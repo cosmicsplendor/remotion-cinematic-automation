@@ -1,0 +1,36 @@
+{
+    "name": "detective-timeline",
+    "version": "1.0.0",
+    "description": "Cinematic detective timeline animation using Remotion",
+    "scripts": {
+      "start": "remotion studio",
+      "build": "remotion render DetectiveTimeline out/timeline.mp4",
+      "build:intro": "remotion render Intro out/intro.mp4",
+      "build:all": "node src/render.js",
+      "upgrade": "remotion upgrade",
+      "test": "eslint src --ext ts,tsx,js,jsx && tsc"
+    },
+    "repository": {},
+    "license": "MIT",
+    "dependencies": {
+      "@remotion/bundler": "^4.0.133",
+      "@remotion/cli": "^4.0.133",
+      "@remotion/renderer": "^4.0.133",
+      "@remotion/zod-types": "^4.0.133",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "remotion": "^4.0.133",
+      "zod": "^3.22.4"
+    },
+    "devDependencies": {
+      "@remotion/eslint-config": "^4.0.133",
+      "@types/react": "^18.2.38",
+      "@types/web": "^0.0.129",
+      "eslint": "^8.56.0",
+      "prettier": "^3.1.1",
+      "typescript": "^5.3.3"
+    },
+    "engines": {
+      "node": ">=16.0.0"
+    }
+  }

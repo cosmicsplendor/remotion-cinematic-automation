@@ -1,0 +1,173 @@
+import React from 'react';
+import {
+  useCurrentFrame,
+  useVideoConfig,
+  interpolate,
+  spring,
+  Easing,
+} from 'remotion';
+
+export const TimelineEvent = ({ event, index, isLeft, isActive }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  
+  const isVisible = frame >= event.startFrame;
+  
+  if (!isVisible) {
+    return null;
+  }
+  
+  const sinceVisible = frame - event.startFrame;
+  
+  // Timeline dot animation
+  const dotScale = spring({
+    frame: sinceVisible,
+    fps,
+    config: {
+      damping: 12,
+    },
+  });
+  
+  // Card animation
+  const cardOpacity = interpolate(
+    sinceVisible,
+    [0, 15],
+    [0, 1],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }
+  );
+  
+  const cardTranslate = interpolate(
+    sinceVisible,
+    [0, 20],
+    [isLeft ? -50 : 50, 0],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.out(Easing.ease),
+    }
+  );
+  
+  // Active event highlight
+  const dotSize = isActive ? 30 : 24;
+  const dotColor = isActive ? '#ff5252' : '#c0392b';
+  const boxShadow = isActive 
+    ? '0 0 20px rgba(255, 82, 82, 0.6), 0 4px 20px rgba(0, 0, 0, 0.5)'
+    : '0 4px 20px rgba(0, 0, 0, 0.5)';
+  
+  // Text reveal animation
+  const titleCharacters = Math.floor(
+    interpolate(sinceVisible, [15, 30], [0, event.title.length], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    })
+  );
+  
+  const descriptionOpacity = interpolate(
+    sinceVisible,
+    [30, 40],
+    [0, 1],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }
+  );
+  
+  const evidenceOpacity = interpolate(
+    sinceVisible,
+    [40, 50],
+    [0, 1],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }
+  );
+  
+  return (
+    <>
+      {/* Timeline dot */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 160 + index * 200,
+          left: '50%',
+          width: dotSize,
+          height: dotSize,
+          borderRadius: '50%',
+          backgroundColor: dotColor,
+          transform: `translate(-50%, -50%) scale(${dotScale})`,
+          zIndex: 10,
+          boxShadow: isActive ? '0 0 15px rgba(255, 82, 82, 0.8)' : 'none',
+          transition: 'box-shadow 0.3s ease',
+        }}
+      />
+      
+      {/* Event card */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 160 + index * 200,
+          [isLeft ? 'right' : 'left']: '50%',
+          [isLeft ? 'marginRight' : 'marginLeft']: 40,
+          width: 500,
+          opacity: cardOpacity,
+          transform: `translateX(${isLeft ? -cardTranslate : cardTranslate}px) translateY(-50%)`,
+          backgroundColor: 'rgba(30, 30, 30, 0.9)',
+          padding: 20,
+          borderRadius: 8,
+          borderLeft: isLeft ? 'none' : isActive ? '4px solid #ff5252' : '4px solid #c0392b',
+          borderRight: isLeft ? isActive ? '4px solid #ff5252' : '4px solid #c0392b' : 'none',
+          boxShadow,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: 'Roboto Mono, monospace',
+            color: '#aaa',
+            fontSize: 14,
+            marginBottom: 8,
+          }}
+        >
+          {event.date}
+        </div>
+        
+        <h3
+          style={{
+            fontFamily: 'Special Elite, cursive',
+            fontSize: 28,
+            margin: '0 0 16px 0',
+            color: isActive ? '#ff5252' : 'white',
+          }}
+        >
+          {event.title.substring(0, titleCharacters)}
+          {titleCharacters < event.title.length && 
+            <span style={{ opacity: sinceVisible % 20 < 10 ? 1 : 0 }}>|</span>}
+        </h3>
+        
+        <div
+          style={{
+            fontSize: 16,
+            lineHeight: 1.5,
+            marginBottom: 12,
+            opacity: descriptionOpacity,
+          }}
+        >
+          {event.description}
+        </div>
+        
+        <div
+          style={{
+            fontSize: 14,
+            color: isActive ? '#ff5252' : '#c0392b',
+            fontWeight: 'bold',
+            opacity: evidenceOpacity,
+          }}
+        >
+          EVIDENCE: {event.evidence}
+        </div>
+      </div>
+    </>
+  );
+};

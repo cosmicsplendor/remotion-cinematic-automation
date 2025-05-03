@@ -1,0 +1,11 @@
+/* Import a font that supports Nepali (Devanagari script) */
+/* Noto Sans Devanagari is a good standard choice */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  /* Use the Nepali font first, then fallbacks */
+  /* Add common system fonts for Devanagari as fallbacks before the generic sans-serif */
+  font-family: 'Noto Sans Devanagari', Mangal, 'Nirmala UI', 'Kohinoor Devanagari', 'Lohit Devanagari', sans-serif;
+  /* You can adjust font-weight if needed, e.g., font-weight: 400; */
+}
