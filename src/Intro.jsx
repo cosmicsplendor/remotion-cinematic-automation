@@ -8,6 +8,10 @@ import {
   interpolate,
   Easing,
 } from 'remotion';
+const data = {
+    title: "एलिसा लामको रहस्यमय मृत्यु",
+    subtitle: "एक अनसुलझा रहस्यको खोजीमा",
+}
 
 export const Intro = () => {
   const frame = useCurrentFrame();
@@ -44,7 +48,7 @@ export const Intro = () => {
   );
   
   // Typewriter effect for the title
-  const titleText = "THE WAREHOUSE MURDERS";
+  const titleText = data.title;
   const visibleCharacters = Math.floor(
     interpolate(frame, [40, 80], [0, titleText.length], {
       extrapolateLeft: 'clamp',
@@ -55,7 +59,7 @@ export const Intro = () => {
   const displayedTitle = titleText.substring(0, visibleCharacters);
   
   // Blinking cursor
-  const showCursor = frame % 30 < 15 || frame < 80;
+  const showCursor = true;
   
   return (
     <AbsoluteFill
@@ -94,23 +98,8 @@ export const Intro = () => {
             fontWeight: 400,
           }}
         >
-          A COLD CASE INVESTIGATION
+                {data.subtitle}
         </h2>
-        
-        {frame > 100 && (
-          <div
-            style={{
-              marginTop: 60,
-              fontSize: 18,
-              opacity: interpolate(frame, [100, 120], [0, 1], {
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp',
-              }),
-            }}
-          >
-            EVIDENCE FILE #85-137
-          </div>
-        )}
       </div>
     </AbsoluteFill>
   );
