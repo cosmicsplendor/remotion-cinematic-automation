@@ -1,17 +1,64 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   AbsoluteFill,
   useCurrentFrame,
   useVideoConfig,
-  Sequence,
-  spring,
   interpolate,
-  Easing,
 } from 'remotion';
+
+// This function segments Devanagari text into proper syllabic units (akshara)
+// to ensure conjuncts are never broken apart during rendering
+const segmentDevanagariText = (text) => {
+  const syllables = [];
+  let currentSyllable = '';
+  
+  // We'll analyze each character and build syllables
+  for (let i = 0; i < text.length; i++) {
+    const char = text.charAt(i);
+    const codePoint = text.codePointAt(i);
+    
+    // Add current character to the current syllable
+    currentSyllable += char;
+    
+    // Check if this could be a syllable boundary
+    const isSpace = codePoint === 0x0020;
+    const isLastChar = i === text.length - 1;
+    
+    // Check if next character is a consonant (which would start a new syllable)
+    const nextCharIsConsonant = i < text.length - 1 && 
+                               (text.codePointAt(i+1) >= 0x0915 && text.codePointAt(i+1) <= 0x0939);
+    
+    // Check if current character is a vowel sign (matra)
+    const isVowelSign = codePoint >= 0x093E && codePoint <= 0x094C;
+    
+    // End syllable at spaces, after vowel signs before consonants, or at end of string
+    if (isSpace || (isVowelSign && nextCharIsConsonant) || isLastChar) {
+      if (currentSyllable.trim() || isSpace) {
+        syllables.push(currentSyllable);
+      }
+      if (!isLastChar && !isSpace) {
+        currentSyllable = '';
+      } else if (isSpace) {
+        currentSyllable = '';
+      }
+    }
+    
+    // Special case: if we just added a halant (्) and next char is consonant,
+    // we need to keep building the current syllable (for conjuncts like ज्ञ)
+    const isHalant = codePoint === 0x094D;
+    if (isHalant && i < text.length - 1) {
+      // Don't end the syllable yet
+      continue;
+    }
+  }
+  
+  return syllables;
+};
+
 const data = {
-    title: "एलिसा लामको रहस्यमय मृत्यु",
-    subtitle: "एक अनसुलझा रहस्यको खोजीमा",
-}
+  title: "भ्यागुता खोज्ने केटाहरु",
+  subtitle: "a closer look at the cold case",
+};
 
 export const Intro = () => {
   const frame = useCurrentFrame();
@@ -47,19 +94,21 @@ export const Intro = () => {
     }
   );
   
-  // Typewriter effect for the title
-  const titleText = data.title;
-  const visibleCharacters = Math.floor(
-    interpolate(frame, [40, 80], [0, titleText.length], {
+  // Segment the title into proper syllabic units
+  const titleClusters = useMemo(() => {
+    return segmentDevanagariText(data.title);
+  }, [data.title]);
+  
+  // Calculate visible clusters for typewriter effect
+  const visibleClusters = Math.floor(
+    interpolate(frame, [40, 80], [0, titleClusters.length], {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     })
   );
   
-  const displayedTitle = titleText.substring(0, visibleCharacters);
-  
-  // Blinking cursor
-  const showCursor = true;
+  // Join the visible clusters to form the displayed title
+  const displayedTitle = titleClusters.slice(0, visibleClusters).join('');
   
   return (
     <AbsoluteFill
@@ -88,7 +137,7 @@ export const Intro = () => {
           }}
         >
           {displayedTitle}
-          {showCursor && <span style={{ opacity: frame % 30 < 15 ? 1 : 0 }}>|</span>}
+          {frame % 30 < 15 && <span>|</span>}
         </h1>
         
         <h2
@@ -98,7 +147,7 @@ export const Intro = () => {
             fontWeight: 400,
           }}
         >
-                {data.subtitle}
+          {data.subtitle}
         </h2>
       </div>
     </AbsoluteFill>

@@ -3,68 +3,34 @@ import { Composition } from 'remotion';
 import { DetectiveTimeline } from './DetectiveTimeline';
 import { Intro } from './Intro';
 import './fonts.css';
-const res = {
+import data from "./data/frog_boys.js"
+const RES = {
   r1080p: { width: 1920, height: 1080 },
   r4k: { width: 3840, height: 2160 },
   r720p: { width: 1280, height: 720 },
+  shorts: { width: 1296, height: 2250 },
 }
+const SECONDS = 50
+const res = RES.r720p; // Change this to the desired resolution
 export const RemotionRoot = () => {
   return (
     <>
       <Composition
         id="DetectiveTimeline"
         component={DetectiveTimeline}
-        durationInFrames={1200}
+        durationInFrames={30 * SECONDS}
         fps={30}
-        width={res.r720p.width}
-        height={res.r720p.height}
-        defaultProps={{
-          events: [
-            {
-              "date": "January 26, 2013",
-              "title": "एलिसा लाम होटलमा चेक इन गर्छिन्",
-              "description": "२१ वर्षीया क्यानेडियन विद्यार्थी एलिसा लाम एक्लै यात्रा गरिरहेको बेला लस एन्जलसको सेसिल होटलमा चेक इन गर्छिन्।",
-              "evidence": "होटल चेक-इन रेकर्डहरू र साक्षीहरूको बयान",
-              "startFrame": 100
-            },
-            {
-              "date": "January 31, 2013",
-              "title": "अन्तिम पटक जीवित देखिएकी",
-              "description": "होटलका कर्मचारी र पाहुनाहरूले एलिसा लामलाई अन्तिम पटक देखेको रिपोर्ट गर्छन्। अनौठो व्यवहार देखाएपछि उनलाई एउटा एक्लो कोठामा सारिएको थियो।",
-              "evidence": "होटलका पाहुनाहरू र कर्मचारीहरूबाट प्राप्त साक्षीहरूको बयान",
-              "startFrame": 160
-            },
-            {
-              "date": "February 1, 2013",
-              "title": "एलिभेटरको निगरानी फुटेज",
-              "description": "सीसीटीभीले लामलाई एलिभेटरमा अनौठो व्यवहार गरिरहेको रेकर्ड गर्छ: धेरै बटनहरू थिच्ने, इशारा गर्ने, र लुक्ने।",
-              "evidence": "भाइरल भएको एलिभेटर निगरानी भिडियो",
-              "startFrame": 220
-            },
-            {
-              "date": "February 19, 2013",
-              "title": "पानी ट्याङ्कीमा शव फेला पर्यो",
-              "description": "पानीको गुणस्तरबारे गुनासो आएपछि मर्मत सम्भार कर्मचारीहरूले छतमा रहेको पानी ट्याङ्कीमा एलिसाको नग्न शव तैरिरहेको अवस्थामा फेला पार्छन्।",
-              "evidence": "पोस्टमार्टम रिपोर्ट र मर्मत सम्भार कर्मचारीको बयान",
-              "startFrame": 280
-            },
-            {
-              "date": "February 21, 2013",
-              "title": "पोस्टमार्टम गरियो",
-              "description": "प्रारम्भिक पोस्टमार्टममा कुनै देखिने चोटपटक फेला परेन। थप परीक्षण गर्न आदेश दिइयो।",
-              "evidence": "कोरोनरको प्रारम्भिक रिपोर्ट",
-              "startFrame": 340
-            }
-          ]
-        }}
+        width={res.width}
+        height={res.height}
+        defaultProps={data}
       />
       <Composition
         id="Intro"
         component={Intro}
         durationInFrames={150}
         fps={30}
-        width={1920}
-        height={1080}
+        width={res.width}
+        height={res.height}
       />
     </>
   );
