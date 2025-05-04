@@ -5,59 +5,11 @@ import {
   useVideoConfig,
   interpolate,
 } from 'remotion';
-
-// This function segments Devanagari text into proper syllabic units (akshara)
-// to ensure conjuncts are never broken apart during rendering
-const segmentDevanagariText = (text) => {
-  const syllables = [];
-  let currentSyllable = '';
-  
-  // We'll analyze each character and build syllables
-  for (let i = 0; i < text.length; i++) {
-    const char = text.charAt(i);
-    const codePoint = text.codePointAt(i);
-    
-    // Add current character to the current syllable
-    currentSyllable += char;
-    
-    // Check if this could be a syllable boundary
-    const isSpace = codePoint === 0x0020;
-    const isLastChar = i === text.length - 1;
-    
-    // Check if next character is a consonant (which would start a new syllable)
-    const nextCharIsConsonant = i < text.length - 1 && 
-                               (text.codePointAt(i+1) >= 0x0915 && text.codePointAt(i+1) <= 0x0939);
-    
-    // Check if current character is a vowel sign (matra)
-    const isVowelSign = codePoint >= 0x093E && codePoint <= 0x094C;
-    
-    // End syllable at spaces, after vowel signs before consonants, or at end of string
-    if (isSpace || (isVowelSign && nextCharIsConsonant) || isLastChar) {
-      if (currentSyllable.trim() || isSpace) {
-        syllables.push(currentSyllable);
-      }
-      if (!isLastChar && !isSpace) {
-        currentSyllable = '';
-      } else if (isSpace) {
-        currentSyllable = '';
-      }
-    }
-    
-    // Special case: if we just added a halant (्) and next char is consonant,
-    // we need to keep building the current syllable (for conjuncts like ज्ञ)
-    const isHalant = codePoint === 0x094D;
-    if (isHalant && i < text.length - 1) {
-      // Don't end the syllable yet
-      continue;
-    }
-  }
-  
-  return syllables;
-};
+import { segmentDevanagariText } from './utils';
 
 const data = {
   title: "भ्यागुता खोज्ने केटाहरु",
-  subtitle: "a closer look at the cold case",
+  subtitle: "एक अनसुलझा रहस्यको खोजीमा",
 };
 
 export const Intro = () => {
@@ -98,7 +50,7 @@ export const Intro = () => {
   const titleClusters = useMemo(() => {
     return segmentDevanagariText(data.title);
   }, [data.title]);
-  
+  console.log(titleClusters)
   // Calculate visible clusters for typewriter effect
   const visibleClusters = Math.floor(
     interpolate(frame, [40, 80], [0, titleClusters.length], {
@@ -137,7 +89,7 @@ export const Intro = () => {
           }}
         >
           {displayedTitle}
-          {frame % 30 < 15 && <span>|</span>}
+          <span></span>
         </h1>
         
         <h2
