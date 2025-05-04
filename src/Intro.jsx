@@ -50,10 +50,9 @@ export const Intro = () => {
   const titleClusters = useMemo(() => {
     return segmentDevanagariText(data.title);
   }, [data.title]);
-  console.log(titleClusters)
   // Calculate visible clusters for typewriter effect
   const visibleClusters = Math.floor(
-    interpolate(frame, [40, 80], [0, titleClusters.length], {
+    interpolate(frame, [30, 60], [0, titleClusters.length], {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     })
@@ -89,7 +88,6 @@ export const Intro = () => {
           }}
         >
           {displayedTitle}
-          <span></span>
         </h1>
         
         <h2
