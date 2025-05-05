@@ -15,7 +15,7 @@ const RES = {
 }
 const transitionDuration = 45;
 const holdDuration = 0;
-const res = RES.r720p; // Change this to the desired resolution
+const res = RES.shorts_alt; // Change this to the desired resolution
 const FPS = 30
 export const RemotionRoot = () => {
   return (

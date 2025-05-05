@@ -52,7 +52,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
     <div
       style={{
         position: 'absolute',
-        bottom: 80,
+        top: "calc(50% + 175px)",
         left: '50%',
         transform: 'translateX(-50%)',
         width: 500,
