@@ -21,7 +21,7 @@ export default [
         subtitle: "११ वर्षको, दयालु र मृदु",
         photoUrl: "/assets/board/images/3.png",
         audioUrl: "/assets/board/audio/3.wav",
-        audioDuration: 5
+        audioDuration: 5.5
     },
     {
         id: "4",
@@ -29,7 +29,7 @@ export default [
         subtitle: "१० वर्षको, उत्साही र हर्षित",
         photoUrl: "/assets/board/images/4.png",
         audioUrl: "/assets/board/audio/4.wav",
-        audioDuration: 10
+        audioDuration: 10.8
     },
     {
         id: "5",
@@ -37,6 +37,6 @@ export default [
         subtitle: "९ वर्षको, ठूला केटाहरुप्रति श्रद्धा गर्ने",
         photoUrl: "/assets/board/images/5.png",
         audioUrl: "/assets/board/audio/5.wav",
-        audioDuration: 10
+        audioDuration: 10.8
     },
 ]

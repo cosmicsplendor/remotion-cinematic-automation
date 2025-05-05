@@ -146,7 +146,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
       {isTyping && sfxTypewriterUrl && (
         <Sequence durationInFrames={1}>
           <Audio 
-            src={staticFile(sfxTypewriterUrl)}
+            src={sfxTypewriterUrl}
             volume={0.3}
             playbackRate={1.1} 
           />
