@@ -1,7 +1,8 @@
 // src/Root.jsx
 import { Composition } from 'remotion';
-import { DetectiveTimeline } from './DetectiveTimeline';
-import { Intro } from './Intro';
+import { DetectiveTimeline } from './DetectiveTimeline.jsx';
+import { Intro } from './Intro.tsx';
+import React from 'react';
 import './fonts.css';
 import data from "./data/frog_boys.js"
 const RES = {

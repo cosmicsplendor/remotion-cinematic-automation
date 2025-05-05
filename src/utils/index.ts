@@ -1,8 +1,8 @@
 // This function segments Devanagari text into proper syllabic units (akshara)
 // to ensure conjuncts are never broken apart during rendering
-export const segmentDevanagariText = (text) => {
-  const syllables = [];
-  let currentSyllable = '';
+export const segmentDevanagariText = (text: string) => {
+  const syllables: string[] = [];
+  let currentSyllable: string = '';
 
   // Unicode ranges
   const CONSONANT_START = 0x0915;

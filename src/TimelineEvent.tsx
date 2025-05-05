@@ -6,8 +6,22 @@ import {
   spring,
   Easing,
 } from 'remotion';
-
-export const TimelineEvent = ({ event, index, isLeft, isActive }) => {
+type TimelineEventProps = {
+  event: any;
+  index: number;
+  isLeft: boolean;
+  isActive: boolean;
+  initialOffset: number;   // <-- Add this
+  eventSpacing: number;    // <-- Add this
+};
+export type TimelineEventData = {
+  date: string;
+  title: string;
+  description: string;
+  evidence: string;
+  startFrame: number;
+}
+export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLeft, isActive }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   

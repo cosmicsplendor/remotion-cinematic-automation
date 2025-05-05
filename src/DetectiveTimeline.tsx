@@ -8,9 +8,11 @@ import {
   interpolate,
   Easing,
 } from 'remotion';
-import {TimelineEvent} from './TimelineEvent';
-
-export const DetectiveTimeline = ({events}) => {
+import { TimelineEvent, TimelineEventData } from './TimelineEvent';
+export type DetectiveTimelineProps = {
+  events?: TimelineEventData[];
+}
+export const DetectiveTimeline: React.FC<DetectiveTimelineProps> = ({ events }) => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps, width, height } = useVideoConfig();
 
@@ -24,29 +26,26 @@ export const DetectiveTimeline = ({events}) => {
       extrapolateRight: 'clamp',
     }
   );
-
+  if (!events) {
+    return null; // Handle case where events are not provided
+  }
   // --- Timeline height interpolation remains the same ---
   // Ensure this calculation accurately reflects the total height needed
   const totalTimelineHeight = 160 + (events.length * 200); // Initial offset + space for all events
-  const timelineVisibleHeight = interpolate(
-    frame,
-    [0, 100, durationInFrames - 100, durationInFrames], // Fade in/out height smoothly
-    [0, totalTimelineHeight, totalTimelineHeight, 0],
-    {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-      easing: Easing.out(Easing.ease), // Adjust easing as needed
-    }
-  );
-
 
   // --- Calculate active event index ---
   // Find the *last* event whose startFrame is less than or equal to the current frame
-  let activeIndex = events.findLastIndex(event => frame >= event.startFrame);
+  let activeIndex = -1;
+  for (let i = events.length - 1; i >= 0; i--) {
+    if (frame >= events[i].startFrame) {
+      activeIndex = i;
+      break;
+    }
+  }
   // If no event has started yet, default to the first one (or -1/0 depending on desired start behavior)
   if (activeIndex === -1) {
-     // Decide behavior before first event: show top (0) or focus on first (-1 might need handling)
-     activeIndex = 0; // Let's default to focusing on the first event initially
+    // Decide behavior before first event: show top (0) or focus on first (-1 might need handling)
+    activeIndex = 0; // Let's default to focusing on the first event initially
   }
 
   // --- Centering Calculation ---
@@ -121,8 +120,8 @@ export const DetectiveTimeline = ({events}) => {
             backgroundColor: '#c0392b',
             transform: 'translateX(-50%)',
             // Use the calculated dynamic height for the line
-            height: `${Math.max(0, (events.length -1) * eventSpacing + 20)}px`, // Height spans between event points
-             // Or use timelineVisibleHeight if you want the line itself to animate length
+            height: `${Math.max(0, (events.length - 1) * eventSpacing + 20)}px`, // Height spans between event points
+            // Or use timelineVisibleHeight if you want the line itself to animate length
             // height: timelineVisibleHeight - initialOffset > 0 ? timelineVisibleHeight - initialOffset : 0,
           }}
         />
@@ -135,7 +134,7 @@ export const DetectiveTimeline = ({events}) => {
             index={index}
             isLeft={index % 2 === 0}
             // Determine active state based purely on frame being within event's duration
-             isActive={frame >= event.startFrame && frame < (events[index + 1]?.startFrame ?? durationInFrames)}
+            isActive={frame >= event.startFrame && frame < (events[index + 1]?.startFrame ?? durationInFrames)}
             // Pass necessary constants if TimelineEvent needs them for positioning
             initialOffset={initialOffset}
             eventSpacing={eventSpacing}
