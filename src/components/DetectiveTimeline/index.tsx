@@ -12,7 +12,9 @@ import { TimelineEvent, TimelineEventData } from './TimelineEvent';
 export type DetectiveTimelineProps = {
   events?: TimelineEventData[];
 }
-export const DetectiveTimeline: React.FC<DetectiveTimelineProps> = ({ events }) => {
+import data from "../../../inputs/timeline/data.ts"; // Adjust the path as necessary
+const { events } = data; // Assuming data is structured as { events: [...] }
+export const DetectiveTimeline: React.FC<{}> = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps, width, height } = useVideoConfig();
 

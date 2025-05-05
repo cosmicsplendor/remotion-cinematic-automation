@@ -5,7 +5,7 @@ import {
   useVideoConfig,
   interpolate,
 } from 'remotion';
-import { segmentDevanagariText } from './utils';
+import { segmentDevanagariText } from '../../utils';
 
 const data = {
   title: "भ्यागुता खोज्ने केटाहरु",

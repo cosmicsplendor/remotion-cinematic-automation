@@ -6,7 +6,7 @@
       "start": "remotion studio",
       "build": "remotion render DetectiveTimeline out/timeline.mp4",
       "build:intro": "remotion render Intro out/intro.mp4",
-      "build:all": "node src/render.js",
+      "build:all": "node src/render.ts",
       "upgrade": "remotion upgrade",
       "test": "eslint src --ext ts,tsx,js,jsx && tsc"
     },
