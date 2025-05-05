@@ -8,6 +8,7 @@ import {
   Sequence,
   staticFile,
 } from 'remotion';
+import { segmentDevanagariText } from '../../utils';
 
 interface EvidenceCardProps {
   name: string;
@@ -17,19 +18,19 @@ interface EvidenceCardProps {
 }
 
 export const EvidenceCard: React.FC<EvidenceCardProps> = ({
-  name,
-  subtitle,
+  name: _name,
+  subtitle: _subtitle,
   relativeFrame,
-  sfxTypewriterUrl,
 }) => {
   const { fps, width } = useVideoConfig();
   
   // Define animation timing constants
   const TITLE_START_FRAME = 0;
-  const TITLE_CHARS_PER_FRAME = 0.5; // Characters per frame for name
-  const SUBTITLE_START_DELAY = 15; // Frames to wait after title finishes
-  const SUBTITLE_CHARS_PER_FRAME = 0.3; // Characters per frame for subtitle
-  
+  const TITLE_CHARS_PER_FRAME = 0.25; // Characters per frame for name
+  const SUBTITLE_START_DELAY = 3; // Frames to wait after title finishes
+  const SUBTITLE_CHARS_PER_FRAME = 0.25; // Characters per frame for subtitle
+  const name = segmentDevanagariText(_name); // Segment the name for better typing effect
+  const subtitle = segmentDevanagariText(_subtitle); // Segment the subtitle for better typing effect
   // Calculate how many characters to show for the title
   const titleCharsToShow = Math.floor(
     Math.min(name.length, relativeFrame * TITLE_CHARS_PER_FRAME)
@@ -107,16 +108,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           textAlign: 'center',
         }}
       >
-        {name.substring(0, titleCharsToShow)}
-        {isTypingTitle && (
-          <span
-            style={{
-              opacity: relativeFrame % 10 < 5 ? 1 : 0, // Blinking cursor
-            }}
-          >
-            |
-          </span>
-        )}
+        {name.slice(0, titleCharsToShow)}
       </h1>
       
       {/* Subtitle with typewriter effect */}
@@ -130,7 +122,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           textAlign: 'center',
         }}
       >
-        {subtitle.substring(0, subtitleCharsToShow)}
+        {subtitle.slice(0, subtitleCharsToShow)}
         {isTypingSubtitle && (
           <span
             style={{
@@ -141,17 +133,6 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           </span>
         )}
       </p>
-      
-      {/* Typewriter sound effect */}
-      {isTyping && sfxTypewriterUrl && (
-        <Sequence durationInFrames={1}>
-          <Audio 
-            src={sfxTypewriterUrl}
-            volume={0.3}
-            playbackRate={1.1} 
-          />
-        </Sequence>
-      )}
     </div>
   );
 };

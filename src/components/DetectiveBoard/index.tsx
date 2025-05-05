@@ -26,8 +26,6 @@ export interface PersonData {
 
 // Props for the main component
 interface DetectiveBoardPresentationProps {
-  backgroundUrl?: string;
-  sfxTypewriterUrl?: string;
   sfxPinUrl?: string;
   transitionDuration?: number; // in frames
   holdDuration?: number; // in frames
@@ -36,8 +34,6 @@ const BOARD_MARGIN = 100; // Margin from the edge of the board
 const INITIAL_POSITION_TOP = 100; // Initial Y position for all photos
 
 export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProps> = ({
-  backgroundUrl = '/assets/cork-board.jpg',
-  sfxTypewriterUrl = '/assets/sfx/typewriter.wav',
   sfxPinUrl = '/assets/sfx/pin.wav',
   transitionDuration = 30, // ~1 second at 30fps
   holdDuration = 60, // Extra time to show the photo after audio ends
@@ -196,21 +192,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
   // Render each person's photo
   return (
     <AbsoluteFill style={{ backgroundColor: '#111' }}>
-      {/* Background */}
-      {backgroundUrl && (
-        <img
-          src={staticFile(normalizeUrl(backgroundUrl) ?? '')} // Ensure backgroundUrl is also normalized
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            position: 'absolute'
-          }}
-          // Add onError for background image too?
-          onError={(e) => console.error("Error loading background image:", e)}
-        />
-      )}
-
       {/* Render all photos */}
       {persons.map((person, index) => {
         const isActive = index === currentPersonIndex;
@@ -273,7 +254,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
                       subtitle={person.subtitle}
                       // This calculation gives the frame relative to the start of the card sequence
                       relativeFrame={frame - cardSequenceStartFrame}
-                      sfxTypewriterUrl={sfxTypewriterUrl ? staticFile(normalizeUrl(sfxTypewriterUrl) ?? '') : undefined}
                     />
                   </Sequence>
                 );

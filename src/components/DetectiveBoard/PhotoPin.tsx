@@ -205,7 +205,7 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
             backgroundColor: 'transparent',
             // Yellowish glow effect
             // ${(finalScale - 1) * 100 * 0.25
-            boxShadow: `0 0 0 15px rgba(255, 255, 200, ${glowOpacity})`,
+            boxShadow: `0 0 15px 5px rgba(255, 255, 200, ${glowOpacity})`,
             borderRadius: '4px', // Slightly rounded corners for the glow
             // Center the glow relative to the photo container (if needed, though width/height match should suffice)
             top: 0,
