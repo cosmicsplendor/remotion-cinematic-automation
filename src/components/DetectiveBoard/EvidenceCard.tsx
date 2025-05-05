@@ -23,7 +23,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
 
   // Define animation timing constants
   const SUBTITLE_START_DELAY = 0; // Frames to wait after title finishes
-  const SUBTITLE_CHARS_PER_FRAME = 1; // Characters per frame for subtitle
+  const SUBTITLE_CHARS_PER_FRAME = 0.5; // Characters per frame for subtitle
   const subtitle = segmentDevanagariText(_subtitle); // Segment the subtitle for better typing effect
   // Calculate how many characters to show for the title
 
@@ -86,10 +86,11 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           fontFamily: 'Courier New, monospace',
           fontSize: 28,
           marginBottom: 10,
-          borderBottom: '2px solid #333',
+          borderBottom: '1px dotted #642',
           paddingBottom: 5,
           width: '100%',
           textAlign: 'center',
+          color: "#421"
         }}
       >
         {name}
@@ -104,13 +105,14 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           opacity: 0.8,
           width: '100%',
           textAlign: 'center',
+          color: "#100"
         }}
       >
         {subtitle.slice(0, subtitleCharsToShow)}
-        {isTypingSubtitle && (
+        {(isTypingSubtitle || subtitleCharsToShow === 0) && (
           <span
             style={{
-              opacity: relativeFrame % 10 < 5 ? 1 : 0, // Blinking cursor
+              opacity: (relativeFrame % 10 < 5 || subtitleCharsToShow === 0)? 1 : 0, // Blinking cursor
             }}
           >
             |
