@@ -8,7 +8,7 @@ import {
   interpolate,
   Easing,
 } from 'remotion';
-import { TimelineEvent, TimelineEventData } from './TimelineEvent';
+import { CARD_SIZE, OFFSET, TimelineEvent, TimelineEventData } from './TimelineEvent';
 export type DetectiveTimelineProps = {
   events?: TimelineEventData[];
 }
@@ -33,7 +33,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   }
   // --- Timeline height interpolation remains the same ---
   // Ensure this calculation accurately reflects the total height needed
-  const totalTimelineHeight = 160 + (events.length * 200); // Initial offset + space for all events
+  const totalTimelineHeight = OFFSET + (events.length * CARD_SIZE); // Initial offset + space for all events
 
   // --- Calculate active event index with interpolation ---
   let activeIndex = -1;
@@ -62,9 +62,9 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   );
 
   // --- Centering Calculation with interpolation ---
-  const eventSpacing = 200;
-  const initialOffset = 160;
-  const viewportCenter = height / 2;
+  const eventSpacing = CARD_SIZE;
+  const initialOffset = OFFSET; // Initial offset for the timeline line
+  const viewportCenter = height * 0.75;
 
   // Interpolate between current and next event positions
   const currentEventY = initialOffset + activeIndex * eventSpacing;
@@ -78,17 +78,28 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   const targetScrollY = interpolatedY - viewportCenter;
   const clampedTargetScrollY = Math.max(0, targetScrollY);
 
-  // Much faster spring configuration
   const cameraScrollY = spring({
     frame: frame,
-    to: clampedTargetScrollY,
     fps: fps,
+    from: 0,
+    to: clampedTargetScrollY,
     config: {
-      damping: 15,    // Lower damping for faster movement
-      mass: 0.4,      // Much lower mass for faster response
-      stiffness: 180, // Much higher stiffness for faster movement
+      damping: 15,
+      mass: 0.4,
+      stiffness: 180,
     },
   });
+
+  // const cameraScrollY = spring({
+  //   frame: frame,
+  //   to: clampedTargetScrollY,
+  //   fps: fps,
+  //   config: {
+  //     damping: 15,    // Lower damping for faster movement
+  //     mass: 0.4,      // Much lower mass for faster response
+  //     stiffness: 180, // Much higher stiffness for faster movement
+  //   },
+  // });
 
   return (
     <AbsoluteFill

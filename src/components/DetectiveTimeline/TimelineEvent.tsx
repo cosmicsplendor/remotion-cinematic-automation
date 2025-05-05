@@ -22,8 +22,8 @@ export type TimelineEventData = {
   evidence: string;
   startFrame: number;
 }
-const OFFSET = 160
-const CARD_SIZE = 200; // Height of each card
+export const OFFSET = 160
+export const CARD_SIZE = 200; // Height of each card
 export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLeft, isActive }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
