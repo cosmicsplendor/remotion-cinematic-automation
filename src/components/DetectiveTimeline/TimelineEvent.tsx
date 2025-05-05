@@ -6,6 +6,7 @@ import {
   spring,
   Easing,
 } from 'remotion';
+import { segmentDevanagariText } from '../../utils';
 type TimelineEventProps = {
   event: any;
   index: number;
@@ -21,6 +22,7 @@ export type TimelineEventData = {
   evidence: string;
   startFrame: number;
 }
+
 export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLeft, isActive }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -72,6 +74,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
     : '0 4px 20px rgba(0, 0, 0, 0.5)';
   
   // Text reveal animation
+  const title = segmentDevanagariText(event.title);
   const titleCharacters = Math.floor(
     interpolate(sinceVisible, [15, 30], [0, event.title.length], {
       extrapolateLeft: 'clamp',
@@ -117,7 +120,6 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
           transition: 'box-shadow 0.3s ease',
         }}
       />
-      
       {/* Event card */}
       <div
         style={{
@@ -155,8 +157,8 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
             color: isActive ? '#ff5252' : 'white',
           }}
         >
-          {event.title.substring(0, titleCharacters)}
-          {titleCharacters < event.title.length && 
+          {title.slice(0, titleCharacters).join("")}
+          {titleCharacters < title.length && 
             <span style={{ opacity: sinceVisible % 20 < 10 ? 1 : 0 }}>|</span>}
         </h3>
         
