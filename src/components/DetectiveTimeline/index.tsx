@@ -12,7 +12,7 @@ import { CARD_SIZE, OFFSET, TimelineEvent, TimelineEventData } from './TimelineE
 export type DetectiveTimelineProps = {
   events?: TimelineEventData[];
 }
-import data from "../../../inputs/timeline/data.ts"; // Adjust the path as necessary
+import data from "../../../data/timeline.ts"; // Adjust the path as necessary
 const { events } = data; // Assuming data is structured as { events: [...] }
 export const DetectiveTimeline: React.FC<{}> = () => {
   const frame = useCurrentFrame();

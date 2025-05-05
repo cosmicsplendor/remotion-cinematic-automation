@@ -1,6 +1,7 @@
 // AudioVisualizer.tsx
 import { useEffect } from 'react';
 import {
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
@@ -19,7 +20,7 @@ export const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   const { fps } = useVideoConfig();
   
   // Get audio data
-  const audioData = useAudioData(audioSrc);
+  const audioData = useAudioData(staticFile(audioSrc));
   
   // Calculate the current amplitude and call the callback
   useEffect(() => {

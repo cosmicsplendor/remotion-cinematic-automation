@@ -4,6 +4,8 @@ import { DetectiveTimeline } from './components/DetectiveTimeline';
 import { Intro } from './components/Intro/index.tsx';
 import React from 'react';
 import './fonts.css';
+import boardData from '../data/board.ts';
+import { DetectiveBoardPresentation } from './components/DetectiveBoard/index.tsx';
 const RES = {
   r1080p: { width: 1920, height: 1080 },
   r4k: { width: 3840, height: 2160 },
@@ -11,14 +13,23 @@ const RES = {
   shorts: { width: 1296, height: 2250 },
 }
 const res = RES.r720p; // Change this to the desired resolution
+const FPS = 30
 export const RemotionRoot = () => {
   return (
     <>
       <Composition
+        id="DetectiveBoard"
+        component={DetectiveBoardPresentation}
+        durationInFrames={FPS * boardData.reduce((acc, person) => acc + person.audioDuration + 2, 0)}
+        fps={FPS}
+        width={res.width}
+        height={res.height}
+      />
+      <Composition
         id="DetectiveTimeline"
         component={DetectiveTimeline}
-        durationInFrames={30 * 50}
-        fps={30}
+        durationInFrames={FPS * 50}
+        fps={FPS}
         width={res.width}
         height={res.height}
       />
@@ -26,7 +37,7 @@ export const RemotionRoot = () => {
         id="Intro"
         component={Intro}
         durationInFrames={150}
-        fps={30}
+        fps={FPS}
         width={res.width}
         height={res.height}
       />

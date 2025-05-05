@@ -6,9 +6,10 @@ import {
   useVideoConfig,
   interpolate,
   Img,
+  staticFile,
 } from 'remotion';
 import { AudioVisualizer } from './AudioVisualizer.tsx';
-import { PersonData } from './DetectiveBoardPresentation';
+import { PersonData } from './index.tsx';
 
 interface PhotoPinProps {
   person: PersonData;
@@ -177,7 +178,7 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
         }}
       >
         <Img
-          src={person.photoUrl}
+          src={staticFile(person.photoUrl)}
           style={{
             width: '100%',
             height: '100%',

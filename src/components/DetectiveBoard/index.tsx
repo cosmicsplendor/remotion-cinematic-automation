@@ -7,13 +7,12 @@ import {
   useCurrentFrame,
   useVideoConfig,
   interpolate,
-  spring,
   random,
+  staticFile,
 } from 'remotion';
-import { useAudioData, visualizeAudio } from '@remotion/media-utils';
 import { PhotoPin } from './PhotoPin.tsx';
 import { EvidenceCard } from './EvidenceCard.tsx';
-import { AudioVisualizer } from './AudioVisualizer.tsx';
+import persons from "../../../data/board.ts"
 
 // Define the data structure for each person
 export interface PersonData {
@@ -27,22 +26,19 @@ export interface PersonData {
 
 // Props for the main component
 interface DetectiveBoardPresentationProps {
-  persons: PersonData[];
   backgroundUrl?: string;
   sfxTypewriterUrl?: string;
   sfxPinUrl?: string;
   transitionDuration?: number; // in frames
   holdDuration?: number; // in frames
 }
-
 const BOARD_MARGIN = 100; // Margin from the edge of the board
 const INITIAL_POSITION_TOP = 100; // Initial Y position for all photos
 
 export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProps> = ({
-  persons,
   backgroundUrl = '/assets/cork-board.jpg',
-  sfxTypewriterUrl = '/assets/sfx/typewriter.mp3',
-  sfxPinUrl = '/assets/sfx/pin.mp3',
+  sfxTypewriterUrl = '/assets/sfx/typewriter.wav',
+  sfxPinUrl = '/assets/sfx/pin.wav',
   transitionDuration = 30, // ~1 second at 30fps
   holdDuration = 60, // Extra time to show the photo after audio ends
 }) => {
@@ -107,7 +103,7 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
       {/* Background */}
       {backgroundUrl && (
         <img 
-          src={backgroundUrl} 
+          src={staticFile(backgroundUrl)} 
           style={{ 
             width: '100%', 
             height: '100%', 
@@ -159,19 +155,19 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
             
             {/* Audio playback */}
             {shouldPlayAudio && (
-              <Audio src={person.audioUrl} />
+              <Audio src={staticFile(person.audioUrl)} />
             )}
             
             {/* Pin sound effect */}
             {isActive && relativeFrame < 5 && (
-              <Audio src={sfxPinUrl} />
+              <Audio src={staticFile(sfxPinUrl)} />
             )}
             
             {/* Pin sound effect when returning */}
             {isActive && 
               relativeFrame > transitionDuration + person.audioDuration + holdDuration - 5 && 
               relativeFrame < transitionDuration + person.audioDuration + holdDuration && (
-              <Audio src={sfxPinUrl} />
+              <Audio src={staticFile(sfxPinUrl)} />
             )}
           </React.Fragment>
         );

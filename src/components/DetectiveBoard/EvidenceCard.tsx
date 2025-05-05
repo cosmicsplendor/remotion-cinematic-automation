@@ -6,6 +6,7 @@ import {
   interpolate,
   Audio,
   Sequence,
+  staticFile,
 } from 'remotion';
 
 interface EvidenceCardProps {
@@ -145,7 +146,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
       {isTyping && sfxTypewriterUrl && (
         <Sequence durationInFrames={1}>
           <Audio 
-            src={sfxTypewriterUrl}
+            src={staticFile(sfxTypewriterUrl)}
             volume={0.3}
             playbackRate={1.2} 
           />
