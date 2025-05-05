@@ -252,6 +252,7 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
                     subtitle={person.subtitle}
                     // This calculation gives the frame relative to the start of the card sequence
                     relativeFrame={frame - cardSequenceStartFrame}
+                    duration={personTotalDuration}
                   />
                 </Sequence>
               );

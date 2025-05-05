@@ -12,12 +12,14 @@ interface EvidenceCardProps {
   subtitle: string;
   relativeFrame: number;
   sfxTypewriterUrl?: string;
+  duration?: number
 }
 
 export const EvidenceCard: React.FC<EvidenceCardProps> = ({
   name,
   subtitle: _subtitle,
   relativeFrame,
+  duration=10
 }) => {
   const { fps, width } = useVideoConfig();
 
@@ -37,13 +39,14 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
   console.log({ relativeFrame, subtitleCharsToShow, subtitle });
   // Calculate if we're currently typing
   const isTypingSubtitle = subtitleCharsToShow > 0 && subtitleCharsToShow < subtitle.length;
-  // Calculate fade-in for the card
+  // Calculate fade in out for the card
   const cardOpacity = interpolate(
-    Math.min(relativeFrame, 30),
-    [0, 30],
-    [0, 1],
+    relativeFrame,
+    [0, 30, duration - 60, duration - 30],
+    [0, 1, 1, 0 ],
     {
       extrapolateRight: 'clamp',
+      extrapolateLeft: 'clamp',
       easing: Easing.sin
     }
   );

@@ -11,7 +11,7 @@ const RES = {
   r4k: { width: 3840, height: 2160 },
   r720p: { width: 1280, height: 720 },
   shorts: { width: 1296, height: 2250 },
-  shorts_alt: { width: 900, height: 1600 },
+  shorts_alt: { width: 720, height: 1280 },
 }
 const transitionDuration = 45;
 const holdDuration = 0;
