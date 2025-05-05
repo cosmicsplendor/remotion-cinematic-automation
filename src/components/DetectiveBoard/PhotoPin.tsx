@@ -53,17 +53,19 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
   const moveToCenter = useMemo(() => {
     if (!isActive) return 0; // No movement if not active
 
-    return spring({
-      frame: relativeFrame,
-      fps,
-      config: {
-        damping: 15,
-        mass: 0.8,
-        stiffness: 100,
-      },
-      // Duration of the "move to center" part of the transition
-      durationInFrames: transitionDuration,
-    });
+    return Math.min(
+      1,
+      spring({
+        frame: relativeFrame,
+        fps,
+        config: {
+          damping: 15,
+          mass: 0.8,
+          stiffness: 100,
+        },
+        durationInFrames: transitionDuration,
+      })
+    );
   }, [isActive, relativeFrame, fps, transitionDuration]);
 
   // Spring animation for moving the photo back to its initial position
