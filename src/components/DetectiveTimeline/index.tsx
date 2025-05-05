@@ -35,8 +35,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   // Ensure this calculation accurately reflects the total height needed
   const totalTimelineHeight = 160 + (events.length * 200); // Initial offset + space for all events
 
-  // --- Calculate active event index ---
-  // Find the *last* event whose startFrame is less than or equal to the current frame
+  // --- Calculate active event index with interpolation ---
   let activeIndex = -1;
   for (let i = events.length - 1; i >= 0; i--) {
     if (frame >= events[i].startFrame) {
@@ -44,43 +43,50 @@ export const DetectiveTimeline: React.FC<{}> = () => {
       break;
     }
   }
-  // If no event has started yet, default to the first one (or -1/0 depending on desired start behavior)
   if (activeIndex === -1) {
-    // Decide behavior before first event: show top (0) or focus on first (-1 might need handling)
-    activeIndex = 0; // Let's default to focusing on the first event initially
+    activeIndex = 0;
   }
 
-  // --- Centering Calculation ---
-  const eventSpacing = 200; // Vertical distance between event starts
-  const initialOffset = 160; // Top offset for the first event and timeline line
+  // Calculate progress to next event for smooth transitions
+  const currentEventStart = events[activeIndex].startFrame;
+  const nextEventStart = events[activeIndex + 1]?.startFrame ?? durationInFrames;
+  const progressToNextEvent = interpolate(
+    frame,
+    [currentEventStart, currentEventStart + 10], // Reduced from full range to just 10 frames
+    [0, 1],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.25, 0.1, 0.25, 1), // Faster easing curve
+    }
+  );
+
+  // --- Centering Calculation with interpolation ---
+  const eventSpacing = 200;
+  const initialOffset = 160;
   const viewportCenter = height / 2;
 
-  // Calculate the absolute Y position of the active event's *center point* or *anchor point*
-  // In this layout, the component is placed at top: initialOffset + index * eventSpacing
-  // Let's aim to center *this* point.
-  const targetEventAbsoluteY = initialOffset + activeIndex * eventSpacing;
+  // Interpolate between current and next event positions
+  const currentEventY = initialOffset + activeIndex * eventSpacing;
+  const nextEventY = initialOffset + (activeIndex + 1) * eventSpacing;
+  const interpolatedY = interpolate(
+    progressToNextEvent,
+    [0, 1],
+    [currentEventY, nextEventY]
+  );
 
-  // Calculate how much the container needs to be scrolled UP (negative Y translation)
-  // to bring targetEventAbsoluteY to viewportCenter.
-  const targetScrollY = targetEventAbsoluteY - viewportCenter;
-
-  // Ensure we don't scroll past the top (scrollY shouldn't be negative)
+  const targetScrollY = interpolatedY - viewportCenter;
   const clampedTargetScrollY = Math.max(0, targetScrollY);
 
-  // Smoothly interpolate the scroll position using spring
+  // Much faster spring configuration
   const cameraScrollY = spring({
     frame: frame,
-    // from: 0, // 'from' is implicitly handled by spring based on previous frame's value
     to: clampedTargetScrollY,
     fps: fps,
     config: {
-      damping: 30,    // Slightly higher damping for potentially smoother stop
-      mass: 1,        // Default mass often works well
-      stiffness: 50,  // Slightly higher stiffness for quicker response
-      // Keep your previous values if they worked better:
-      // damping: 25,
-      // mass: 1.2,
-      // stiffness: 30
+      damping: 15,    // Lower damping for faster movement
+      mass: 0.4,      // Much lower mass for faster response
+      stiffness: 180, // Much higher stiffness for faster movement
     },
   });
 

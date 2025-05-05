@@ -22,7 +22,8 @@ export type TimelineEventData = {
   evidence: string;
   startFrame: number;
 }
-
+const OFFSET = 160
+const CARD_SIZE = 200; // Height of each card
 export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLeft, isActive }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -35,19 +36,21 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
   
   const sinceVisible = frame - event.startFrame;
   
-  // Timeline dot animation
+  // Timeline dot animation - faster spring
   const dotScale = spring({
     frame: sinceVisible,
     fps,
     config: {
       damping: 12,
+      mass: 0.3,    // Lower mass for snappier animation
+      stiffness: 200, // Higher stiffness for faster movement
     },
   });
   
-  // Card animation
+  // Card animation - faster fade in
   const cardOpacity = interpolate(
     sinceVisible,
-    [0, 15],
+    [0, 5],  // Reduced from [0, 15]
     [0, 1],
     {
       extrapolateLeft: 'clamp',
@@ -57,7 +60,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
   
   const cardTranslate = interpolate(
     sinceVisible,
-    [0, 20],
+    [0, 8],  // Reduced from [0, 20]
     [isLeft ? -50 : 50, 0],
     {
       extrapolateLeft: 'clamp',
@@ -73,10 +76,10 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
     ? '0 0 20px rgba(255, 82, 82, 0.6), 0 4px 20px rgba(0, 0, 0, 0.5)'
     : '0 4px 20px rgba(0, 0, 0, 0.5)';
   
-  // Text reveal animation
+  // Text reveal animation - faster text appearance
   const title = segmentDevanagariText(event.title);
   const titleCharacters = Math.floor(
-    interpolate(sinceVisible, [15, 30], [0, event.title.length], {
+    interpolate(sinceVisible, [5, 12], [0, event.title.length], {  // Reduced from [15, 30]
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     })
@@ -84,7 +87,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
   
   const descriptionOpacity = interpolate(
     sinceVisible,
-    [30, 40],
+    [8, 12],  // Reduced from [30, 40]
     [0, 1],
     {
       extrapolateLeft: 'clamp',
@@ -94,7 +97,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
   
   const evidenceOpacity = interpolate(
     sinceVisible,
-    [40, 50],
+    [10, 15],  // Reduced from [40, 50]
     [0, 1],
     {
       extrapolateLeft: 'clamp',
@@ -108,7 +111,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
       <div
         style={{
           position: 'absolute',
-          top: 160 + index * 200,
+          top: OFFSET + index * CARD_SIZE,
           left: '50%',
           width: dotSize,
           height: dotSize,
@@ -124,7 +127,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
       <div
         style={{
           position: 'absolute',
-          top: 160 + index * 200,
+          top: OFFSET + index * CARD_SIZE,
           [isLeft ? 'right' : 'left']: '50%',
           [isLeft ? 'marginRight' : 'marginLeft']: 40,
           width: 500,
