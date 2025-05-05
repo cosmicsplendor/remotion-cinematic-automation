@@ -31,7 +31,9 @@ interface PhotoPinProps {
   audioSrc?: string; // The URL of the audio file (if any)
   audioStartFrame?: number; // The absolute frame number when the audio playback starts
 }
-
+// --- Constants ---
+const PHOTO_WIDTH = 240 * 0.75;
+const PHOTO_HEIGHT = 320 * 0.75;
 export const PhotoPin: React.FC<PhotoPinProps> = ({
   person,
   isActive,
@@ -112,24 +114,22 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
   // Interpolate base scale (smaller when inactive/at edge, larger at center)
   const baseScale = isActive
     ? interpolate(
-        moveToCenter - moveBack,
-        [0, 1],
-        [0.3, 1] // Scale from 30% to 100%
-      )
+      moveToCenter - moveBack,
+      [0, 1],
+      [0.3, 1] // Scale from 30% to 100%
+    )
     : 0.3; // Inactive photos are always 30% scale
 
   // Interpolate glow effect opacity (only visible when centered)
   const glowOpacity = isActive
     ? interpolate(
-        moveToCenter - moveBack,
-        [0, 1],
-        [0, 0.8] // Opacity from 0 to 80%
-      )
+      moveToCenter - moveBack,
+      [0, 1],
+      [0, 0.8] // Opacity from 0 to 80%
+    )
     : 0; // No glow when inactive
 
-  // --- Constants ---
-  const PHOTO_WIDTH = 240;
-  const PHOTO_HEIGHT = 320;
+
 
   // --- State for Audio-Driven Scaling ---
   const [scaleModifier, setScaleModifier] = useState(1); // 1 means no modification
@@ -160,16 +160,14 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
 
   // --- Final Scale Calculation ---
   // Combine the base animation scale with the audio-driven scale modifier
-  const finalScale = baseScale * scaleModifier;
-
   // --- Render Logic ---
   return (
     <div
       style={{
         position: 'absolute',
         // Calculate top-left corner based on center position and final scaled dimensions
-        left: currentX - (PHOTO_WIDTH * finalScale) / 2,
-        top: currentY - (PHOTO_HEIGHT * finalScale) / 2,
+        left: currentX - (PHOTO_WIDTH * baseScale) / 2,
+        top: currentY - (PHOTO_HEIGHT * baseScale) / 2,
         // Apply rotation
         transform: `rotate(${currentRotation}deg)`,
         transformOrigin: 'center center', // Ensure scaling and rotation happen around the center
@@ -202,11 +200,12 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
           style={{
             position: 'absolute',
             // Match the size of the scaled photo container
-            width: PHOTO_WIDTH * finalScale,
-            height: PHOTO_HEIGHT * finalScale,
+            width: PHOTO_WIDTH * baseScale,
+            height: PHOTO_HEIGHT * baseScale,
             backgroundColor: 'transparent',
             // Yellowish glow effect
-            boxShadow: `0 0 30px 10px rgba(255, 255, 200, ${glowOpacity})`,
+            // ${(finalScale - 1) * 100 * 0.25
+            boxShadow: `0 0 0 15px rgba(255, 255, 200, ${glowOpacity})`,
             borderRadius: '4px', // Slightly rounded corners for the glow
             // Center the glow relative to the photo container (if needed, though width/height match should suffice)
             top: 0,
@@ -222,13 +221,12 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
         style={{
           position: 'relative', // Needed for absolute positioning of children like the pin/glow
           // Apply the final calculated scale via width/height
-          width: PHOTO_WIDTH * finalScale,
-          height: PHOTO_HEIGHT * finalScale,
+          width: PHOTO_WIDTH * baseScale,
+          height: PHOTO_HEIGHT * baseScale,
           backgroundColor: 'white', // Polaroid-style background
           boxShadow: '0 4px 8px rgba(0,0,0,0.3)', // Standard shadow
           padding: 8 * baseScale, // Padding that scales down when photo is small
           // Transition for smoother size changes from audio visualiser
-          transition: 'width 0.05s ease-out, height 0.05s ease-out',
           zIndex: 1, // Above the glow
         }}
       >
@@ -257,7 +255,7 @@ export const PhotoPin: React.FC<PhotoPinProps> = ({
             // This callback receives the normalized amplitude (0 to 1)
             // Apply the scaling effect based on the amplitude.
             // The useEffect hook handles resetting the scale when conditions change.
-            setScaleModifier(1 + amplitude * 0.1); // Scale up to 10% based on amplitude
+            setScaleModifier(1 + amplitude * 0.05); // Scale up to 10% based on amplitude
           }}
         />
       )}

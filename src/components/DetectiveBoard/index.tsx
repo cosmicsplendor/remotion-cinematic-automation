@@ -234,18 +234,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
           .filter((url): url is string => Boolean(url)); // Type guard to ensure non-null strings
 
 
-        // Debug log audio playback status (less frequently)
-        if (isActive && relativeFrame >= 0 && relativeFrame % 30 === 0) {
-          console.log(`--- Person ${person.name} (Index ${index}) ---`);
-          console.log(`Frame: ${frame}, RelativeFrame: ${relativeFrame}`);
-          console.log(`Segment: ${timings.startFrame} to ${timings.endFrame} (Duration: ${personTotalDuration})`);
-          console.log(`Audio Window (Absolute): ${audioStartFrameAbsolute} to ${audioStartFrameAbsolute + audioDurationInVideoFrames}`);
-          console.log(`Audio Duration (Frames): ${audioDurationInVideoFrames}`);
-          console.log(`Potential Audio URLs: ${potentialAudioUrls.join(', ')}`);
-          console.log(`Audio Error State: ${audioErrors[person.id] ? 'Error encountered' : 'No error yet'}`);
-        }
-
-
         return (
           <React.Fragment key={person.id}>
             {/* Photo pin component */}
