@@ -148,7 +148,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           <Audio 
             src={staticFile(sfxTypewriterUrl)}
             volume={0.3}
-            playbackRate={1.2} 
+            playbackRate={1.1} 
           />
         </Sequence>
       )}

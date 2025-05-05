@@ -49,7 +49,7 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
   const timePerPerson = useMemo(() => {
     return persons.map(person => ({
       id: person.id,
-      duration: person.audioDuration + transitionDuration * 2 + holdDuration,
+      duration: person.audioDuration * fps + transitionDuration * 2 + holdDuration,
     }));
   }, [persons, transitionDuration, holdDuration]);
   
@@ -125,7 +125,7 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
         // Calculate if we should play audio for this person
         const shouldPlayAudio = isActive && 
           relativeFrame >= transitionDuration && 
-          relativeFrame < transitionDuration + person.audioDuration;
+          relativeFrame < transitionDuration + person.audioDuration * fps;
         
         return (
           <React.Fragment key={person.id}>
@@ -165,8 +165,8 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
             
             {/* Pin sound effect when returning */}
             {isActive && 
-              relativeFrame > transitionDuration + person.audioDuration + holdDuration - 5 && 
-              relativeFrame < transitionDuration + person.audioDuration + holdDuration && (
+              relativeFrame > transitionDuration + person.audioDuration * fps + holdDuration - 5 && 
+              relativeFrame < transitionDuration + person.audioDuration * fps + holdDuration && (
               <Audio src={staticFile(sfxPinUrl)} />
             )}
           </React.Fragment>
