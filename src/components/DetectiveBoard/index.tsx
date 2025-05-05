@@ -207,7 +207,7 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
         // const audioDurationInVideoFrames = person.audioDuration; // Use this if audioDuration is already in frames matching video FPS
 
         // Audio should start playing 'transitionDuration' frames after the person's segment starts
-        const audioStartFrameAbsolute = timings.startFrame + transitionDuration;
+        const audioStartFrameAbsolute = timings.startFrame + transitionDuration * 0.5;
 
         // Get all potential audio URLs to try, normalized
         const potentialAudioUrls = getAudioUrls(person.audioUrl)
