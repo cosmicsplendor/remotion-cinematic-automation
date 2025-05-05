@@ -1,12 +1,8 @@
 // EvidenceCard.tsx
 import React from 'react';
 import {
-  useCurrentFrame,
   useVideoConfig,
   interpolate,
-  Audio,
-  Sequence,
-  staticFile,
 } from 'remotion';
 import { segmentDevanagariText } from '../../utils';
 
@@ -18,41 +14,30 @@ interface EvidenceCardProps {
 }
 
 export const EvidenceCard: React.FC<EvidenceCardProps> = ({
-  name: _name,
+  name,
   subtitle: _subtitle,
   relativeFrame,
 }) => {
   const { fps, width } = useVideoConfig();
   
   // Define animation timing constants
-  const TITLE_START_FRAME = 0;
-  const TITLE_CHARS_PER_FRAME = 0.25; // Characters per frame for name
-  const SUBTITLE_START_DELAY = 3; // Frames to wait after title finishes
-  const SUBTITLE_CHARS_PER_FRAME = 0.25; // Characters per frame for subtitle
-  const name = segmentDevanagariText(_name); // Segment the name for better typing effect
+  const SUBTITLE_START_DELAY = 0; // Frames to wait after title finishes
+  const SUBTITLE_CHARS_PER_FRAME = 0.75; // Characters per frame for subtitle
   const subtitle = segmentDevanagariText(_subtitle); // Segment the subtitle for better typing effect
   // Calculate how many characters to show for the title
-  const titleCharsToShow = Math.floor(
-    Math.min(name.length, relativeFrame * TITLE_CHARS_PER_FRAME)
-  );
-  
-  // Calculate when the title finishes typing
-  const titleFinishFrame = Math.ceil(name.length / TITLE_CHARS_PER_FRAME);
-  
+
   // Calculate how many characters to show for the subtitle
-  const subtitleCharsToShow = relativeFrame > titleFinishFrame + SUBTITLE_START_DELAY
+  const subtitleCharsToShow = relativeFrame > 0 + SUBTITLE_START_DELAY
     ? Math.floor(
         Math.min(
           subtitle.length,
-          (relativeFrame - titleFinishFrame - SUBTITLE_START_DELAY) * SUBTITLE_CHARS_PER_FRAME
+          (relativeFrame - 0 - SUBTITLE_START_DELAY) * SUBTITLE_CHARS_PER_FRAME
         )
       )
     : 0;
   
   // Calculate if we're currently typing
-  const isTypingTitle = titleCharsToShow > 0 && titleCharsToShow < name.length;
   const isTypingSubtitle = subtitleCharsToShow > 0 && subtitleCharsToShow < subtitle.length;
-  const isTyping = isTypingTitle || isTypingSubtitle;
   
   // Calculate fade-in for the card
   const cardOpacity = interpolate(
@@ -108,7 +93,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           textAlign: 'center',
         }}
       >
-        {name.slice(0, titleCharsToShow)}
+        {name}
       </h1>
       
       {/* Subtitle with typewriter effect */}
