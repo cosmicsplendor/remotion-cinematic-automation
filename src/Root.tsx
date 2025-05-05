@@ -12,7 +12,7 @@ const RES = {
   r720p: { width: 1280, height: 720 },
   shorts: { width: 1296, height: 2250 },
 }
-const transitionDuration = 30;
+const transitionDuration = 45;
 const holdDuration = 0;
 const res = RES.r720p; // Change this to the desired resolution
 const FPS = 30

@@ -3,6 +3,7 @@ import React from 'react';
 import {
   useVideoConfig,
   interpolate,
+  Easing,
 } from 'remotion';
 import { segmentDevanagariText } from '../../utils';
 
@@ -19,33 +20,31 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
   relativeFrame,
 }) => {
   const { fps, width } = useVideoConfig();
-  
+
   // Define animation timing constants
   const SUBTITLE_START_DELAY = 0; // Frames to wait after title finishes
-  const SUBTITLE_CHARS_PER_FRAME = 0.75; // Characters per frame for subtitle
+  const SUBTITLE_CHARS_PER_FRAME = 1; // Characters per frame for subtitle
   const subtitle = segmentDevanagariText(_subtitle); // Segment the subtitle for better typing effect
   // Calculate how many characters to show for the title
 
   // Calculate how many characters to show for the subtitle
-  const subtitleCharsToShow = relativeFrame > 0 + SUBTITLE_START_DELAY
-    ? Math.floor(
-        Math.min(
-          subtitle.length,
-          (relativeFrame - 0 - SUBTITLE_START_DELAY) * SUBTITLE_CHARS_PER_FRAME
-        )
-      )
-    : 0;
-  
+  const subtitleCharsToShow = Math.max(Math.floor(
+    Math.min(
+      subtitle.length,
+      (relativeFrame - 0 - SUBTITLE_START_DELAY) * SUBTITLE_CHARS_PER_FRAME
+    )
+  ), 1)
+  console.log({ relativeFrame, subtitleCharsToShow, subtitle });
   // Calculate if we're currently typing
   const isTypingSubtitle = subtitleCharsToShow > 0 && subtitleCharsToShow < subtitle.length;
-  
   // Calculate fade-in for the card
   const cardOpacity = interpolate(
-    Math.min(relativeFrame, 15),
-    [0, 15],
+    Math.min(relativeFrame, 30),
+    [0, 30],
     [0, 1],
     {
       extrapolateRight: 'clamp',
+      easing: Easing.sin
     }
   );
 
@@ -80,7 +79,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           transform: 'rotate(-2deg)',
         }}
       />
-      
+
       {/* Title with typewriter effect */}
       <h1
         style={{
@@ -95,7 +94,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
       >
         {name}
       </h1>
-      
+
       {/* Subtitle with typewriter effect */}
       <p
         style={{

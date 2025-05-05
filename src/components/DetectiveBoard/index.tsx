@@ -233,31 +233,28 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
             />
 
             {/* Evidence card with text (only shown when active) */}
-            {isActive && relativeFrame >= 0 && (() => { // Start of IIFE
+            {isActive  && (() => { // Start of IIFE
               // Calculate the absolute start frame for this specific card sequence
-              const cardSequenceStartFrame = timings.startFrame + transitionDuration;
+              const cardSequenceStartFrame = timings.startFrame ;
               // Calculate the duration the card should be visible
               // Ensure duration is not negative if timings are short
-              const cardSequenceDuration = Math.max(0, personTotalDuration - transitionDuration * 2);
 
               // Only render the sequence if it has a positive duration
-              if (cardSequenceDuration > 0) {
-                // Return the Sequence component from the IIFE
-                return (
-                  <Sequence
-                    from={cardSequenceStartFrame} // Correct: Start at the absolute frame for this person's card
-                    durationInFrames={cardSequenceDuration}
-                    name={`EvidenceCardSequence_${person.name}`} // Optional: Good for debugging
-                  >
-                    <EvidenceCard
-                      name={person.name}
-                      subtitle={person.subtitle}
-                      // This calculation gives the frame relative to the start of the card sequence
-                      relativeFrame={frame - cardSequenceStartFrame}
-                    />
-                  </Sequence>
-                );
-              }
+              // Return the Sequence component from the IIFE
+              return (
+                <Sequence
+                  from={cardSequenceStartFrame} // Correct: Start at the absolute frame for this person's card
+                  durationInFrames={personTotalDuration}
+                  name={`EvidenceCardSequence_${person.name}`} // Optional: Good for debugging
+                >
+                  <EvidenceCard
+                    name={person.name}
+                    subtitle={person.subtitle}
+                    // This calculation gives the frame relative to the start of the card sequence
+                    relativeFrame={frame - cardSequenceStartFrame}
+                  />
+                </Sequence>
+              );
               // If duration is not positive, the IIFE returns null (effectively rendering nothing)
               return null;
             })() /* End of IIFE, immediately invoked */}
