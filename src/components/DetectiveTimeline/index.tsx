@@ -84,9 +84,9 @@ export const DetectiveTimeline: React.FC<{}> = () => {
     from: 0,
     to: clampedTargetScrollY,
     config: {
-      damping: 15,
-      mass: 0.4,
-      stiffness: 180,
+      damping: 25,
+      mass: 1,
+      stiffness: 1,
     },
   });
 

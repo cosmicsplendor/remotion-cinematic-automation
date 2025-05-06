@@ -50,12 +50,14 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
   // Card animation - faster fade in
   const cardOpacity = interpolate(
     sinceVisible,
-    [0, 5],  // Reduced from [0, 15]
+    [0, 30],  // Reduced from [0, 15]
     [0, 1],
     {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
-    }
+      easing: Easing.sin,
+    },
+
   );
   
   const cardTranslate = interpolate(
