@@ -36,13 +36,12 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
       (relativeFrame - 0 - SUBTITLE_START_DELAY) * SUBTITLE_CHARS_PER_FRAME
     )
   ), 1)
-  console.log({ relativeFrame, subtitleCharsToShow, subtitle });
   // Calculate if we're currently typing
   const isTypingSubtitle = subtitleCharsToShow > 0 && subtitleCharsToShow < subtitle.length;
   // Calculate fade in out for the card
   const cardOpacity = interpolate(
     relativeFrame,
-    [0, 30, duration - 60, duration - 30],
+    [0, 30, duration - 60, duration - 15],
     [0, 1, 1, 0 ],
     {
       extrapolateRight: 'clamp',

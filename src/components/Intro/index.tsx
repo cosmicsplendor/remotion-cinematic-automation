@@ -8,8 +8,8 @@ import {
 import { segmentDevanagariText } from '../../utils';
 
 const data = {
-  title: "भ्यागुता खोज्ने केटाहरु",
-  subtitle: "एक अनसुलझा रहस्यको खोजीमा",
+  title: "पत्रहरूको परिचय",
+  subtitle: "भ्यागुते केटाहरूको विवरण",
 };
 
 export const Intro = () => {

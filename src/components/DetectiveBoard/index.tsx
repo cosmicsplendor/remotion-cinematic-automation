@@ -44,17 +44,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
   // Track which audio files have errors
   const [audioErrors, setAudioErrors] = useState<Record<string, boolean>>({});
 
-  // Debug logging to verify that persons data is correct
-  useEffect(() => {
-    if (frame === 0) {
-      console.log('Persons data:', persons);
-      console.log('FPS:', fps);
-      console.log('Duration in frames:', durationInFrames);
-      // Crucial: Verify audioDuration values
-      persons.forEach(p => console.log(`Person ${p.name} audioDuration: ${p.audioDuration}`));
-    }
-  }, [frame, fps, durationInFrames]);
-
   // Calculate the total duration per person (audio + transition + hold)
   // Ensure audioDuration corresponds to the VIDEO's FPS
   const timePerPerson = useMemo(() => {
@@ -71,7 +60,7 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
 
       return {
         id: person.id,
-        duration: (audioDurationInVideoFrames || 0) + transitionDuration * 2 + holdDuration,
+        duration: (audioDurationInVideoFrames - transitionDuration * 0.75) + transitionDuration * 2 + holdDuration,
       };
     });
   }, [persons, transitionDuration, holdDuration, fps, frame]); // Added frame dependency for initial log
@@ -84,14 +73,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
       const start = startFrame;
       const duration = timePerPerson[index]?.duration || transitionDuration * 2 + holdDuration; // Fallback duration if calculation failed
       startFrame += duration;
-
-      // Debug logging to verify timing calculations
-      if (frame === 0) {
-        console.log(`Person ${person.name}: start=${start}, duration=${duration}, end=${startFrame}`);
-        if (duration <= transitionDuration * 2 + holdDuration) {
-          console.warn(`Person ${person.name} has zero or invalid audio duration contributing to total time.`);
-        }
-      }
 
       return {
         id: person.id,
