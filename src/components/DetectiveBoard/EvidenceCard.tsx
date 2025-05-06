@@ -11,7 +11,6 @@ interface EvidenceCardProps {
   name: string;
   subtitle: string;
   relativeFrame: number;
-  sfxTypewriterUrl?: string;
   duration?: number
 }
 

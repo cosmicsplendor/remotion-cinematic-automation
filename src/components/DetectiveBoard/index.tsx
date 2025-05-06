@@ -280,22 +280,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
             <Sequence from={timings.startFrame} durationInFrames={5} name={`PinSoundStart_${person.name}`}>
               {sfxPinUrl && <Audio src={staticFile(normalizeUrl(sfxPinUrl) ?? '')} onError={(e) => console.error('Pin sound start error:', e)} />}
             </Sequence>
-
-            {/* Pin sound effect when returning (Place end SFX within the main person sequence) */}
-            {/* Calculate absolute frame for return pin sound */}
-            {(() => {
-              const returnPinSoundStartFrame = timings.startFrame + transitionDuration + audioDurationInVideoFrames + holdDuration - 5;
-              // Ensure this frame is within the component's overall activity
-              if (returnPinSoundStartFrame > timings.startFrame && returnPinSoundStartFrame < timings.endFrame) {
-                return (
-                  <Sequence from={returnPinSoundStartFrame} durationInFrames={5} name={`PinSoundEnd_${person.name}`}>
-                    {sfxPinUrl && <Audio src={staticFile(normalizeUrl(sfxPinUrl) ?? '')} onError={(e) => console.error('Pin sound end error:', e)} />}
-                  </Sequence>
-                );
-              }
-              return null;
-            })()}
-
           </React.Fragment>
         );
       })}
