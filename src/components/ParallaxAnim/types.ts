@@ -42,9 +42,6 @@ export type LayerData = z.infer<typeof LayerDataSchema>;
 export const ParallaxConfigSchema = z.object({
   compositionName: z.string(),
   durationInFrames: z.number(),
-  fps: z.number(),
-  width: z.number(),
-  height: z.number(),
   backgroundColor: z.string(),
   camera: CameraConfigSchema,
   layers: z.array(LayerDataSchema),
