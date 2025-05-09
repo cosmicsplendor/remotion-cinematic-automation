@@ -15,6 +15,7 @@ import { CARD_SIZE, OFFSET, TimelineEvent, TimelineEventData } from './TimelineE
 
 import data from "../../../data/timeline.json";
 import useAudioDurations from '../hooks/useAudioDurations.ts';
+import { pickOne } from '../../utils/index.ts';
 const { events: rawEvents } = data;
 
 type CalculatedTimelineEvent = TimelineEventData & {
@@ -214,6 +215,9 @@ export const DetectiveTimeline: React.FC<{}> = () => {
                 )}
               </Sequence>
             )}
+            <Sequence from={event.calculatedStartFrame} durationInFrames={25} name={`PinSoundStart_${event.calculatedStartFrame}`}>
+                      <Audio volume={0.125} src={staticFile(pickOne(["assets/sfx/blip1.wav", "assets/sfx/blip2.wav"]))} onError={(e) => console.error('Pin sound start error:', e)} />
+            </Sequence>
           </div>
         ))}
       </div>
