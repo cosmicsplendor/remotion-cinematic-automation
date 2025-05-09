@@ -8,10 +8,9 @@ import {
 import { segmentDevanagariText } from '../../utils';
 
 const data = {
-  title: "पत्रहरूको परिचय",
-  subtitle: "भ्यागुते केटाहरूको विवरण",
-};
-
+  title:  "खोजीको सुरुवात",
+  subtitle: "एक रहस्यमय खोजको प्रारम्भ",
+}
 export const Intro = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { boolean, z } from 'zod';
 
 export const CameraConfigSchema = z.object({
   initialX: z.number(),
@@ -45,6 +45,7 @@ export const ParallaxConfigSchema = z.object({
   backgroundColor: z.string(),
   camera: CameraConfigSchema,
   layers: z.array(LayerDataSchema),
+  reverse: boolean().optional(), // Optional reverse parameter
 });
 
 // Use the Zod schema type for ParallaxConfig

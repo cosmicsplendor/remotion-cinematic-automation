@@ -14,16 +14,20 @@ const SVGViewer: React.FC<{ svgString: string; width: string; height: string }> 
       dangerouslySetInnerHTML={{ __html: svgString }}
     />
   );
-};
-export const ParallaxComposition: React.FC<ParallaxConfig> = ({
+};export const ParallaxComposition: React.FC<ParallaxConfig & { reverse?: boolean }> = ({
   durationInFrames,
   backgroundColor,
   camera,
   layers,
+  reverse = false, // New reverse parameter with default false
 }) => {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
-  const cameraProgress = frame / (durationInFrames > 1 ? durationInFrames - 1 : 1);
+  
+  // Calculate progress based on reverse flag
+  const cameraProgress = reverse 
+    ? 1 - (frame / (durationInFrames > 1 ? durationInFrames - 1 : 1))
+    : frame / (durationInFrames > 1 ? durationInFrames - 1 : 1);
 
   // Calculate camera position based on animation progress
   const currentCameraX = interpolate(cameraProgress, [0, 1], [camera.initialX, camera.finalX]);
@@ -62,22 +66,24 @@ export const ParallaxComposition: React.FC<ParallaxConfig> = ({
                 {(layer.elements || [])
                   .sort((a, b) => a.zIndex - b.zIndex)
                   .map((element: SVGElementData) => {
-                    // Calculate rotation based on animation type
+                    // Calculate rotation based on animation type and reverse flag
                     let currentRotation: number;
+                    const fromRotation = reverse ? element.finalRotation : element.initialRotation;
+                    const toRotation = reverse ? element.initialRotation : element.finalRotation;
                     
                     if (element.rotationAnimationType === 'spring') {
                       currentRotation = spring({
                         frame,
                         fps,
-                        from: element.initialRotation,
-                        to: element.finalRotation,
+                        from: fromRotation,
+                        to: toRotation,
                         config: { stiffness: 100, damping: 15 },
                       });
                     } else {
                       currentRotation = interpolate(
                         frame,
                         [0, Math.max(0, durationInFrames - 1)],
-                        [element.initialRotation, element.finalRotation],
+                        [fromRotation, toRotation],
                         { 
                           easing: Easing.bezier(0.42, 0, 0.58, 1), 
                           extrapolateLeft: 'clamp', 
@@ -121,4 +127,4 @@ export const ParallaxComposition: React.FC<ParallaxConfig> = ({
       </AbsoluteFill>
     </AbsoluteFill>
   );
-};
+}

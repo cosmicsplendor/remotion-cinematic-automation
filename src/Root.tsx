@@ -64,7 +64,8 @@ export const ParallaxVideo = () => {
           compositionName: parallaxData.compositionName,
           camera: parallaxData.camera,
           backgroundColor: parallaxData.backgroundColor,
-          layers: validatedLayers
+          layers: validatedLayers,
+          reverse: false
         }}
       />
     </>
@@ -74,7 +75,7 @@ export const RemotionRoot = () => {
   return (
     <>
       <ParallaxVideo />
-      {/* <Composition
+      <Composition
         id="DetectiveBoard"
         component={DetectiveBoardPresentation}
         durationInFrames={
@@ -106,7 +107,7 @@ export const RemotionRoot = () => {
         fps={FPS}
         width={res.width}
         height={res.height}
-      /> */}
+      />
     </>
   );
 };

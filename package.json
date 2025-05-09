@@ -6,6 +6,8 @@
     "start": "remotion studio",
     "build": "remotion render DetectiveTimeline out/timeline.mp4",
     "build:intro": "remotion render Intro out/intro.mp4",
+    "build:parallax": "remotion render ParallaxScene out/parallax.mp4",
+    "build:timeline": "remotion render DetectiveTimeline out/timeline.mp4",
     "build:all": "node src/render.ts",
     "upgrade": "remotion upgrade",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc"
@@ -13,7 +15,7 @@
   "remotion": {
     "webpackOverride": "./webpack.config.js"
   },
-    "repository": {},
+  "repository": {},
   "license": "MIT",
   "dependencies": {
     "@remotion/bundler": "^4.0.133",
@@ -23,6 +25,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remotion": "^4.0.133",
+    "styled-components": "^6.1.18",
     "zod": "^3.22.4"
   },
   "devDependencies": {

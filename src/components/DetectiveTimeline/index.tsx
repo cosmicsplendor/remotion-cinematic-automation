@@ -1,82 +1,163 @@
-import React from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   AbsoluteFill,
   useCurrentFrame,
   useVideoConfig,
-  Sequence, // Sequence might not be needed directly here unless used elsewhere
+  Sequence,
   spring,
   interpolate,
   Easing,
+  staticFile,
+  Audio,
 } from 'remotion';
+import { useAudioData, getAudioDurationInSeconds } from '@remotion/media-utils';
+
 import { CARD_SIZE, OFFSET, TimelineEvent, TimelineEventData } from './TimelineEvent';
-export type DetectiveTimelineProps = {
-  events?: TimelineEventData[];
-}
-import data from "../../../data/timeline.ts"; // Adjust the path as necessary
-const { events } = data; // Assuming data is structured as { events: [...] }
+
+import data from "../../../data/timeline.ts";
+const { events: rawEvents } = data;
+
+type CalculatedTimelineEvent = TimelineEventData & {
+  calculatedStartFrame: number;
+  audioDurationInFrames: number;
+  isLeft: boolean; // Add isLeft property to fix the type error
+  id?: string;
+  audio?: string;
+  fallbackAudio?: string;
+};
+
+// Custom hook to handle audio duration calculation
+const useAudioDurations = (events: TimelineEventData[], fps: number) => {
+  const [durations, setDurations] = useState<Record<number, number>>({});
+
+  useEffect(() => {
+    const loadDurations = async () => {
+      const newDurations: Record<number, number> = {};
+      
+      await Promise.all(
+        events.map(async (event, index) => {
+          if (event.audio) {
+            try {
+              const durationInSeconds = await getAudioDurationInSeconds(staticFile(event.audio));
+              newDurations[index] = Math.ceil(durationInSeconds * fps);
+            } catch (error) {
+              console.warn(`Failed to load audio duration for event ${index}:`, error);
+              newDurations[index] = fps * 3; // Fallback to 3 seconds
+            }
+          } else {
+            newDurations[index] = fps * 3; // Default duration for events without audio
+          }
+        })
+      );
+      
+      setDurations(newDurations);
+    };
+
+    loadDurations();
+  }, [events, fps]);
+
+  return durations;
+};
+
 export const DetectiveTimeline: React.FC<{}> = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps, width, height } = useVideoConfig();
+  const [audioErrors, setAudioErrors] = useState<Record<string, boolean>>({});
 
-  // --- Opacity interpolation remains the same ---
+  const events = rawEvents || [];
+  if (events.length === 0) {
+    console.warn("No events data provided to DetectiveTimeline.");
+    return null;
+  }
+
+  const audioDurations = useAudioDurations(events, fps);
+
+  // Handle audio errors
+  const handleAudioError = (eventId: string, audioUrl: string, error: Error) => {
+    console.error(`Audio error for event ${eventId} (${audioUrl}):`, error);
+    setAudioErrors(prev => ({
+      ...prev,
+      [eventId]: true
+    }));
+  };
+
+  const calculatedEvents: CalculatedTimelineEvent[] = useMemo(() => {
+    let currentFrame = 0;
+    const gapFrames = fps * 0.5;
+
+    return events.map((event, index) => {
+      const audioDurationInFrames = audioDurations[index] ?? fps * 3;
+
+      const calculatedStartFrame = currentFrame;
+      const calculatedEndFrame = calculatedStartFrame + audioDurationInFrames;
+
+      currentFrame = calculatedEndFrame + (index < events.length - 1 ? gapFrames : 0);
+
+      return {
+        ...event,
+        calculatedStartFrame,
+        audioDurationInFrames,
+        isLeft: index % 2 === 0, // Add isLeft property based on the index
+      };
+    });
+  }, [events, audioDurations, fps]);
+
+  const lastCalculatedEvent = calculatedEvents[calculatedEvents.length - 1];
+  const endMarginFrames = fps * 2;
+  const effectiveEndFrame = lastCalculatedEvent.calculatedStartFrame + lastCalculatedEvent.audioDurationInFrames + endMarginFrames;
+  const finalCutoffFrame = Math.min(durationInFrames, effectiveEndFrame);
+
   const opacity = interpolate(
     frame,
-    [0, 30, durationInFrames - 30, durationInFrames],
+    [0, 30, finalCutoffFrame - 30, finalCutoffFrame],
     [0, 1, 1, 0],
     {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     }
   );
-  if (!events) {
-    return null; // Handle case where events are not provided
-  }
-  // --- Timeline height interpolation remains the same ---
-  // Ensure this calculation accurately reflects the total height needed
-  const totalTimelineHeight = OFFSET + (events.length * CARD_SIZE); // Initial offset + space for all events
 
-  // --- Calculate active event index with interpolation ---
   let activeIndex = -1;
-  for (let i = events.length - 1; i >= 0; i--) {
-    if (frame >= events[i].startFrame) {
+  for (let i = calculatedEvents.length - 1; i >= 0; i--) {
+    const event = calculatedEvents[i];
+    const eventEndFrame = event.calculatedStartFrame + event.audioDurationInFrames;
+
+    if (frame >= event.calculatedStartFrame && frame < eventEndFrame) {
       activeIndex = i;
       break;
     }
   }
-  if (activeIndex === -1) {
-    activeIndex = 0;
+
+  activeIndex = -1;
+  for (let i = calculatedEvents.length - 1; i >= 0; i--) {
+    const event = calculatedEvents[i];
+    const activePeriodEndFrame = (i === calculatedEvents.length - 1)
+      ? finalCutoffFrame
+      : calculatedEvents[i + 1].calculatedStartFrame;
+
+    if (frame >= event.calculatedStartFrame && frame < activePeriodEndFrame) {
+      activeIndex = i;
+      break;
+    }
   }
 
-  // Calculate progress to next event for smooth transitions
-  const currentEventStart = events[activeIndex].startFrame;
-  const nextEventStart = events[activeIndex + 1]?.startFrame ?? durationInFrames;
-  const progressToNextEvent = interpolate(
-    frame,
-    [currentEventStart, currentEventStart + 10], // Reduced from full range to just 10 frames
-    [0, 1],
-    {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-      easing: Easing.bezier(0.25, 0.1, 0.25, 1), // Faster easing curve
+  if (activeIndex === -1 && calculatedEvents.length > 0) {
+    if (frame >= calculatedEvents[0].calculatedStartFrame) {
+      activeIndex = 0;
     }
-  );
+  }
 
-  // --- Centering Calculation with interpolation ---
   const eventSpacing = CARD_SIZE;
-  const initialOffset = OFFSET; // Initial offset for the timeline line
-  const viewportCenter = height * 0.75;
+  const initialOffset = OFFSET;
+  const timelineScrollTargetY = height * 0.6;
 
-  // Interpolate between current and next event positions
-  const currentEventY = initialOffset + activeIndex * eventSpacing;
-  const nextEventY = initialOffset + (activeIndex + 1) * eventSpacing;
-  const interpolatedY = interpolate(
-    progressToNextEvent,
-    [0, 1],
-    [currentEventY, nextEventY]
-  );
+  const targetEventIndexForScroll = Math.max(0, activeIndex);
+  const targetEventContainerY = initialOffset + targetEventIndexForScroll * eventSpacing;
+  const targetScrollY = targetEventContainerY - timelineScrollTargetY;
 
-  const targetScrollY = interpolatedY - viewportCenter;
-  const clampedTargetScrollY = Math.max(0, targetScrollY);
+  const totalScrollableContentHeight = initialOffset + (calculatedEvents.length - 1) * eventSpacing + (height - timelineScrollTargetY);
+  const maxScrollY = Math.max(0, totalScrollableContentHeight - height);
+  const clampedTargetScrollY = Math.max(0, Math.min(maxScrollY, targetScrollY));
 
   const cameraScrollY = spring({
     frame: frame,
@@ -84,22 +165,13 @@ export const DetectiveTimeline: React.FC<{}> = () => {
     from: 0,
     to: clampedTargetScrollY,
     config: {
-      damping: 25,
-      mass: 1,
-      stiffness: 1,
+      damping: 15,
+      mass: 0.4,
+      stiffness: 180,
     },
   });
 
-  // const cameraScrollY = spring({
-  //   frame: frame,
-  //   to: clampedTargetScrollY,
-  //   fps: fps,
-  //   config: {
-  //     damping: 15,    // Lower damping for faster movement
-  //     mass: 0.4,      // Much lower mass for faster response
-  //     stiffness: 180, // Much higher stiffness for faster movement
-  //   },
-  // });
+  const totalTimelineLineHeight = (calculatedEvents.length - 1) * eventSpacing;
 
   return (
     <AbsoluteFill
@@ -107,57 +179,81 @@ export const DetectiveTimeline: React.FC<{}> = () => {
         backgroundColor: '#121212',
         color: 'white',
         opacity,
-        overflow: 'hidden', // Hide content moving outside the viewport
+        overflow: 'hidden',
       }}
     >
-      {/* Camera container that moves */}
       <div
         style={{
           position: 'absolute',
           top: 0,
-          left: 0,
+          left: '50%',
           width: '100%',
-          // Height needs to be large enough to contain all events
-          // It doesn't strictly need to be dynamic here, but ensures content isn't cut off
-          // Use totalTimelineHeight or a sufficiently large number
-          height: `${totalTimelineHeight + 200}px`, // Add some buffer
-          transform: `translateY(-${cameraScrollY}px)`,
-          // Add will-change for potentially smoother animation, but use judiciously
-          // willChange: 'transform',
+          height: `${totalScrollableContentHeight}px`,
+          transform: `translate(-50%, -${cameraScrollY}px)`,
         }}
       >
-        {/* Optional: Title (can be outside the scrolling div if always visible) */}
-        {/* <div style={{ position: 'fixed', top: 40, ...}}>Title</div> */}
-
-        {/* The red timeline line */}
         <div
           style={{
             position: 'absolute',
-            top: initialOffset, // Start line where the first event starts visually
-            left: '50%',
+            top: initialOffset,
+            left: '0',
+            transform: 'translateX(-50%)',
             width: 8,
             backgroundColor: '#c0392b',
-            transform: 'translateX(-50%)',
-            // Use the calculated dynamic height for the line
-            height: `${Math.max(0, (events.length - 1) * eventSpacing + 20)}px`, // Height spans between event points
-            // Or use timelineVisibleHeight if you want the line itself to animate length
-            // height: timelineVisibleHeight - initialOffset > 0 ? timelineVisibleHeight - initialOffset : 0,
+            height: `${Math.max(0, totalTimelineLineHeight)}px`,
           }}
         />
 
-        {/* Map through events and render them */}
-        {events.map((event, index) => (
-          <TimelineEvent
-            key={event.title + index} // Use a more stable key if possible
-            event={event}
-            index={index}
-            isLeft={index % 2 === 0}
-            // Determine active state based purely on frame being within event's duration
-            isActive={frame >= event.startFrame && frame < (events[index + 1]?.startFrame ?? durationInFrames)}
-            // Pass necessary constants if TimelineEvent needs them for positioning
-            initialOffset={initialOffset}
-            eventSpacing={eventSpacing}
-          />
+        {calculatedEvents.map((calculatedEvent, index) => (
+          <div
+            key={calculatedEvent.title + index}
+            style={{
+              position: 'absolute',
+              top: initialOffset + index * eventSpacing,
+              left: calculatedEvent.isLeft ? 'auto' : '0',
+              right: calculatedEvent.isLeft ? '0' : 'auto',
+              transform: 'translateY(-50%)',
+              width: calculatedEvent.isLeft ? 'auto' : '100%',
+              marginLeft: calculatedEvent.isLeft ? 'auto' : '0',
+              marginRight: calculatedEvent.isLeft ? '0' : 'auto',
+            }}
+          >
+            <>
+            <TimelineEvent
+              event={calculatedEvent}
+              index={index}
+              isLeft={calculatedEvent.isLeft}
+              isActive={index === activeIndex}
+              calculatedStartFrame={calculatedEvent.calculatedStartFrame}
+              initialOffset={initialOffset}
+              eventSpacing={eventSpacing}
+            />
+            
+            {calculatedEvent.audio && (
+              <Sequence
+                from={calculatedEvent.calculatedStartFrame}
+                durationInFrames={calculatedEvent.audioDurationInFrames}
+                name={`AudioSequence_${calculatedEvent.title}`}
+              >
+                {!audioErrors[calculatedEvent.id || index.toString()] && (
+                  <Audio
+                    src={staticFile(calculatedEvent.audio)}
+                    volume={1}
+                    onError={(e) => handleAudioError(calculatedEvent.id || index.toString(), calculatedEvent.audio!, e)}
+                  />
+                )}
+
+                {audioErrors[calculatedEvent.id || index.toString()] && calculatedEvent.fallbackAudio && (
+                  <Audio
+                    src={staticFile(calculatedEvent.fallbackAudio)}
+                    volume={1}
+                    onError={(e) => console.error(`Fallback audio error for ${calculatedEvent.title} (${calculatedEvent.fallbackAudio}):`, e)}
+                  />
+                )}
+              </Sequence>
+            )}
+          </>
+          </div>
         ))}
       </div>
     </AbsoluteFill>

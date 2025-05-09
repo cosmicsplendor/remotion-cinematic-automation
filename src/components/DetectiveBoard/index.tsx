@@ -10,6 +10,7 @@ import {
   random,
   staticFile,
 } from 'remotion';
+import { getAudioDurationInSeconds } from '@remotion/media-utils';
 import { PhotoPin } from './PhotoPin.tsx';
 import { EvidenceCard } from './EvidenceCard.tsx';
 import persons from "../../../data/board.ts"
@@ -33,6 +34,31 @@ interface DetectiveBoardPresentationProps {
 const BOARD_MARGIN = 100; // Margin from the edge of the board
 const INITIAL_POSITION_TOP = 100; // Initial Y position for all photos
 
+const useAudioDuration = (audioUrl: string | undefined, fps: number) => {
+  const [duration, setDuration] = useState<number | null>(null);
+
+  useEffect(() => {
+    const loadDuration = async () => {
+      if (!audioUrl) {
+        setDuration(null);
+        return;
+      }
+
+      try {
+        const durationInSeconds = await getAudioDurationInSeconds(staticFile(audioUrl));
+        setDuration(Math.ceil(durationInSeconds * fps));
+      } catch (error) {
+        console.warn(`Failed to load audio duration for ${audioUrl}:`, error);
+        setDuration(null);
+      }
+    };
+
+    loadDuration();
+  }, [audioUrl, fps]);
+
+  return duration;
+};
+
 export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProps> = ({
   sfxPinUrl = '/assets/sfx/pin.wav',
   transitionDuration = 30, // ~1 second at 30fps
@@ -45,16 +71,12 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
   const [audioErrors, setAudioErrors] = useState<Record<string, boolean>>({});
 
   // Calculate the total duration per person (audio + transition + hold)
-  // Ensure audioDuration corresponds to the VIDEO's FPS
   const timePerPerson = useMemo(() => {
     return persons.map(person => {
-      // IMPORTANT: Assume person.audioDuration is in SECONDS unless already converted
-      // If audioDuration is already in frames (at video fps), use it directly.
-      // If it's in seconds, multiply by fps.
-      const audioDurationInVideoFrames = person.audioDuration * fps; // Assuming audioDuration is in seconds
-      // const audioDurationInVideoFrames = person.audioDuration; // Use this if audioDuration is already in frames matching video FPS
+      const audioDuration = useAudioDuration(person.audioUrl, fps);
+      const audioDurationInVideoFrames = audioDuration ?? (person.audioDuration * fps);
 
-      if (frame === 0 && isNaN(audioDurationInVideoFrames)) {
+      if (frame === 0 && !audioDuration) {
         console.warn(`Person ${person.name} has invalid audioDuration: ${person.audioDuration}`);
       }
 
@@ -63,8 +85,7 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
         duration: (audioDurationInVideoFrames - transitionDuration * 0.75) + transitionDuration * 2 + holdDuration,
       };
     });
-  }, [persons, transitionDuration, holdDuration, fps, frame]); // Added frame dependency for initial log
-
+  }, [persons, transitionDuration, holdDuration, fps, frame]);
 
   // Calculate the start frame for each person
   const personStartFrames = useMemo(() => {
@@ -88,11 +109,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
     const index = personStartFrames.findIndex(
       person => frame >= person.startFrame && frame < person.endFrame
     );
-
-    // Debug logging for current person (less frequent)
-    // if (frame % 15 === 0) { // Log more frequently during debugging
-    //   console.log(`Frame ${frame}, Current person index: ${index}`);
-    // }
 
     return index;
   }, [frame, personStartFrames]);
@@ -120,15 +136,11 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
 
   // Handle audio error for a person
   const handleAudioError = (personId: string, url: string, error: any) => {
-    // Avoid logging harmless 'DOMException: The play() request was interrupted' which can happen during seeks
     if (error.message && error.message.includes('play() request was interrupted')) {
-      // console.log(`Audio interruption ignored for ${personId} (${url})`);
       return;
     }
     console.error(`Audio error for person ${personId} (${url}):`, error);
 
-    // Mark this audio file as having an error only if it's not already marked
-    // to prevent potential infinite loops if fallback also fails
     setAudioErrors(prev => {
       if (!prev[personId]) {
         return { ...prev, [personId]: true };
@@ -141,10 +153,6 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
   const getAudioUrls = (originalUrl: string) => {
     if (!originalUrl) return [];
 
-    // Simple approach: return original only for now. Implement fallback logic if needed.
-    // return [originalUrl];
-
-    // Fallback Example: Try mp3, wav, ogg if original fails
     const basePath = originalUrl.replace(/\.[^/.]+$/, ""); // Remove extension
     const originalExt = originalUrl.substring(basePath.length); // Get original extension (e.g., '.wav')
 
@@ -155,20 +163,17 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
       `${basePath}.ogg`,
       `${basePath}.m4a`,
     ];
-    // Return unique URLs, keeping original order preference
     return [...new Set(potentialUrls)].filter(url => url !== originalUrl || url === originalUrl); // Ensure original is included
   };
 
   // Helper function to normalize audio URL
   const normalizeUrl = (url: string | null | undefined): string | undefined => {
     if (!url) return undefined;
-    // Ensure the URL starts with / unless it's an absolute URL (http/https)
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
     return url.startsWith('/') ? url : `/${url}`;
   };
-
 
   // Render each person's photo
   return (
@@ -177,28 +182,22 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
       {persons.map((person, index) => {
         const isActive = index === currentPersonIndex;
         const timings = personStartFrames[index];
-        if (!timings) return null; // Should not happen, but good practice
+        if (!timings) return null;
 
-        const relativeFrame = isActive ? frame - timings.startFrame : -1; // Use -1 to indicate not active
+        const relativeFrame = isActive ? frame - timings.startFrame : -1;
         const personTotalDuration = timings.calculatedDuration;
         const initialPosition = initialPositions[index];
 
-        // Calculate audio duration in video frames (ensure this matches calculation in timePerPerson)
-        const audioDurationInVideoFrames = person.audioDuration * fps; // Assuming audioDuration is in seconds
-        // const audioDurationInVideoFrames = person.audioDuration; // Use this if audioDuration is already in frames matching video FPS
+        const audioDurationInVideoFrames = useAudioDuration(person.audioUrl, fps) ?? (person.audioDuration * fps);
 
-        // Audio should start playing 'transitionDuration' frames after the person's segment starts
         const audioStartFrameAbsolute = timings.startFrame + transitionDuration * 0.5;
 
-        // Get all potential audio URLs to try, normalized
         const potentialAudioUrls = getAudioUrls(person.audioUrl)
           .map(url => normalizeUrl(url))
-          .filter((url): url is string => Boolean(url)); // Type guard to ensure non-null strings
-
+          .filter((url): url is string => Boolean(url));
 
         return (
           <React.Fragment key={person.id}>
-            {/* Photo pin component */}
             <PhotoPin
               person={person}
               isActive={isActive}
@@ -207,76 +206,52 @@ export const DetectiveBoardPresentation: React.FC<DetectiveBoardPresentationProp
               totalDuration={personTotalDuration}
               initialPosition={initialPosition}
               centerPosition={{ x: width / 2, y: height / 2 }}
-              // Pass the audio source URL if the person is active
               audioSrc={isActive ? normalizeUrl(person.audioUrl) : undefined}
-              // Pass the absolute frame number when this audio should start playing
               audioStartFrame={isActive ? audioStartFrameAbsolute : undefined}
             />
 
-            {/* Evidence card with text (only shown when active) */}
-            {isActive  && (() => { // Start of IIFE
-              // Calculate the absolute start frame for this specific card sequence
-              const cardSequenceStartFrame = timings.startFrame ;
-              // Calculate the duration the card should be visible
-              // Ensure duration is not negative if timings are short
-
-              // Only render the sequence if it has a positive duration
-              // Return the Sequence component from the IIFE
+            {isActive && (() => {
+              const cardSequenceStartFrame = timings.startFrame;
               return (
                 <Sequence
-                  from={cardSequenceStartFrame} // Correct: Start at the absolute frame for this person's card
+                  from={cardSequenceStartFrame}
                   durationInFrames={personTotalDuration}
-                  name={`EvidenceCardSequence_${person.name}`} // Optional: Good for debugging
+                  name={`EvidenceCardSequence_${person.name}`}
                 >
                   <EvidenceCard
                     name={person.name}
                     subtitle={person.subtitle}
-                    // This calculation gives the frame relative to the start of the card sequence
                     relativeFrame={frame - cardSequenceStartFrame}
                     duration={personTotalDuration}
                   />
                 </Sequence>
               );
-              // If duration is not positive, the IIFE returns null (effectively rendering nothing)
-              return null;
-            })() /* End of IIFE, immediately invoked */}
-            {/* Audio Playback using Sequence */}
+            })()}
+
             {isActive && potentialAudioUrls.length > 0 && audioDurationInVideoFrames > 0 && (
               <Sequence
-                from={audioStartFrameAbsolute} // Start playing exactly when audio should begin
-                durationInFrames={audioDurationInVideoFrames} // Play for the calculated duration
+                from={audioStartFrameAbsolute}
+                durationInFrames={audioDurationInVideoFrames}
                 name={`AudioSequence_${person.name}`}
               >
-                {/* Attempt Primary Audio URL */}
                 {!audioErrors[person.id] && potentialAudioUrls[0] && (
                   <Audio
                     src={staticFile(potentialAudioUrls[0])}
                     volume={1}
                     onError={(e) => handleAudioError(person.id, potentialAudioUrls[0], e)}
-                  // Consider adding startFrom prop if needed, though Sequence 'from' usually handles it
-                  // startFrom={0} // Audio starts at the beginning of the Sequence
-                  // endAt={audioDurationInVideoFrames} // Audio ends at the end of the Sequence duration
                   />
                 )}
 
-                {/* Attempt Fallback Audio URL(s) if Primary had Error */}
                 {audioErrors[person.id] && potentialAudioUrls[1] && (
                   <Audio
                     src={staticFile(potentialAudioUrls[1])}
                     volume={1}
-                    // Don't set error state again for fallback, just log
                     onError={(e) => console.error(`Fallback audio error for ${person.name} (${potentialAudioUrls[1]}):`, e)}
-                  // startFrom={0}
-                  // endAt={audioDurationInVideoFrames}
                   />
                 )}
-                {/* Add more fallbacks if necessary */}
-                {/* {audioErrors[person.id] && potentialAudioUrls[2] && ( <Audio ... /> )} */}
               </Sequence>
             )}
 
-
-            {/* Pin sound effect (Place start SFX within the main person sequence) */}
             <Sequence from={timings.startFrame} durationInFrames={5} name={`PinSoundStart_${person.name}`}>
               {sfxPinUrl && <Audio src={staticFile(normalizeUrl(sfxPinUrl) ?? '')} onError={(e) => console.error('Pin sound start error:', e)} />}
             </Sequence>
