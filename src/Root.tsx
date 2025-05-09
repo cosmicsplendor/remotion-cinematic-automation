@@ -15,6 +15,8 @@ const RES = {
   shorts: { width: 1296, height: 2250 },
   shorts_alt: { width: 720, height: 1280 },
 }
+import timelineData from '../data/timeline.ts';
+const timelineAudioFiles = timelineData.events.map((event) => event.audio);
 const transitionDuration = 30;
 const holdDuration = 0;
 const res = RES.r720p; // Change this to the desired resolution

@@ -214,7 +214,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
             <TimelineEvent
               event={event}
               index={index}
-              isLeft={event.isLeft}
+              isLeft={event.isLeft || false}
               isActive={index === activeIndex}
               calculatedStartFrame={event.calculatedStartFrame}
               initialOffset={initialOffset}
