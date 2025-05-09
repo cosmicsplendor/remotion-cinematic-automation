@@ -15,8 +15,7 @@ const RES = {
   shorts: { width: 1296, height: 2250 },
   shorts_alt: { width: 720, height: 1280 },
 }
-import timelineData from '../data/timeline.ts';
-import useAudioDurations from './components/hooks/useAudioDurations.ts';
+import timelineData from '../data/timeline.json';
 const transitionDuration = 30;
 const holdDuration = 0;
 const res = RES.r720p; // Change this to the desired resolution
@@ -26,8 +25,8 @@ export const DetectiveTimelineVideo = () => {
     (acc, event) => acc + Math.ceil((event.audioDuration || 3) * FPS),
     0
   );
-  
-  <Composition
+
+  return <Composition
     id="DetectiveTimeline"
     component={DetectiveTimeline}
     durationInFrames={totalDurationInFrames}

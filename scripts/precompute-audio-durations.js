@@ -2,12 +2,12 @@ const { getAudioDurationInSeconds } = require('get-audio-duration');
 const fs = require('fs');
 const path = require('path');
 
-const timelineDataPath = path.join(__dirname, '../data/timeline.ts');
-const audioDir = path.join(__dirname, '../public/assets/timeline');
+const timelineDataPath = path.join(__dirname, '../data/timeline.json');
+const audioDir = path.join(__dirname, '../public/');
+const timeline = require(timelineDataPath)
 
 async function main() {
   // Load your timeline data (adjust import as needed)
-  const timeline = require(timelineDataPath).default;
 
   // For each event, compute duration
   for (const event of timeline.events) {
@@ -25,7 +25,7 @@ async function main() {
 
   // Write back to a JSON file for import in Remotion
   fs.writeFileSync(
-    path.join(__dirname, '../data/timeline_durations.json'),
+    path.join(__dirname, '../data/timeline.json'),
     JSON.stringify(timeline, null, 2)
   );
 }

@@ -13,7 +13,7 @@ import {
 
 import { CARD_SIZE, OFFSET, TimelineEvent, TimelineEventData } from './TimelineEvent';
 
-import data from "../../../data/timeline.ts";
+import data from "../../../data/timeline.json";
 import useAudioDurations from '../hooks/useAudioDurations.ts';
 const { events: rawEvents } = data;
 
