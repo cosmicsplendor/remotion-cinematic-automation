@@ -20,7 +20,7 @@ const { events: rawEvents } = data;
 type CalculatedTimelineEvent = TimelineEventData & {
   calculatedStartFrame: number;
   audioDurationInFrames: number;
-  isLeft: boolean; // Add isLeft property to fix the type error
+  isLeft?: boolean;
   id?: string;
   audio?: string;
   fallbackAudio?: string;
@@ -97,14 +97,16 @@ export const DetectiveTimeline: React.FC<{}> = () => {
         ...event,
         calculatedStartFrame,
         audioDurationInFrames,
-        isLeft: index % 2 === 0, // Add isLeft property based on the index
+        isLeft: index % 2 === 0,
       };
     });
   }, [events, audioDurations, fps]);
 
   const lastCalculatedEvent = calculatedEvents[calculatedEvents.length - 1];
   const endMarginFrames = fps * 2;
-  const effectiveEndFrame = lastCalculatedEvent.calculatedStartFrame + lastCalculatedEvent.audioDurationInFrames + endMarginFrames;
+  const effectiveEndFrame = lastCalculatedEvent 
+    ? lastCalculatedEvent.calculatedStartFrame + lastCalculatedEvent.audioDurationInFrames + endMarginFrames
+    : durationInFrames;
   const finalCutoffFrame = Math.min(durationInFrames, effectiveEndFrame);
 
   const opacity = interpolate(
@@ -117,18 +119,8 @@ export const DetectiveTimeline: React.FC<{}> = () => {
     }
   );
 
+  // Find active event based on frame
   let activeIndex = -1;
-  for (let i = calculatedEvents.length - 1; i >= 0; i--) {
-    const event = calculatedEvents[i];
-    const eventEndFrame = event.calculatedStartFrame + event.audioDurationInFrames;
-
-    if (frame >= event.calculatedStartFrame && frame < eventEndFrame) {
-      activeIndex = i;
-      break;
-    }
-  }
-
-  activeIndex = -1;
   for (let i = calculatedEvents.length - 1; i >= 0; i--) {
     const event = calculatedEvents[i];
     const activePeriodEndFrame = (i === calculatedEvents.length - 1)
@@ -147,31 +139,31 @@ export const DetectiveTimeline: React.FC<{}> = () => {
     }
   }
 
+  // Timeline calculations
   const eventSpacing = CARD_SIZE;
   const initialOffset = OFFSET;
-  const timelineScrollTargetY = height * 0.6;
+  const viewportCenter = height * 0.75; // Match original vertical center point
 
+  // Calculate scroll position
   const targetEventIndexForScroll = Math.max(0, activeIndex);
-  const targetEventContainerY = initialOffset + targetEventIndexForScroll * eventSpacing;
-  const targetScrollY = targetEventContainerY - timelineScrollTargetY;
+  const targetEventY = initialOffset + targetEventIndexForScroll * eventSpacing;
+  const targetScrollY = targetEventY - viewportCenter;
 
-  const totalScrollableContentHeight = initialOffset + (calculatedEvents.length - 1) * eventSpacing + (height - timelineScrollTargetY);
-  const maxScrollY = Math.max(0, totalScrollableContentHeight - height);
-  const clampedTargetScrollY = Math.max(0, Math.min(maxScrollY, targetScrollY));
+  const totalTimelineHeight = initialOffset + (calculatedEvents.length * eventSpacing);
+  const clampedTargetScrollY = Math.max(0, targetScrollY);
 
+  // Spring animation for smooth scrolling
   const cameraScrollY = spring({
     frame: frame,
     fps: fps,
     from: 0,
     to: clampedTargetScrollY,
     config: {
-      damping: 15,
-      mass: 0.4,
+      damping: 25,
+      mass: 1,
       stiffness: 180,
     },
   });
-
-  const totalTimelineLineHeight = (calculatedEvents.length - 1) * eventSpacing;
 
   return (
     <AbsoluteFill
@@ -182,77 +174,77 @@ export const DetectiveTimeline: React.FC<{}> = () => {
         overflow: 'hidden',
       }}
     >
+      {/* Camera container with proper styling from original */}
       <div
         style={{
           position: 'absolute',
           top: 0,
-          left: '50%',
+          left: 0,
           width: '100%',
-          height: `${totalScrollableContentHeight}px`,
-          transform: `translate(-50%, -${cameraScrollY}px)`,
+          height: `${totalTimelineHeight + 200}px`, // Add buffer like in original
+          transform: `translateY(-${cameraScrollY}px)`,
         }}
       >
+        {/* The timeline line - centered like in original */}
         <div
           style={{
             position: 'absolute',
             top: initialOffset,
-            left: '0',
-            transform: 'translateX(-50%)',
+            left: '50%', // Center alignment
             width: 8,
             backgroundColor: '#c0392b',
-            height: `${Math.max(0, totalTimelineLineHeight)}px`,
+            transform: 'translateX(-50%)', // Center the line
+            height: `${Math.max(0, (calculatedEvents.length - 1) * eventSpacing + 20)}px`,
           }}
         />
 
-        {calculatedEvents.map((calculatedEvent, index) => (
+        {/* Map through events with proper positioning containers */}
+        {calculatedEvents.map((event, index) => (
           <div
-            key={calculatedEvent.title + index}
+            key={event.title + index}
             style={{
               position: 'absolute',
-              top: initialOffset + index * eventSpacing,
-              left: calculatedEvent.isLeft ? 'auto' : '0',
-              right: calculatedEvent.isLeft ? '0' : 'auto',
-              transform: 'translateY(-50%)',
-              width: calculatedEvent.isLeft ? 'auto' : '100%',
-              marginLeft: calculatedEvent.isLeft ? 'auto' : '0',
-              marginRight: calculatedEvent.isLeft ? '0' : 'auto',
+              top: initialOffset + index * eventSpacing, // Position vertically on the timeline
+              left: '50%', // Center the container
+              width: '100%',
+              transform: 'translateX(-50%)', // Center align
+              height: 0, // No height to avoid affecting layout
             }}
           >
-            <>
             <TimelineEvent
-              event={calculatedEvent}
+              event={event}
               index={index}
-              isLeft={calculatedEvent.isLeft}
+              isLeft={event.isLeft}
               isActive={index === activeIndex}
-              calculatedStartFrame={calculatedEvent.calculatedStartFrame}
+              calculatedStartFrame={event.calculatedStartFrame}
               initialOffset={initialOffset}
               eventSpacing={eventSpacing}
             />
             
-            {calculatedEvent.audio && (
+            {/* Audio component for this event */}
+            {event.audio && (
               <Sequence
-                from={calculatedEvent.calculatedStartFrame}
-                durationInFrames={calculatedEvent.audioDurationInFrames}
-                name={`AudioSequence_${calculatedEvent.title}`}
+                from={event.calculatedStartFrame}
+                durationInFrames={event.audioDurationInFrames}
+                name={`AudioSequence_${event.title}`}
               >
-                {!audioErrors[calculatedEvent.id || index.toString()] && (
+                {!audioErrors[event.id || index.toString()] && (
                   <Audio
-                    src={staticFile(calculatedEvent.audio)}
+                    src={staticFile(event.audio)}
                     volume={1}
-                    onError={(e) => handleAudioError(calculatedEvent.id || index.toString(), calculatedEvent.audio!, e)}
+                    onError={(e) => handleAudioError(event.id || index.toString(), event.audio!, e)}
                   />
                 )}
 
-                {audioErrors[calculatedEvent.id || index.toString()] && calculatedEvent.fallbackAudio && (
+                {audioErrors[event.id || index.toString()] && event.fallbackAudio && (
                   <Audio
-                    src={staticFile(calculatedEvent.fallbackAudio)}
+                    src={staticFile(event.fallbackAudio)}
                     volume={1}
-                    onError={(e) => console.error(`Fallback audio error for ${calculatedEvent.title} (${calculatedEvent.fallbackAudio}):`, e)}
+                    onError={(e) => console.error(`Fallback audio error for ${event.title} (${event.fallbackAudio}):`, e)}
                   />
                 )}
               </Sequence>
             )}
-          </>
           </div>
         ))}
       </div>
