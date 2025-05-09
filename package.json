@@ -22,6 +22,7 @@
     "@remotion/cli": "^4.0.133",
     "@remotion/renderer": "^4.0.133",
     "@remotion/zod-types": "^4.0.133",
+    "get-audio-duration": "^4.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remotion": "^4.0.133",
