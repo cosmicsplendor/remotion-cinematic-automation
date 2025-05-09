@@ -23,16 +23,30 @@ const res = RES.r720p; // Change this to the desired resolution
 const FPS = 60
 export const DetectiveTimelineVideo = () => {
   const audioDurations = useAudioDurations(timelineData.events, FPS);
-  const audioDuration = Object.values(audioDurations).reduce((acc, duration) => acc + duration + FPS * 0.5, 0);
-  return <Composition
-    id="DetectiveTimeline"
-    component={DetectiveTimeline}
-    durationInFrames={audioDuration + (transitionDuration * 2) + holdDuration}
-    fps={FPS}
-    width={res.width}
-    height={res.height}
-  />
-}
+
+  // Wait until all durations are loaded
+  const allLoaded = timelineData.events.length > 0 &&
+    Object.keys(audioDurations).length === timelineData.events.length &&
+    Object.values(audioDurations).every((d) => typeof d === 'number' && d > 0);
+
+  if (!allLoaded) return null; // Or a loading spinner
+
+  const audioDuration = Object.values(audioDurations).reduce(
+    (acc, duration) => acc + duration + FPS * 0.5,
+    0
+  );
+
+  return (
+    <Composition
+      id="DetectiveTimeline"
+      component={DetectiveTimeline}
+      durationInFrames={audioDuration + (transitionDuration * 2) + holdDuration}
+      fps={FPS}
+      width={res.width}
+      height={res.height}
+    />
+  );
+};
 export const ParallaxVideo = () => {
   const validatedLayers = parallaxData.layers.map(layer => ({
     id: layer.id,
