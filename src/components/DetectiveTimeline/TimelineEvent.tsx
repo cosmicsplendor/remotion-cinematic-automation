@@ -32,7 +32,7 @@ export type TimelineEventData = {
   // startFrame is calculated by the parent component
 }
 
-export const OFFSET = 160;
+export const OFFSET = 200;
 export const CARD_SIZE = 200; // Height of each card, effectively vertical spacing
 
 export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLeft, isActive, initialOffset, eventSpacing, calculatedStartFrame }) => {
@@ -152,14 +152,14 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
     }
 
     // Ensure opacity stays within the desired range [0, 0.5]
-    glowOpacity = Math.max(0, Math.min(0.5, glowOpacity));
+    glowOpacity = Math.max(0, Math.min(0.4, glowOpacity));
   }
   // --- End Audio Visualization Logic ---
 
 
   // Calculate the box shadow for the card, including the dynamic glow
   const baseShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-  const activeGlowShadow = `0 0 15px 8px rgba(255, 100, 50, ${glowOpacity})`;
+  const activeGlowShadow = `0 0 5px 6px rgba(255, 100, 50, ${glowOpacity})`;
 
   const boxShadow = isActive
     ? `${activeGlowShadow}, ${baseShadow}`

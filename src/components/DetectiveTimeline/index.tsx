@@ -111,7 +111,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   // Timeline calculations
   const eventSpacing = CARD_SIZE;
   const initialOffset = OFFSET;
-  const viewportCenter = height * 0.75; // Match original vertical center point
+  const viewportCenter = height * 0.5; // Match original vertical center point
 
   // Calculate scroll position
   const targetEventIndexForScroll = Math.max(0, activeIndex);
