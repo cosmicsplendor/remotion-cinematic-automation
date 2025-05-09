@@ -10,11 +10,11 @@ import {
   staticFile,
   Audio,
 } from 'remotion';
-import { useAudioData, getAudioDurationInSeconds } from '@remotion/media-utils';
 
 import { CARD_SIZE, OFFSET, TimelineEvent, TimelineEventData } from './TimelineEvent';
 
 import data from "../../../data/timeline.ts";
+import useAudioDurations from '../hooks/useAudioDurations.ts';
 const { events: rawEvents } = data;
 
 type CalculatedTimelineEvent = TimelineEventData & {
@@ -25,39 +25,8 @@ type CalculatedTimelineEvent = TimelineEventData & {
   audio?: string;
   fallbackAudio?: string;
 };
-
 // Custom hook to handle audio duration calculation
-const useAudioDurations = (events: TimelineEventData[], fps: number) => {
-  const [durations, setDurations] = useState<Record<number, number>>({});
 
-  useEffect(() => {
-    const loadDurations = async () => {
-      const newDurations: Record<number, number> = {};
-      
-      await Promise.all(
-        events.map(async (event, index) => {
-          if (event.audio) {
-            try {
-              const durationInSeconds = await getAudioDurationInSeconds(staticFile(event.audio));
-              newDurations[index] = Math.ceil(durationInSeconds * fps);
-            } catch (error) {
-              console.warn(`Failed to load audio duration for event ${index}:`, error);
-              newDurations[index] = fps * 3; // Fallback to 3 seconds
-            }
-          } else {
-            newDurations[index] = fps * 3; // Default duration for events without audio
-          }
-        })
-      );
-      
-      setDurations(newDurations);
-    };
-
-    loadDurations();
-  }, [events, fps]);
-
-  return durations;
-};
 
 export const DetectiveTimeline: React.FC<{}> = () => {
   const frame = useCurrentFrame();

@@ -21,6 +21,16 @@ const transitionDuration = 30;
 const holdDuration = 0;
 const res = RES.r720p; // Change this to the desired resolution
 const FPS = 60
+export const DetectiveTimelineVideo = () => {
+  return <Composition
+    id="DetectiveTimeline"
+    component={DetectiveTimeline}
+    durationInFrames={FPS * 50}
+    fps={FPS}
+    width={res.width}
+    height={res.height}
+  />
+}
 export const ParallaxVideo = () => {
   const validatedLayers = parallaxData.layers.map(layer => ({
     id: layer.id,
@@ -77,6 +87,7 @@ export const RemotionRoot = () => {
   return (
     <>
       <ParallaxVideo />
+      <DetectiveTimelineVideo />
       <Composition
         id="DetectiveBoard"
         component={DetectiveBoardPresentation}
@@ -94,14 +105,7 @@ export const RemotionRoot = () => {
           transitionDuration
         }}
       />
-      <Composition
-        id="DetectiveTimeline"
-        component={DetectiveTimeline}
-        durationInFrames={FPS * 50}
-        fps={FPS}
-        width={res.width}
-        height={res.height}
-      />
+
       <Composition
         id="Intro"
         component={Intro}
