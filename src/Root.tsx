@@ -8,6 +8,7 @@ import boardData from '../data/board.ts';
 import { DetectiveBoardPresentation } from './components/DetectiveBoard/index.tsx';
 import parallaxData from '../data/parallax/frog_boys.json'; // Adjust the path as necessary
 import { ParallaxComposition } from './components/ParallaxAnim/index.tsx';
+import captionData from '../data/captions.json';
 const RES = {
   r1080p: { width: 1920, height: 1080 },
   r4k: { width: 3840, height: 2160 },
@@ -16,9 +17,10 @@ const RES = {
   shorts_alt: { width: 720, height: 1280 },
 }
 import timelineData from '../data/timeline.json';
+import CaptionVisualizer from './components/CaptionViz/index.tsx';
 const transitionDuration = 30;
 const holdDuration = 0;
-const res = RES.r720p; // Change this to the desired resolution
+const res = RES.shorts_alt; // Change this to the desired resolution
 const FPS = 60
 export const DetectiveTimelineVideo = () => {
   const totalDurationInFrames = timelineData.events.length * 0.5 * FPS + timelineData.events.reduce(
@@ -72,8 +74,8 @@ export const ParallaxVideo = () => {
         component={ParallaxComposition}
         durationInFrames={parallaxData.durationInFrames}
         fps={FPS}
-        width={parallaxData.width || res.width}  // Use parallaxData width or fallback to res.width
-        height={parallaxData.height || res.height}
+        width={res.width}  // Use parallaxData width or fallback to res.width
+        height={res.height}
         defaultProps={{
           durationInFrames: parallaxData.durationInFrames,
           compositionName: parallaxData.compositionName,
@@ -91,6 +93,20 @@ export const RemotionRoot = () => {
     <>
       <ParallaxVideo />
       <DetectiveTimelineVideo />
+      <Composition
+        id="CaptionViz"
+        component={CaptionVisualizer as React.FC<any>}
+        durationInFrames={Math.round(captionData[captionData.length - 1].end * FPS + 5 * FPS)}
+        fps={FPS}
+        width={res.width}  // Use parallaxData width or fallback to res.width
+        height={res.height}
+        defaultProps={{
+          data: captionData,
+          videoUrl: "assets/videos/cap.mp4",
+          yPosition: 0.75,
+          mode: "single"
+        }}
+      />
       <Composition
         id="DetectiveBoard"
         component={DetectiveBoardPresentation}
