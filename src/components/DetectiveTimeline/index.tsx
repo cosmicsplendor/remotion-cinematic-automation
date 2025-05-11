@@ -216,7 +216,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
               </Sequence>
             )}
             <Sequence from={event.calculatedStartFrame} durationInFrames={25} name={`PinSoundStart_${event.calculatedStartFrame}`}>
-                      <Audio volume={0.125} src={staticFile(pickOne(["assets/sfx/blip1.wav", "assets/sfx/blip2.wav"]))} onError={(e) => console.error('Pin sound start error:', e)} />
+                      <Audio volume={0.125} src={staticFile("assets/sfx/blip1.wav")} onError={(e) => console.error('Pin sound start error:', e)} />
             </Sequence>
           </div>
         ))}

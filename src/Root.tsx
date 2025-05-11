@@ -21,11 +21,10 @@ const holdDuration = 0;
 const res = RES.r720p; // Change this to the desired resolution
 const FPS = 60
 export const DetectiveTimelineVideo = () => {
-  const totalDurationInFrames = timelineData.events.reduce(
+  const totalDurationInFrames = timelineData.events.length * 0.5 * FPS + timelineData.events.reduce(
     (acc, event) => acc + Math.ceil((event.audioDuration || 3) * FPS),
     0
   );
-
   return <Composition
     id="DetectiveTimeline"
     component={DetectiveTimeline}
