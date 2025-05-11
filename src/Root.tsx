@@ -96,7 +96,7 @@ export const RemotionRoot = () => {
       <Composition
         id="CaptionViz"
         component={CaptionVisualizer as React.FC<any>}
-        durationInFrames={Math.round(captionData[captionData.length - 1].end * FPS + 5 * FPS)}
+        durationInFrames={FPS * 76.5}
         fps={FPS}
         width={res.width}  // Use parallaxData width or fallback to res.width
         height={res.height}

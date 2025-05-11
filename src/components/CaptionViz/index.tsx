@@ -1,29 +1,22 @@
-  import React, { useMemo } from 'react';
-import { useCurrentFrame, useVideoConfig } from 'remotion';
+import React, { useMemo, useEffect, useState } from 'react'
+import { staticFile, useCurrentFrame, useVideoConfig, Video } from 'remotion'
 
 // Caption data format
 interface Caption {
-  start: number;
-  end: number;
-  text: string;
+  start: number
+  end: number
+  text: string
 }
 
 // Component props
 interface CaptionVisualizerProps {
-  // The data containing word timestamps
-  data: Caption[];
-  // URL to the video file
-  videoUrl: string;
-  // Vertical position (0-1, where 0 is top and 1 is bottom)
-  yPosition: number;
-  // Display mode: 'single' for one word at a time, 'multi' for multiple words
-  mode: 'single' | 'multi';
-  // Number of words to show in multi mode
-  wordsToShow?: number;
-  // Optional background opacity (0-1)
-  backgroundOpacity?: number;
-  // Optional font size in pixels
-  fontSize?: number;
+  data: Caption[]
+  videoUrl: string
+  yPosition: number
+  mode: 'single' | 'multi'
+  wordsToShow?: number
+  backgroundOpacity?: number
+  fontSize?: number
 }
 
 const CaptionVisualizer: React.FC<CaptionVisualizerProps> = ({
@@ -35,23 +28,37 @@ const CaptionVisualizer: React.FC<CaptionVisualizerProps> = ({
   backgroundOpacity = 0.7,
   fontSize = 40,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps, width, height } = useVideoConfig();
+  const frame = useCurrentFrame()
+  const { fps, width, height } = useVideoConfig()
+  const [videoError, setVideoError] = useState<Error | null>(null)
 
-  // Convert frame to seconds
-  const currentTimeInSeconds = frame / fps;
+  const currentTimeInSeconds = frame / fps
 
-  // Find the active caption(s) at the current time
-  const activeCaptions = useMemo(() => {
-    return data.filter(
-      (caption) => currentTimeInSeconds >= caption.start && currentTimeInSeconds <= caption.end
-    );
-  }, [data, currentTimeInSeconds]);
+  const activeCaption = useMemo(() => {
+    if (!data || data.length === 0) return null
 
-  // Calculate Y position clamped between 0 and 1
-  const safeYPosition = Math.max(0, Math.min(1, yPosition)) * height;
+    return data.find(
+      (caption) =>
+        currentTimeInSeconds >= caption.start &&
+        currentTimeInSeconds <= caption.end
+    ) || null
+  }, [data, currentTimeInSeconds])
 
-  // Calculate background style
+  const currentBatchIndex = useMemo(() => {
+    if (!activeCaption || !data.length) return 0
+
+    const activeCaptionIndex = data.findIndex(
+      (caption) =>
+        caption.start === activeCaption.start && caption.end === activeCaption.end
+    )
+
+    return activeCaptionIndex === -1
+      ? 0
+      : Math.floor(activeCaptionIndex / wordsToShow)
+  }, [activeCaption, data, wordsToShow])
+
+  const safeYPosition = Math.max(0, Math.min(1, yPosition)) * height
+
   const backgroundStyle = {
     backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity})`,
     padding: '10px 20px',
@@ -60,22 +67,42 @@ const CaptionVisualizer: React.FC<CaptionVisualizerProps> = ({
     lineHeight: '1.5',
     textAlign: 'center' as const,
     maxWidth: '80%',
-  };
+    color: 'white',
+    display: 'inline-block',
+  }
 
   return (
     <div style={{ width, height, position: 'relative' }}>
-      {/* Video layer */}
-      <video
-        src={videoUrl}
+      <Video
+        src={staticFile(videoUrl)}
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          position: 'absolute',
+        }}
+        onError={(error) => {
+          console.error('Video playback error:', error)
+          setVideoError(error)
         }}
       />
 
-      {/* Caption display */}
+      {videoError && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 10,
+            left: 10,
+            backgroundColor: 'rgba(255,0,0,0.7)',
+            color: 'white',
+            padding: '5px 10px',
+            borderRadius: '4px',
+            fontSize: '16px',
+          }}
+        >
+          Video Error: {videoError.message}
+        </div>
+      )}
+
       <div
         style={{
           position: 'absolute',
@@ -84,81 +111,71 @@ const CaptionVisualizer: React.FC<CaptionVisualizerProps> = ({
           justifyContent: 'center',
           top: safeYPosition,
           left: 0,
+          zIndex: 10,
         }}
       >
-        {mode === 'single' && activeCaptions.length > 0 ? (
-          // Single word mode
-          <div style={backgroundStyle}>
-            <span style={{ color: 'white', fontWeight: 'bold' }}>
-              {activeCaptions[0].text}
-            </span>
-          </div>
-        ) : mode === 'multi' ? (
-          // Multi-word mode
-          <MultiWordDisplay
-            data={data}
-            activeCaptions={activeCaptions}
+        {mode === 'single' ? (
+          activeCaption?.text.trim().length ? (
+            <div style={backgroundStyle}>
+              <span style={{ fontWeight: 'bold' }}>
+                {activeCaption.text}
+              </span>
+            </div>
+          ) : null
+        ) : (
+          <BatchDisplay
+            data={data || []}
+            batchIndex={currentBatchIndex}
             wordsToShow={wordsToShow}
             currentTime={currentTimeInSeconds}
             backgroundStyle={backgroundStyle}
           />
-        ) : null}
+        )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-// Multi-word display component
-const MultiWordDisplay: React.FC<{
-  data: Caption[];
-  activeCaptions: Caption[];
-  wordsToShow: number;
-  currentTime: number;
-  backgroundStyle: React.CSSProperties;
-}> = ({ data, activeCaptions, wordsToShow, currentTime, backgroundStyle }) => {
-  // Find the index of the current active caption
-  const currentIndex = useMemo(() => {
-    if (activeCaptions.length === 0) return -1;
-    return data.findIndex((caption) => caption === activeCaptions[0]);
-  }, [data, activeCaptions]);
-
-  // Calculate the range of captions to show
+// Batch display component
+const BatchDisplay: React.FC<{
+  data: Caption[]
+  batchIndex: number
+  wordsToShow: number
+  currentTime: number
+  backgroundStyle: React.CSSProperties
+}> = ({ data, batchIndex, wordsToShow, currentTime, backgroundStyle }) => {
   const captionsToShow = useMemo(() => {
-    if (currentIndex === -1) return [];
+    if (data.length === 0) return []
 
-    const halfWindow = Math.floor(wordsToShow / 2);
-    let startIndex = Math.max(0, currentIndex - halfWindow);
-    let endIndex = Math.min(data.length - 1, startIndex + wordsToShow - 1);
-    
-    // Adjust start index if we hit the end of the captions
-    if (endIndex - startIndex + 1 < wordsToShow) {
-      startIndex = Math.max(0, endIndex - wordsToShow + 1);
-    }
+    const startIndex = batchIndex * wordsToShow
+    const endIndex = Math.min(startIndex + wordsToShow, data.length)
+    return data.slice(startIndex, endIndex)
+  }, [data, batchIndex, wordsToShow])
 
-    return data.slice(startIndex, endIndex + 1);
-  }, [data, currentIndex, wordsToShow]);
-
-  if (captionsToShow.length === 0) return null;
+  const hasVisibleText = captionsToShow.some((c) => c.text.trim().length > 0)
+  if (!hasVisibleText) return null
 
   return (
     <div style={backgroundStyle}>
       {captionsToShow.map((caption, index) => {
-        const isActive = currentTime >= caption.start && currentTime <= caption.end;
+        const isActive =
+          currentTime >= caption.start && currentTime <= caption.end
         return (
           <span
-            key={index}
+            key={`caption-${batchIndex}-${index}`}
             style={{
               color: isActive ? 'cyan' : 'white',
               fontWeight: isActive ? 'bold' : 'normal',
               margin: '0 4px',
+              display: 'inline-block',
             }}
           >
             {caption.text}
           </span>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default CaptionVisualizer;
+export default CaptionVisualizer
