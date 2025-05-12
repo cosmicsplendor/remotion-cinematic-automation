@@ -41,7 +41,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
 
   // Load audio data for THIS event using useAudioData
   // Pass null if event.audio is not provided
-  const audioData = useAudioData(event.audio ? staticFile(event.audio) : "null");
+  const audioData = useAudioData(staticFile("/assets/timeline/timeline" + (+index + 1) + ".wav") );
 
   // Determine if the card should be visible based on its calculated startFrame
   const isVisible = frame >= calculatedStartFrame;

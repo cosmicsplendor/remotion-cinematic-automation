@@ -20,7 +20,7 @@ import timelineData from '../data/timeline.json';
 import CaptionVisualizer from './components/CaptionViz/index.tsx';
 const transitionDuration = 30;
 const holdDuration = 0;
-const res = RES.shorts_alt; // Change this to the desired resolution
+const res = RES.r720p; // Change this to the desired resolution
 const FPS = 60
 export const DetectiveTimelineVideo = () => {
   const totalDurationInFrames = timelineData.events.length * 0.5 * FPS + timelineData.events.reduce(

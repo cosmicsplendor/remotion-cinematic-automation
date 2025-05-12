@@ -56,7 +56,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
     const gapFrames = fps * 0.5;
 
     return events.map((event, index) => {
-      const audioDurationInFrames = audioDurations[index] ?? fps * 3;
+      const audioDurationInFrames = Math.round(events[index].audioDuration * fps);
 
       const calculatedStartFrame = currentFrame;
       const calculatedEndFrame = calculatedStartFrame + audioDurationInFrames;
@@ -74,7 +74,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
 
   const lastCalculatedEvent = calculatedEvents[calculatedEvents.length - 1];
   const endMarginFrames = fps * 2;
-  const effectiveEndFrame = lastCalculatedEvent 
+  const effectiveEndFrame = lastCalculatedEvent
     ? lastCalculatedEvent.calculatedStartFrame + lastCalculatedEvent.audioDurationInFrames + endMarginFrames
     : durationInFrames;
   const finalCutoffFrame = Math.min(durationInFrames, effectiveEndFrame);
@@ -134,7 +134,6 @@ export const DetectiveTimeline: React.FC<{}> = () => {
       stiffness: 180,
     },
   });
-
   return (
     <AbsoluteFill
       style={{
@@ -169,57 +168,48 @@ export const DetectiveTimeline: React.FC<{}> = () => {
         />
 
         {/* Map through events with proper positioning containers */}
-        {calculatedEvents.map((event, index) => (
-          <div
-            key={event.title + index}
-            style={{
-              position: 'absolute',
-              top: initialOffset + index * eventSpacing, // Position vertically on the timeline
-              left: '50%', // Center the container
-              width: '100%',
-              transform: 'translateX(-50%)', // Center align
-              height: 0, // No height to avoid affecting layout
-            }}
-          >
-            <TimelineEvent
-              event={event}
-              index={index}
-              isLeft={event.isLeft || false}
-              isActive={index === activeIndex}
-              calculatedStartFrame={event.calculatedStartFrame}
-              initialOffset={initialOffset}
-              eventSpacing={eventSpacing}
-            />
-            
-            {/* Audio component for this event */}
-            {event.audio && (
+        {calculatedEvents.map((event, index) => {
+          console.log(staticFile("assets/timeline/timeline" + (index + 1) + ".wav"))
+          return (
+            <div
+              key={event.title + index}
+              style={{
+                position: 'absolute',
+                top: initialOffset + index * eventSpacing, // Position vertically on the timeline
+                left: '50%', // Center the container
+                width: '100%',
+                transform: 'translateX(-50%)', // Center align
+                height: 0, // No height to avoid affecting layout
+              }}
+            >
+              <TimelineEvent
+                event={event}
+                index={index}
+                isLeft={event.isLeft || false}
+                isActive={index === activeIndex}
+                calculatedStartFrame={event.calculatedStartFrame}
+                initialOffset={initialOffset}
+                eventSpacing={eventSpacing}
+              />
+
+              {/* Audio component for this event */}
               <Sequence
                 from={event.calculatedStartFrame}
                 durationInFrames={event.audioDurationInFrames}
                 name={`AudioSequence_${event.title}`}
               >
-                {!audioErrors[event.id || index.toString()] && (
-                  <Audio
-                    src={staticFile(event.audio)}
-                    volume={1}
-                    onError={(e) => handleAudioError(event.id || index.toString(), event.audio!, e)}
-                  />
-                )}
-
-                {audioErrors[event.id || index.toString()] && event.fallbackAudio && (
-                  <Audio
-                    src={staticFile(event.fallbackAudio)}
-                    volume={1}
-                    onError={(e) => console.error(`Fallback audio error for ${event.title} (${event.fallbackAudio}):`, e)}
-                  />
-                )}
+                <Audio
+                  src={staticFile("assets/timeline/timeline" + (index + 1) + ".wav")}
+                  volume={1}
+                  onError={(e) => handleAudioError(event.id || index.toString(), event.audio!, e)}
+                />
               </Sequence>
-            )}
-            <Sequence from={event.calculatedStartFrame} durationInFrames={25} name={`PinSoundStart_${event.calculatedStartFrame}`}>
-                      <Audio volume={0.125} src={staticFile("assets/sfx/blip1.wav")} onError={(e) => console.error('Pin sound start error:', e)} />
-            </Sequence>
-          </div>
-        ))}
+              <Sequence from={event.calculatedStartFrame} durationInFrames={25} name={`PinSoundStart_${event.calculatedStartFrame}`}>
+                <Audio volume={0.125} src={staticFile("assets/sfx/blip1.wav")} onError={(e) => console.error('Pin sound start error:', e)} />
+              </Sequence>
+            </div>
+          )
+        })}
       </div>
     </AbsoluteFill>
   );
