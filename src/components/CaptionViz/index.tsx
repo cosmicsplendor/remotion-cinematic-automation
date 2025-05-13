@@ -165,7 +165,7 @@ const BatchDisplay: React.FC<{
             key={`caption-${batchIndex}-${index}`}
             style={{
               color: isActive ? 'cyan' : 'white',
-              fontWeight: isActive ? 'bold' : 'normal',
+              fontWeight: 500,
               margin: '0 4px',
               display: 'inline-block',
             }}

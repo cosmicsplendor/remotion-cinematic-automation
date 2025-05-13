@@ -21,9 +21,10 @@ import timelineData from '../data/timeline.json';
 import CaptionVisualizer from './components/CaptionViz/index.tsx';
 const transitionDuration = 30;
 const holdDuration = 0;
+const _res = RES.shorts
 const res = {
-  width: Math.floor(RES.shorts.width / 2) * 2,
-  height: Math.floor(RES.shorts.height / 2) * 2
+  width: Math.floor(_res.width / 2) * 2,
+  height: Math.floor(_res.height / 2) * 2
 };
 
 const FPS = 60
@@ -101,14 +102,14 @@ export const RemotionRoot = () => {
       <Composition
         id="CaptionViz"
         component={CaptionVisualizer as React.FC<any>}
-        durationInFrames={FPS * 76.5}
+        durationInFrames={FPS * 3.4}
         fps={FPS}
         width={res.width}  // Use parallaxData width or fallback to res.width
         height={res.height}
         defaultProps={{
           data: captionData,
           videoUrl: "assets/videos/cap.mp4",
-          yPosition: 0.75,
+          yPosition: 0.125,
           mode: "single"
         }}
       />
