@@ -1,64 +1,64 @@
 {
   "events": [
     {
-      "date": "बिहान १०:००",
-      "title": "अन्तिम पटक देखिए",
-      "description": "बिहान १०:०० बजे साक्षीले सैनिक फायरिङ रेन्जतर्फ 'शेल जम्मा गर्न' जाँदै देखे।",
-      "detailedDescription": "त्यो दिन करिब बिहान १०:०० बजेतिर, एक स्थानीय प्रत्यक्षदर्शीले पाँच जना केटाहरूलाई वार्योङ पहाडतर्फ हिँडिरहेको देखेका थिए, जुन सैनिक फायरिङ रेन्ज क्षेत्र नजिकै पर्छ। प्रत्यक्षदर्शीका अनुसार उनीहरू 'गोलीको खोस्टा जम्मा गर्दै थिए, जुन त्यस क्षेत्रका बालबालिका माझ प्रचलित गतिविधि थियो। प्रत्यक्षदर्शीले उनीहरूलाई खुसी र सामान्य अवस्थामा देखेका थिए। यो नै उनीहरूलाई अन्तिम पटक जीवित देखिएको समय र स्थान मानिन्छ।",
-      "evidence": "डोङ्गा पत्रिकामा छापिएको प्रत्यक्षदर्शीको बयान",
-      "startFrame": 300,
-      "audio": "assets/timeline/timeline1.wav",
-      "audioDuration": 25.386083
+      "date": "1987-09-17",
+      "title": "Onset of Mysterious Symptoms",
+      "description": "Shortly after dismantling a mysterious device from an abandoned medical building, two scavengers experienced severe vomiting, dizziness, weakness, and intense diarrhea. One man’s hand swelled grotesquely, blistering and darkening as if burned from within. Doctors were puzzled, suggesting common ailments but finding no explanation.",
+      "evidence": "Medical records from local clinics; testimonies from the two men; initial clinic visit records; firsthand testimony from hospital workers."
     },
     {
-      "date": "बिहान १०:३०",
-      "title": "फायरिङ रेन्ज क्षेत्र नजिक",
-      "description": "अनुमान: करिब बिहान १०:३० बजे फायरिङ रेन्ज नजिक, शव भेटिने स्थानबाट २५०मि. मा पुगे।",
-      "detailedDescription": "अन्तिम पटक देखिएको समय र स्थान तथा उनीहरूको शव पछि फेला परेको स्थानका आधारमा, यो अनुमान गरिन्छ कि करिब बिहान १०:३० बजेसम्म उनीहरू सैनिक फायरिङ रेन्जको परिधि वा त्यसको अत्यन्तै नजिक पुगिसकेका थिए। उनीहरूको शव फेला परेको स्थान, वार्योङ पहाडको त्यो सानो डाँडो जहाँ उनीहरूलाई अन्तिम पटक देखिएको थियो, त्यहाँबाट करिब २५० मिटरको छोटो दूरीमा छ। यसले उनीहरूको अन्तिम गतिविधि यस दुर्गम क्षेत्रमै सीमित रहेको संकेत गर्छ।",
-      "evidence": "अन्तिम पटक देखिएको स्थान र शव भेटिएको स्थानको निकटतामा आधारित अनुमान",
-      "startFrame": 3000,
-      "audio": "assets/timeline/timeline2.wav",
-      "audioDuration": 25.441958
+      "date": "1987-09-18",
+      "title": "Discovery of the Glowing Treasure",
+      "description": "The strange device was sold to a junkyard owned by Devair Alves Ferreira. From its cracked core spilled a luminous blue powder, brilliant and mesmerizing. Devair was entranced; he brought the substance home to show his family. That night, his house glittered faintly in the dark.",
+      "evidence": "Witness reports from neighbors; remnants of glowing powder later recovered from Ferreira's home; glowing fragments found in the Ferreira household; testimonies from neighbors and family."
     },
     {
-      "date": "दिउँसो २:००",
-      "title": "सम्भावित भेटघाट",
-      "description": "अनुमान: करिब दिउँसो २:०० बजे अनाधिकृत व्यक्ति भेटिए - सिकारी, तस्कर, सैनिक वा विक्षिप्त व्यक्ति।",
-      "detailedDescription": "वार्योङ पहाड नजिकको यो क्षेत्र सैनिक फायरिङ रेन्जको छेउमा पर्ने र कम आवतजावत हुने ठाउँ हो। यस्तो दुर्गम स्थानमा अनाधिकृत रूपमा प्रवेश गर्ने कोही व्यक्तिसँग दिउँसो २:०० बजेतिर उनीहरूको भेट भएको हुन सक्ने प्रबल सम्भावना अनुसन्धानकर्ताहरूले औंल्याएका छन्। विभिन्न अनुसन्धान सिद्धान्त अनुसार, ती व्यक्ति सिकारी, अवैध काठ तस्कर, अनौपचारिक सैन्य अभ्यास गरिरहेका सैनिक कर्मचारी, वा मानसिक रूपमा विक्षिप्त कोही पनि हुन सक्थे। उनीहरूको शव नजिकै केही प्रयोग नगरिएका गोलीहरू भेटिएकाले हतियार बोक्ने व्यक्तिको संलग्नतालाई संकेत गर्छ।",
-      "evidence": "शव भेटिएको स्थानको प्रकृति, नजिक भेटिएका प्रयोग नगरिएका गोली र विभिन्न अनुसन्धानका सिद्धान्त",
-      "startFrame": 6000,
-      "audio": "assets/timeline/timeline3.wav",
-      "audioDuration": 27.335875
+      "date": "1987-09-19",
+      "title": "A Child's Fatal Play",
+      "description": "Devair's six-year-old daughter, Leide das Neves Ferreira, was utterly captivated by the sparkling blue powder. She smeared it on her skin like makeup, showed it to friends, and slept with a fragment near her bed, unknowingly absorbing a silent, deadly threat.",
+      "evidence": "Later dosimetry estimates; forensic photographs; witness reports from neighbors."
     },
     {
-      "date": "दिउँसो २:३०",
-      "title": "सम्भावित मुठभेड",
-      "description": "अनुमान: दिउँसो २:३० बजेतिर केही देखे वा भेटेपछि विवाद/भिडन्त भयो, जसले चोट पुर्यायो।",
-      "detailedDescription": "घटनाक्रम र पछि शव परीक्षणबाट पत्ता लागेका तथ्यका आधारमा, करिब दिउँसो २:३० तिर उनीहरूले देखेको वा भेटेको कुरालाई लिएर अज्ञात व्यक्ति वा व्यक्तिहरूसँग उनीहरूको विवाद वा शारीरिक भिडन्त भएको हुन सक्ने अनुमान गरिएको छ। शव परीक्षण रिपोर्ट अनुसार, पाँचै जना केटाहरूको टाउकोमा कडा वस्तुले गम्भीर चोटपटक (ब्लन्ट फोर्स ट्रमा) पुर्याइएको थियो। यो चोटपटक हत्याको स्पष्ट प्रमाण हो र यसले आक्रमणकारी र पीडितबीच शारीरिक सङ्घर्ष वा जानाजानी आक्रमण भएको संकेत गर्छ। त्यस दिन त्यस क्षेत्र वरपरका केही स्थानीय बासिन्दाले दर्दनाक चिच्याहट सुनेको रिपोर्टले पनि यही समयमा केही भयानक घटना भएको हुन सक्ने अनुमानलाई बल दिन्छ।",
-      "evidence": "शव परीक्षणबाट पत्ता लागेको टाउकोको गम्भीर चोटपटक (ब्लन्ट फोर्स ट्रमा) र स्थानीयले सुनेको आवाजको रिपोर्टका आधारमा गरिएको अनुमान",
-      "startFrame": 9000,
-      "audio": "assets/timeline/timeline4.wav",
-      "audioDuration": 38.876958
+      "date": "1987-09-21",
+      "title": "The Beautiful Danger Spreads",
+      "description": "Devair broke the powder into smaller pieces to share with friends and family. Some neighbors placed samples on altars, others kept it as a treasure. By now, people were starting to feel sick. Leide grew pale and listless, her appetite vanished, and she developed swelling and mouth sores.",
+      "evidence": "Autopsy results; reports from contaminated homes; interviews with neighbors; Medical records from her first hospitalization; interviews with extended family."
     },
     {
-      "date": "दिउँसो ३:००",
-      "title": "मृत्युको सम्भावित समय",
-      "description": "अनुमान: दिउँसो ३:०० बजेतिर गम्भीर चोटपटक वा रहस्य लुकाउन मारिए।",
-      "detailedDescription": "शरीरमा देखिएका गम्भीर चोटपटक र समग्र परिस्थितिजन्य प्रमाणहरूको विश्लेषणका आधारमा, अनुसन्धानकर्ताहरूले उनीहरूको मृत्यु दिउँसो ३:०० बजेको आसपास भएको हुन सक्ने अनुमान गरेका छन्। उनीहरूले देखेको कुनै गोप्य वा अनाधिकृत गतिविधि बाहिर आउन नदिन वा उनीहरूको उपस्थितिको बारेमा कसैले थाहा नपाओस् भन्ने उद्देश्यले आक्रमणकारीले उनीहरूको हत्या गरेको भन्ने नै यस घटनाको सबैभन्दा प्रबल सिद्धान्त मानिन्छ। उनीहरूलाई आक्रमणकारीले घटनास्थलमै मारेको अनुमान गरिएको छ।",
-      "evidence": "शवमा देखिएको चोटपटकको गम्भीरता र परिस्थितिजन्य प्रमाणका आधारमा गरिएको अनुमान",
-      "startFrame": 12000,
-      "audio": "assets/timeline/timeline5.wav",
-      "audioDuration": 30.122292
+      "date": "1987-09-23",
+      "title": "Sickness Without Cause Deepens",
+      "description": "Symptoms spread quietly—mouth ulcers, fever, skin peeling. Entire households began falling ill with inexplicable sickness. Leide's condition worsened dramatically: her hair fell out in clumps, and her skin peeled painfully. People whispered about a curse, but the source remained unknown.",
+      "evidence": "Hospital admission logs; family interviews; photos of physical symptoms; Hospital reports; personal letters; nurse testimonies."
     },
     {
-      "date": "दिउँसो ४:००",
-      "title": "शव लुकाउने प्रयास",
-      "description": "अनुमान: दिउँसो ४:०० बजेतिर अपराधीले शव लुकाए - हतारमा गाडे वा अन्यत्र सारे।",
-      "detailedDescription": "अपराधपछि, आक्रमणकारीले शवहरू लुकाउने प्रयास गरेको अनुमान गरिन्छ। उनीहरूको शव २००२ मा एउटा सानो खाल्डोमाथि ढुङ्गाले अपर्याप्त तरिकाले छोपिएको अवस्थामा संयोगवश फेला परेको थियो। यो स्थान मानव बस्तीबाट नजिकै भए पनि, वर्षौंसम्म गरिएका विशाल खोजी अभियानहरूका क्रममा भेटिएको थिएन, जसले शव लुकाइएको संकेत गर्छ। शवहरूलाई हतारमा गाडिएको वा सुरुमा अन्यत्र राखेर पछि यहाँ सारिएको हुन सक्ने सम्भावना छ। यस घटनाको प्रारम्भिक प्रहरी अनुसन्धानमा घटनास्थलको सही घेराबन्दी नगरिएको वा प्रमाणहरू राम्ररी संकलन नगरिएको भन्ने आरोपहरू पनि लागेका छन्, जसले प्रमाण लुकाउन थप मद्दत पुगेको हुन सक्छ।",
-      "evidence": "शव भेटिएको अवस्था (अधुरो गाडिएको), स्थान (लामो समयसम्म नभेटिएको) र प्रारम्भिक प्रहरी अनुसन्धानमा देखिएका कमजोरीका रिपोर्टहरू",
-      "startFrame": 15000,
-      "audio": "assets/timeline/timeline6.wav",
-      "audioDuration": 40.555583
+      "date": "1987-09-25",
+      "title": "Contaminated Scrap for Sale",
+      "description": "Still unaware of its danger, Devair sold parts of the glowing metal to another junkyard across town. The invisible sickness quietly traveled with it, spreading the wave of inexplicable illness even further. As more families fell ill, fear turned to suspicion. Rumors swirled about curses or poison, and neighbors accused the Ferreira family of witchcraft. Devair and his wife were ostracized, blamed for what no one yet understood.",
+      "evidence": "Inventory records from multiple scrapyards; contamination trail reports; neighborhood survey maps; eyewitness accounts of public confrontations; media reports on early local reactions."
+    },
+    {
+      "date": "1987-09-28",
+      "title": "Desperate Realization and Identification",
+      "description": "Devair’s wife, Maria Gabriela Ferreira, desperate to understand the source of their affliction, especially Leide's rapid decline, took the machine’s remnants to a local health agency. A physicist on duty examined the fragments, then immediately ordered an evacuation. He refused to touch the pieces, recognizing the terrifying truth.",
+      "evidence": "Testimonies from hospital staff; logbook entry from the health agency; physicist’s formal report; Clinic incident report; interviews with the physicist; emergency responder logs."
+    },
+    {
+      "date": "1987-09-29",
+      "title": "A City in Crisis: Radiation Confirmed",
+      "description": "Authorities descended on Goiânia in hazmat suits, declaring a public emergency. Neighborhoods were sealed, entire blocks evacuated. The word 'radiation' was spoken for the first time. Leide, barely conscious, was moved to an isolated hospital ward. The blue dust was identified as Cesium-137—highly radioactive and fatal. As investigators traced the origins, they uncovered a chilling truth: the capsule had come from a cancer treatment machine left behind in an abandoned radiotherapy clinic. The clinic had closed years earlier, with no proper disposal of its dangerous contents. Tragically, the security guard tasked with protecting the site had stopped showing up for work. Had he been there, this chain of events might have never begun.",
+      "evidence": "Civil defense bulletins; military decontamination records; photographs of evacuated zones; records from the Instituto Goiano de Radioterapia; testimonies from health workers and investigators; nuclear agency findings."
+    },
+    {
+      "date": "1987-10-23",
+      "title": "The Tragic Toll Revealed",
+      "description": "Despite weeks of care, Leide's body could not recover; her internal organs were irreparably damaged. She passed away at just six years old, becoming the poignant face of the tragedy. Days later, her mother, Maria Gabriela, also perished, along with two others. Over 250 people showed significant contamination. The truth had emerged, but tragically, far too late.  Brazil's that city was declared a disaster zone.",
+      "evidence": "Official casualty lists; contamination analysis; WHO and IAEA investigative reports; Death certificate; autopsy report; sealed burial documentation; press coverage."
+    },
+    {
+      "date": "1994-03",
+      "title": "A Life Consumed by Guilt: The Final Years of Roberto dos Santos Alves",
+      "description": "Years after the Goiânia accident, Roberto dos Santos Alves, one of the two men who had unknowingly dismantled the abandoned radiotherapy machine, found himself spiraling. Though he survived the acute radiation exposure, he carried deeper scars—psychological ones. Branded by some as a bringer of misfortune, he struggled with relentless guilt over the lives lost and the suffering caused. He turned to alcohol to cope, distancing himself from friends and family. By the early 1990s, his health had deteriorated. In March 1994, he died—some say from complications worsened by radiation, others from alcohol-related illness. His death went largely unnoticed outside of Goiânia, but for those who remembered, it was another quiet casualty of the tragedy.",
+      "evidence": "Local obituary notices; interviews with surviving relatives; psychological impact studies on Goiânia survivors; medical records indicating substance abuse; survivor testimony from local journalists."
     }
   ]
 }
