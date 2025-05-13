@@ -27,7 +27,7 @@ type CalculatedTimelineEvent = TimelineEventData & {
   fallbackAudio?: string;
 };
 // Custom hook to handle audio duration calculation
-
+const GAP_FACTOR = 0.125
 
 export const DetectiveTimeline: React.FC<{}> = () => {
   const frame = useCurrentFrame();
@@ -53,7 +53,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
 
   const calculatedEvents: CalculatedTimelineEvent[] = useMemo(() => {
     let currentFrame = 0;
-    const gapFrames = fps * 0.5;
+    const gapFrames = fps * GAP_FACTOR;
 
     return events.map((event, index) => {
       const audioDurationInFrames = Math.round(events[index].audioDuration * fps);
