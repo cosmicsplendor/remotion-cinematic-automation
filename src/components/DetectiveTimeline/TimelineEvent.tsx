@@ -209,11 +209,11 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
           {title.slice(0, titleCharacters).join("")}
           {titleCharacters < title.length && <span style={{ opacity: sinceVisible % 20 < 10 ? 1 : 0 }}>|</span>}
         </h3>
-        <div style={{ fontSize: 16, lineHeight: 1.5, marginBottom: 12, opacity: descriptionOpacity }}>
+        <div style={{ fontSize: event.evidence ? 16: 22, lineHeight: 1.5, marginBottom: 12, opacity: descriptionOpacity }}>
           {event.description}
         </div>
         <div style={{ fontSize: 14, color: isActive ? '#ff5252' : '#c0392b', fontWeight: 'bold', opacity: evidenceOpacity }}>
-          EVIDENCE: {event.evidence}
+          {event.evidence && `EVIDENCE: ${event.evidence}`}
         </div>
       </div>
     </>

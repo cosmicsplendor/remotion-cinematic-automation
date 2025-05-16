@@ -102,15 +102,16 @@ export const RemotionRoot = () => {
       <Composition
         id="CaptionViz"
         component={CaptionVisualizer as React.FC<any>}
-        durationInFrames={FPS * 3.4}
+        durationInFrames={FPS * 3.7}
         fps={FPS}
         width={res.width}  // Use parallaxData width or fallback to res.width
         height={res.height}
         defaultProps={{
           data: captionData,
           videoUrl: "assets/videos/cap.mp4",
-          yPosition: 0.125,
-          mode: "single"
+          yPosition: 0.5,
+          mode: "single",
+          fontSize: 60
         }}
       />
       <Composition
