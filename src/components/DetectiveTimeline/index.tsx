@@ -15,9 +15,9 @@ import { CARD_SIZE, OFFSET, TimelineEvent, TimelineEventData } from './TimelineE
 
 import data from "../../../data/timeline.json";
 import useAudioDurations from '../hooks/useAudioDurations.ts';
-import { pickOne } from '../../utils/index.ts';
 const { events: rawEvents } = data;
-
+import config from "../../../data/timeline.config.json"
+const { GAP_FACTOR, VP_CENTER, SCROLL_DURATION } = config;
 type CalculatedTimelineEvent = TimelineEventData & {
   calculatedStartFrame: number;
   audioDurationInFrames: number;
@@ -26,8 +26,6 @@ type CalculatedTimelineEvent = TimelineEventData & {
   audio?: string;
   fallbackAudio?: string;
 };
-// Custom hook to handle audio duration calculation
-const GAP_FACTOR = 0.125
 
 export const DetectiveTimeline: React.FC<{}> = () => {
   const frame = useCurrentFrame();
@@ -112,7 +110,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   // Timeline calculations
   const eventSpacing = CARD_SIZE;
   const initialOffset = OFFSET;
-  const viewportCenter = height * 0.5; // Match original vertical center point
+  const viewportCenter = height * VP_CENTER; // Match original vertical center point
 
   // Calculate scroll position
   const targetEventIndexForScroll = Math.max(0, activeIndex);
@@ -122,18 +120,64 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   const totalTimelineHeight = initialOffset + (calculatedEvents.length * eventSpacing);
   const clampedTargetScrollY = Math.max(0, targetScrollY);
 
-  // Spring animation for smooth scrolling
-  const cameraScrollY = spring({
-    frame: frame,
-    fps: fps,
-    from: 0,
-    to: clampedTargetScrollY,
-    config: {
-      damping: 25,
-      mass: 1,
-      stiffness: 180,
-    },
+  // Track transitions between events
+  const [transitionData, setTransitionData] = React.useState({
+    fromPosition: 0,
+    toPosition: 0,
+    startFrame: 0,
+    isTransitioning: false
   });
+  
+  // This monitors for change in activeIndex and starts a new transition
+  React.useEffect(() => {
+    if (activeIndex >= 0) {
+      const newTargetY = clampedTargetScrollY;
+      
+      // Only start a new transition if the target position has changed
+      if (newTargetY !== transitionData.toPosition) {
+        setTransitionData({
+          fromPosition: transitionData.isTransitioning ? transitionData.fromPosition : cameraScrollY,
+          toPosition: newTargetY,
+          startFrame: frame,
+          isTransitioning: true
+        });
+      }
+    }
+  }, [activeIndex, clampedTargetScrollY]);
+
+  // Calculate camera scroll position with custom easing
+  // This completely replaces the spring function with our own custom animation
+  
+  let cameraScrollY = 0;
+  
+  if (transitionData.isTransitioning) {
+    const elapsed = frame - transitionData.startFrame;
+    const progress = Math.min(elapsed / SCROLL_DURATION, 1);
+    
+    // Custom easing function for smooth movement (ease in-out cubic)
+    const easedProgress = progress < 0.5 
+      ? 4 * progress * progress * progress 
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    // const easedProgress = -(Math.cos(Math.PI * progress) - 1) / 2;
+    
+    // Linear interpolation between start and end positions
+    cameraScrollY = transitionData.fromPosition + (transitionData.toPosition - transitionData.fromPosition) * easedProgress;
+    
+    // If we've completed the transition, update the state
+    if (progress >= 1 && frame > transitionData.startFrame + 5) {
+      // Small delay to avoid immediate state updates
+      setTimeout(() => {
+        setTransitionData(prev => ({
+          ...prev,
+          isTransitioning: false,
+          fromPosition: prev.toPosition
+        }));
+      }, 0);
+    }
+  } else {
+    cameraScrollY = transitionData.toPosition;
+  }
+
   return (
     <AbsoluteFill
       style={{
@@ -154,22 +198,43 @@ export const DetectiveTimeline: React.FC<{}> = () => {
           transform: `translateY(-${cameraScrollY}px)`,
         }}
       >
-        {/* The timeline line - centered like in original */}
-        <div
-          style={{
-            position: 'absolute',
-            top: initialOffset,
-            left: '50%', // Center alignment
-            width: 8,
-            backgroundColor: '#c0392b',
-            transform: 'translateX(-50%)', // Center the line
-            height: `${Math.max(0, (calculatedEvents.length - 1) * eventSpacing + 20)}px`,
-          }}
-        />
+        {/* Replace solid timeline with dashed/broken segments */}
+        {calculatedEvents.map((event, index) => {
+          // Don't draw a line segment for the last event
+          if (index === calculatedEvents.length - 1) return null;
+          
+          // Calculate the start and end points for this segment
+          const startY = initialOffset + index * eventSpacing;
+          const endY = initialOffset + (index + 1) * eventSpacing;
+          const segmentHeight = endY - startY;
+          
+          // Determine line style - alternating styles for visual interest
+          const isDashed = index % 2 === 0;
+          
+          return (
+            <div
+              key={`timeline-segment-${index}`}
+              style={{
+                position: 'absolute',
+                top: startY + 8,
+                left: '50%',
+                width: 10,
+                height: segmentHeight - 8,
+                backgroundColor: '#c0392b',
+                transform: 'translateX(-50%)',
+                borderRadius: 5,
+                // Apply dashed style to alternating segments
+                ...(isDashed && {
+                  backgroundImage: 'repeating-linear-gradient(to bottom, #c0392b, #c0392b 30px, transparent 30px, transparent 20px)',
+                  backgroundColor: 'transparent'
+                })
+              }}
+            />
+          );
+        })}
 
         {/* Map through events with proper positioning containers */}
         {calculatedEvents.map((event, index) => {
-          console.log(staticFile("assets/timeline/timeline" + (index + 1) + ".wav"))
           return (
             <div
               key={event.title + index}
@@ -191,6 +256,9 @@ export const DetectiveTimeline: React.FC<{}> = () => {
                 initialOffset={initialOffset}
                 eventSpacing={eventSpacing}
               />
+
+              {/* Add a dot/node at each event point */}
+             
 
               {/* Audio component for this event */}
               <Sequence

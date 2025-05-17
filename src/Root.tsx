@@ -21,7 +21,7 @@ import timelineData from '../data/timeline.json';
 import CaptionVisualizer from './components/CaptionViz/index.tsx';
 const transitionDuration = 30;
 const holdDuration = 0;
-const _res = RES.shorts
+const _res = RES.r1080p
 const res = {
   width: Math.floor(_res.width / 2) * 2,
   height: Math.floor(_res.height / 2) * 2

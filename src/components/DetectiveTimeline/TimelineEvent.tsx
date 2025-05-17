@@ -32,8 +32,8 @@ export type TimelineEventData = {
   // startFrame is calculated by the parent component
 }
 
-export const OFFSET = 200;
-export const CARD_SIZE = 200; // Height of each card, effectively vertical spacing
+export const OFFSET = 250;
+export const CARD_SIZE = 400; // Height of each card, effectively vertical spacing
 
 export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLeft, isActive, initialOffset, eventSpacing, calculatedStartFrame }) => {
   const frame = useCurrentFrame();
@@ -190,7 +190,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
           top: 0, // Positioned at the top of the parent div
           [isLeft ? 'right' : 'left']: '50%',
           [isLeft ? 'marginRight' : 'marginLeft']: 40,
-          width: 500,
+          width: 800,
           opacity: cardOpacity,
           transform: `translateX(${isLeft ? -cardTranslate : cardTranslate}px) translateY(-50%)`, // Translate relative to its own size
           backgroundColor: 'rgba(30, 30, 30, 0.9)',
@@ -202,17 +202,17 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
         }}
       >
         {/* Card Content */}
-        <div style={{ fontFamily: 'Roboto Mono, monospace', color: '#aaa', fontSize: 14, marginBottom: 8 }}>
+        <div style={{ fontFamily: 'Roboto Mono, monospace', color: '#aaa', fontSize: 24, marginBottom: 8 }}>
           {event.date}
         </div>
-        <h3 style={{ fontFamily: 'Special Elite, cursive', fontSize: 28, margin: '0 0 16px 0', color: isActive ? '#ff5252' : 'white' }}>
+        <h3 style={{ fontFamily: 'Special Elite, cursive', fontSize: 36, margin: '0 0 16px 0', color: isActive ? '#ff5252' : 'white' }}>
           {title.slice(0, titleCharacters).join("")}
           {titleCharacters < title.length && <span style={{ opacity: sinceVisible % 20 < 10 ? 1 : 0 }}>|</span>}
         </h3>
-        <div style={{ fontSize: event.evidence ? 16: 22, lineHeight: 1.5, marginBottom: 12, opacity: descriptionOpacity }}>
+        <div style={{ fontSize: event.evidence ? 26: 28, lineHeight: 1.5, marginBottom: 12, opacity: descriptionOpacity }}>
           {event.description}
         </div>
-        <div style={{ fontSize: 14, color: isActive ? '#ff5252' : '#c0392b', fontWeight: 'bold', opacity: evidenceOpacity }}>
+        <div style={{ fontSize: 18, color: isActive ? '#ff5252' : '#c0392b', fontWeight: 'bold', opacity: evidenceOpacity }}>
           {event.evidence && `EVIDENCE: ${event.evidence}`}
         </div>
       </div>
