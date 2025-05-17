@@ -1,0 +1,9 @@
+1. Still the initial zump needs to be fixed
+2. now disregards speed
+3. implement aspect data extraction automation
+4. extend the cards a bit more towards the edges (leaving only 96px buffer)
+5. either keep the images in past events (try first) or clip it smoothly
+6. add support for videos
+7. add support for fade in or out
+8. that aspect matching logic and proper zoom to account for clipping still flawed - should be declarative, almost magical
+9. add support for more easing functions

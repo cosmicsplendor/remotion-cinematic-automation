@@ -1,29 +1,16 @@
 import React, { useState, useMemo } from 'react';
-import {
-  useCurrentFrame,
-  useVideoConfig,
-  interpolate,
-  spring,
-  Easing,
-  staticFile,
-} from 'remotion';
-
-import { segmentDevanagariText } from '../../utils'; // Adjust path as needed
+import { useCurrentFrame, useVideoConfig, interpolate, spring, Easing, staticFile } from 'remotion';
+import { segmentDevanagariText } from '../../utils';
 import config from "../../../data/timeline.config.json";
-import KeyframeAudioProcessor from './KeyframeAudioProcessor'; // Assuming it's in the same directory
+import KeyframeAudioProcessor from './KeyframeAudioProcessor';
 import { calculateEffectProgress, getKenBurnsTransforms, parseKenBurnsEffect } from './helpers';
-
 const { SCROLL_DURATION } = config;
-
-// Enhanced Keyframe type with updated kenBurns property comment
 type Keyframe = {
   duration: number;
   media: string;
   audio: string;
   kenBurns?: string; // Format: "effect-type;duration(e.g. 2s);easing;speed(0-1)" // Examples: "static", "zoom-in;2s;ease-in-out;0.7", "pan-left;3s;ease;0.3"
 };
-
-// Updated TimelineEventData type
 export type TimelineEventData = {
   date: string;
   title: string;
@@ -33,15 +20,14 @@ export type TimelineEventData = {
   keyframes?: Keyframe[];
   id?: string;
 };
-
 type TimelineEventProps = {
   event: TimelineEventData & { calculatedStartFrame: number; isLeft?: boolean };
   index: number;
   isActive: boolean;
 };
 
-export const OFFSET = 400; // Retaining from your old code
-export const CARD_SIZE = 400; // Retaining from your old code
+export const OFFSET = 400;
+export const CARD_SIZE = 400;
 
 export const TimelineEvent: React.FC<TimelineEventProps> = ({
   event,
@@ -225,14 +211,6 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
     })
   );
 
-  const descriptionOpacity = interpolate(animationStartFrame, [8, 12], [0, 1], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
-
-  const evidenceOpacity = interpolate(animationStartFrame, [10, 15], [0, 1], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
-
   const dotSize = isActive ? 30 : 24;
   const dotColor = isActive ? '#ff5252' : '#c0392b';
   const baseShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
@@ -312,12 +290,6 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
               transformOrigin: 'center center',
               ...kenBurnsStyle, // Applying the new Ken Burns style
             }} />
-          </div>
-        )}
-        
-        {evidence && (
-          <div style={{ fontSize: 18, color: isActive ? '#ff5252' : '#c0392b', fontWeight: 'bold', opacity: evidenceOpacity }}>
-            EVIDENCE: {evidence}
           </div>
         )}
       </div>

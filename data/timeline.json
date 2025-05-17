@@ -1,64 +1,70 @@
 {
+  "hook": "उसले केटीको कारण साथी मारेर फाल्यो, अनि आफैँ पुलिससँग खोज्न हिँड्यो! 😱",
   "events": [
     {
-      "date": "1987-09-17",
-      "title": "Onset of Mysterious Symptoms",
-      "description": "Shortly after dismantling a mysterious device from an abandoned medical building, two scavengers experienced severe vomiting, dizziness, weakness, and intense diarrhea. One man’s hand swelled grotesquely, blistering and darkening as if burned from within. Doctors were puzzled, suggesting common ailments but finding no explanation.",
-      "evidence": "Medical records from local clinics; testimonies from the two men; initial clinic visit records; firsthand testimony from hospital workers."
+      "date": "हत्याको १ महिना अगाडि",
+      "title": "१ महिना अगाडिदेखि  बदलाको योजना",
+      "description": "घरझगडा र केटीको कारण हार्दिक प्रजापतिले सँगैबस्ने दिपेन् पटेललाई मार्ने योजना बनाउँछ।",
+      "audioDuration": 4.558625,
+      "keyframes": [
+        {
+          "duration": 4.558625,
+          "media": "timeline1.jpg",
+          "audio": "timeline1.wav",
+          "kenBurns": "zoom-in-pan-left;4s;ease-out;0.01"
+        }
+      ]
     },
     {
-      "date": "1987-09-18",
-      "title": "Discovery of the Glowing Treasure",
-      "description": "The strange device was sold to a junkyard owned by Devair Alves Ferreira. From its cracked core spilled a luminous blue powder, brilliant and mesmerizing. Devair was entranced; he brought the substance home to show his family. That night, his house glittered faintly in the dark.",
-      "evidence": "Witness reports from neighbors; remnants of glowing powder later recovered from Ferreira's home; glowing fragments found in the Ferreira household; testimonies from neighbors and family."
+      "date": "मे ७, २०२५ को रात",
+      "title": "आक्रमण र हत्या",
+      "description": "दिपेनको गाडीमा लिफ्ट लिएर राति सुनसान ठाउँमा पुगेपछि खुर्सानी र चक्कुले रेटेर मार्यो।",
+      "audioDuration": 9.628542,
+      "keyframes": [
+        {
+          "duration": 5.840292,
+          "media": "timeline2_1.jpg",
+          "audio": "timeline2_1.wav"
+        },
+        {
+          "duration": 3.78825,
+          "media": "timeline2_2.jpg",
+          "audio": "timeline2_2.wav"
+        }
+      ]
     },
     {
-      "date": "1987-09-19",
-      "title": "A Child's Fatal Play",
-      "description": "Devair's six-year-old daughter, Leide das Neves Ferreira, was utterly captivated by the sparkling blue powder. She smeared it on her skin like makeup, showed it to friends, and slept with a fragment near her bed, unknowingly absorbing a silent, deadly threat.",
-      "evidence": "Later dosimetry estimates; forensic photographs; witness reports from neighbors."
+      "date": "मे ७, २०२५ को रात",
+      "title": "शव फाल्यो",
+      "description": "हत्यापछि गाडी चलाएर शव खोलामा फाल्यो।",
+      "audioDuration": 6.234292,
+      "keyframes": [
+        {
+          "duration": 6.234292,
+          "media": "timeline3.jpg",
+          "audio": "timeline3.wav"
+        }
+      ]
     },
     {
-      "date": "1987-09-21",
-      "title": "The Beautiful Danger Spreads",
-      "description": "Devair broke the powder into smaller pieces to share with friends and family. Some neighbors placed samples on altars, others kept it as a treasure. By now, people were starting to feel sick. Leide grew pale and listless, her appetite vanished, and she developed swelling and mouth sores.",
-      "evidence": "Autopsy results; reports from contaminated homes; interviews with neighbors; Medical records from her first hospitalization; interviews with extended family."
-    },
-    {
-      "date": "1987-09-23",
-      "title": "Sickness Without Cause Deepens",
-      "description": "Symptoms spread quietly—mouth ulcers, fever, skin peeling. Entire households began falling ill with inexplicable sickness. Leide's condition worsened dramatically: her hair fell out in clumps, and her skin peeled painfully. People whispered about a curse, but the source remained unknown.",
-      "evidence": "Hospital admission logs; family interviews; photos of physical symptoms; Hospital reports; personal letters; nurse testimonies."
-    },
-    {
-      "date": "1987-09-25",
-      "title": "Contaminated Scrap for Sale",
-      "description": "Still unaware of its danger, Devair sold parts of the glowing metal to another junkyard across town. The invisible sickness quietly traveled with it, spreading the wave of inexplicable illness even further. As more families fell ill, fear turned to suspicion. Rumors swirled about curses or poison, and neighbors accused the Ferreira family of witchcraft. Devair and his wife were ostracized, blamed for what no one yet understood.",
-      "evidence": "Inventory records from multiple scrapyards; contamination trail reports; neighborhood survey maps; eyewitness accounts of public confrontations; media reports on early local reactions."
-    },
-    {
-      "date": "1987-09-28",
-      "title": "Desperate Realization and Identification",
-      "description": "Devair’s wife, Maria Gabriela Ferreira, desperate to understand the source of their affliction, especially Leide's rapid decline, took the machine’s remnants to a local health agency. A physicist on duty examined the fragments, then immediately ordered an evacuation. He refused to touch the pieces, recognizing the terrifying truth.",
-      "evidence": "Testimonies from hospital staff; logbook entry from the health agency; physicist’s formal report; Clinic incident report; interviews with the physicist; emergency responder logs."
-    },
-    {
-      "date": "1987-09-29",
-      "title": "A City in Crisis: Radiation Confirmed",
-      "description": "Authorities descended on Goiânia in hazmat suits, declaring a public emergency. Neighborhoods were sealed, entire blocks evacuated. The word 'radiation' was spoken for the first time. Leide, barely conscious, was moved to an isolated hospital ward. The blue dust was identified as Cesium-137—highly radioactive and fatal. As investigators traced the origins, they uncovered a chilling truth: the capsule had come from a cancer treatment machine left behind in an abandoned radiotherapy clinic. The clinic had closed years earlier, with no proper disposal of its dangerous contents. Tragically, the security guard tasked with protecting the site had stopped showing up for work. Had he been there, this chain of events might have never begun.",
-      "evidence": "Civil defense bulletins; military decontamination records; photographs of evacuated zones; records from the Instituto Goiano de Radioterapia; testimonies from health workers and investigators; nuclear agency findings."
-    },
-    {
-      "date": "1987-10-23",
-      "title": "The Tragic Toll Revealed",
-      "description": "Despite weeks of care, Leide's body could not recover; her internal organs were irreparably damaged. She passed away at just six years old, becoming the poignant face of the tragedy. Days later, her mother, Maria Gabriela, also perished, along with two others. Over 250 people showed significant contamination. The truth had emerged, but tragically, far too late.  Brazil's that city was declared a disaster zone.",
-      "evidence": "Official casualty lists; contamination analysis; WHO and IAEA investigative reports; Death certificate; autopsy report; sealed burial documentation; press coverage."
-    },
-    {
-      "date": "1994-03",
-      "title": "A Life Consumed by Guilt: The Final Years of Roberto dos Santos Alves",
-      "description": "Years after the Goiânia accident, Roberto dos Santos Alves, one of the two men who had unknowingly dismantled the abandoned radiotherapy machine, found himself spiraling. Though he survived the acute radiation exposure, he carried deeper scars—psychological ones. Branded by some as a bringer of misfortune, he struggled with relentless guilt over the lives lost and the suffering caused. He turned to alcohol to cope, distancing himself from friends and family. By the early 1990s, his health had deteriorated. In March 1994, he died—some say from complications worsened by radiation, others from alcohol-related illness. His death went largely unnoticed outside of Goiânia, but for those who remembered, it was another quiet casualty of the tragedy.",
-      "evidence": "Local obituary notices; interviews with surviving relatives; psychological impact studies on Goiânia survivors; medical records indicating substance abuse; survivor testimony from local journalists."
+      "date": "मे ७ - मे १२, २०२५",
+      "title": "खोज्ने नाटक",
+      "description": "दिपेन हराएपछि हार्दिक परिवार र प्रहरीसँगै खोज्ने नाटक गरिरह्यो।",
+      "audioDuration": 14.948833,
+      "keyframes": [
+        {
+          "duration": 6.514208,
+          "media": "timeline4_1.jpg",
+          "audio": "timeline4_1.wav",
+          "kenBurns": "zoom-in;1s;ease-in-out;0.001"
+        },
+        {
+          "duration": 8.434625,
+          "media": "timeline4_2.jpg",
+          "audio": "timeline4_2.wav",
+          "kenBurns": "pan-up;1s;ease-in-out;0.001"
+        }
+      ]
     }
   ]
 }
