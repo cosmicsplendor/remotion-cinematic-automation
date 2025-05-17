@@ -54,11 +54,18 @@ export const DetectiveTimeline: React.FC<{}> = () => {
     const gapFrames = fps * GAP_FACTOR;
 
     return events.map((event, index) => {
-      const audioDurationInFrames = Math.round(events[index].audioDuration * fps);
-
+      // Calculate the start frame for this event
       const calculatedStartFrame = currentFrame;
-      const calculatedEndFrame = calculatedStartFrame + audioDurationInFrames;
-
+      
+      // Get audio duration for this event
+      const audioDurationInFrames = Math.round(events[index].audioDuration * fps);
+      
+      // Calculate total duration including SCROLL_DURATION delay for audio
+      // This extends the event's total display time
+      const totalEventDuration = audioDurationInFrames + SCROLL_DURATION;
+      
+      // Calculate end frame and increment currentFrame for next event
+      const calculatedEndFrame = calculatedStartFrame + totalEventDuration;
       currentFrame = calculatedEndFrame + (index < events.length - 1 ? gapFrames : 0);
 
       return {
@@ -73,7 +80,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   const lastCalculatedEvent = calculatedEvents[calculatedEvents.length - 1];
   const endMarginFrames = fps * 2;
   const effectiveEndFrame = lastCalculatedEvent
-    ? lastCalculatedEvent.calculatedStartFrame + lastCalculatedEvent.audioDurationInFrames + endMarginFrames
+    ? lastCalculatedEvent.calculatedStartFrame + lastCalculatedEvent.audioDurationInFrames + SCROLL_DURATION + endMarginFrames
     : durationInFrames;
   const finalCutoffFrame = Math.min(durationInFrames, effectiveEndFrame);
 
@@ -235,6 +242,11 @@ export const DetectiveTimeline: React.FC<{}> = () => {
 
         {/* Map through events with proper positioning containers */}
         {calculatedEvents.map((event, index) => {
+          // Calculate if the scroll animation for this event has completed
+          const isScrollCompleted = activeIndex === index && 
+                                   (!transitionData.isTransitioning || 
+                                    frame >= transitionData.startFrame + SCROLL_DURATION);
+          
           return (
             <div
               key={event.title + index}
@@ -259,10 +271,9 @@ export const DetectiveTimeline: React.FC<{}> = () => {
 
               {/* Add a dot/node at each event point */}
              
-
-              {/* Audio component for this event */}
+              {/* Audio component for this event - now delayed by SCROLL_DURATION */}
               <Sequence
-                from={event.calculatedStartFrame}
+                from={event.calculatedStartFrame + SCROLL_DURATION} // Delay start by SCROLL_DURATION
                 durationInFrames={event.audioDurationInFrames}
                 name={`AudioSequence_${event.title}`}
               >
@@ -272,8 +283,18 @@ export const DetectiveTimeline: React.FC<{}> = () => {
                   onError={(e) => handleAudioError(event.id || index.toString(), event.audio!, e)}
                 />
               </Sequence>
-              <Sequence from={event.calculatedStartFrame} durationInFrames={25} name={`PinSoundStart_${event.calculatedStartFrame}`}>
-                <Audio volume={0.125} src={staticFile("assets/sfx/blip1.wav")} onError={(e) => console.error('Pin sound start error:', e)} />
+              
+              {/* Pin sound - only play after scroll has completed to avoid playing during transitions */}
+              <Sequence 
+                from={event.calculatedStartFrame} 
+                durationInFrames={25} 
+                name={`PinSoundStart_${event.calculatedStartFrame}`}
+              >
+                <Audio 
+                  volume={0.125} 
+                  src={staticFile("assets/sfx/blip1.wav")} 
+                  onError={(e) => console.error('Pin sound start error:', e)} 
+                />
               </Sequence>
             </div>
           )
