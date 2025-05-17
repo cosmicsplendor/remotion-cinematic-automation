@@ -57,15 +57,16 @@ export const DetectiveTimeline: React.FC<{}> = () => {
       // Calculate the start frame for this event
       const calculatedStartFrame = currentFrame;
       
-      // Get audio duration for this event
-      const audioDurationInFrames = Math.round(events[index].audioDuration * fps);
+      // Get audio duration for this event      const audioDurationInFrames = Math.round(events[index].audioDuration * fps);
       
-      // Calculate total duration including SCROLL_DURATION delay for audio
-      // This extends the event's total display time
+      // Keep the event active for its full audio duration first
+      // Then add SCROLL_DURATION for the transition
+      const audioDurationInFrames = Math.round(event.audioDuration * fps);
       const totalEventDuration = audioDurationInFrames + SCROLL_DURATION;
       
       // Calculate end frame and increment currentFrame for next event
-      const calculatedEndFrame = calculatedStartFrame + totalEventDuration;
+      // Ensure we don't start scrolling until after the audio finishes
+      const calculatedEndFrame = calculatedStartFrame + audioDurationInFrames + SCROLL_DURATION;
       currentFrame = calculatedEndFrame + (index < events.length - 1 ? gapFrames : 0);
 
       return {
@@ -162,10 +163,10 @@ export const DetectiveTimeline: React.FC<{}> = () => {
     const progress = Math.min(elapsed / SCROLL_DURATION, 1);
     
     // Custom easing function for smooth movement (ease in-out cubic)
-    const easedProgress = progress < 0.5 
-      ? 4 * progress * progress * progress 
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-    // const easedProgress = -(Math.cos(Math.PI * progress) - 1) / 2;
+    // const easedProgress = progress < 0.5 
+    //   ? 4 * progress * progress * progress 
+    //   : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    const easedProgress = -(Math.cos(Math.PI * progress) - 1) / 2;
     
     // Linear interpolation between start and end positions
     cameraScrollY = transitionData.fromPosition + (transitionData.toPosition - transitionData.fromPosition) * easedProgress;
@@ -278,7 +279,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
                 name={`AudioSequence_${event.title}`}
               >
                 <Audio
-                  src={staticFile("assets/timeline/timeline" + (index + 1) + ".wav")}
+                  src={staticFile("assets/timeline/timeline/audio" + (index + 1) + ".wav")}
                   volume={1}
                   onError={(e) => handleAudioError(event.id || index.toString(), event.audio!, e)}
                 />

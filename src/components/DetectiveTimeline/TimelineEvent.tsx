@@ -11,6 +11,8 @@ import { useAudioData, visualizeAudio } from '@remotion/media-utils'; // Correct
 
 // Assuming this utility function exists and works correctly
 import { segmentDevanagariText } from '../../utils';
+import config from "../../../data/timeline.config.json";
+const { SCROLL_DURATION } = config;
 
 type TimelineEventProps = {
   event: any; // Consider a more specific type if possible
@@ -41,8 +43,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
 
   // Load audio data for THIS event using useAudioData
   // Pass null if event.audio is not provided
-  const audioData = useAudioData(staticFile("/assets/timeline/timeline" + (+index + 1) + ".wav") );
-
+  const audioData = useAudioData(staticFile("/assets/timeline/timeline/audio" + (+index + 1) + ".wav") );
   // Determine if the card should be visible based on its calculated startFrame
   const isVisible = frame >= calculatedStartFrame;
   if (!isVisible) {
@@ -120,19 +121,17 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({ event, index, isLe
     }
   );
   // --- End Existing Animations ---
-
   // --- Audio Visualization Logic ---
   let glowOpacity = 0;
 
   // Only calculate glow opacity if the card is active AND audio data is available
   if (isActive && audioData) {
-    // Calculate the frame number relative to the start of *this* audio clip's playback.
-    // Use the calculatedStartFrame passed from the parent.
-    const frameInAudio = frame - calculatedStartFrame;
-
-    // If the current frame is before the audio is supposed to start, amplitude is 0.
-    // visualizeAudio expects a non-negative frame number relative to the audio start.
-    if (frameInAudio >= 0) {
+    // Calculate the frame number relative to the start of *this* audio clip's playback,
+    // accounting for SCROLL_DURATION delay before audio starts
+    const frameInAudio = frame - (calculatedStartFrame + SCROLL_DURATION);
+    const audioEndFrame = calculatedStartFrame + SCROLL_DURATION + (event.audioDuration * fps);// Only calculate audio visualization if we're within the audio duration
+    // and after the start frame
+    if (frameInAudio >= 0 && frame <= audioEndFrame) {
         // Get amplitude using visualizeAudio for the current frame relative to the audio start
         const visualization = visualizeAudio({
             fps,
