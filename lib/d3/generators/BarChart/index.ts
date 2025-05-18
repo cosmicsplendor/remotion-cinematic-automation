@@ -71,7 +71,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
 
     let animation: Animation, barCount: BarCount, bar: Bar, label: Label, points: Points, xAxis: XAxis = { offset: -10, size: 18 }
     let accessors: Accessors<Datum>, allData: Data, logoXOffset: number, position: Position, tween = true, horizontal = false, background = "whitesmoke", dom: DOM
-    
+
     const transitionTo = (
         sel: Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>,
         attribs: Hash,
@@ -109,7 +109,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const ptsRangeDir = Math.sign(ptsRange[1] - ptsRange[0])
 
         const barLenAccessor = (d: Datum) => {
-            bar.minLength + (pointsScale(accessors.x(d)) - ptsRange[0]) * ptsRangeDir
+            return bar.minLength + (pointsScale(accessors.x(d)) - ptsRange[0]) * ptsRangeDir
         }
         const barTopAccessor = (d: Datum) => ptsRange[0] + ptsRangeDir * barLenAccessor(d)
         const barBaseAccessor = () => ptsRange[0]
@@ -204,7 +204,10 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                         return transitionBars(sel)
                     }
                     sel.attr("y", EXIT_DEST)
-                        .attr("width", barLenAccessor)
+                        .attr("width", d => {
+                            const len = barLenAccessor(d)
+                            return len
+                        })
                     return transitionBars(sel)
                 },
                 update => transitionBars(update),
@@ -220,10 +223,10 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                     .attr("x", barBaseAccessor())
             })
 
-       
+
             .attr("src", accessors.logoSrc)
             .attr("height", BAR_THICKNESS)
-            .attr("width", "auto")
+            // .attr("width", "auto")
 
         const totalPointsSel = svg
             .selectAll<BaseType, Datum>(".total-points")
@@ -334,12 +337,12 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const totlaPointsSelTrans = totalPointsSel
             .transition(transitionState)
         if (noTransition || !tween) {
-            totalPointsSel.text(d => xAxis.format ? xAxis.format(accessors.x(d)):  accessors.x(d))
+            totalPointsSel.text(d => xAxis.format ? xAxis.format(accessors.x(d)) : accessors.x(d))
         } else {
             totlaPointsSelTrans.tween("text", function (d) {
-                var i = interpolate(xAxis.reverseFormat ? xAxis.reverseFormat(select(this).text()): 0, accessors.x(d))
+                var i = interpolate(xAxis.reverseFormat ? xAxis.reverseFormat(select(this).text()) : 0, accessors.x(d))
                 return t => {
-                    select(this).text(xAxis.format ? xAxis.format(i(t)): i(t))
+                    select(this).text(xAxis.format ? xAxis.format(i(t)) : i(t))
                 }
             })
         }
@@ -358,8 +361,8 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
     barGraph.tween = val => (tween = val, barGraph)
     barGraph.horizontal = val => (horizontal = val, barGraph)
     barGraph.background = val => (background = val, barGraph)
-    barGraph.dom = val => (dom=val,barGraph)
+    barGraph.dom = val => (dom = val, barGraph)
     return barGraph
 }
 
-export {BarChartGenerator}
+export { BarChartGenerator }
