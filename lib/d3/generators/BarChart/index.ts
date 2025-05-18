@@ -1,18 +1,6 @@
 import { wait } from "../../utils/index"
 import { Dims } from "../../utils/types"
-import {
-    scaleLinear,
-    select,
-    scaleBand,
-    max,
-    transition,
-    Selection,
-    Transition,
-    BaseType,
-    axisTop,
-    axisLeft,
-    interpolate,
-} from "d3"
+import { scaleLinear, select, scaleBand, max, transition, Selection, Transition, BaseType, axisTop, axisLeft, interpolate, } from "d3"
 
 type Hash = Record<string, any>
 
@@ -133,41 +121,52 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             }
             return transitionTo(sel as any, attribs, transitionState, noTransition)
         }
-        const transitionImages = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
+        const transitionImagesSvg = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
             const attribs: Hash = {
-                style: (d: Datum) => {
-                    const alongPtsAxis: number = barTopAccessor(d) + ptsRangeDir * logoXOffset
-                    const alongLabelAxis = dest ?? teamNameScale(accessors.y(d))
+                x: (d: Datum) => {
                     if (horizontal) {
-                        return `position: absolute; left: ${alongLabelAxis}px; top: ${alongPtsAxis}px;`
+                        return dest ?? teamNameScale(accessors.y(d));
+                    } else {
+                        return barTopAccessor(d) + ptsRangeDir * logoXOffset;
                     }
-                    return `position: absolute; left: ${alongPtsAxis}px; top: ${alongLabelAxis}px;`
+                },
+                y: (d: Datum) => {
+                    if (horizontal) {
+                        return barTopAccessor(d) + ptsRangeDir * logoXOffset;
+                    } else {
+                        return dest ?? teamNameScale(accessors.y(d));
+                    }
                 }
-            }
-            return transitionTo(sel as any, attribs, transitionState, noTransition)
+            };
+            return transitionTo(sel as any, attribs, transitionState, noTransition);
         }
-        // select("body")
-        //     .selectAll("img")
-        //     .data(data, accessors.id)
-        //     .join(
-        //         enter => {
-        //             const sel = enter
-        //                 .append("img")
-        //                 .attr("style", (d: Datum) => {
-        //                     const alongPtsAxis = barTopAccessor(d) + ptsRangeDir * logoXOffset
-        //                     if (horizontal) return `position: absolute; top: ${alongPtsAxis}px; left: ${EXIT_DEST}px;`
-        //                     return `position: absolute; left: ${alongPtsAxis}px; top: ${EXIT_DEST}px;`
-        //                 })
-        //             return transitionImages(sel)
-        //         },
-        //         update => transitionImages(update),
-        //         exit => {
-        //             transitionImages(exit, EXIT_DEST).remove()
-        //         }
-        //     )
-        //     .attr("src", accessors.logoSrc)
-        //     .attr("height", BAR_THICKNESS)
-        //     .attr("width", "auto")
+
+        svg.selectAll("image")
+            .data(data, accessors.id as any)
+            .join(
+                enter => {
+                    const sel = enter
+                        .append("image")
+
+                    if (horizontal) {
+                        sel.attr("x", EXIT_DEST)
+                            .attr("y", d => barTopAccessor(d) + ptsRangeDir * logoXOffset);
+                    } else {
+                        sel.attr("x", d => barTopAccessor(d) + ptsRangeDir * logoXOffset)
+                            .attr("y", EXIT_DEST);
+                    }
+
+                    return transitionImagesSvg(sel);
+                },
+                update => transitionImagesSvg(update),
+                exit => {
+                    transitionImagesSvg(exit, EXIT_DEST).remove();
+                }
+            )
+            .attr("href", accessors.logoSrc) // SVG uses href instead of src
+            .attr("height", BAR_THICKNESS)
+            .attr("width", BAR_THICKNESS) // You might want to maintain aspect ratio here
+            .attr("preserveAspectRatio", "xMidYMid meet"); // Maintain aspect ratio
         const transitionPoints = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
             const attribs: Hash = {
                 transform: (d: Datum) => {
@@ -226,8 +225,6 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
 
             .attr("src", accessors.logoSrc)
             .attr("height", BAR_THICKNESS)
-            // .attr("width", "auto")
-
         const totalPointsSel = svg
             .selectAll<BaseType, Datum>(".total-points")
             .data<Datum>(data)
