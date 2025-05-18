@@ -254,9 +254,9 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                         .append("text")
                         .call(sel => {
                             if (horizontal) {
-                                return sel.attr("transform", `translate(${EXIT_DEST}, ${barBaseAccessor() + label.topOffset}), rotate(${label.rotation})`)
+                                return sel.attr("transform", `translate(${EXIT_DEST}, ${barBaseAccessor() + (label.topOffset || 0)}), rotate(${label.rotation})`)
                             }
-                            sel.attr("transform", `translate(${dims.ml - label.rightOffset}, ${EXIT_DEST})`)
+                            sel.attr("transform", `translate(${dims.ml - (label.rightOffset || 0)}, ${EXIT_DEST})`)
                         })
 
                     return transitionLabels(sel)
@@ -282,7 +282,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .join("text")
             .attr("class", "position")
             .attr("x", dims.ml + position.xOffset)
-            .attr("y", d => teamNameScale(accessors.y(d)) + BAR_THICKNESS / 2)
+            .attr("y", d => (teamNameScale(accessors.y(d)) ?? 0) + BAR_THICKNESS / 2)
             .attr("alignment-baseline", "central")
             .attr("fill", position.fill)
             .attr("style", "font-weight: 600;")
@@ -321,12 +321,12 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const totlaPointsSelTrans = totalPointsSel
             .transition(transitionState)
         if (noTransition || !tween) {
-            totalPointsSel.text(d => xAxis.format(accessors.x(d)))
+            totalPointsSel.text(d => xAxis.format ? xAxis.format(accessors.x(d)):  accessors.x(d))
         } else {
             totlaPointsSelTrans.tween("text", function (d) {
-                var i = interpolate(xAxis.reverseFormat(select(this).text()), accessors.x(d))
+                var i = interpolate(xAxis.reverseFormat ? xAxis.reverseFormat(select(this).text()): 0, accessors.x(d))
                 return t => {
-                    select(this).text(xAxis.format(i(t)))
+                    select(this).text(xAxis.format ? xAxis.format(i(t)): i(t))
                 }
             })
         }
