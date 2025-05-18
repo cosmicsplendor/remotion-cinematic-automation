@@ -18,7 +18,7 @@ type Frame = {
 export type Chart = BarChart<Datum>
 export type SafeChart = {
   [K in keyof Required<Chart>]: Exclude<Required<Chart>[K], undefined> extends (...args: any[]) => any
-    ? (...args: Parameters<Required<Chart>[K]>) => ChartWithAll
+    ? (...args: Parameters<Required<Chart>[K]>) => SafeChart
     : never
 }
 type ParamInters = {timestamp: AnyFunction, musicSrc: string}
@@ -26,9 +26,7 @@ type StartVizParam = {barChart: BarChart<Datum>} & ParamInters
 type InitParam = { modifier: (chart: BarChart<Datum>) => BarChart<Datum>, dims: Dims } & ParamInters
 
 const BILLION = 1000000000, MILLION = 1000000
-export function safeCall<T, Args extends any[]>(fn: MaybeFn<T, Args>, ...args: Args): T | undefined {
-  return typeof fn === 'function' ? (fn as any)(...args) : undefined
-}
+
 const startViz = async (params: StartVizParam) => {
     const { barChart, timestamp } = params
     const originalData = data as Frame[]
@@ -43,11 +41,11 @@ const startViz = async (params: StartVizParam) => {
         }
     }
 }
-export const formatX = (num: number) => {
+export const formatX = (num: number | string) => {
     if (num === 0) return "0"
-    const divisor = num >= BILLION ? BILLION : MILLION
+    const divisor = Number(num) >= BILLION ? BILLION : MILLION
     const suffix = divisor === BILLION ? "B" : "M"
-    return num === 0 ? "0" : `€${(num / divisor).toFixed(2)}${suffix}`
+    return num === 0 ? "0" : `€${(Number(num) / divisor).toFixed(2)}${suffix}`
 }
 export const reverseFormatX = (str: string) => {
     const suffix = str.slice(-1)
