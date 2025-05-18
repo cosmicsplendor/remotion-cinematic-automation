@@ -20,6 +20,7 @@ const RES = {
 }
 import timelineData from '../data/timeline.json';
 import CaptionVisualizer from './components/CaptionViz/index';
+import { TransferMarket } from './components/TransferMarket';
 const transitionDuration = 30;
 const holdDuration = 0;
 const _res = RES.r1080p
@@ -100,6 +101,16 @@ export const RemotionRoot = () => {
     <>
       <ParallaxVideo />
       <DetectiveTimelineVideo />
+      <Composition
+        id="TransferMarket"
+        component={TransferMarket as React.FC<any>}
+        durationInFrames={FPS * 10}
+        fps={FPS}
+        width={res.width} 
+        height={res.height}
+        defaultProps={{
+        }}
+      />
       <Composition
         id="CaptionViz"
         component={CaptionVisualizer as React.FC<any>}

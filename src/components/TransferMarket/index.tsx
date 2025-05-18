@@ -5,25 +5,19 @@ import {
   useVideoConfig,
   interpolate,
 } from 'remotion';
-import timestampGenerator from "../../../lib/d3/generators/BarChart/timestamps/odometer"
 import { Chart, initPlot, SafeChart } from "./helpers"
 import { easeLinear, reverse } from "d3"
 import { formatX, reverseFormatX } from "./helpers"
 
-export const Intro = () => {
+export const TransferMarket = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();
   useEffect(() => {
-
-    // import musicSrc from "@assets/music/Teasing The King.mp3"
-    // import musicSrc from "@assets/music/Wager With Angels.mp3"
-    // import musicSrc from "@assets/music/Swans In Flight.mp3"
-
     const w = window.innerWidth, h = window.innerHeight
     const margins = { mt: 140, mr: 580, mb: 75, ml: 350 }
     const dims = Object.freeze({ w, h, ...margins })
-    const timestamp = timestampGenerator(dims, "train-station", "1992")
-      .offsets({ bottom: h * 0.35, right: 0 })
+    // const timestamp = timestampGenerator(dims, "train-station", "1992")
+    //   .offsets({ bottom: h * 0.35, right: 0 })
     const modifier = (chart: Chart) => {
       const safeChart = chart as SafeChart
       safeChart
@@ -39,9 +33,10 @@ export const Intro = () => {
           format: formatX,
           reverseFormat: reverseFormatX
         })
+        return safeChart as Chart
     }
-
-    timestamp(2008)
+    initPlot({ dims, modifier, timestamp: () => null })
+    // timestamp(2008)
   })
   const opacity = interpolate(
     frame,

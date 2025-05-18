@@ -21,7 +21,7 @@ export type SafeChart = {
     ? (...args: Parameters<Required<Chart>[K]>) => SafeChart
     : never
 }
-type ParamInters = {timestamp: AnyFunction, musicSrc: string}
+type ParamInters = {timestamp: AnyFunction}
 type StartVizParam = {barChart: BarChart<Datum>} & ParamInters
 type InitParam = { modifier: (chart: BarChart<Datum>) => BarChart<Datum>, dims: Dims } & ParamInters
 
@@ -52,7 +52,7 @@ export const reverseFormatX = (str: string) => {
     const num = Number(str.slice(1, -1))
     return num * (suffix === "B" ? BILLION: MILLION)
 }
-export const initPlot = ({ modifier, timestamp, dims, musicSrc }: InitParam) => {
+export const initPlot = ({ modifier, timestamp, dims }: InitParam) => {
     const barChart = BarChartGenerator<Datum>(dims)
         .accessors({
             x: d => d.spent,
@@ -63,9 +63,5 @@ export const initPlot = ({ modifier, timestamp, dims, musicSrc }: InitParam) => 
             logoSrc: d => (<StrHash>logosMap)[d.club]
         })
 
-    const onClick = () => {
-        window.removeEventListener("click", onClick)
-        startViz({ barChart: modifier(barChart), timestamp, musicSrc })
-    }
-    window.addEventListener("click", onClick)
+        startViz({ barChart: modifier(barChart), timestamp })
 }
