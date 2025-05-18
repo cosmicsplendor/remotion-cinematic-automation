@@ -1,0 +1,1 @@
+export const tan = "#f6e6d1"

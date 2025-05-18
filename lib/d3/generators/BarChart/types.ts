@@ -1,0 +1,1 @@
+export type Dims = Record<"w" | "h" | "ml" | "mr" | "mt" | "mb", number>
