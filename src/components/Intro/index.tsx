@@ -62,39 +62,19 @@ export const Intro = () => {
   
   return (
     <AbsoluteFill
-      style={{
-        backgroundColor: 'black',
-        color: 'white',
-        opacity,
-      }}
+      className="bg-black text-white"
+      style={{ opacity }}
     >
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          textAlign: 'center',
-          width: '100%',
-        }}
-      >
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center w-full">
         <h1
-          style={{
-            fontFamily: 'Special Elite, cursive',
-            fontSize: 80,
-            marginBottom: 20,
-            opacity: titleOpacity,
-          }}
+          className="font-special-elite text-[80px] mb-5"
+          style={{ opacity: titleOpacity }}
         >
           {displayedTitle}
         </h1>
-        
         <h2
-          style={{
-            fontSize: 32,
-            opacity: subtitleOpacity,
-            fontWeight: 400,
-          }}
+          className="text-2xl font-normal"
+          style={{ opacity: subtitleOpacity }}
         >
           {data.subtitle}
         </h2>

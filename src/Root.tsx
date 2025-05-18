@@ -1,4 +1,5 @@
 // src/Root.jsx
+import './tailwind.css'; 
 import { Composition } from 'remotion';
 import { DetectiveTimeline } from './components/DetectiveTimeline';
 import { Intro } from './components/Intro/index.tsx';

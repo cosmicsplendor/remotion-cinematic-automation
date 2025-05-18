@@ -21,6 +21,7 @@
     "@remotion/bundler": "^4.0.133",
     "@remotion/cli": "^4.0.133",
     "@remotion/renderer": "^4.0.133",
+    "@remotion/tailwind": "^4.0.305",
     "@remotion/zod-types": "^4.0.133",
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
@@ -35,8 +36,11 @@
     "@remotion/eslint-config": "^4.0.133",
     "@types/react": "^18.2.38",
     "@types/web": "^0.0.129",
+    "autoprefixer": "^10.4.21",
     "eslint": "^8.56.0",
+    "postcss": "^8.5.3",
     "prettier": "^3.1.1",
+    "tailwindcss": "^4.1.7",
     "typescript": "^5.3.3"
   },
   "engines": {
