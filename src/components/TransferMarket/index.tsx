@@ -9,8 +9,8 @@ import { Chart, initPlot, SafeChart } from "./helpers"
 import { easeLinear, reverse } from "d3"
 import { formatX, reverseFormatX } from "./helpers"
 
-const SVG_ID = "SVGX"
-const CONT_ID = "CONTAINERX"
+const SVG_ID:string = "SVGX"
+const CONT_ID:string = "CONTAINERX"
 export const TransferMarket = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps, width, height } = useVideoConfig();
@@ -40,8 +40,10 @@ export const TransferMarket = () => {
           format: formatX,
           reverseFormat: reverseFormatX
         })
-        return safeChart as Chart
+        .dom({ svg: `#${SVG_ID}`, container: `#${CONT_ID}`})
+      return safeChart as Chart
     }
+    initPlot({ dims, modifier, timestamp: () => null })
     //  select("body")
     //             .selectAll("img")
     //             .data<Datum>(data, accessors.id as any)
@@ -61,7 +63,6 @@ export const TransferMarket = () => {
     //                     transitionImages(exit, EXIT_DEST).remove()
     //                 }
     //             )
-    initPlot({ dims, modifier, timestamp: () => null })
     // timestamp(2008)
   }, [svgRef, containerRef])
   const opacity = interpolate(

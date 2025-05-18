@@ -39,6 +39,7 @@ type Accessors<Datum> = {
     logoSrc: (d: Datum) => string
 }
 // const pointsToStr = (val: number) => `${val}${val === 0 ? "" : " pts"}`
+type DOM = Record<"container" | "svg", string>
 export type BarChart<Datum> = {
     (data?: Datum[], noTransition?: boolean): Promise<void>
     animation?: (val: Animation) => BarChart<Datum>,
@@ -53,7 +54,8 @@ export type BarChart<Datum> = {
     xAxis?: (val: XAxis) => BarChart<Datum>,
     tween?: (val: boolean) => BarChart<Datum>,
     horizontal?: (val: boolean) => BarChart<Datum>,
-    background?: (val: string) => BarChart<Datum>
+    background?: (val: string) => BarChart<Datum>,
+    dom?: ({ container, svg }: DOM) => BarChart<Datum>
 }
 const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: T, attribs: Hash) => {
     return Object
@@ -68,7 +70,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
     type TransitionResult = Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>
 
     let animation: Animation, barCount: BarCount, bar: Bar, label: Label, points: Points, xAxis: XAxis = { offset: -10, size: 18 }
-    let accessors: Accessors<Datum>, allData: Data, logoXOffset: number, position: Position, tween = true, horizontal = false, background = "whitesmoke"
+    let accessors: Accessors<Datum>, allData: Data, logoXOffset: number, position: Position, tween = true, horizontal = false, background = "whitesmoke", dom: DOM
     
     const transitionTo = (
         sel: Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>,
@@ -80,12 +82,10 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         return applyAttribs(initialSel, attribs)
     }
 
-    select("body").append("svg")
-        .attr("width", dims.w)
-        .attr("height", dims.h)
-
-    const svg = select("svg")
     const barGraph: BarChart<Datum> = async (newData, noTransition = false) => {
+        const svg = select(dom.svg)
+            .attr("width", dims.w)
+            .attr("height", dims.h)
         allData = newData ?? allData
         const BAR_THICKNESS = Math.round((horizontal ? dims.w - dims.ml - dims.mt : dims.h - dims.mt - dims.mb) / barCount.active) - bar.gap
         const EXIT_DEST = horizontal ?
@@ -108,7 +108,9 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const ptsRange = pointsScale.range()
         const ptsRangeDir = Math.sign(ptsRange[1] - ptsRange[0])
 
-        const barLenAccessor = (d: Datum) => bar.minLength + (pointsScale(accessors.x(d)) - ptsRange[0]) * ptsRangeDir
+        const barLenAccessor = (d: Datum) => {
+            bar.minLength + (pointsScale(accessors.x(d)) - ptsRange[0]) * ptsRangeDir
+        }
         const barTopAccessor = (d: Datum) => ptsRange[0] + ptsRangeDir * barLenAccessor(d)
         const barBaseAccessor = () => ptsRange[0]
 
@@ -144,13 +146,35 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             }
             return transitionTo(sel as any, attribs, transitionState, noTransition)
         }
+        // select("body")
+        //     .selectAll("img")
+        //     .data(data, accessors.id)
+        //     .join(
+        //         enter => {
+        //             const sel = enter
+        //                 .append("img")
+        //                 .attr("style", (d: Datum) => {
+        //                     const alongPtsAxis = barTopAccessor(d) + ptsRangeDir * logoXOffset
+        //                     if (horizontal) return `position: absolute; top: ${alongPtsAxis}px; left: ${EXIT_DEST}px;`
+        //                     return `position: absolute; left: ${alongPtsAxis}px; top: ${EXIT_DEST}px;`
+        //                 })
+        //             return transitionImages(sel)
+        //         },
+        //         update => transitionImages(update),
+        //         exit => {
+        //             transitionImages(exit, EXIT_DEST).remove()
+        //         }
+        //     )
+        //     .attr("src", accessors.logoSrc)
+        //     .attr("height", BAR_THICKNESS)
+        //     .attr("width", "auto")
         const transitionPoints = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
             const attribs: Hash = {
                 transform: (d: Datum) => {
                     const alongPtsAxis = pointsScale(accessors.x(d)) + ptsRangeDir * points.xOffset
                     const alongLabelAxis = dest ?? (teamNameScale(accessors.y(d)) || 0) + BAR_THICKNESS * 0.5
                     if (horizontal) return `translate(${alongLabelAxis}, ${alongPtsAxis}), rotate(-${points.rotation})`
-                    return `translage(${alongPtsAxis}, ${alongLabelAxis})`
+                    return `translate(${alongPtsAxis}, ${alongLabelAxis})`
                 }
             }
             return transitionTo(sel as any, attribs, transitionState, noTransition)
@@ -213,7 +237,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                                 return sel
                                     .attr("transform", `translateX(${EXIT_DEST})`)
                             }
-                            sel.attr("transform", `translateY(${EXIT_DEST})`)
+                            sel.attr("transform", `translate(0, ${EXIT_DEST})`)
                         })
                     return transitionPoints(sel)
                 },
@@ -334,6 +358,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
     barGraph.tween = val => (tween = val, barGraph)
     barGraph.horizontal = val => (horizontal = val, barGraph)
     barGraph.background = val => (background = val, barGraph)
+    barGraph.dom = val => (dom=val,barGraph)
     return barGraph
 }
 

@@ -17,12 +17,12 @@ type Frame = {
 }
 export type Chart = BarChart<Datum>
 export type SafeChart = {
-  [K in keyof Required<Chart>]: Exclude<Required<Chart>[K], undefined> extends (...args: any[]) => any
+    [K in keyof Required<Chart>]: Exclude<Required<Chart>[K], undefined> extends (...args: any[]) => any
     ? (...args: Parameters<Required<Chart>[K]>) => SafeChart
     : never
 }
-type ParamInters = {timestamp: AnyFunction}
-type StartVizParam = {barChart: BarChart<Datum>} & ParamInters
+type ParamInters = { timestamp: AnyFunction }
+type StartVizParam = { barChart: BarChart<Datum> } & ParamInters
 type InitParam = { modifier: (chart: BarChart<Datum>) => BarChart<Datum>, dims: Dims } & ParamInters
 
 const BILLION = 1000000000, MILLION = 1000000
@@ -30,16 +30,16 @@ const BILLION = 1000000000, MILLION = 1000000
 const startViz = async (params: StartVizParam) => {
     const { barChart, timestamp } = params
     const originalData = data as Frame[]
-    
+
     const dataToUse = originalData.slice(0)
     barChart(dataToUse[0].frames[0].map(d => ({ ...d, points: 0 })), true)
-    for (const index in dataToUse) {
-        const { frames, season } = dataToUse[index]
-        timestamp(season)
-        for (const data of frames) {
-            await barChart(data)
-        }
-    }
+    // for (const index in dataToUse) {
+    //     const { frames, season } = dataToUse[index]
+    //     timestamp(season)
+    //     for (const data of frames) {
+    //         await barChart(data)
+    //     }
+    // }
 }
 export const formatX = (num: number | string) => {
     if (num === 0) return "0"
@@ -50,7 +50,7 @@ export const formatX = (num: number | string) => {
 export const reverseFormatX = (str: string) => {
     const suffix = str.slice(-1)
     const num = Number(str.slice(1, -1))
-    return num * (suffix === "B" ? BILLION: MILLION)
+    return num * (suffix === "B" ? BILLION : MILLION)
 }
 export const initPlot = ({ modifier, timestamp, dims }: InitParam) => {
     const barChart = BarChartGenerator<Datum>(dims)
@@ -63,5 +63,5 @@ export const initPlot = ({ modifier, timestamp, dims }: InitParam) => {
             logoSrc: d => (<StrHash>logosMap)[d.club]
         })
 
-        startViz({ barChart: modifier(barChart), timestamp })
+    startViz({ barChart: modifier(barChart), timestamp })
 }
