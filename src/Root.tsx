@@ -2,13 +2,13 @@
 import './tailwind.css'; 
 import { Composition } from 'remotion';
 import { DetectiveTimeline } from './components/DetectiveTimeline';
-import { Intro } from './components/Intro/index.tsx';
+import { Intro } from './components/Intro/index';
 import React from 'react';
 import './fonts.css';
-import boardData from '../data/board.ts';
-import { DetectiveBoardPresentation } from './components/DetectiveBoard/index.tsx';
+import boardData from '../data/board';
+import { DetectiveBoardPresentation } from './components/DetectiveBoard/index';
 import parallaxData from '../data/parallax/frog_boys.json'; // Adjust the path as necessary
-import { ParallaxComposition } from './components/ParallaxAnim/index.tsx';
+import { ParallaxComposition } from './components/ParallaxAnim/index';
 import captionData from '../data/captions.json';
 const RES = {
   r1080p: { width: 1920, height: 1080 },
@@ -19,7 +19,7 @@ const RES = {
   shorts_split: { width: 1140, height: 1140 },
 }
 import timelineData from '../data/timeline.json';
-import CaptionVisualizer from './components/CaptionViz/index.tsx';
+import CaptionVisualizer from './components/CaptionViz/index';
 const transitionDuration = 30;
 const holdDuration = 0;
 const _res = RES.r1080p

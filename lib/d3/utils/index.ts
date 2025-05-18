@@ -1,4 +1,4 @@
-import { GoogleTableData, GoogleTableDataPoint } from "./types.ts"
+import { GoogleTableData, GoogleTableDataPoint } from "./types"
 const wait = (ms: number) =>  {
     return new Promise(resolve => setTimeout(resolve, ms))
 }

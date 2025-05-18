@@ -1,0 +1,7969 @@
+[
+  {
+    "season": 1992,
+    "frames": [
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 1656333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1262500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 766667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 691667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 655000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 587500
+        },
+        {
+          "club": "Leeds United",
+          "spent": 577500
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 533333
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 530667
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 492167
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 3312667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 2525000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1533333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1383333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 1310000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1175000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 1155000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 1066667
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 1061333
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 984333
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 4969000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 3787500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 2300000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 2075000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 1965000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1762500
+        },
+        {
+          "club": "Leeds United",
+          "spent": 1732500
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 1600000
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 1592000
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 1476500
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 6625333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 5050000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 3066667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 2766667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 2620000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2350000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 2310000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 2133333
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 2122667
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 1968667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 8281667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 6312500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 3833333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 3458333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 3275000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2937500
+        },
+        {
+          "club": "Leeds United",
+          "spent": 2887500
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 2666667
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 2653333
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 2460833
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 9938000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 7575000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 4600000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 4150000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 3930000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 3525000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 3465000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 3200000
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 3184000
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 2953000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 1993,
+    "frames": [
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 11901333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 8311333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 5483333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 4941667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 4813333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 4638333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 4434000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 4242167
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 3565000
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 3439667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 13864667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 9047667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 6816667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 6358333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 5668000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 5346667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 5026667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 5019333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 4205000
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 3926333
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 15828000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 9784000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 8150000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 7775000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 6902000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 6055000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 5796500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 5240000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 4845000
+        },
+        {
+          "club": "Southampton FC",
+          "spent": 4413000
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 17791333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 10520333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 9483333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 9191667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 8136000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 6763333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 6573667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 5485000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 5453333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 5060667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 19754667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 11256667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 10816667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 10608333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 9370000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 7471667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 7350833
+        },
+        {
+          "club": "Manchester City",
+          "spent": 6325833
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 6125000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 5666667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 21718000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 12150000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 12025000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 11993000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 10604000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 8180000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 8128000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 7591000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 6765000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 6597000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 1994,
+    "frames": [
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 23343000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 14160000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 13995000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 13551333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 11346833
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 9403333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 8782167
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 8410333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 7966000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 7786667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 24968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 16170000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 15965000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 15109667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 12089667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 10626667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 10223667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 9436333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 8884667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 8808333
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 26593000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 18180000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 17935000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 16668000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 12832500
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 12037000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 11850000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 10948000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 10090500
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 9830000
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 28218000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 20190000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 19905000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 18226333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 13850333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 13575333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 13073333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 13011333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 10851667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 10744667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 29843000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 22200000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 21875000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 19784667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 15663667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 15074667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 14318167
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 14296667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 11873333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 11863333
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 31468000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 24210000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 23845000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 21343000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 17477000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 17138000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 15520000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 15061000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 13060000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 12895000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 1995,
+    "frames": [
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 34218000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 27418333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 23940833
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 23571333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 22843667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 19968000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 17364500
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 17186000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 16118333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 13211667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 36968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 30626667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 28210333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 25799667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 24036667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 22798000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 19311000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 19209000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 19176667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 13657667
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 39718000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 33835000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 33577000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 28028000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 25628000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 24132500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 22235000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 21436000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 21053500
+        },
+        {
+          "club": "Manchester City",
+          "spent": 15566000
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 42468000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 38943667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 37043333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 30256333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 28458000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 25293333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 24228333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 23561000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 22898000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 17474333
+        }
+      ],
+      [
+        {
+          "club": "Blackburn Rovers",
+          "spent": 45218000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 44310333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 40251667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 32484667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 31288000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 28351667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 25686000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 24742500
+        },
+        {
+          "club": "Manchester United",
+          "spent": 24324167
+        },
+        {
+          "club": "Manchester City",
+          "spent": 19382667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 49677000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 47968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 43460000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 34713000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 34118000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 31410000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 27811000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 26587000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 24420000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 21291000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 1996,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 52677000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 47968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 44043333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 36088000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 35909667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 32428333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 29217667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 27937000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 26291667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 21291000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 55677000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 47968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 44626667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 37701333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 37463000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 33446667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 30624333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 29287000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 28163333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 22294667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 58677000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 47968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 45210000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 39493000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 38838000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 34465000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 32031000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 30637000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 30035000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 25065500
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 61677000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 47968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 45793333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 41284667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 40213000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 35483333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 33437667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 31987000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 31906667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 27836333
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 64677000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 47968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 46376667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 43076333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 41588000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 36501667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 34844333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 33778333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 33337000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 30607167
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 67677000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 47968000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 46960000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 44868000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 42963000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 37520000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 36251000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 35650000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 34687000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 33378000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 1997,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 73276167
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 50051667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 49551333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 46255500
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 45913000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 41190833
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 37956833
+        },
+        {
+          "club": "Manchester United",
+          "spent": 37908333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 36437000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 36029667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 78875333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 53143333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 51134667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 48863000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 47643000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 44861667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 40166667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 39662667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 38681333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 38187000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 84474500
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 56235000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 52718000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 51813000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 49030500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 48532500
+        },
+        {
+          "club": "Manchester United",
+          "spent": 42425000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 41368500
+        },
+        {
+          "club": "Leeds United",
+          "spent": 41333000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 39937000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 90073667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 59326667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 54763000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 54301333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 52203333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 50418000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 44683333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 43984667
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 43074333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 42226667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 95672833
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 62418333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 57713000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 55884667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 55874167
+        },
+        {
+          "club": "Everton FC",
+          "spent": 51805500
+        },
+        {
+          "club": "Manchester United",
+          "spent": 46941667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 46636333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 45193333
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 44780167
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 101272000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 65510000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 60663000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 59545000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 57468000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 53193000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 49288000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 49200000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 48160000
+        },
+        {
+          "club": "Sheffield Wednesday",
+          "spent": 46486000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 1998,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 108372000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 67758333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 66866333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 62293000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 62203333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 58134667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 56658333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 52257833
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 51376667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 50696333
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 115472000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 76264667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 70006667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 64861667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 64116667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 63923000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 63076333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 59328667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 54593333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 52104667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 122572000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 85663000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 72255000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 71575000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 68018000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 67520000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 66399500
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 65553000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 57810000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 53513000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 129672000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 95061333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 79033333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 74503333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 73470333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 72959667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 70178333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 67183000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 61026667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 54921333
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 136772000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 104459667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 86491667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 80541167
+        },
+        {
+          "club": "Everton FC",
+          "spent": 77901333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 76751667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 72836667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 68813000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 64243333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 56329667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 143872000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 93950000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 87612000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 82843000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 79000000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 75495000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 70443000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 67460000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 57738000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 1999,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 148413667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 95275000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 89212000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 88083333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 84109667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 79728333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 73276333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 71853333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 63688833
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 152955333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 97166667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 96600000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 90812000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 85376333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 83961667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 76246667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 76109667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 69639667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 157497000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 106250000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 97925000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 92412000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 88195000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 86643000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 80640000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 78943000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 75590500
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 162038667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 115333333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 99250000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 94012000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 92428333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 87909667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 85033333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 81776333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 81541333
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 166580333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 124416667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 100575000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 96661667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 95612000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 89426667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 89176333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 87492167
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 84609667
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 171122000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 133500000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 101900000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 100895000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 97212000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 93820000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 93443000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 90443000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 87443000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2000,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 175440333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 139166667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 110278333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 103850000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 102551667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 102302167
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 100732000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 96190333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 91733000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 179758667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 144833333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 119661667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 111283333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 111161333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 105800000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 104252000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 101937667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 96023000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 184077000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 150500000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 129045000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 120020500
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 120015000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 107772000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 107750000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 107685000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 100313000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 188395333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 156166667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 138428333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 128879667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 128746667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 113432333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 111292000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 109700000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 104603000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 192713667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 161833333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 147811667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 137738833
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 137478333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 119179667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 114812000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 111650000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 108893000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 197032000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 167500000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 157195000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 146598000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 146210000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 124927000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 118332000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 113858000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 113600000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 113183000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2001,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 202172000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 172526667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 162642500
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 154493333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 154314667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 127908333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 126677000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 122682000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 119359667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 117858000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 207312000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 177553333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 168090000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 162776667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 162031333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 142216667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 128427000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 127032000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 124861333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 122533000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 212452000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 182580000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 173537500
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 171060000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 169748000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 156525000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 131382000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 130363000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 130177000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 127208000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 217592000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 187606667
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 179343333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 178985000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 177464667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 170833333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 135864667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 135732000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 131927000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 131883000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 222732000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 192633333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 187626667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 185181333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 185141667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 184432500
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 141366333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 140082000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 136558000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 133677000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 227872000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 199450000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 197660000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 195910000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 192898000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 189880000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 146868000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 144432000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 141233000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 135427000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2002,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 233630333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 207539167
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 202910000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 195910000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 193648000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 192018333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 148076333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 145945333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 142983000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 137132000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 239388667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 215628333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 208160000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 195910000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 194398000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 194156667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 149284667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 147458667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 144733000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 138837000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 245147000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 223717500
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 213410000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 196295000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 195910000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 195148000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 150493000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 148972000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 146483000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 140542000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 250905333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 231806667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 218660000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 198433333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 195910000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 195898000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 151701333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 150485333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 148233000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 142247000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 256663667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 239895833
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 223910000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 200571667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 196648000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 195910000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 152909667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 151998667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 149983000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 143952000
+        }
+      ],
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 262422000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 247985000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 229160000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 202710000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 195910000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 154118000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 153512000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 151733000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 145657000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2003,
+    "frames": [
+      [
+        {
+          "club": "Newcastle United",
+          "spent": 262422000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 257405833
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 231768333
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 224243333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 207280833
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 157842167
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 156691333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 154908667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 147309500
+        }
+      ],
+      [
+        {
+          "club": "Manchester United",
+          "spent": 266826667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 262422000
+        },
+        {
+          "club": "Chelsea FC",
+          "spent": 252576667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 234376667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 211851667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 161649667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 161566333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 156305333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 148962000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 280910000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 276247500
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 262422000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 236985000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 216422500
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 166608000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 165290500
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 157702000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 150614500
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 309243333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 285668333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 262422000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 239593333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 220993333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 171566333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 169014667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 159098667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 152267000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 337576667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 295089167
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 262422000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 242201667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 225564167
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 176524667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 172738833
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 160495333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 153919500
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 365910000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 304510000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 262422000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 244810000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 230135000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 181483000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 176463000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 161892000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 155572000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2004,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 392976667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 314718333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 267330333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 254543333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 232215000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 188937167
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 177775500
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 163582000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 157551167
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 420043333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 324926667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 272238667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 264276667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 234295000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 196391333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 179088000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 165272000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 159530333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 447110000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 335135000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 277147000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 274010000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 236375000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 203845500
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 180400500
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 166962000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 161509500
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 474176667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 345343333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 283743333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 282055333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 238455000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 211299667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 181713000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 168652000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 163488667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 501243333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 355551667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 293476667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 286963667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 240535000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 218753833
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 183025500
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 170342000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 165467833
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 528310000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 365760000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 303210000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 291872000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 242615000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 226208000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 184338000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 172032000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 167447000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2005,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 543510000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 371060000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 310553333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 302163667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 250281667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 232293000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 185879667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 174788667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 172867833
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 558710000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 376360000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 317896667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 312455333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 257948333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 238378000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 187421333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 178288667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 177545333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 573910000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 381660000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 325240000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 322747000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 265615000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 244463000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 188963000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 183709500
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 180302000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 589110000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 386960000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 333038667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 332583333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 273281667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 250548000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 190504667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 189130333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 183058667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 604310000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 392260000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 343330333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 339926667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 280948333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 256633000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 194551167
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 192046333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 185815333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 619510000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 397560000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 353622000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 347270000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 288615000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 262718000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 199972000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 193588000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 188572000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2006,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 634340000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 402093333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 358872000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 354586667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 291115000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 272884667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 202888667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 196584667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 192688667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 649170000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 406626667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 364122000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 361903333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 293615000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 283051333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 205805333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 199581333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 196805333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 664000000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 411160000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 369372000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 369220000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 296115000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 293218000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 208722000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 202578000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 200922000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 678830000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 415693333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 376536667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 374622000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 303384667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 298615000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 211638667
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 205574667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 205038667
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 693660000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 420226667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 383853333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 379872000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 313551333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 301115000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 214555333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 209155333
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 208571333
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 708490000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 424760000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 391170000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 385122000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 323718000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 303615000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 217472000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 213272000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 211568000
+        },
+        {
+          "club": "Leeds United",
+          "spent": 197398000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2007,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 718323333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 440393333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 406286667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 391430333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 339409667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 308773333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 223522000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 217422000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 212601333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 200260333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 728156667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 456026667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 421403333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 397738667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 355101333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 313931667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 229572000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 221572000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 213634667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 208118667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 737990000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 471660000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 436520000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 404047000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 370793000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 319090000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 235622000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 225722000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 215977000
+        },
+        {
+          "club": "Blackburn Rovers",
+          "spent": 214668000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 747823333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 487293333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 451636667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 410355333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 386484667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 324248333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 241672000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 229872000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 223835333
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 217557333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 757656667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 502926667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 466753333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 416663667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 402176333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 329406667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 247722000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 234022000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 231693667
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 225990667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 767490000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 518560000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 481870000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 422972000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 417868000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 334565000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 253772000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 239552000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 238172000
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 234424000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2008,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 772573333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 526101667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 493778333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 441859667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 428885333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 341256667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 257868667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 247488667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 242018667
+        },
+        {
+          "club": "Middlesbrough FC",
+          "spent": 236557333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 777656667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 533643333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 505686667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 465851333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 434798667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 347948333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 261965333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 256805333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 244485333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 243651000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 782740000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 541185000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 517595000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 489843000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 440712000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 354640000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 269876000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 266122000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 266062000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 246952000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 787823333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 548726667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 529503333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 513834667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 446625333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 361331667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 296101000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 275438667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 270158667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 249418667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 792906667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 556268333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 541411667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 537826333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 452538667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 368023333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 322326000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 284755333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 274255333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 251885333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 797990000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 563810000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 561818000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 553320000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 458452000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 374715000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 348551000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 294072000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 278352000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 254352000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2009,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 802990000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 568534667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 568360000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 560570000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 458452000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 376715000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 373101000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 301888667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 282235333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 257860333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 807990000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 575251333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 572910000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 567820000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 458452000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 397651000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 378715000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 309705333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 286118667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 261368667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 812990000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 581968000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 577460000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 575070000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 458452000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 422201000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 380715000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 317522000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 290002000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 264877000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 817990000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 588684667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 582320000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 582010000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 458452000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 446751000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 382715000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 325338667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 293885333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 268385333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 822990000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 595401333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 589570000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 586560000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 471301000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 458452000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 384715000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 333155333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 297768667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 271893667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 827990000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 602118000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 596820000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 591110000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 495851000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 458452000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 386715000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 340972000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 301652000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 275402000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2010,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 848240000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 613108333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 606434667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 595993333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 526452667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 460365333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 390548333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 347205333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 301935333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 278147833
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 868490000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 629396667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 610751333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 600876667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 557054333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 462278667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 394381667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 353438667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 302218667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 280893667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 888740000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 645685000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 615068000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 605760000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 587656000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 464192000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 398215000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 359672000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 302502000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 283639500
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 908990000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 661973333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 619384667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 618257667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 610643333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 466105333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 402048333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 365905333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 302785333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 286385333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 929240000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 678261667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 648859333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 623701333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 615526667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 468018667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 405881667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 372138667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 303068667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 289131167
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 949490000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 694550000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 679461000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 628018000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 620410000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 469932000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 409715000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 378372000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 303352000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 291877000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2011,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 965565000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 705437500
+        },
+        {
+          "club": "Manchester City",
+          "spent": 694552667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 630793333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 629143000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 474432000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 420628333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 381594500
+        },
+        {
+          "club": "Everton FC",
+          "spent": 304552000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 291877000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 981640000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 716325000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 709644333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 641176667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 630268000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 478932000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 431541667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 384817000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 305752000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 291877000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 997715000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 727212500
+        },
+        {
+          "club": "Manchester City",
+          "spent": 724736000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 651560000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 631393000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 483432000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 442455000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 388039500
+        },
+        {
+          "club": "Everton FC",
+          "spent": 306952000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 291877000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1013790000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 739827667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 738100000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 661943333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 632518000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 487932000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 453368333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 391262000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 308152000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 293341667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1029865000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 754919333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 748987500
+        },
+        {
+          "club": "Manchester United",
+          "spent": 672326667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 633643000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 492432000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 464281667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 394484500
+        },
+        {
+          "club": "Everton FC",
+          "spent": 309352000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 297828333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1045940000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 770011000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 759875000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 682710000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 634768000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 496932000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 475195000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 397707000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 310552000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 302315000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2012,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1064223333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 780336000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 770808333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 695451667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 646976333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 502259500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 484528333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 402345333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 314160333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 308698333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1082506667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 790661000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 781741667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 708193333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 659184667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 507587000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 493861667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 406983667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 317768667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 315081667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1100790000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 800986000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 792675000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 720935000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 671393000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 512914500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 503195000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 411622000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 321465000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 321377000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1119073333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 811311000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 803608333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 733676667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 683601333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 518242000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 512528333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 416260333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 327848333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 324985333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1137356667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 821636000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 814541667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 746418333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 695809667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 523569500
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 521861667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 420898667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 334231667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 328593667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1155640000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 831961000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 825475000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 759160000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 708018000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 531195000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 528897000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 425537000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 340615000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 332202000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2013,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1177365000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 851211000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 834791667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 772015000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 728443000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 539111667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 528897000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 428843667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 345941667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 336918667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1199090000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 870461000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 844108333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 784870000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 748868000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 547028333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 528897000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 432150333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 351268333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 341635333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1220815000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 889711000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 853425000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 797725000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 769293000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 554945000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 528897000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 435457000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 356595000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 346352000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1242540000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 908961000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 862741667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 810580000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 789718000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 562861667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 528897000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 438763667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 361921667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 351068667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1264265000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 928211000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 872058333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 823435000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 810143000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 570778333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 528897000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 442070333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 367248333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 355785333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1285990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 947461000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 881375000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 836290000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 830568000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 578695000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 528897000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 445377000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 372575000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 360502000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2014,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1308940000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 964594333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 906280000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 867581667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 838648000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 598525000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 536067000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 447618667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 376078333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 367195333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1331890000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 981727667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 931185000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 898873333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 846728000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 618355000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 543237000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 449860333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 379581667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 373888667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1354840000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 998861000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 956090000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 930165000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 854808000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 638185000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 550407000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 452102000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 383085000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 380582000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1377790000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1015994333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 980995000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 961456667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 862888000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 658015000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 557577000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 454343667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 387275333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 386588333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1400740000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1033127667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1005900000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 992748333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 870968000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 677845000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 564747000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 456585333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 393968667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 390091667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1423690000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1050261000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1030805000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1024040000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 879048000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 697675000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 571917000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 458827000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 400662000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 393595000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2015,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1438606667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1085006000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1051888333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1050040000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 890881333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 702091667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 589735333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 469860333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 408812000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 404370000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1453523333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1119751000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1076040000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1072971667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 902714667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 706508333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 607553667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 480893667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 416962000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 415145000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1468440000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1154496000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1102040000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1094055000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 914548000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 710925000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 625372000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 491927000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 425920000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 425112000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1483356667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1189241000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1128040000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1115138333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 926381333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 715341667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 643190333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 502960333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 436695000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 433262000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1498273333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1223986000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1154040000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1136221667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 938214667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 719758333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 661008667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 513993667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 447470000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 441412000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1513190000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1258731000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1180040000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1157305000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 950048000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 724175000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 678827000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 458245000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 449562000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2016,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1535323333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1294772667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1210873333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1170621667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 963781333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 743008333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 678827000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 465228333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 463895333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1557456667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1330814333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1241706667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1183938333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 977514667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 761841667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 678827000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 478228667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 472211667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1579590000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1366856000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1272540000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1197255000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 991248000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 780675000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 678827000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 492562000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 479195000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1601723333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1402897667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1303373333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1210571667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1004981333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 799508333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 678827000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 506895333
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 486178333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1623856667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1438939333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1334206667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1223888333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1018714667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 818341667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 678827000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 521228667
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 493161667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1645990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1474981000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1365040000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1237205000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1032448000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 837175000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 678827000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 535562000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "Sunderland AFC",
+          "spent": 500145000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2017,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1689406667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1527897667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1398106667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1266146667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1053031333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 862650000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 685377000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 569428667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 504055333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1732823333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1580814333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1431173333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1295088333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1073614667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 888125000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 691927000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 603295333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 512938667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1776240000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1633731000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1464240000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1324030000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1094198000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 913600000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 698477000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 637162000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 521822000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1819656667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1686647667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1497306667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1352971667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1114781333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 939075000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 705027000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 671028667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 530705333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1863073333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1739564333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1530373333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1381913333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1135364667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 964550000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 711577000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 704895333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 539588667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1906490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1792481000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1563440000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1410855000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1155948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 990025000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 738762000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 718127000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 548472000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2018,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1939990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1805579333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1577223333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1441221667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1155948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1002966667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 753703667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 727527000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 565288667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 1973490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1818677667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1591006667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1471588333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1155948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1015908333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 768645333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 736927000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 582105333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2006990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1831776000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1604790000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1501955000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1155948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1028850000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 783587000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 746327000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 598922000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2040490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1844874333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1618573333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1532321667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1155948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1041791667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 798528667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 755727000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 615738667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2073990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1857972667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1632356667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1562688333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1155948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1054733333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 813470333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 765127000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 632555333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2107490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1871071000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1646140000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1593055000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1155948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1067675000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 828412000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 774527000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 649372000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 525027000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2019,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2114990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1897657667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1683273333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1594788333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1177281333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1093141667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 848162000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 785760333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 668588667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 551543667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2122490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1924244333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1720406667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1596521667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1198614667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1118608333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 867912000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 796993667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 687805333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 578060333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2129990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1950831000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1757540000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1598255000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1219948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1144075000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 887662000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 808227000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 707022000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 604577000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2137490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 1977417667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1794673333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1599988333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1241281333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1169541667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 907412000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 819460333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 726238667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 631093667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2144990000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2004004333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1831806667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1601721667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1262614667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1195008333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 927162000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 830693667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 745455333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 657610333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2152490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2030591000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1868940000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1603455000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1283948000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1220475000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 946912000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 841927000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 764672000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 684127000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2020,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2193690000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2059491000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1882906667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1617046667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1301864667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1234475000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 959140333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 848427000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 772488667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 701018667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2234890000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2088391000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1896873333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1630638333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1319781333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1248475000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 971368667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 854927000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 780305333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 717910333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2276090000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2117291000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1910840000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1644230000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1337698000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1262475000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 983597000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 861427000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 788122000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 734802000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2317290000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2146191000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1924806667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1657821667
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1355614667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1276475000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 995825333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 867927000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 795938667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 751693667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2358490000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2175091000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1938773333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1671413333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1373531333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1290475000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1008053667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 874427000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 803755333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 768585333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2399690000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2203991000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1952740000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1685005000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1391448000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1304475000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1020282000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 880927000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 811572000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 785477000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2021,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2418523333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2227141000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 1976406667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1699505000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1405764667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1332375000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1026865333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 902677000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 822788667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 807110333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2437356667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2250291000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2000073333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1714005000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1420081333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1360275000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1033448667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 924427000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 834005333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 828743667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2456190000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2273441000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2023740000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1728505000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1434398000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1388175000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1040032000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 946177000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 850377000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 845222000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2475023333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2296591000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2047406667
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1743005000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1448714667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1416075000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1046615333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 967927000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 872010333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 856438667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2493856667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2319741000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2071073333
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1757505000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1463031333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1443975000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1053198667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 989677000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 893643667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 867655333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2512690000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2342891000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2094740000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1772005000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1477348000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1471875000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1059782000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 1011427000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 915277000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 878872000
+        }
+      ]
+    ]
+  },
+  {
+    "season": 2022,
+    "frames": [
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2612271667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2367974333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2134410000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1794138333
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1505664667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1503935000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1072815333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 1042318667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 931883667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 911205333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2711853333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2393057667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2174080000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1816271667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1535995000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1533981333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1085848667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 1073210333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 948490333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 943538667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2811435000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2418141000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2213750000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1838405000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1568055000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1562298000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 1104102000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1098882000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 975872000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 965097000
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 2911016667
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2443224333
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2253420000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1860538333
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1600115000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1590614667
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 1134993667
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1111915333
+        },
+        {
+          "club": "West Ham United",
+          "spent": 1008205333
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 981703667
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 3010598333
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2468307667
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2293090000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1882671667
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1632175000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1618931333
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 1165885333
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1124948667
+        },
+        {
+          "club": "West Ham United",
+          "spent": 1040538667
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 998310333
+        }
+      ],
+      [
+        {
+          "club": "Chelsea FC",
+          "spent": 3110180000
+        },
+        {
+          "club": "Manchester City",
+          "spent": 2493391000
+        },
+        {
+          "club": "Manchester United",
+          "spent": 2332760000
+        },
+        {
+          "club": "Liverpool FC",
+          "spent": 1904805000
+        },
+        {
+          "club": "Arsenal FC",
+          "spent": 1664235000
+        },
+        {
+          "club": "Tottenham Hotspur",
+          "spent": 1647248000
+        },
+        {
+          "club": "Newcastle United",
+          "spent": 1196777000
+        },
+        {
+          "club": "Everton FC",
+          "spent": 1137982000
+        },
+        {
+          "club": "West Ham United",
+          "spent": 1072872000
+        },
+        {
+          "club": "Aston Villa",
+          "spent": 1014917000
+        }
+      ]
+    ]
+  }
+]

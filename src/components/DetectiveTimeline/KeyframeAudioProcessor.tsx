@@ -1,6 +1,6 @@
 // KeyframeAudioProcessor.tsx (or inline in TimelineEvent.tsx if preferred)
 import React, { useEffect, useState } from 'react';
-import { useAudioData, visualizeAudio, AudioData } from '@remotion/media-utils';
+import { useAudioData, visualizeAudio } from '@remotion/media-utils';
 import { interpolate } from 'remotion'; // If interpolate is used for glow
 
 type KeyframeAudioProcessorProps = {

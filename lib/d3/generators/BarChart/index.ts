@@ -46,7 +46,7 @@ export type BarChart<Datum> = {
     bar?: (val: Bar) => BarChart<Datum>,
     label?: (val: Label) => BarChart<Datum>,
     points?: (val: Points) => BarChart<Datum>,
-    accessors?: (val: Accessors<Datum>) => BarChart<Datum>,
+    accessors: (val: Accessors<Datum>) => BarChart<Datum>,
     data?: (val: Datum[]) => BarChart<Datum>,
     logoXOffset?: (val: number) => BarChart<Datum>,
     position?: (val: Position) => BarChart<Datum>,
@@ -358,4 +358,4 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
     return barGraph
 }
 
-export default BarChartGenerator
+export {BarChartGenerator}

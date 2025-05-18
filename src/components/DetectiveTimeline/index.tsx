@@ -41,8 +41,8 @@ type CalculatedTimelineEvent = TimelineEventDataWithKeyframes & {
 
 export const DetectiveTimeline: React.FC<{}> = () => {
   const frame = useCurrentFrame();
-  const { durationInFrames, fps, width, height } = useVideoConfig();
-  const [audioErrors, setAudioErrors] = useState<Record<string, boolean>>({});
+  const { durationInFrames, fps,  height } = useVideoConfig();
+  const [_, setAudioErrors] = useState<Record<string, boolean>>({});
 
   const events: TimelineEventDataWithKeyframes[] = rawEvents || [];
   if (events.length === 0) {
@@ -116,7 +116,6 @@ export const DetectiveTimeline: React.FC<{}> = () => {
   for (let i = calculatedEvents.length - 1; i >= 0; i--) {
     const event = calculatedEvents[i];
     // An event is active from its start until the next one starts OR until timeline ends
-    const eventEndsAt = event.calculatedStartFrame + event.audioDurationInFrames + SCROLL_DURATION + (i < calculatedEvents.length - 1 ? (fps * GAP_FACTOR) : endMarginFrames);
     
     // A card is "active" (highlighted) from its calculatedStartFrame until the next card's calculatedStartFrame
     // Or, if it's the last card, until the effectiveEndFrame of the timeline.

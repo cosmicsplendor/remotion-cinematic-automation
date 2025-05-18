@@ -18,7 +18,7 @@ const render = async () => {
   const bundleLocation = await bundle({
     entryPoint: path.resolve('./src/index.js'),
     // If you have a Webpack override, add it here
-    webpackOverride: (config) => config,
+    webpackOverride: (config: any) => config,
   });
 
   const resolutionSuffix = `${width}x${height}`;
