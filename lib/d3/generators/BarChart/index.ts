@@ -65,15 +65,22 @@ const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: 
 }
 function BarChartGenerator<Datum extends object>(dims: Dims) {
     type Data = Datum[]
-    type Sel<T extends BaseType, D = Datum, PElement extends BaseType = BaseType, PDatum = unknown> = Selection<T, D, PElement, PDatum>
+    type KeyFn = (d: Datum) => string | number
+    type TransitionResult = Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>
+
     let animation: Animation, barCount: BarCount, bar: Bar, label: Label, points: Points, xAxis: XAxis = { offset: -10, size: 18 }
     let accessors: Accessors<Datum>, allData: Data, logoXOffset: number, position: Position, tween = true, horizontal = false, background = "whitesmoke"
+    
     const transitionTo = (
-        sel: Sel<BaseType>, attribs: Hash, transitionState: Transition<BaseType, unknown, null, undefined>, noTransition = false
-    ) => {
+        sel: Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>,
+        attribs: Hash,
+        transitionState: Transition<BaseType, unknown, null, undefined>,
+        noTransition = false
+    ): TransitionResult => {
         const initialSel = noTransition ? sel : sel.transition(transitionState)
-        return applyAttribs(initialSel, attribs) as typeof initialSel
+        return applyAttribs(initialSel, attribs)
     }
+
     select("body").append("svg")
         .attr("width", dims.w)
         .attr("height", dims.h)
@@ -108,7 +115,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const barBaseAccessor = () => ptsRange[0]
 
         const transitionBars = <T extends BaseType>(
-            sel: Sel<T>,
+            sel: Selection<T, Datum, BaseType, Datum>,
             to: number | Function = (d: Datum) => teamNameScale(accessors.y(d)),
             opacity = 1
         ) => {
@@ -124,9 +131,9 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                 width: barLenAccessor,
                 y: to, opacity
             }
-            return transitionTo(sel, attribs, transitionState, noTransition)
+            return transitionTo(sel as any, attribs, transitionState, noTransition)
         }
-        const transitionImages = <T extends BaseType>(sel: Sel<T>, dest?: number) => {
+        const transitionImages = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
             const attribs: Hash = {
                 style: (d: Datum) => {
                     const alongPtsAxis: number = barTopAccessor(d) + ptsRangeDir * logoXOffset
@@ -137,34 +144,34 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                     return `position: absolute; left: ${alongPtsAxis}px; top: ${alongLabelAxis}px;`
                 }
             }
-            return transitionTo(sel, attribs, transitionState, noTransition)
+            return transitionTo(sel as any, attribs, transitionState, noTransition)
         }
-        const transitionPoints = <T extends BaseType>(sel: Sel<T>, dest?: number) => {
+        const transitionPoints = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
             const attribs: Hash = {
                 transform: (d: Datum) => {
                     const alongPtsAxis = pointsScale(accessors.x(d)) + ptsRangeDir * points.xOffset
-                    const alongLabelAxis = dest ?? teamNameScale(accessors.y(d)) + BAR_THICKNESS * 0.5
+                    const alongLabelAxis = dest ?? (teamNameScale(accessors.y(d)) || 0) + BAR_THICKNESS * 0.5
                     if (horizontal) return `translate(${alongLabelAxis}, ${alongPtsAxis}), rotate(-${points.rotation})`
                     return `translage(${alongPtsAxis}, ${alongLabelAxis})`
                 }
             }
-            return transitionTo(sel, attribs, transitionState, noTransition)
+            return transitionTo(sel as any, attribs, transitionState, noTransition)
         }
-        const transitionLabels = <T extends BaseType>(sel: Sel<T>, dest?: number) => {
+        const transitionLabels = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
             const attribs: Hash = {
                 transform: (d: Datum) => {
                     const alongLabelAxis = dest ?? teamNameScale(accessors.y(d))
                     if (horizontal) {
-                        return `translate(${alongLabelAxis + BAR_THICKNESS / 2}, ${barBaseAccessor() + label.topOffset}), rotate(${label.rotation})`
+                        return `translate(${(alongLabelAxis || 0) + BAR_THICKNESS / 2}, ${barBaseAccessor() + (label.topOffset || 0)}), rotate(${label.rotation})`
                     }
-                    return `translate(${dims.ml - label.rightOffset}, ${alongLabelAxis + BAR_THICKNESS / 2})`
+                    return `translate(${dims.ml - (label.rightOffset || 0)}, ${(alongLabelAxis || 0) + BAR_THICKNESS / 2})`
                 }
             }
-            return transitionTo(sel, attribs, transitionState, noTransition)
+            return transitionTo(sel as any, attribs, transitionState, noTransition)
         }
         body.style("background", background)
         svg.selectAll("rect")
-            .data(data, accessors.id)
+            .data<Datum>(data, accessors.id as any)
             .join(
                 enter => {
                     const sel = enter
@@ -194,7 +201,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
 
         select("body")
             .selectAll("img")
-            .data(data, accessors.id)
+            .data<Datum>(data, accessors.id as any)
             .join(
                 enter => {
                     const sel = enter
@@ -216,8 +223,8 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("width", "auto")
 
         const totalPointsSel = svg
-            .selectAll(".total-points")
-            .data(data)
+            .selectAll<BaseType, Datum>(".total-points")
+            .data<Datum>(data)
             .join(
                 enter => {
                     const sel = enter
@@ -246,8 +253,8 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("alignment-baseline", "central")
 
         svg
-            .selectAll(".label-axis")
-            .data(data, accessors.id)
+            .selectAll<BaseType, Datum>(".label-axis")
+            .data<Datum>(data, accessors.id)
             .join(
                 enter => {
                     const sel = enter
@@ -277,9 +284,9 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("text-anchor", label.textAnchor ?? "")
 
         svg
-            .selectAll(".position")
-            .data(data)
-            .join("text")
+            .selectAll<BaseType, Datum>(".position")
+            .data<Datum>(data)
+            .join<SVGTextElement>("text")
             .attr("class", "position")
             .attr("x", dims.ml + position.xOffset)
             .attr("y", d => (teamNameScale(accessors.y(d)) ?? 0) + BAR_THICKNESS / 2)
@@ -312,7 +319,10 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                         .tickSizeInner(0)
                         .tickSizeOuter(0)
                         .ticks(2)
-                        .tickFormat(xAxis.format === undefined ? null : val => Number(val) <= maxPoints ? xAxis.format(val as number) : "")(g as any)
+                        .tickFormat(xAxis.format === undefined ? (val: any) => val : val => {
+                            if (!maxPoints || !xAxis.format) return ""
+                            return Number(val) <= maxPoints ? xAxis.format(val as number) : ""
+                        })(g as any)
                     ptsAxis.select('.domain')
                         .attr('stroke-width', 0)
                 })
