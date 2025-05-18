@@ -65,7 +65,6 @@ const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: 
 }
 function BarChartGenerator<Datum extends object>(dims: Dims) {
     type Data = Datum[]
-    type KeyFn = (d: Datum) => string | number
     type TransitionResult = Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>
 
     let animation: Animation, barCount: BarCount, bar: Bar, label: Label, points: Points, xAxis: XAxis = { offset: -10, size: 18 }
@@ -86,7 +85,6 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         .attr("height", dims.h)
 
     const svg = select("svg")
-    const body = select("body")
     const barGraph: BarChart<Datum> = async (newData, noTransition = false) => {
         allData = newData ?? allData
         const BAR_THICKNESS = Math.round((horizontal ? dims.w - dims.ml - dims.mt : dims.h - dims.mt - dims.mb) / barCount.active) - bar.gap
@@ -169,7 +167,6 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             }
             return transitionTo(sel as any, attribs, transitionState, noTransition)
         }
-        body.style("background", background)
         svg.selectAll("rect")
             .data<Datum>(data, accessors.id as any)
             .join(
@@ -199,25 +196,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                     .attr("x", barBaseAccessor())
             })
 
-        select("body")
-            .selectAll("img")
-            .data<Datum>(data, accessors.id as any)
-            .join(
-                enter => {
-                    const sel = enter
-                        .append("img")
-                        .attr("style", (d: Datum) => {
-                            const alongPtsAxis = barTopAccessor(d) + ptsRangeDir * logoXOffset
-                            if (horizontal) return `position: absolute; top: ${alongPtsAxis}px; left: ${EXIT_DEST}px;`
-                            return `position: absolute; left: ${alongPtsAxis}px; top: ${EXIT_DEST}px;`
-                        })
-                    return transitionImages(sel)
-                },
-                update => transitionImages(update),
-                exit => {
-                    transitionImages(exit, EXIT_DEST).remove()
-                }
-            )
+       
             .attr("src", accessors.logoSrc)
             .attr("height", BAR_THICKNESS)
             .attr("width", "auto")

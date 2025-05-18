@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   AbsoluteFill,
   useCurrentFrame,
@@ -9,11 +9,18 @@ import { Chart, initPlot, SafeChart } from "./helpers"
 import { easeLinear, reverse } from "d3"
 import { formatX, reverseFormatX } from "./helpers"
 
+const SVG_ID = "SVGX"
+const CONT_ID = "CONTAINERX"
 export const TransferMarket = () => {
   const frame = useCurrentFrame();
-  const { durationInFrames, fps } = useVideoConfig();
+  const { durationInFrames, fps, width, height } = useVideoConfig();
+  const svgRef = useRef(null)
+  const containerRef = useRef(null)
   useEffect(() => {
-    const w = window.innerWidth, h = window.innerHeight
+    if (containerRef.current === null || svgRef.current === null) {
+      return
+    }
+    const w = width * 0.7, h = height
     const margins = { mt: 140, mr: 580, mb: 75, ml: 350 }
     const dims = Object.freeze({ w, h, ...margins })
     // const timestamp = timestampGenerator(dims, "train-station", "1992")
@@ -35,9 +42,28 @@ export const TransferMarket = () => {
         })
         return safeChart as Chart
     }
+    //  select("body")
+    //             .selectAll("img")
+    //             .data<Datum>(data, accessors.id as any)
+    //             .join(
+    //                 enter => {
+    //                     const sel = enter
+    //                         .append("img")
+    //                         .attr("style", (d: Datum) => {
+    //                             const alongPtsAxis = barTopAccessor(d) + ptsRangeDir * logoXOffset
+    //                             if (horizontal) return `position: absolute; top: ${alongPtsAxis}px; left: ${EXIT_DEST}px;`
+    //                             return `position: absolute; left: ${alongPtsAxis}px; top: ${EXIT_DEST}px;`
+    //                         })
+    //                     return transitionImages(sel)
+    //                 },
+    //                 update => transitionImages(update),
+    //                 exit => {
+    //                     transitionImages(exit, EXIT_DEST).remove()
+    //                 }
+    //             )
     initPlot({ dims, modifier, timestamp: () => null })
     // timestamp(2008)
-  })
+  }, [svgRef, containerRef])
   const opacity = interpolate(
     frame,
     [0, 30, durationInFrames - 30, durationInFrames],
@@ -57,8 +83,12 @@ export const TransferMarket = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}
+      id={CONT_ID}
+      ref={containerRef}
     >
+      <svg id={SVG_ID} ref={svgRef}>
 
+      </svg>
     </AbsoluteFill>
   )
 };
