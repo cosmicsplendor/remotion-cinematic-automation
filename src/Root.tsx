@@ -18,9 +18,10 @@ const RES = {
   shorts_alt: { width: 720, height: 1280 },
   shorts_split: { width: 1140, height: 1140 },
 }
+
 import timelineData from '../data/timeline.json';
 import CaptionVisualizer from './components/CaptionViz/index';
-import { TransferMarket } from './components/TransferMarket';
+import { TRANSFER_LIFESPAN, TransferMarket } from './components/TransferMarket';
 const transitionDuration = 30;
 const holdDuration = 0;
 const _res = RES.r1080p
@@ -104,7 +105,7 @@ export const RemotionRoot = () => {
       <Composition
         id="TransferMarket"
         component={TransferMarket as React.FC<any>}
-        durationInFrames={FPS * 10}
+        durationInFrames={FPS * TRANSFER_LIFESPAN}
         fps={FPS}
         width={res.width} 
         height={res.height}

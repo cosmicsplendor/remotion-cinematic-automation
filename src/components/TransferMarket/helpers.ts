@@ -16,14 +16,24 @@ export type SafeChart = {
     ? (...args: Parameters<Required<Chart>[K]>) => SafeChart
     : never
 }
-const BILLION = 1000000000, MILLION = 1000000
+const BILLION = 1_000_000_000
+const MILLION = 1_000_000
 
 export const formatX = (num: number | string) => {
     if (num === 0) return "0"
-    const divisor = Number(num) >= BILLION ? BILLION : MILLION
+    const n = Number(num)
+
+    const divisor = n >= BILLION ? BILLION : MILLION
     const suffix = divisor === BILLION ? "B" : "M"
-    return num === 0 ? "0" : `€${(Number(num) / divisor).toFixed(2)}${suffix}`
+
+    let decimals
+    if (n >= BILLION) decimals = 3
+    else if (n >= 100_000_000) decimals = 1
+    else decimals = 2
+
+    return `€${(n / divisor).toFixed(decimals)}${suffix}`
 }
+
 export const reverseFormatX = (str: string) => {
     const suffix = str.slice(-1)
     const num = Number(str.slice(1, -1))

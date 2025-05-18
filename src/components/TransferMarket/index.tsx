@@ -16,8 +16,8 @@ import data from "./assets/data.json"
 
 const SVG_ID = "SVGX"
 const CONT_ID = "CONTAINERX"
-const DURATION = 500; // Equivalent to 1 second at 60fps
-
+const DURATION = 1500; // Equivalent to 1 second at 60fps
+export const TRANSFER_LIFESPAN = data.length * DURATION / 150
 export const TransferMarket = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps, width, height } = useVideoConfig();
@@ -54,8 +54,8 @@ export const TransferMarket = () => {
       return;
     }
     
-    const w = width * 0.8, h = height;
-    const margins = { mt: 140, mr: 580, mb: 75, ml: 350 };
+    const w = width * 0.7, h = height;
+    const margins = { mt: 140, mr: 250, mb: 75, ml: 250 };
     const dims = Object.freeze({ w, h, ...margins });
     
     const modifier = (chart: Chart) => {
@@ -65,7 +65,7 @@ export const TransferMarket = () => {
         .bar({ gap: 22, minLength: 10 })
         .barCount({ dir: 1, active: 10, max: 20 })
         .label({ fill: "#707070", rightOffset: 200, size: 24 })
-        .position({ fill: "#666", size: 18, xOffset: -250 })
+        .position({ fill: "#666", size: 32, xOffset: -250 })
         .points({ size: 20, xOffset: 150, fill: "#555" })
         .logoXOffset(50)
         .xAxis({
@@ -92,7 +92,7 @@ export const TransferMarket = () => {
     
     // Initialize with first frame data
     if (flattenedData.length > 0) {
-      barChart(flattenedData[0].data.map(d => ({ ...d, points: 0 })));
+      barChart(flattenedData[0].data.map(d => ({ ...d, points: 0 })), true);
     }
     
     // Store the chart reference for updates
