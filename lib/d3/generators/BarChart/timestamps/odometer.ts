@@ -8,9 +8,9 @@ type Offsets = Record<"bottom" | "right", number>
 
 type Timestamp = {
     (value: string | number): void
-    offsets?: (offsets: Offsets) => Timestamp,
-    fontSize?: (fontSize: string) => Timestamp,
-    bounds?: () => Bounds
+    offsets: (offsets: Offsets) => Timestamp,
+    fontSize: (fontSize: string) => Timestamp,
+    bounds: () => Bounds
 }
 declare global {
     interface Window { odometerOptions: object }
