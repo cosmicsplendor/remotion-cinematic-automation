@@ -9,7 +9,7 @@ type Offsets = Record<"bottom" | "right", number>
 type Timestamp = {
     (value: string | number): void
     offsets: (offsets: Offsets) => Timestamp,
-    fontSize: (fontSize: string) => Timestamp,
+    fontSize?: (fontSize: string) => Timestamp,
     bounds: () => Bounds
 }
 declare global {
@@ -38,10 +38,12 @@ const TimestampGenerator = (dims: Dims, theme = "train-station", val="1992", fon
     let offsets: Offsets
     const timestamp: Timestamp = (value = "0") => {
         tsContainer.attr("style", `left: ${dims.w - dims.mr - offsets.right}px; top: ${dims.h - dims.mb - offsets.bottom}px; position: absolute;`)
-        document.querySelector(".odometer").textContent = (`${String(value).padStart(2, "0")}`)
+        const dom = document.querySelector(".odometer")
+        if (!dom) return
+        dom.textContent = (`${String(value).padStart(2, "0")}`)
     }
     timestamp.offsets = val => (offsets = val, timestamp)
-    timestamp.bounds = () => tsContainer.node().getBoundingClientRect()
+    timestamp.bounds = () => tsContainer.node()?.getBoundingClientRect()
     return timestamp
 }
 

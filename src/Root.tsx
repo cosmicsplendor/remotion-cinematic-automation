@@ -10,6 +10,7 @@ import { DetectiveBoardPresentation } from './components/DetectiveBoard/index';
 import parallaxData from '../data/parallax/frog_boys.json'; // Adjust the path as necessary
 import { ParallaxComposition } from './components/ParallaxAnim/index';
 import captionData from '../data/captions.json';
+
 const RES = {
   r1080p: { width: 1920, height: 1080 },
   r4k: { width: 3840, height: 2160 },

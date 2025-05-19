@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime.js - Level 4 (Clock)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #333; overflow: hidden; }
+        svg {
+            width: 400px;
+            height: 400px;
+            /* border: 1px solid #555; */
+        }
+        .clock-face {
+            fill: none;
+            stroke: #4A4A4A;
+            stroke-width: 10;
+        }
+        .major-arc {
+            fill: none;
+            stroke-width: 12;
+            stroke-linecap: round;
+        }
+        .hand {
+            stroke: #FFD700; /* Gold */
+            stroke-width: 4;
+            stroke-linecap: round;
+        }
+        .tick {
+            fill: #61DAFB; /* Light Blue */
+        }
+    </style>
+</head>
+<body>
+    <svg id="clockSvg" viewBox="0 0 200 200">
+        <!-- Elements will be added here by JavaScript -->
+    </svg>
+
+    <script>
+        const svgNS = "http://www.w3.org/2000/svg";
+        const clockSvg = document.getElementById('clockSvg');
+        const centerX = 100;
+        const centerY = 100;
+        const mainRadius = 80;
+        const numTicks = 60; // Like seconds/minutes
+
+        // 1. Create static clock face
+        const clockFace = document.createElementNS(svgNS, 'circle');
+        clockFace.setAttribute('cx', centerX);
+        clockFace.setAttribute('cy', centerY);
+        clockFace.setAttribute('r', mainRadius);
+        clockFace.setAttribute('class', 'clock-face');
+        clockSvg.appendChild(clockFace);
+
+        // 2. Create arcs (like in the video example)
+        // Arc function: (cx, cy, r, startAngle, endAngle) => path d attribute
+        function describeArc(x, y, radius, startAngle, endAngle) {
+            const start = polarToCartesian(x, y, radius, endAngle);
+            const end = polarToCartesian(x, y, radius, startAngle);
+            const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+            const d = [
+                "M", start.x, start.y,
+                "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+            ].join(" ");
+            return d;
+        }
+
+        function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+            const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+            return {
+                x: centerX + (radius * Math.cos(angleInRadians)),
+                y: centerY + (radius * Math.sin(angleInRadians))
+            };
+        }
+
+        const arcColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FED766'];
+        const arcContainer = document.createElementNS(svgNS, 'g');
+        clockSvg.appendChild(arcContainer);
+
+        for (let i = 0; i < 4; i++) {
+            const arcPath = document.createElementNS(svgNS, 'path');
+            const radius = mainRadius - 5 - (i * 15); // Staggered radii
+            const startAngle = 0; // We'll animate stroke-dashoffset
+            const endAngle = 359.99; // Almost full circle to avoid closing path issues with dasharray
+            
+            arcPath.setAttribute('d', describeArc(centerX, centerY, radius, startAngle, endAngle));
+            arcPath.setAttribute('class', 'major-arc');
+            arcPath.setAttribute('stroke', arcColors[i % arcColors.length]);
+            arcPath.style.strokeDasharray = 0; // Initially invisible
+            arcPath.style.strokeDashoffset = 0; // Initially invisible
+            arcContainer.appendChild(arcPath);
+        }
+
+
+        // 3. Create tick marks dynamically
+        const tickRadius = mainRadius - 15;
+        const tickContainer = document.createElementNS(svgNS, 'g');
+        clockSvg.appendChild(tickContainer);
+
+        for (let i = 0; i < numTicks; i++) {
+            const angle = (i / numTicks) * 360;
+            const tick = document.createElementNS(svgNS, 'rect');
+            const tickWidth = (i % 5 === 0) ? 2 : 1; // Major ticks are wider
+            const tickHeight = (i % 5 === 0) ? 8 : 5;
+
+            // Position ticks on the circumference then rotate them
+            // Note: SVG transforms apply from the SVG origin (0,0) by default unless transform-origin is set
+            tick.setAttribute('x', centerX - tickWidth / 2); // Center the tick horizontally
+            tick.setAttribute('y', centerY - tickRadius - tickHeight / 2); // Position at 12 o'clock equivalent
+            tick.setAttribute('width', tickWidth);
+            tick.setAttribute('height', tickHeight);
+            tick.setAttribute('class', 'tick');
+            tick.setAttribute('fill', (i % 5 === 0) ? '#FFC107' : '#BDBDBD');
+            // We will rotate the group or apply transform directly
+            tick.setAttribute('transform', `rotate(${angle} ${centerX} ${centerY})`);
+            tick.style.opacity = 0; // Start invisible
+            tickContainer.appendChild(tick);
+        }
+
+        // 4. Create the hand
+        const hand = document.createElementNS(svgNS, 'line');
+        hand.setAttribute('x1', centerX);
+        hand.setAttribute('y1', centerY);
+        hand.setAttribute('x2', centerX);
+        hand.setAttribute('y2', centerY - (mainRadius - 25)); // Length of the hand
+        hand.setAttribute('class', 'hand');
+        // Set transform-origin for rotation. SVG <line> rotates around (x1, y1) by default IF transform is applied to it.
+        // More robust: group the hand and rotate the group, or ensure transform-origin is set.
+        // For a line, it's easier to just update x2, y2 or rotate around its base.
+        // Here, we'll use CSS transform property on the SVG element, which Anime.js handles.
+        hand.style.transformOrigin = `${centerX}px ${centerY}px`; // Crucial for rotation around the center
+        clockSvg.appendChild(hand);
+
+
+        // 5. Animate!
+        const tl = anime.timeline({
+            easing: 'easeInOutSine',
+            loop: true
+        });
+
+        tl.add({
+            targets: '.major-arc',
+            strokeDasharray: function(el) {
+                const pathLength = el.getTotalLength();
+                return [pathLength, pathLength]; // [stroke, gap] -> full stroke, full gap
+            },
+            strokeDashoffset: function(el) {
+                const pathLength = el.getTotalLength();
+                return [anime.setDashoffset, pathLength - (pathLength * 0.75)]; // Start from 0, animate to 75% drawn
+            },
+            strokeOpacity: [0.5, 1],
+            duration: 1500,
+            delay: anime.stagger(200, {start: 500}) // Stagger the appearance of arcs
+        })
+        .add({
+            targets: '.tick',
+            opacity: [0, 0.8],
+            scale: [0.5, 1], // Optional: scale them in
+            translateY: [-5, 0], // Optional: move them slightly
+            duration: 500,
+            delay: anime.stagger(50, {from: 'center', start: 0}), // Stagger ticks from the center outward
+        }, '-=1000') // Overlap with arc animation
+        .add({
+            targets: hand,
+            rotate: 360, // One full rotation
+            duration: 12000, // e.g., 12 seconds for a full turn for demo
+            easing: 'linear' // Clock hands move linearly
+        }, 0) // Start hand rotation from the beginning of the timeline
+        .add({ // Make arcs fade a bit and reset for next loop
+            targets: '.major-arc',
+            strokeOpacity: [1, 0.3],
+            strokeDashoffset: function(el) {
+                const pathLength = el.getTotalLength();
+                return pathLength; // Animate to fully hidden for the next loop start
+            },
+            duration: 1000,
+            delay: anime.stagger(100)
+        }, '+=8000'); // Start fading out near the end of hand rotation
+
+    </script>
+</body>
+</html>
