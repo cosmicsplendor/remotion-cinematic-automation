@@ -21,6 +21,7 @@ export type SafeChart = {
   ? (...args: Parameters<Required<Chart>[K]>) => SafeChart
   : never
 }
+
 const BILLION = 1_000_000_000
 const MILLION = 1_000_000
 

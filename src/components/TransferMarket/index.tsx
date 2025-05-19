@@ -20,13 +20,13 @@ import data from "./assets/data.json"
 // Import the AudioVisualizer component
 import { AudioVisualizer } from '../AudioVisualizer';
 import React from 'react'; // Import React for Fragment
+import Clock from './Clock';
 
 // --- Restored Original Constants and Export ---
-const SVG_ID = "SVGX"
+const PLOT_ID = "PLOGX"
 const CONT_ID = "CONTAINERX"
 const DURATION = 1500; // Equivalent to 1 second at 60fps
 export const TRANSFER_LIFESPAN = data.length * DURATION * 6 / 1000; // Restored original export
-// ---------------------------------------------
 
 export const TransferMarket: React.FC = () => {
   const frame = useCurrentFrame();
@@ -39,9 +39,9 @@ export const TransferMarket: React.FC = () => {
   const [currentAmplitude, setCurrentAmplitude] = useState(0);
   // Calculate frames per data point based on video config and DURATION constant
   const FRAMES_PER_DATA_POINT = useMemo(() => {
-      // Avoid division by zero or negative fps if config is not ready
-      if (!fps || fps <= 0) return 0;
-      return (fps * DURATION) / 1000;
+    // Avoid division by zero or negative fps if config is not ready
+    if (!fps || fps <= 0) return 0;
+    return (fps * DURATION) / 1000;
   }, [fps]); // DURATION is a constant, no need to list it as a dependency
 
 
@@ -55,9 +55,9 @@ export const TransferMarket: React.FC = () => {
       const seasonNumber = parseInt(season as any, 10);
       // Allow invalid season if frames exist, just don't associate audio/odometer
       if (frames && frames.length > 0) {
-           for (const dataFrame of frames) {
-             result.push({ data: dataFrame, season: isNaN(seasonNumber) ? null : seasonNumber }); // Store season number or null
-           }
+        for (const dataFrame of frames) {
+          result.push({ data: dataFrame, season: isNaN(seasonNumber) ? null : seasonNumber }); // Store season number or null
+        }
       }
     }
     return result;
@@ -76,16 +76,16 @@ export const TransferMarket: React.FC = () => {
 
       // Only add metadata if season is a valid number AND there are frames for this entry
       if (!isNaN(seasonNumber) && seasonEntry.frames && seasonEntry.frames.length > 0) {
-          metadata.push({
-              season: seasonNumber,
-              startFrame: currentFrameCounter,
-          });
+        metadata.push({
+          season: seasonNumber,
+          startFrame: currentFrameCounter,
+        });
       }
 
       // ALWAYS increment the frame counter based on the number of frames in the entry,
       // regardless of whether the season was valid or if audio metadata was added for it.
       if (seasonEntry.frames && seasonEntry.frames.length > 0) {
-         currentFrameCounter += seasonEntry.frames.length * FRAMES_PER_DATA_POINT;
+        currentFrameCounter += seasonEntry.frames.length * FRAMES_PER_DATA_POINT;
       }
     }
     // console.log("Season Audio Metadata:", metadata);
@@ -111,12 +111,12 @@ export const TransferMarket: React.FC = () => {
 
   // Find the metadata for the *current* season
   const currentSeasonMetadata = useMemo(() => {
-      if (currentSeason === null) return null; // No valid season to find metadata for
-      return seasonAudioMetadata.find(meta => meta.season === currentSeason) || null;
+    if (currentSeason === null) return null; // No valid season to find metadata for
+    return seasonAudioMetadata.find(meta => meta.season === currentSeason) || null;
   }, [currentSeason, seasonAudioMetadata]);
 
 
-  // Initial chart setup (runs once on mount or dependencies change)
+  
   useEffect(() => {
     if (containerRef.current === null || svgRef.current === null) {
       return;
@@ -141,7 +141,7 @@ export const TransferMarket: React.FC = () => {
           format: formatX,
           reverseFormat: reverseFormatX
         })
-        .dom({ svg: `#${SVG_ID}`, container: `#${CONT_ID}` }); // SVG_ID and CONT_ID used here
+        .dom({ svg: `#${PLOT_ID}`, container: `#${CONT_ID}` }); // PLOT_ID and CONT_ID used here
 
       return safeChart as Chart;
     };
@@ -162,7 +162,7 @@ export const TransferMarket: React.FC = () => {
     if (flattenedData.length > 0) {
       barChart(flattenedData[0].data.map(d => ({ ...d, points: 0 })), true);
     } else {
-        console.warn("flattenedData is empty, chart not initialized with data.");
+      console.warn("flattenedData is empty, chart not initialized with data.");
     }
 
     // Store the chart reference for updates
@@ -173,7 +173,7 @@ export const TransferMarket: React.FC = () => {
   // Update chart when data index changes
   useEffect(() => {
     if (!chartRef.current || !currentData) {
-        return;
+      return;
     }
     const chart = chartRef.current;
     const { data } = currentData;
@@ -206,16 +206,10 @@ export const TransferMarket: React.FC = () => {
       id={CONT_ID} // CONT_ID used here
       ref={containerRef}
     >
-       <svg
-           id={SVG_ID} // SVG_ID used here
-           ref={svgRef}
-           // Use currentAmplitude for styling if needed
-           // style={{
-           //    transform: `scale(${1 + currentAmplitude * 0.02})`,
-           //    transition: 'transform 0.05s linear',
-           // }}
-        ></svg>
-
+      <svg
+        id={PLOT_ID} // PLOT_ID used here
+        ref={svgRef}
+      ></svg>
       {/* Season Display */}
       {currentData && (currentSeason !== null) && ( // Only show if data and a valid season number exist
         <div style={{
@@ -240,22 +234,23 @@ export const TransferMarket: React.FC = () => {
 
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
       {seasonAudioMetadata.map(({ season, startFrame }) => {
-          const audioSrcPath = `/assets/transferAudio/${season}.wav`;
-          return (
-               <Sequence key={`audio-${season}-playback`} from={startFrame}>
-                   <Audio src={staticFile(audioSrcPath)} />
-               </Sequence>
-          );
+        const audioSrcPath = `/assets/transferAudio/${season}.wav`;
+        return (
+          <Sequence key={`audio-${season}-playback`} from={startFrame}>
+            <Audio src={staticFile(audioSrcPath)} />
+          </Sequence>
+        );
       })}
 
       {/* Single AudioVisualizer for the CURRENT season only */}
       {currentSeasonMetadata && (
-           <AudioVisualizer
-               audioSrc={`/assets/transferAudio/${currentSeasonMetadata.season}.wav`} // Pass relative path
-               audioStartFrame={currentSeasonMetadata.startFrame} // Pass the absolute start frame
-               onAmplitudeChange={setCurrentAmplitude} // Update the state
-           />
+        <AudioVisualizer
+          audioSrc={`/assets/transferAudio/${currentSeasonMetadata.season}.wav`} // Pass relative path
+          audioStartFrame={currentSeasonMetadata.startFrame} // Pass the absolute start frame
+          onAmplitudeChange={setCurrentAmplitude} // Update the state
+        />
       )}
+      <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/>
     </AbsoluteFill>
   );
 };
