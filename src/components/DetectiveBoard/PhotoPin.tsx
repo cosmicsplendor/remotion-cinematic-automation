@@ -8,7 +8,7 @@ import {
   Img,
   staticFile,
 } from 'remotion';
-import { AudioVisualizer } from './AudioVisualizer.tsx'; // Assuming AudioVisualizer.tsx is in the same directory
+import { AudioVisualizer } from '../AudioVisualizer.tsx'; // Assuming AudioVisualizer.tsx is in the same directory
 import { PersonData } from './index.tsx'; // Adjust path if PersonData is defined elsewhere
 
 // Define the properties the PhotoPin component expects

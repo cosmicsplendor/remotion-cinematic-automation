@@ -1,12 +1,12 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import {
   AbsoluteFill,
   useCurrentFrame,
   useVideoConfig,
   interpolate,
-  Audio, // Import Audio
-  staticFile, // Import staticFile
-  Sequence, // Import Sequence
+  Audio,
+  staticFile,
+  Sequence,
 } from 'remotion';
 import { Chart, Datum, SafeChart, Frame, SeasonOdometer } from "./helpers"
 import { easeLinear } from "d3"
@@ -16,32 +16,34 @@ import teamNameMap from "./assets/teamNameMap.json"
 import colorsMap from "./assets/colorsMap.json"
 import logosMap from "./assets/logosMap.json"
 import data from "./assets/data.json"
-import "tm-odometer/themes/odometer-theme-plaza.css";
 
+// Import the AudioVisualizer component
+import { AudioVisualizer } from '../AudioVisualizer';
+import React from 'react'; // Import React for Fragment
+
+// --- Restored Original Constants and Export ---
 const SVG_ID = "SVGX"
 const CONT_ID = "CONTAINERX"
 const DURATION = 1500; // Equivalent to 1 second at 60fps
-export const TRANSFER_LIFESPAN = data.length * DURATION / 150 // This seems off, should be based on flattened data length? Let's recalculate total frames
+export const TRANSFER_LIFESPAN = data.length * DURATION * 6 / 1000; // Restored original export
+// ---------------------------------------------
 
-// Calculate total frames based on the number of data points and frames per point
-const originalData = data as Frame[];
-const totalDataPoints = originalData.reduce((sum, seasonEntry) => sum + seasonEntry.frames.length, 0);
-// We'll calculate the total duration in frames dynamically based on this
-// const TOTAL_FRAMES_DYNAMIC = totalDataPoints * (fps * DURATION / 1000); // Cannot use fps here as it's not available at top level
-
-// Let's calculate FRAMES_PER_DATA_POINT inside the component using fps
-// And then calculate total frames needed.
-
-
-export const TransferMarket: React.FC = () => { // Added React.FC type
+export const TransferMarket: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps, width, height } = useVideoConfig();
-  const svgRef = useRef<SVGSVGElement>(null); // Added type
-  const containerRef = useRef<HTMLDivElement>(null); // Added type
+  const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
 
-  // Calculate frames per data point based on video config
-  const FRAMES_PER_DATA_POINT = useMemo(() => fps * DURATION / 1000, [fps, DURATION]);
+  // State to hold the current amplitude value reported by the active visualizer
+  const [currentAmplitude, setCurrentAmplitude] = useState(0);
+  // Calculate frames per data point based on video config and DURATION constant
+  const FRAMES_PER_DATA_POINT = useMemo(() => {
+      // Avoid division by zero or negative fps if config is not ready
+      if (!fps || fps <= 0) return 0;
+      return (fps * DURATION) / 1000;
+  }, [fps]); // DURATION is a constant, no need to list it as a dependency
+
 
   // Prepare flattened data array for frame-based animation
   const flattenedData = useMemo(() => {
@@ -51,19 +53,19 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
     for (const index in originalDataTyped) {
       const { frames, season } = originalDataTyped[index];
       const seasonNumber = parseInt(season as any, 10);
-      if (isNaN(seasonNumber)) {
-          console.warn(`Skipping entry with invalid season: ${season}`, originalDataTyped[index]);
-          continue; // Skip if season is not a valid number
-      }
-
-      for (const dataFrame of frames) {
-        result.push({ data: dataFrame, season: seasonNumber });
+      // Allow invalid season if frames exist, just don't associate audio/odometer
+      if (frames && frames.length > 0) {
+           for (const dataFrame of frames) {
+             result.push({ data: dataFrame, season: isNaN(seasonNumber) ? null : seasonNumber }); // Store season number or null
+           }
       }
     }
     return result;
-  }, [data]); // Depend on data itself
+  }, [data]);
+
 
   // Calculate metadata for audio sequences (start frame for each season)
+  // This only includes entries with a valid season number and frames
   const seasonAudioMetadata = useMemo(() => {
     const metadata = [];
     let currentFrameCounter = 0;
@@ -71,45 +73,50 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
 
     for (const seasonEntry of originalDataTyped) {
       const seasonNumber = parseInt(seasonEntry.season as any, 10);
-       if (isNaN(seasonNumber)) {
-          console.warn(`Skipping audio metadata for invalid season: ${seasonEntry.season}`);
-          // Still increment frame counter based on the frames *in this invalid entry*
-          // so subsequent valid entries start at the correct time.
-          currentFrameCounter += seasonEntry.frames.length * FRAMES_PER_DATA_POINT;
-          continue;
-       }
 
-      if (seasonEntry.frames.length > 0) {
-          // This is the start frame for the current season
+      // Only add metadata if season is a valid number AND there are frames for this entry
+      if (!isNaN(seasonNumber) && seasonEntry.frames && seasonEntry.frames.length > 0) {
           metadata.push({
               season: seasonNumber,
               startFrame: currentFrameCounter,
           });
-
-          // Increment the frame counter by the duration of this season's data points
-          currentFrameCounter += seasonEntry.frames.length * FRAMES_PER_DATA_POINT;
       }
-      // If seasonEntry.frames is empty, currentFrameCounter doesn't change,
-      // which correctly means the next season starts immediately after the previous one ended.
+
+      // ALWAYS increment the frame counter based on the number of frames in the entry,
+      // regardless of whether the season was valid or if audio metadata was added for it.
+      if (seasonEntry.frames && seasonEntry.frames.length > 0) {
+         currentFrameCounter += seasonEntry.frames.length * FRAMES_PER_DATA_POINT;
+      }
     }
-     console.log("Season Audio Metadata:", metadata); // Log the calculated metadata
+    // console.log("Season Audio Metadata:", metadata);
     return metadata;
-  }, [data, FRAMES_PER_DATA_POINT]); // Depend on data and FRAMES_PER_DATA_POINT
+  }, [data, FRAMES_PER_DATA_POINT]);
+
 
   // Calculate which data point to show based on current frame
-  const currentDataIndex = Math.min(
-    Math.floor(frame / FRAMES_PER_DATA_POINT),
-    flattenedData.length - 1
-  );
+  const currentDataIndex = useMemo(() => {
+    if (flattenedData.length === 0) return 0;
+    return Math.min(
+      Math.floor(frame / FRAMES_PER_DATA_POINT),
+      flattenedData.length - 1
+    );
+  }, [frame, FRAMES_PER_DATA_POINT, flattenedData.length]);
+
 
   // Get current data to display
   const currentData = flattenedData[currentDataIndex];
 
-  // Get current season as number
-  const currentSeason = currentData ? currentData.season : 0;
+  // Get current season as number (will be null if data was invalid)
+  const currentSeason = currentData ? currentData.season : null;
+
+  // Find the metadata for the *current* season
+  const currentSeasonMetadata = useMemo(() => {
+      if (currentSeason === null) return null; // No valid season to find metadata for
+      return seasonAudioMetadata.find(meta => meta.season === currentSeason) || null;
+  }, [currentSeason, seasonAudioMetadata]);
 
 
-  // Initial chart setup (runs once on mount)
+  // Initial chart setup (runs once on mount or dependencies change)
   useEffect(() => {
     if (containerRef.current === null || svgRef.current === null) {
       return;
@@ -122,7 +129,7 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
     const modifier = (chart: Chart) => {
       const safeChart = chart as SafeChart;
       safeChart
-        .animation({ easingFn: easeLinear, duration: DURATION, offset: 0 })
+        .animation({ easingFn: easeLinear, duration: DURATION, offset: 0 }) // DURATION constant used here
         .bar({ gap: 22, minLength: 10 })
         .barCount({ dir: 1, active: 10, max: 20 })
         .label({ fill: "#707070", rightOffset: 200, size: 24 })
@@ -134,7 +141,7 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
           format: formatX,
           reverseFormat: reverseFormatX
         })
-        .dom({ svg: `#${SVG_ID}`, container: `#${CONT_ID}` });
+        .dom({ svg: `#${SVG_ID}`, container: `#${CONT_ID}` }); // SVG_ID and CONT_ID used here
 
       return safeChart as Chart;
     };
@@ -161,23 +168,17 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
     // Store the chart reference for updates
     chartRef.current = barChart;
 
-  }, [svgRef, containerRef, flattenedData, width, height, DURATION]); // Added dependencies
+  }, [svgRef, containerRef, flattenedData, width, height]); // DURATION removed as dependency
 
   // Update chart when data index changes
   useEffect(() => {
     if (!chartRef.current || !currentData) {
-        // console.log("Skipping chart update: chartRef or currentData missing");
         return;
     }
-
     const chart = chartRef.current;
     const { data } = currentData;
-
-    // Update the chart with the data for the current frame
-    // console.log(`Updating chart for frame ${frame}, data index ${currentDataIndex}, season ${currentSeason}`);
     chart(data);
-
-  }, [currentData]); // Depend only on currentData
+  }, [currentData]);
 
 
   const opacity = interpolate(
@@ -190,7 +191,6 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
     }
   );
 
-
   return (
     <AbsoluteFill
       style={{
@@ -200,14 +200,24 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
         alignItems: 'center',
         justifyContent: 'flex-start',
         background: "white"
+        // Use currentAmplitude for styling if needed
+        // background: `rgba(255, 255, 255, ${1 - currentAmplitude * 0.2})`
       }}
-      id={CONT_ID}
+      id={CONT_ID} // CONT_ID used here
       ref={containerRef}
     >
-      <svg id={SVG_ID} ref={svgRef}></svg>
+       <svg
+           id={SVG_ID} // SVG_ID used here
+           ref={svgRef}
+           // Use currentAmplitude for styling if needed
+           // style={{
+           //    transform: `scale(${1 + currentAmplitude * 0.02})`,
+           //    transition: 'transform 0.05s linear',
+           // }}
+        ></svg>
 
       {/* Season Display */}
-      {currentData && (
+      {currentData && (currentSeason !== null) && ( // Only show if data and a valid season number exist
         <div style={{
           position: 'absolute',
           top: '10px',
@@ -222,21 +232,30 @@ export const TransferMarket: React.FC = () => { // Added React.FC type
             fontWeight: 'bold',
             color: '#333'
           }}>
-            Season:
           </span>
-          <SeasonOdometer value={currentSeason} />
+          {/* Ensure SeasonOdometer handles null if currentSeason is null */}
+          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
-      {/* Audio Sequences for Each Season */}
-      {seasonAudioMetadata.map(({ season, startFrame }) => (
-          // Use a unique key for each Sequence
-          <Sequence key={`audio-${season}`} from={startFrame}>
-              {/* Audio plays automatically when this Sequence becomes active */}
-              <Audio src={staticFile(`/assets/transferAudio/${season}.wav`)} />
-          </Sequence>
-      ))}
+      {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
+      {seasonAudioMetadata.map(({ season, startFrame }) => {
+          const audioSrcPath = `/assets/transferAudio/${season}.wav`;
+          return (
+               <Sequence key={`audio-${season}-playback`} from={startFrame}>
+                   <Audio src={staticFile(audioSrcPath)} />
+               </Sequence>
+          );
+      })}
 
+      {/* Single AudioVisualizer for the CURRENT season only */}
+      {currentSeasonMetadata && (
+           <AudioVisualizer
+               audioSrc={`/assets/transferAudio/${currentSeasonMetadata.season}.wav`} // Pass relative path
+               audioStartFrame={currentSeasonMetadata.startFrame} // Pass the absolute start frame
+               onAmplitudeChange={setCurrentAmplitude} // Update the state
+           />
+      )}
     </AbsoluteFill>
   );
 };
