@@ -20,7 +20,7 @@ const ClockGenerator = (query: string) => {
 
     let pos: Pos = { x: 0, y: 0 }, duration = "0s", background = "#444", fontSize: string, rimColor = "whitesmoke", scale=0.2
     const clock: Clock = (hr = 0, min = 0) => {
-        container.attr("style", `transform: scale(${scale});position: absolute; left: ${pos.x}px; top: ${pos.y}px; font-size: ${fontSize}; width: 40em; height: 40em; border-radius: 50%; background: ${rimColor}; box-shadow: 0 0 8px 2px #aaa; display: flex; align-items: center; justify-content: center;`)
+        container.attr("style", `transform: scale(${scale});position: absolute; left: ${pos.x}px; top: ${pos.y}px; font-size: ${fontSize}; width: 40em; height: 40em; border-radius: 50%; background: ${rimColor}; box-shadow: 0 0 8px 2px #aaa; display: flex; align-items: center; justify-content: center;z-index:0`)
         face.attr("style", `width: 85%; height: 85%; box-shadow: inset 0 0 20px #aaa; border-radius: 50%; background: white`)
         hour.attr("style", `width: 10em; height: 2em; background: ${background}; border-radius: 1em; position: absolute; top: calc(50% - 1em); left: 50%; transform-origin: 0 1em; transform: rotate(${hr}deg); transition: transform ${duration} linear;`)
         minute.attr("style", `width: 14em; height: 2em; background: ${background}; border-radius: 1em; position: absolute; top: calc(50% - 1em); left: 50%; transform-origin: 0 1em; transform: rotate(${min}deg); transition: transform ${duration} linear;`)

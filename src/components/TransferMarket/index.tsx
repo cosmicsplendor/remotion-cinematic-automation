@@ -23,9 +23,10 @@ import React from 'react'; // Import React for Fragment
 import Clock from './Clock';
 
 // --- Restored Original Constants and Export ---
-const PLOT_ID = "PLOGX"
+const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
 const DURATION = 1500; // Equivalent to 1 second at 60fps
+const margins = { mt: 100, mr: 250, mb: 40, ml: 290 };
 export const TRANSFER_LIFESPAN = data.length * DURATION * 6 / 1000; // Restored original export
 
 export const TransferMarket: React.FC = () => {
@@ -123,7 +124,6 @@ export const TransferMarket: React.FC = () => {
     }
 
     const w = width * 0.9, h = height;
-    const margins = { mt: 140, mr: 250, mb: 75, ml: 250 };
     const dims = Object.freeze({ w, h, ...margins });
 
     const modifier = (chart: Chart) => {
@@ -228,29 +228,30 @@ export const TransferMarket: React.FC = () => {
           }}>
           </span>
           {/* Ensure SeasonOdometer handles null if currentSeason is null */}
-          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} /> {/* Pass 0 if season is null to avoid error */}
+       
+          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude}  top="5vh" right="26px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
-      {seasonAudioMetadata.map(({ season, startFrame }) => {
+      {/* {seasonAudioMetadata.map(({ season, startFrame }) => {
         const audioSrcPath = `/assets/transferAudio/${season}.wav`;
         return (
           <Sequence key={`audio-${season}-playback`} from={startFrame}>
             <Audio src={staticFile(audioSrcPath)} />
           </Sequence>
         );
-      })}
+      })} */}
 
       {/* Single AudioVisualizer for the CURRENT season only */}
-      {currentSeasonMetadata && (
+      {/* {currentSeasonMetadata && (
         <AudioVisualizer
           audioSrc={`/assets/transferAudio/${currentSeasonMetadata.season}.wav`} // Pass relative path
           audioStartFrame={currentSeasonMetadata.startFrame} // Pass the absolute start frame
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
-      )}
-      <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/>
+      )} */}
+      {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );
 };

@@ -77,7 +77,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         allData = newData ?? allData
         const BAR_THICKNESS = Math.round((horizontal ? dims.w - dims.ml - dims.mt : dims.h - dims.mt - dims.mb) / barCount.active) - bar.gap
         const EXIT_DEST = horizontal ?
-            barCount.dir === -1 ? -BAR_THICKNESS : dims.w :
+            barCount.dir === -1 ? -BAR_THICKNESS : dims.w:
             barCount.dir === -1 ? -BAR_THICKNESS : dims.h
         const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
         const data = allData.slice(...sliceArgs)
