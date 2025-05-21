@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
 import * as THREE from 'three'; // Ensure THREE is imported and passed
-import { VantaEffect } from 'vanta';
+import { VantaEffect } from '../../@types/vanta';
 // Import the specific effect you want to use: VANTA.GLOBE
-import VANTA from 'vanta/dist/vanta.globe.min';
+
+import VANTA from 'lib/backgrounds/vanta.globe.min.js';
 
 // Define the settings for your Vanta Globe and camera movement
 const settings = {
@@ -150,8 +151,6 @@ export const VantaGlobe: React.FC<React.PropsWithChildren<{}>> = ({
             gyroControls: false,
             // Initialize with base camera settings
             zoom: baseCameraZoom,
-            xOffset: 0, // Start with no offset
-            yOffset: 0, // Start with no offset
         });
 
         // Cleanup function: destroy the Vanta effect when the component unmounts

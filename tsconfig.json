@@ -5,6 +5,12 @@
     "jsx": "react-jsx",
     "strict": true,
     "noEmit": true,
+    "baseUrl": ".", // This is project root
+    "paths": {
+      "lib/*": [
+        "lib/*"
+      ]
+    },
     "lib": [
       "es2015"
     ],
@@ -15,9 +21,12 @@
     "resolveJsonModule": true,
     "typeRoots": [
       "./node_modules/@types",
-      "./src/@types" // or wherever you've placed your types
-    ]
+    ],
   },
+  "include": [
+    "src/**/*",
+    "lib/**/*"
+  ],
   "exclude": [
     "remotion.config.ts"
   ]

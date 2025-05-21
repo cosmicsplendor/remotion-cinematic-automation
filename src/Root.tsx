@@ -40,7 +40,7 @@ export const DetectiveTimelineVideo = () => {
   return <Composition
     id="DetectiveTimeline"
     component={DetectiveTimeline}
-    durationInFrames={totalDurationInFrames}
+    durationInFrames={120}
     fps={FPS}
     width={res.width}
     height={res.height}

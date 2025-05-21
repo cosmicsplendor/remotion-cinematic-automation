@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
 import * as THREE from 'three'; // IMPORTANT: THREE is required by Vanta
-import { VantaEffect } from 'vanta'; // For type hinting. This pulls types from the 'vanta' package.
+import { VantaEffect } from '../../@types/vanta'; // For type hinting. This pulls types from the 'vanta' package.
 
 // Import the specific Birds effect function directly as a default export.
 // We'll give it a clear name like 'VantaBirdsEffect'.
