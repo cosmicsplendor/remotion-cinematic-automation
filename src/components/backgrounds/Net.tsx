@@ -5,16 +5,16 @@ import { VantaEffect } from 'vanta';
 // Import the specific effect you want to use
 import VANTA from 'vanta/dist/vanta.net.min';
 const settings = {
-  color: 0x0077ff,
-  backgroundColor: 0x1b1b1b,
-  points: 10,
-  maxDistance: 20,
-  spacing: 15,
+  color: "#555555",
+  backgroundColor: 0x000000,
+  points: 2.5,
+  maxDistance: 30,
+  spacing: 20,
   showDots: true,
-  speed: 1,
+  speed: 10,
 }
 // The VantaBackground component for Remotion
-export const VantaBackground: React.FC<React.PropsWithChildren<{}>> = ({
+export const VantaNet: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
   const { color, backgroundColor, points, maxDistance, spacing, showDots, speed } = settings;
@@ -41,6 +41,10 @@ export const VantaBackground: React.FC<React.PropsWithChildren<{}>> = ({
       maxDistance,
       spacing,
       showDots,
+      backgroundAlpha: 0,
+      mouseControls: false,
+      touchControls: false,
+      gyroControls: false,
     });
 
     return () => {
@@ -61,8 +65,8 @@ export const VantaBackground: React.FC<React.PropsWithChildren<{}>> = ({
     // Access and update the internal VANTA animation time
     if (vantaEffect.current && vantaEffect.current.options) {
       // Update the VANTA animation time
-      vantaEffect.current.options.time = time;
-      vantaEffect.current.update();
+      // vantaEffect.current.options.time = time;
+      // vantaEffect.current.update();
     }
   }, [frame, fps, speed]);
 

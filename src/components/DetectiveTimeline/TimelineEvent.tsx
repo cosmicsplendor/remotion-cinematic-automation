@@ -252,7 +252,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
           width: 860,
           opacity: cardOpacity,
           transform: `translateX(${isLeft ? -cardTranslate : cardTranslate}px) translateY(-50%)`,
-          backgroundColor: 'rgba(30, 30, 30, 0.9)',
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
           padding: 20, borderRadius: 8,
           borderLeft: isLeft ? 'none' : isActive ? '4px solid #ff5252' : '4px solid #c0392b',
           borderRight: isLeft ? isActive ? '4px solid #ff5252' : '4px solid #c0392b' : 'none',

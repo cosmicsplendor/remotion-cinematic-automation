@@ -14,6 +14,7 @@ declare module 'vanta' {
     maxDistance?: number;
     spacing?: number;
     showDots?: boolean;
+    backgroundAlpha?: number;
   }
 
   export interface VantaEffect {
@@ -52,6 +53,9 @@ declare module 'vanta' {
     color2?: string | number;
     size?: number;
     speed?: number;
+    minWidth?: number;
+    minHeight?: number;
+
   }
 
   // CLOUDS effect
@@ -116,6 +120,7 @@ declare module 'vanta' {
     maxDistance?: number;
     spacing?: number;
     showDots?: boolean;
+    backgroundAlpha?: number;
   }
 
   // RINGS effect

@@ -17,6 +17,9 @@ import data from "../../../data/timeline.json";
 import useAudioDurations from '../hooks/useAudioDurations.ts'; // Assuming this hook is adapted or its output is consistent
 const { events: rawEvents } = data;
 import config from "../../../data/timeline.config.json"
+import { VantaNet } from '../backgrounds/Net';
+import { VantaCell } from '../backgrounds/Cell';
+import { VantaGlobe } from '../backgrounds/Globe';
 const { GAP_FACTOR, VP_CENTER, SCROLL_DURATION } = config;
 
 // Define Keyframe type (can be shared or re-declared)
@@ -145,7 +148,6 @@ export const DetectiveTimeline: React.FC<{}> = () => {
      }
   }
 
-
   const eventSpacing = CARD_SIZE;
   const initialOffset = OFFSET;
   const viewportCenter = height * VP_CENTER;
@@ -215,6 +217,7 @@ export const DetectiveTimeline: React.FC<{}> = () => {
         height: `${totalTimelineHeight + 200}px`,
         transform: `translateY(-${cameraScrollY}px)`,
       }}>
+        <VantaGlobe />
         {calculatedEvents.map((event, index) => {
           if (index === calculatedEvents.length - 1) return null;
           const startY = initialOffset + index * eventSpacing;
