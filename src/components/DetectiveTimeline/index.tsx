@@ -17,9 +17,9 @@ import data from "../../../data/timeline.json";
 import useAudioDurations from '../hooks/useAudioDurations.ts'; // Assuming this hook is adapted or its output is consistent
 const { events: rawEvents } = data;
 import config from "../../../data/timeline.config.json"
-import { VantaNet } from '../backgrounds/Net';
 import { VantaCell } from '../backgrounds/Cell';
 import { VantaGlobe } from '../backgrounds/Globe';
+import { VantaBird } from '../backgrounds/Birds';
 const { GAP_FACTOR, VP_CENTER, SCROLL_DURATION } = config;
 
 // Define Keyframe type (can be shared or re-declared)

@@ -49,9 +49,9 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
 
   const currentKeyframeInfo = useMemo(() => {
     if (!keyframes || keyframes.length === 0 || timeIntoEventAudioPhaseFrames < 0) {
-      return { 
-        keyframe: null, 
-        kfIndex: -1, 
+      return {
+        keyframe: null,
+        kfIndex: -1,
         audioPath: undefined,
         progressInKeyframe: 0, // This is raw progress, not eased.
         keyframeStartFrame: 0,
@@ -63,23 +63,23 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
     for (let i = 0; i < keyframes.length; i++) {
       const kf = keyframes[i];
       const kfDurationFrames = Math.round(kf.duration * fps);
-      
-      if (timeIntoEventAudioPhaseFrames >= cumulativeDurationFrames && 
-          timeIntoEventAudioPhaseFrames < cumulativeDurationFrames + kfDurationFrames) {
-        
+
+      if (timeIntoEventAudioPhaseFrames >= cumulativeDurationFrames &&
+        timeIntoEventAudioPhaseFrames < cumulativeDurationFrames + kfDurationFrames) {
+
         const keyframeStartFrame = calculatedStartFrame + SCROLL_DURATION + cumulativeDurationFrames;
         // Raw progress for this specific keyframe
         const progressInKeyframe = Math.max(0, Math.min(1, (frame - keyframeStartFrame) / kfDurationFrames));
-        
-        const audioPath = kf.audio && kf.audio.trim() !== "" 
-          ? staticFile(`assets/timeline/audio/${kf.audio}`) 
+
+        const audioPath = kf.audio && kf.audio.trim() !== ""
+          ? staticFile(`assets/timeline/audio/${kf.audio}`)
           : undefined;
-          
-        return { 
-          keyframe: kf, 
-          kfIndex: i, 
+
+        return {
+          keyframe: kf,
+          kfIndex: i,
           audioPath,
-          progressInKeyframe, 
+          progressInKeyframe,
           keyframeStartFrame,
           keyframeDurationFrames: kfDurationFrames
         };
@@ -88,11 +88,11 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
     }
     // If past all keyframes, effectively hold the last frame's state or reset
     // For now, let's assume it means no active keyframe
-    return { 
-      keyframe: null, 
-      kfIndex: -1, 
+    return {
+      keyframe: null,
+      kfIndex: -1,
       audioPath: undefined,
-      progressInKeyframe: 0, 
+      progressInKeyframe: 0,
       keyframeStartFrame: 0,
       keyframeDurationFrames: 0
     };
@@ -110,7 +110,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
       return firstKeyframe;
     }
     if (isActive && frame >= calculatedStartFrame + SCROLL_DURATION) {
-      return activeKeyframe || firstKeyframe; 
+      return activeKeyframe || firstKeyframe;
     }
     return null;
   }, [isActive, frame, calculatedStartFrame, SCROLL_DURATION, activeKeyframe, firstKeyframe]);
@@ -118,26 +118,26 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
   // Enhanced Ken Burns effect calculation
   const kenBurnsStyle = useMemo(() => {
     if (!displayKeyframe) return {};
-    
+
     // TODO: Implement dynamic image aspect ratio loading if possible
     // For this example, we'll assume a standard 16:9 or allow it to be passed/configured
     const imageAspectRatio = 1.8333333333333333; // Placeholder: This should ideally be the actual aspect ratio of the image
-                                    // You might need a way to get image dimensions, e.g., after it loads, or store them with keyframe data.
-    
+    // You might need a way to get image dimensions, e.g., after it loads, or store them with keyframe data.
+
     const kenBurnsEffect = parseKenBurnsEffect(displayKeyframe.kenBurns);
-    
+
     let effectProgress;
-    
+
     if (frame < calculatedStartFrame + SCROLL_DURATION) {
       const scrollProgress = (frame - calculatedStartFrame) / SCROLL_DURATION;
       const easedScrollProgress = Easing.bezier(0.4, 0, 0.2, 1)(scrollProgress);
       effectProgress = Math.min(0.1, easedScrollProgress); // Smoothly transition to initial effect state
-    } 
+    }
     else if (activeKeyframe === displayKeyframe && currentKeyframeInfo.keyframeStartFrame > 0) { // Ensure we have a valid start frame for active KF
-      const keyframeDuration = kenBurnsEffect.duration > 0 
-        ? kenBurnsEffect.duration 
-        : (activeKeyframe.duration || 2); 
-      
+      const keyframeDuration = kenBurnsEffect.duration > 0
+        ? kenBurnsEffect.duration
+        : (activeKeyframe.duration || 2);
+
       effectProgress = calculateEffectProgress(
         frame,
         currentKeyframeInfo.keyframeStartFrame,
@@ -145,7 +145,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
         keyframeDuration,
         kenBurnsEffect.easing
       );
-    } 
+    }
     else { // Default state: e.g. showing first keyframe while waiting for next, or after all KFs
       // If it's the first keyframe being held before its 'active' phase or after its effect is done.
       // Or if no specific active keyframe matches but displayKeyframe is set (e.g. firstKeyframe fallback)
@@ -155,15 +155,15 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
       // If using firstKeyframe as fallback and it had an effect, it should be at its end state.
       effectProgress = 1; // Hold the final state of the effect
     }
-    
+
     const { scale, x, y } = getKenBurnsTransforms(
-      kenBurnsEffect.type, 
-      effectProgress, 
+      kenBurnsEffect.type,
+      effectProgress,
       kenBurnsEffect.speed,
       imageAspectRatio,
       containerAspectRatio
     );
-    
+
     return {
       transform: `scale(${scale}) translate(${x}%, ${y}%)`,
       transition: 'transform 16ms linear', // Smoother frame-to-frame for driven animations
@@ -188,7 +188,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
     return Math.round(activeKeyframe.duration * fps);
   }, [activeKeyframe, fps]);
 
-  const animationStartFrame = frame - calculatedStartFrame; 
+  const animationStartFrame = frame - calculatedStartFrame;
 
   const dotScale = spring({
     frame: animationStartFrame,
@@ -217,7 +217,7 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
   const activeGlowShadow = `0 0 3px 6px rgba(250, 100, 50, ${glowOpacity})`;
   const boxShadow = isActive ? `${activeGlowShadow}, ${baseShadow}` : baseShadow; // Using existing boxShadow logic
 
-  if (frame < calculatedStartFrame - fps * 2 && !isActive) { 
+  if (frame < calculatedStartFrame - fps * 2 && !isActive) {
     return null;
   }
 
@@ -254,29 +254,30 @@ export const TimelineEvent: React.FC<TimelineEventProps> = ({
           transform: `translateX(${isLeft ? -cardTranslate : cardTranslate}px) translateY(-50%)`,
           backgroundColor: 'rgba(255, 255, 255, 0.9)',
           padding: 20, borderRadius: 8,
-          borderLeft: isLeft ? 'none' : isActive ? '4px solid #ff5252' : '4px solid #c0392b',
-          borderRight: isLeft ? isActive ? '4px solid #ff5252' : '4px solid #c0392b' : 'none',
+          borderLeft: isLeft ? 'none' : isActive ? '8px solid #ff5252' : '8px solid #c0392b',
+          borderRight: isLeft ? isActive ? '8px solid #ff5252' : '8px solid #c0392b' : 'none',
           transition: 'box-shadow 0.2s ease-out, border-color 0.2s ease-out', // Retaining existing transition
+          boxShadow: '0 8px 40px 0 rgba(0,0,0,0.55), 0 1.5px 8px 0 rgba(0,0,0,0.18)',
         }}
       >
-        <div style={{ fontFamily: 'Roboto Mono, monospace', color: '#aaa', fontSize: 24, marginBottom: 8 }}>
+        <div style={{ fontFamily: 'Roboto Mono, monospace', color: '#666060', fontSize: 24, marginBottom: 8 }}>
           {date}
         </div>
-        <h3 style={{ fontFamily: 'Special Elite, cursive', fontSize: 36, margin: '0 0 16px 0', color: isActive ? '#ff5252' : 'white' }}>
+        <h3 style={{ fontFamily: 'Special Elite, cursive', fontSize: 36, margin: '0 0 16px 0', color: isActive ? '#ff5252' : '#666060' }}>
           {titleSegments.slice(0, titleCharacters).join("")}
           {titleCharacters < titleSegments.length && <span style={{ opacity: animationStartFrame % 20 < 10 ? 1 : 0 }}>|</span>}
         </h3>
-        
+
         {displayKeyframe && (
           <div style={{
             margin: '16px auto',
-            overflow: 'hidden', 
+            overflow: 'hidden',
             borderRadius: 16,
             backgroundColor: '#222',
             boxShadow: boxShadow, // Using your existing boxShadow variable
-            width: '100%', 
+            width: '100%',
             height: 400,
-            position: 'relative', 
+            position: 'relative',
           }}>
             <div style={{
               position: 'absolute',
