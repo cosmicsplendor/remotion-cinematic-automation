@@ -21,7 +21,7 @@ interface VantaEffect {
 }
 
 // Type declarations for local Vanta modules
-declare module 'lib/backgrounds/dist/vanta.birds.min.js' {
+declare module 'lib/backgrounds/vanta.birds.min.js' {
   interface BirdsOptions extends VantaBaseOptions {
     backgroundColor?: number;
     color1?: number;
@@ -39,7 +39,7 @@ declare module 'lib/backgrounds/dist/vanta.birds.min.js' {
   export default VANTA;
 }
 
-declare module 'lib/backgrounds/dist/vanta.cells.min.js' {
+declare module 'lib/backgrounds/vanta.cells.min.js' {
   interface CellsOptions extends VantaBaseOptions {
     color1?: number;
     color2?: number;
@@ -50,7 +50,7 @@ declare module 'lib/backgrounds/dist/vanta.cells.min.js' {
   export default VANTA;
 }
 
-declare module 'lib/backgrounds/dist/vanta.dots.min.js' {
+declare module 'lib/backgrounds/vanta.dots.min.js' {
   interface DotsOptions extends VantaBaseOptions {
     color?: number;
     color2?: number;
@@ -62,7 +62,7 @@ declare module 'lib/backgrounds/dist/vanta.dots.min.js' {
   export default VANTA;
 }
 
-declare module 'lib/backgrounds/dist/vanta.globe.min.js' {
+declare module 'lib/backgrounds/vanta.globe.min.js' {
   interface GlobeOptions extends VantaBaseOptions {
     backgroundColor?: number;
     color?: number;
@@ -76,7 +76,7 @@ declare module 'lib/backgrounds/dist/vanta.globe.min.js' {
   export default VANTA;
 }
 
-declare module 'lib/backgrounds/dist/vanta.ripple.min.js' {
+declare module 'lib/backgrounds/vanta.ripple.min.js' {
   interface RippleOptions extends VantaBaseOptions {
     color?: number;
     backgroundColor?: number;
@@ -88,7 +88,7 @@ declare module 'lib/backgrounds/dist/vanta.ripple.min.js' {
   export default VANTA;
 }
 
-declare module 'lib/backgrounds/dist/vanta.trunk.min.js' {
+declare module 'lib/backgrounds/vanta.trunk.min.js' {
   interface TrunkOptions extends VantaBaseOptions {
     color?: number;
     backgroundColor?: number;

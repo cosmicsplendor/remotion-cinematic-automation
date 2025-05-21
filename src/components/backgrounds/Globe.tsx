@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
 import * as THREE from 'three'; // Ensure THREE is imported and passed
-import { VantaEffect } from '../../@types/vanta';
+import { VantaEffect } from '../../../lib/@types/vanta';
 // Import the specific effect you want to use: VANTA.GLOBE
 
-import VANTA from 'lib/backgrounds/vanta.globe.min.js';
+import VANTA from '../../../lib/backgrounds/vanta.globe.min.js';
 
 // Define the settings for your Vanta Globe and camera movement
 const settings = {
@@ -167,28 +167,10 @@ export const VantaGlobe: React.FC<React.PropsWithChildren<{}>> = ({
     // === 2. Orchestrate periodic dynamic camera movement ===
     useEffect(() => {
         if (!vantaEffect.current) return;
-
-        // Calculate time in seconds based on current frame and FPS
-        const timeInSeconds = (frame / fps) * animationSpeedMultiplier;
-
-        // Calculate dynamic camera properties using sine/cosine for smooth, periodic motion
-        const newZoom = baseCameraZoom + Math.sin(timeInSeconds * Math.PI * 2 * cameraZoomSpeed) * cameraZoomAmplitude;
-        const newXOffset = Math.sin(timeInSeconds * Math.PI * 2 * cameraOrbitXSpeed) * cameraOrbitXAmplitude;
-        const newYOffset = Math.cos(timeInSeconds * Math.PI * 2 * cameraOrbitYSpeed) * cameraOrbitYAmplitude; // Using cos for vertical for a different phase
-
-        // Update Vanta's internal camera options
-        // This is how you dynamically control Vanta effects after initialization
-        vantaEffect.current.setOptions({
-            zoom: newZoom,
-            xOffset: newXOffset,
-            yOffset: newYOffset,
-        });
+        vantaEffect.current.animationLoop(frame/fps)
 
     }, [
-        frame, fps, // Depend on frame and fps to re-run on every frame
-        animationSpeedMultiplier, baseCameraZoom, cameraZoomAmplitude, cameraZoomSpeed,
-        cameraOrbitXAmplitude, cameraOrbitXSpeed, cameraOrbitYAmplitude, cameraOrbitYSpeed,
-        vantaEffect.current // Ensure we have the effect instance
+        frame, fps
     ]);
 
     return (

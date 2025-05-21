@@ -21,6 +21,7 @@
     "resolveJsonModule": true,
     "typeRoots": [
       "./node_modules/@types",
+      "./lib/@types"
     ],
   },
   "include": [

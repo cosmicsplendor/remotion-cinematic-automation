@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
 import * as THREE from 'three';
-import { VantaEffect } from '../../@types/vanta';
+import { VantaEffect } from '../../../lib/@types/vanta';
 // Import the specific effect you want to use
 import VANTA from 'vanta/dist/vanta.cells.min';
 const settings = {
