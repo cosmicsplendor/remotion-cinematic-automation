@@ -1,22 +1,25 @@
 import React, { useEffect, useRef } from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
 import * as THREE from 'three';
+import { VantaEffect } from 'vanta';
 // Import the specific effect you want to use
 import VANTA from 'vanta/dist/vanta.net.min';
-
+const settings = {
+  color: 0x0077ff,
+  backgroundColor: 0x1b1b1b,
+  points: 10,
+  maxDistance: 20,
+  spacing: 15,
+  showDots: true,
+  speed: 1,
+}
 // The VantaBackground component for Remotion
-export const VantaBackground = ({
-  color = 0x0077ff,
-  backgroundColor = 0x1b1b1b,
-  points = 10,
-  maxDistance = 20,
-  spacing = 15,
-  showDots = true,
-  speed = 1,
+export const VantaBackground: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
+  const { color, backgroundColor, points, maxDistance, spacing, showDots, speed } = settings;
   const vantaRef = useRef(null);
-  const vantaEffect = useRef(null);
+  const vantaEffect = useRef<VantaEffect | null>(null);
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -54,7 +57,7 @@ export const VantaBackground = ({
     // Set the animation time based on the current frame
     // This ensures the animation progresses with the video frames
     const time = frame / fps * speed;
-    
+
     // Access and update the internal VANTA animation time
     if (vantaEffect.current && vantaEffect.current.options) {
       // Update the VANTA animation time
@@ -64,12 +67,12 @@ export const VantaBackground = ({
   }, [frame, fps, speed]);
 
   return (
-    <div 
-      ref={vantaRef} 
-      style={{ 
-        position: 'absolute', 
-        width: '100%', 
-        height: '100%', 
+    <div
+      ref={vantaRef}
+      style={{
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
         zIndex: 0,
       }}
     >
@@ -77,7 +80,7 @@ export const VantaBackground = ({
     </div>
   );
 };
-//   <VantaBackground 
+//   <VantaBackground
 //         color={0x3a9df1}
 //         backgroundColor={0x0d1117}
 //         points={10}
