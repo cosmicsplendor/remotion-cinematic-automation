@@ -52,17 +52,8 @@ export const TransferMarket: React.FC = () => {
     const originalDataTyped = data as Frame[];
 
     for (const index in originalDataTyped) {
-      const { year, day, month, coins } = originalDataTyped[index];
-      // Allow invalid season if frames exist, just don't associate audio/odometer
-      if (coins && coins.length > 0) {
-        const coinObjs = []
-        for (let i=0; i < coins.length; i+=2) {
-          const name: string = coins[i] as string;
-          const cap: number = coins[i + 1] as number;
-          coinObjs.push({ name, cap }); // Store season number or null
-        }
-        result.push({ season: `${year}-${month}-${day}`, data: coinObjs });
-      }
+      const { weekStart, coins } = originalDataTyped[index];
+      result.push({ weekStart, data: coins.slice(0, 15) });
     }
     return result;
   }, [data]);
@@ -76,20 +67,20 @@ export const TransferMarket: React.FC = () => {
     const originalDataTyped = data as Frame[];
 
     for (const seasonEntry of originalDataTyped) {
-      const seasonNumber = parseInt(seasonEntry.season as any, 10);
+      const seasonNumber = new Date(seasonEntry.weekStart).getFullYear();
 
       // Only add metadata if season is a valid number AND there are frames for this entry
-      if (!isNaN(seasonNumber) && seasonEntry.frames && seasonEntry.frames.length > 0) {
+      if (!isNaN(seasonNumber) && seasonEntry.coins && seasonEntry.coins.length > 0) {
         metadata.push({
           season: seasonNumber,
           startFrame: currentFrameCounter,
         });
       }
 
-      // ALWAYS increment the frame counter based on the number of frames in the entry,
+      // ALWAYS increment the frame counter based on the number of coins in the entry,
       // regardless of whether the season was valid or if audio metadata was added for it.
-      if (seasonEntry.frames && seasonEntry.frames.length > 0) {
-        currentFrameCounter += seasonEntry.frames.length * FRAMES_PER_DATA_POINT;
+      if (seasonEntry.coins && seasonEntry.coins.length > 0) {
+        currentFrameCounter += seasonEntry.coins.length * FRAMES_PER_DATA_POINT;
       }
     }
     // console.log("Season Audio Metadata:", metadata);
@@ -111,7 +102,7 @@ export const TransferMarket: React.FC = () => {
   const currentData = flattenedData[currentDataIndex];
 
   // Get current season as number (will be null if data was invalid)
-  const currentSeason = currentData ? currentData.season : null;
+  const currentSeason = currentData ? new Date(currentData.weekStart).getFullYear() : null;
 
   // Find the metadata for the *current* season
   const currentSeasonMetadata = useMemo(() => {
@@ -120,7 +111,7 @@ export const TransferMarket: React.FC = () => {
   }, [currentSeason, seasonAudioMetadata]);
 
 
-  
+
   useEffect(() => {
     if (containerRef.current === null || svgRef.current === null) {
       return;
@@ -151,7 +142,7 @@ export const TransferMarket: React.FC = () => {
 
     const barChartRaw = BarChartGenerator<Datum>(dims)
       .accessors({
-        x: d => d.cap,
+        x: d => d.marketCap,
         y: d => d.name,
         id: d => d.name,
         color: d => (colorsMap as any)[d.name],
@@ -231,8 +222,8 @@ export const TransferMarket: React.FC = () => {
           }}>
           </span>
           {/* Ensure SeasonOdometer handles null if currentSeason is null */}
-       
-          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude}  top="5vh" right="26px" /> {/* Pass 0 if season is null to avoid error */}
+
+          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="5vh" right="26px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
