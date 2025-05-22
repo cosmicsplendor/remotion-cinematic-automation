@@ -25,7 +25,7 @@ import Clock from './Clock';
 // --- Restored Original Constants and Export ---
 const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
-const DURATION = 500; // Equivalent to 1 second at 60fps
+const DURATION = 1000; // Equivalent to 1 second at 60fps
 const margins = { mt: 100, mr: 250, mb: 40, ml: 290 };
 export const TRANSFER_LIFESPAN = data.length * DURATION / 1000; // Restored original export
 
