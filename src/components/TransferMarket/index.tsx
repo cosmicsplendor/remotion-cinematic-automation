@@ -147,7 +147,10 @@ export const TransferMarket: React.FC = () => {
         id: d => d.name,
         color: d => (colorsMap as any)[d.name],
         name: d => (teamNameMap as any)[d.name] ?? d.name,
-        logoSrc: d => (logosMap as any)[d.name]
+        logoSrc: d =>{
+          const sanitizedName = d.name.replace(/[^a-zA-Z0-9\-_]/g, '_').toLowerCase();
+          return staticFile(`race-images/${sanitizedName}.png`);
+        }
       });
 
     const barChart = modifier(barChartRaw);
