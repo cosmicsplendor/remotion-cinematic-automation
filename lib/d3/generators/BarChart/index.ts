@@ -1,6 +1,6 @@
 import { wait } from "../../utils/index"
 import { Dims } from "../../utils/types"
-import { scaleLinear, select, scaleBand, max, transition, Selection, Transition, BaseType, axisTop, axisLeft, interpolate, } from "d3"
+import { scaleLinear, select, scaleBand, max, transition, Selection, Transition, BaseType, axisTop, axisLeft, interpolate, scalePow, } from "d3"
 
 type Hash = Record<string, any>
 
@@ -85,8 +85,8 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const transitionState = transition()
             .duration(animation.duration)
             .ease(animation.easingFn)
-        const pointsScale = scaleLinear()
-            .domain([0, Math.max(maxPoints as number, 10)])
+        const pointsScale = scalePow().exponent(0.33)
+            .domain([0, Math.max(maxPoints as number, 20)])
             .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr])
             .nice()
         const teamNameScale = scaleBand()

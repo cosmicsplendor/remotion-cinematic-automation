@@ -38,7 +38,7 @@ export const formatX = (num: number | string) => {
   else if (n >= 100_000_000) decimals = 1
   else decimals = 2
 
-  return `€${(n / divisor).toFixed(decimals)}${suffix}`
+  return `$${(n / divisor).toFixed(decimals)}${suffix}`
 }
 
 export const reverseFormatX = (str: string) => {
