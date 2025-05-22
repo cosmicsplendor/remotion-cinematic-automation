@@ -3,30 +3,31 @@ const path = require('path');
 
 // Path to your data file
 const dataFilePath = path.join(__dirname, '../src/components/TransferMarket/assets/data.json');
-
+const D1 = 'Tether';
+const D2 = 'Tether USDt';
 function processCoinData(data) {
     const processedData = data.map(weekData => {
         const coins = weekData.coins;
-        let usdcIndex = -1;
-        let usdCoinIndex = -1;
+        let d1Idx = -1;
+        let dtIdx = -1;
 
         // Find the indices of USDC and USD Coin
         for (let i = 0; i < coins.length; i++) {
-            if (coins[i].name === 'USD Coin' && usdCoinIndex === -1) {
-                usdCoinIndex = i;
-            } else if (coins[i].name === 'USDC' && usdcIndex === -1) {
-                usdcIndex = i;
+            if (coins[i].name === D1 && dtIdx === -1) {
+                dtIdx = i;
+            } else if (coins[i].name === D2 && d1Idx === -1) {
+                d1Idx = i;
             }
         }
 
         // Modify the coins array based on the indices
-        if (usdcIndex !== -1 && usdCoinIndex !== -1) {
-            if (usdcIndex < usdCoinIndex) {
+        if (d1Idx !== -1 && dtIdx !== -1) {
+            if (d1Idx < dtIdx) {
                 // Keep USDC, remove USD Coin
-                coins.splice(usdCoinIndex, 1); // Remove the element at usdCoinIndex
+                coins.splice(dtIdx, 1); // Remove the element at dtIdx
             } else {
                 // Keep USD Coin, remove USDC
-                coins.splice(usdcIndex, 1); // Remove the element at usdcIndex
+                coins.splice(d1Idx, 1); // Remove the element at d1Idx
             }
         }
 
