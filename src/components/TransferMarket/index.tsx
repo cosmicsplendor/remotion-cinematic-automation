@@ -139,16 +139,17 @@ export const TransferMarket: React.FC = () => {
 
       return safeChart as Chart;
     };
-
+    const sanitizeName = (name: string) => name.replace(/[^a-zA-Z0-9\-_]/g, '_').toLowerCase()
     const barChartRaw = BarChartGenerator<Datum>(dims)
       .accessors({
         x: d => d.marketCap,
         y: d => d.name,
         id: d => d.name,
-        color: d => (colorsMap as any)[d.name],
+        // color: d => (colorsMap as any)[sanitizeName(d.name)] ?? "#000",
+        color: d => "#000",
         name: d => (teamNameMap as any)[d.name] ?? d.name,
         logoSrc: d =>{
-          const sanitizedName = d.name.replace(/[^a-zA-Z0-9\-_]/g, '_').toLowerCase();
+          const sanitizedName = sanitizeName(d.name);
           return staticFile(`race-images/${sanitizedName}.png`);
         }
       });
