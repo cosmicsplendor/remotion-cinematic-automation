@@ -3,8 +3,8 @@ const path = require('path');
 
 // Path to your data file
 const dataFilePath = path.join(__dirname, '../src/components/TransferMarket/assets/data.json');
-const D1 = 'Tether';
-const D2 = 'Tether USDt';
+const D1 = 'Binance Coin';
+const D2 = 'BNB';
 function processCoinData(data) {
     const processedData = data.map(weekData => {
         const coins = weekData.coins;
