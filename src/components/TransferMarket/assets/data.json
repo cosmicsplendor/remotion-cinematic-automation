@@ -24531,6 +24531,8 @@
     "weekStart": "2020-11-13T00:00:00.000Z",
     "coins": [
       {
+        "name": "Terra Classic",
+        "marketCap": 915338873922.4
       },
       {
         "name": "Bitcoin",
@@ -24638,6 +24640,8 @@
     "weekStart": "2020-11-20T00:00:00.000Z",
     "coins": [
       {
+        "name": "Terra Classic",
+        "marketCap": 549203324353.44
       },
       {
         "name": "Bitcoin",
@@ -24753,6 +24757,8 @@
     "weekStart": "2020-11-27T00:00:00.000Z",
     "coins": [
       {
+        "name": "Terra Classic",
+        "marketCap": 366135549568.96
       },
       {
         "name": "Bitcoin",
