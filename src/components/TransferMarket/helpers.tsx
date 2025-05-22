@@ -7,13 +7,14 @@ import "./odometer-themes/slot-machine.css";
 
 export type StrHash = Hash<string>
 export type Datum = {
-  club: string
-  spent: number
+  name: string
+  cap: number
 }
 export type Frame = {
-  season: number,
-  window: string,
-  frames: Datum[][]
+  year: number,
+  month: number,
+  day: number,
+  coins: Array<string|number>
 }
 export type Chart = BarChart<Datum>
 export type SafeChart = {

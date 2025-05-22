@@ -31,7 +31,7 @@ const res = {
   height: Math.floor(_res.height / 2) * 2
 };
 
-const FPS = 20
+const FPS = 60
 export const DetectiveTimelineVideo = () => {
   const totalDurationInFrames = timelineData.events.length * 0.5 * FPS + timelineData.events.reduce(
     (acc, event) => acc + Math.ceil((event.audioDuration || 3) * FPS),
@@ -40,7 +40,7 @@ export const DetectiveTimelineVideo = () => {
   return <Composition
     id="DetectiveTimeline"
     component={DetectiveTimeline}
-    durationInFrames={160}
+    durationInFrames={totalDurationInFrames}
     fps={FPS}
     width={res.width}
     height={res.height}

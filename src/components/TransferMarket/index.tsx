@@ -25,9 +25,9 @@ import Clock from './Clock';
 // --- Restored Original Constants and Export ---
 const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
-const DURATION = 1500; // Equivalent to 1 second at 60fps
+const DURATION = 500; // Equivalent to 1 second at 60fps
 const margins = { mt: 100, mr: 250, mb: 40, ml: 290 };
-export const TRANSFER_LIFESPAN = data.length * DURATION * 6 / 1000; // Restored original export
+export const TRANSFER_LIFESPAN = data.length * DURATION / 1000; // Restored original export
 
 export const TransferMarket: React.FC = () => {
   const frame = useCurrentFrame();
@@ -52,13 +52,16 @@ export const TransferMarket: React.FC = () => {
     const originalDataTyped = data as Frame[];
 
     for (const index in originalDataTyped) {
-      const { frames, season } = originalDataTyped[index];
-      const seasonNumber = parseInt(season as any, 10);
+      const { year, day, month, coins } = originalDataTyped[index];
       // Allow invalid season if frames exist, just don't associate audio/odometer
-      if (frames && frames.length > 0) {
-        for (const dataFrame of frames) {
-          result.push({ data: dataFrame, season: isNaN(seasonNumber) ? null : seasonNumber }); // Store season number or null
+      if (coins && coins.length > 0) {
+        const coinObjs = []
+        for (let i=0; i < coins.length; i+=2) {
+          const name: string = coins[i] as string;
+          const cap: number = coins[i + 1] as number;
+          coinObjs.push({ name, cap }); // Store season number or null
         }
+        result.push({ season: `${year}-${month}-${day}`, data: coinObjs });
       }
     }
     return result;
@@ -148,12 +151,12 @@ export const TransferMarket: React.FC = () => {
 
     const barChartRaw = BarChartGenerator<Datum>(dims)
       .accessors({
-        x: d => d.spent,
-        y: d => d.club,
-        id: d => d.club,
-        color: d => (colorsMap as any)[d.club],
-        name: d => (teamNameMap as any)[d.club] ?? d.club,
-        logoSrc: d => (logosMap as any)[d.club]
+        x: d => d.cap,
+        y: d => d.name,
+        id: d => d.name,
+        color: d => (colorsMap as any)[d.name],
+        name: d => (teamNameMap as any)[d.name] ?? d.name,
+        logoSrc: d => (logosMap as any)[d.name]
       });
 
     const barChart = modifier(barChartRaw);
