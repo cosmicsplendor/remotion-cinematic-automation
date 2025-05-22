@@ -21512,10 +21512,6 @@
         "marketCap": 17009299485.617285
       },
       {
-        "name": "Innovative Bioresearch Classic",
-        "marketCap": 10254455453.045
-      },
-      {
         "name": "XRP",
         "marketCap": 8148147388.767857
       },
@@ -21617,10 +21613,6 @@
         "marketCap": 6357928651.492428
       },
       {
-        "name": "Innovative Bioresearch Classic",
-        "marketCap": 6152673271.827
-      },
-      {
         "name": "Bitcoin Cash",
         "marketCap": 4303158129.972429
       },
@@ -21716,10 +21708,6 @@
       {
         "name": "Bitcoin Cash",
         "marketCap": 4377981648.247
-      },
-      {
-        "name": "Innovative Bioresearch Classic",
-        "marketCap": 4101782181.2180004
       },
       {
         "name": "Bitcoin SV",
@@ -24543,8 +24531,6 @@
     "weekStart": "2020-11-13T00:00:00.000Z",
     "coins": [
       {
-        "name": "Terra Classic",
-        "marketCap": 915338873922.4
       },
       {
         "name": "Bitcoin",
@@ -24652,8 +24638,6 @@
     "weekStart": "2020-11-20T00:00:00.000Z",
     "coins": [
       {
-        "name": "Terra Classic",
-        "marketCap": 549203324353.44
       },
       {
         "name": "Bitcoin",
@@ -24769,8 +24753,6 @@
     "weekStart": "2020-11-27T00:00:00.000Z",
     "coins": [
       {
-        "name": "Terra Classic",
-        "marketCap": 366135549568.96
       },
       {
         "name": "Bitcoin",

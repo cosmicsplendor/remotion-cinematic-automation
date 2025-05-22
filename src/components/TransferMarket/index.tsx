@@ -127,7 +127,7 @@ export const TransferMarket: React.FC = () => {
         .bar({ gap: 22, minLength: 10 })
         .barCount({ dir: 1, active: 10, max: 20 })
         .label({ fill: "#707070", rightOffset: 200, size: 24 })
-        .position({ fill: "#666", size: 32, xOffset: -250 })
+        .position({ fill: "#666", size: 32, xOffset: -260 })
         .points({ size: 20, xOffset: 150, fill: "#555" })
         .logoXOffset(50)
         .xAxis({
@@ -226,7 +226,7 @@ export const TransferMarket: React.FC = () => {
           </span>
           {/* Ensure SeasonOdometer handles null if currentSeason is null */}
 
-          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="5vh" right="26px" /> {/* Pass 0 if season is null to avoid error */}
+          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="5vh" right="0px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
