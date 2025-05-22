@@ -226,7 +226,7 @@ export const TransferMarket: React.FC = () => {
           </span>
           {/* Ensure SeasonOdometer handles null if currentSeason is null */}
 
-          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="5vh" right="0px" /> {/* Pass 0 if season is null to avoid error */}
+          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="15vh" right="64px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
