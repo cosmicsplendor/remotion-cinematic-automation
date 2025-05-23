@@ -11,7 +11,7 @@ const Clock: React.FC<{ x: number, y: number, lifespan: number, cycleDuration: n
         }
         const clock: any = ClockGenerator(`#${CLOCK_ID}`)
         clock.pos({ x, y })
-            .background("#aaa")
+            .background("#999")
         clock()
         setTimeout(() => {
             clock.duration(`${lifespan}s`)

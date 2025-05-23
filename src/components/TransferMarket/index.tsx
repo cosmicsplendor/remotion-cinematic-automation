@@ -21,6 +21,7 @@ import data from "./assets/data.json"
 import { AudioVisualizer } from '../AudioVisualizer';
 import React from 'react'; // Import React for Fragment
 import Clock from './Clock';
+import RotatingGear from './Gear';
 
 // --- Restored Original Constants and Export ---
 const PLOT_ID = "PLOTX"
@@ -100,7 +101,7 @@ export const TransferMarket: React.FC = () => {
 
   // Get current data to display
   const currentData = flattenedData[currentDataIndex];
-
+  const quarter = Math.floor(new Date( flattenedData[currentDataIndex]?.weekStart).getMonth() / 3) + 1;
   // Get current season as number (will be null if data was invalid)
   const currentSeason = currentData ? new Date(currentData.weekStart).getFullYear() : null;
 
@@ -239,6 +240,7 @@ export const TransferMarket: React.FC = () => {
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
       )} */}
+      <RotatingGear top="200px" right="250px"/>
       {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );
