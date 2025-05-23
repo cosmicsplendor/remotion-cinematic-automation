@@ -219,7 +219,7 @@ export const TransferMarket: React.FC = () => {
           </span>
           {/* Ensure SeasonOdometer handles null if currentYear is null */}
           <OdometerDisplay currentIndex={quarter} values={quarters} top="8px" right="190px" />
-          <RotatingGear top="-64px" right="300px" />
+          <RotatingGear top="-64px" right="300px" t={frame * 1/fps}/>
           <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}

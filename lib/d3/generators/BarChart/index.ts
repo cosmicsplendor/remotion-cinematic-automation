@@ -1,8 +1,6 @@
 import { Dims } from "../../utils/types"
 import { scaleLinear, select, scaleBand, max, Selection, BaseType, axisTop, axisLeft, interpolate, scalePow, ScalePower } from "d3" // Added ScalePower type
 
-type Hash = Record<string, any>
-
 type BarCount = Record<"max" | "active", number> & Record<"dir", 1 | -1>
 type Bar = Record<"gap" | "minLength", number>
 type Label = {
@@ -58,16 +56,6 @@ type InterpolatedDatum<Datum> = Datum & {
     _newX: number  // Ensure _prevX and _newX are always numbers
 }
 
-const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: T, attribs: Hash) => {
-    return Object
-        .entries(attribs)
-        .reduce((sel, entry: [string, any]) => {
-            const [attrib, val] = entry
-            return sel.attr(attrib, val)
-        }, sel)
-}
-
-// Helper function to create interpolated scales that transition smoothly
 const createInterpolatedScale = (
     prevScale: ScalePower<number, number> | null, // Typed prevScale
     newScale: ScalePower<number, number>,     // Typed newScale
@@ -196,15 +184,11 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const prevMaxPoints = prevSliced.length > 0 ? Math.max(...prevSliced.map(accessors.x), 20) : 20;
         const newMaxPoints = newSliced.length > 0 ? Math.max(...newSliced.map(accessors.x), 20) : 20; // Ensure newSliced check
 
-        // Scale for newData (target state at progress = 1)
         const targetPointsScale = scalePow().exponent(0.33)
             .domain([0, newMaxPoints])
             .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr])
             .nice();
 
-        // Scale for prevData (initial state at progress = 0)
-        // If memoizedPrevPointsScale is null (first frame), create it based on prevMaxPoints.
-        // Otherwise, memoizedPrevPointsScale holds the targetPointsScale from the end of the last transition.
         let initialPointsScale = memoizedPrevPointsScale;
         if (!initialPointsScale) {
             initialPointsScale = scalePow().exponent(0.33)
@@ -213,7 +197,6 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                 .nice();
         }
 
-        // Interpolated scale for drawing the AXIS
         const axisDisplayScale = createInterpolatedScale(initialPointsScale, targetPointsScale, progress);
 
         if (progress >= 1) {
@@ -228,20 +211,22 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             );
 
         const pointsAxisGen = horizontal ? axisLeft(axisDisplayScale) : axisTop(axisDisplayScale); // Axis uses interpolated scale
-
-        // Use the range from the axisDisplayScale for consistency, though all ranges should be identical.
         const ptsRange = axisDisplayScale.range();
         const ptsRangeDir = Math.sign(ptsRange[1] - ptsRange[0]);
 
-        // *** MODIFIED barLenAccessor ***
         const barLenAccessor = (d: InterpolatedDatum<Datum>) => {
-            // Length contribution from value in the initial scale (progress=0)
             const prevLengthCont = (initialPointsScale(d._prevX) - initialPointsScale.range()[0]) * Math.sign(initialPointsScale.range()[1] - initialPointsScale.range()[0]);
-            // Length contribution from value in the target scale (progress=1)
             const newLengthCont = (targetPointsScale(d._newX) - targetPointsScale.range()[0]) * Math.sign(targetPointsScale.range()[1] - targetPointsScale.range()[0]);
 
             const safePrevLengthCont = Math.max(0, prevLengthCont);
             const safeNewLengthCont = Math.max(0, newLengthCont);
+
+            if (d._transitionState === TransitionState.EXITING) {
+                // Interpolate from full size to (e.g.) 80% of original size as it exits
+                const exitFraction = 1;
+                const exitLength = safePrevLengthCont * (1 - progress * (1 - exitFraction));
+                return bar.minLength + exitLength;
+            }
 
             const interpolatedLengthCont = safePrevLengthCont * (1 - progress) + safeNewLengthCont * progress;
             return bar.minLength + interpolatedLengthCont;
@@ -286,23 +271,6 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                         .attr("rx", 2).attr("ry", 4);
                 }
             });
-
-        // Corrected logic for horizontal bar y-position.
-        // If horizontal, positive values go UP. Range is [bottom_y, top_y]. ptsRangeDir = top_y - bottom_y = negative.
-        // barLenAccessor(d) is positive length.
-        // barTopAccessor(d) = ptsRange[0] + ptsRangeDir * barLenAccessor(d) = bottom_y - length = y_value_of_bar_end.
-        // So bar's y should be barTopAccessor(d). Height is barLenAccessor(d).
-        // This was previously:
-        // .attr("y", d => {
-        //     const height = Math.max(0, barLenAccessor(d))
-        //     return dims.h - dims.mb - height // This assumes origin at top-left and positive height goes down.
-        // })
-        // For horizontal bars with scale range [bottom_y, top_y] (top_y < bottom_y):
-        // y-coordinate of the bar's top (value end) is barTopAccessor(d)
-        // y-coordinate of the bar's bottom (base) is ptsRange[0] (axisDisplayScale.range()[0])
-        // Height is ptsRange[0] - barTopAccessor(d) = -ptsRangeDir * barLenAccessor(d) = barLenAccessor(d)
-        // So if (horizontal), y should be barTopAccessor(d) and height barLenAccessor(d)
-
 
         svg.selectAll("rect.bar") // Re-selecting to apply corrected horizontal logic if needed
             // ... (data, join, fill, opacity calls are fine) ...
@@ -410,11 +378,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .join<SVGTextElement>("text")
             .attr("class", "position")
             .attr("x", dims.ml + position.xOffset)
-            // MODIFICATION 1: Use _targetPosition for the Y-coordinate
-            // This ensures the medal's Y position is fixed based on its final rank.
             .attr("y", d => {
-                // Assuming _targetPosition is always defined as a number (0-indexed rank or off-screen value)
-                // It would be good to make _targetPosition non-optional in your InterpolatedDatum type.
                 return positionScale(d._targetPosition || 0) + BAR_THICKNESS / 2;
             })
             .attr("alignment-baseline", "central")
@@ -424,20 +388,11 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("font-family", "helvetica")
             .attr("text-anchor", "start")
             .attr("opacity", getOpacity) // Opacity can still transition based on _interpolatedPosition,
-            // so medals fade in/out at their static spots.
-            // MODIFICATION 2: Determine the medal text based on _targetPosition
             .text((d: InterpolatedDatum<Datum>) => {
-                // _targetPosition is the 0-indexed final rank.
-                // Add 1 to get 1-indexed rank (e.g., 0 becomes 1st, 1 becomes 2nd).
                 const rank = (d._targetPosition || 0) + 1;
-
-                // Only show medals for items whose *final* rank is 1, 2, or 3
-                // and is within the number of active bars currently displayed.
-                // For example, if barCount.active is 2, only ranks 1 and 2 can show medals.
                 if (rank < 1 || rank > Math.min(3, barCount.active)) {
                     return ""; // No medal if target rank is not 1, 2, or 3, or beyond active count
                 }
-
                 const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
                 return medal;
             });
