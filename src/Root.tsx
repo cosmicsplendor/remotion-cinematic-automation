@@ -106,7 +106,7 @@ export const RemotionRoot = () => {
       <Composition
         id="TransferMarket"
         component={TransferMarket as React.FC<any>}
-        durationInFrames={FPS * TRANSFER_LIFESPAN}
+        durationInFrames={FPS * 10}
         fps={FPS}
         width={res.width} 
         height={res.height}

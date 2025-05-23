@@ -1,12 +1,10 @@
-import { wait } from "../../utils/index"
 import { Dims } from "../../utils/types"
-import { scaleLinear, select, scaleBand, max, transition, Selection, Transition, BaseType, axisTop, axisLeft, interpolate, scalePow, } from "d3"
+import { scaleLinear, select, scaleBand, max, Selection, BaseType, axisTop, axisLeft, interpolate, scalePow, } from "d3"
 
 type Hash = Record<string, any>
 
 type BarCount = Record<"max" | "active", number> & Record<"dir", 1 | -1>
 type Bar = Record<"gap" | "minLength", number>
-type Animation = Record<"easingFn", (norm: number) => number> & Record<"duration" | "offset", number>
 type Label = {
     fill: string,
     size: number,
@@ -26,25 +24,24 @@ type Accessors<Datum> = {
     name: (d: Datum) => string,
     logoSrc: (d: Datum) => string
 }
-// const pointsToStr = (val: number) => `${val}${val === 0 ? "" : " pts"}`
+
 type DOM = Record<"container" | "svg", string>
-export type BarChart<Datum> = {
-    (data?: Datum[], noTransition?: boolean): Promise<void>
-    animation?: (val: Animation) => BarChart<Datum>,
-    barCount?: (val: BarCount) => BarChart<Datum>,
-    bar?: (val: Bar) => BarChart<Datum>,
-    label?: (val: Label) => BarChart<Datum>,
-    points?: (val: Points) => BarChart<Datum>,
-    accessors: (val: Accessors<Datum>) => BarChart<Datum>,
-    data?: (val: Datum[]) => BarChart<Datum>,
-    logoXOffset?: (val: number) => BarChart<Datum>,
-    position?: (val: Position) => BarChart<Datum>,
-    xAxis?: (val: XAxis) => BarChart<Datum>,
-    tween?: (val: boolean) => BarChart<Datum>,
-    horizontal?: (val: boolean) => BarChart<Datum>,
-    background?: (val: string) => BarChart<Datum>,
-    dom?: ({ container, svg }: DOM) => BarChart<Datum>
+
+export type RemotionBarChart<Datum> = {
+    (prevData: Datum[], newData: Datum[], progress: number): void
+    barCount?: (val: BarCount) => RemotionBarChart<Datum>,
+    bar?: (val: Bar) => RemotionBarChart<Datum>,
+    label?: (val: Label) => RemotionBarChart<Datum>,
+    points?: (val: Points) => RemotionBarChart<Datum>,
+    accessors: (val: Accessors<Datum>) => RemotionBarChart<Datum>,
+    logoXOffset?: (val: number) => RemotionBarChart<Datum>,
+    position?: (val: Position) => RemotionBarChart<Datum>,
+    xAxis?: (val: XAxis) => RemotionBarChart<Datum>,
+    horizontal?: (val: boolean) => RemotionBarChart<Datum>,
+    background?: (val: string) => RemotionBarChart<Datum>,
+    dom?: ({ container, svg }: DOM) => RemotionBarChart<Datum>
 }
+
 const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: T, attribs: Hash) => {
     return Object
         .entries(attribs)
@@ -53,245 +50,217 @@ const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: 
             return sel.attr(attrib, val)
         }, sel)
 }
+
+// Helper function to interpolate between two data points
+const interpolateDataPoint = <Datum>(
+    prevItem: Datum | undefined,
+    newItem: Datum,
+    progress: number,
+    accessors: Accessors<Datum>
+): Datum & { _interpolatedX: number } => {
+    const prevX = prevItem ? accessors.x(prevItem) : 0
+    const newX = accessors.x(newItem)
+    const interpolatedX = prevX + (newX - prevX) * progress
+    
+    return {
+        ...newItem,
+        _interpolatedX: interpolatedX
+    }
+}
+
+// Helper function to create interpolated dataset
+const createInterpolatedData = <Datum>(
+    prevData: Datum[],
+    newData: Datum[],
+    progress: number,
+    accessors: Accessors<Datum>,
+    barCount: BarCount
+): (Datum & { _interpolatedX: number, _opacity: number })[] => {
+    const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
+    const prevSliced = prevData.slice(...sliceArgs)
+    const newSliced = newData.slice(...sliceArgs)
+    
+    // Create a map of previous data by ID for easy lookup
+    const prevMap = new Map(prevSliced.map(d => [accessors.id(d), d]))
+    
+    // Create interpolated data array
+    const interpolatedData = newSliced.map(newItem => {
+        const id = accessors.id(newItem)
+        const prevItem = prevMap.get(id)
+        const interpolated = interpolateDataPoint(prevItem, newItem, progress, accessors)
+        
+        // Calculate opacity for fade in/out effects
+        const opacity = prevItem ? 1 : progress // Fade in new items
+        
+        return {
+            ...interpolated,
+            _opacity: opacity
+        }
+    })
+    
+    // Add exiting items with fade out effect
+    prevSliced.forEach(prevItem => {
+        const id = accessors.id(prevItem)
+        const stillExists = newSliced.some(newItem => accessors.id(newItem) === id)
+        
+        if (!stillExists) {
+            const interpolated = interpolateDataPoint(prevItem, prevItem, progress, accessors)
+            interpolatedData.push({
+                ...interpolated,
+                _opacity: 1 - progress // Fade out
+            })
+        }
+    })
+    
+    return interpolatedData
+}
+
 function BarChartGenerator<Datum extends object>(dims: Dims) {
     type Data = Datum[]
-    type TransitionResult = Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>
+    type InterpolatedDatum = Datum & { _interpolatedX: number, _opacity: number }
 
-    let animation: Animation, barCount: BarCount, bar: Bar, label: Label, points: Points, xAxis: XAxis = { offset: -10, size: 18 }
-    let accessors: Accessors<Datum>, allData: Data, logoXOffset: number, position: Position, tween = true, horizontal = false, background = "whitesmoke", dom: DOM
+    let barCount: BarCount, bar: Bar, label: Label, points: Points, xAxis: XAxis = { offset: -10, size: 18 }
+    let accessors: Accessors<Datum>, logoXOffset: number, position: Position, horizontal = false, background = "whitesmoke", dom: DOM
 
-    const transitionTo = (
-        sel: Selection<BaseType, Datum, BaseType, Datum> | Transition<BaseType, Datum, BaseType, Datum>,
-        attribs: Hash,
-        transitionState: Transition<BaseType, unknown, null, undefined>,
-        noTransition = false
-    ): TransitionResult => {
-        const initialSel = noTransition ? sel : sel.transition(transitionState)
-        return applyAttribs(initialSel, attribs)
-    }
-
-    const barGraph: BarChart<Datum> = async (newData, noTransition = false) => {
+    const barGraph: RemotionBarChart<Datum> = (prevData: Data, newData: Data, progress: number) => {
         const svg = select(dom.svg)
             .attr("width", dims.w)
             .attr("height", dims.h)
-        allData = newData ?? allData
+            
+        const interpolatedData = createInterpolatedData(prevData, newData, progress, accessors, barCount)
         const BAR_THICKNESS = Math.round((horizontal ? dims.w - dims.ml - dims.mt : dims.h - dims.mt - dims.mb) / barCount.active) - bar.gap
-        const EXIT_DEST = horizontal ?
-            barCount.dir === -1 ? -BAR_THICKNESS : dims.w:
-            barCount.dir === -1 ? -BAR_THICKNESS : dims.h
-        const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
-        const data = allData.slice(...sliceArgs)
-        const maxPoints = max(data, accessors.x)
-        const transitionState = transition()
-            .duration(animation.duration)
-            .ease(animation.easingFn)
+        
+        // Use interpolated x values for scaling
+        const maxPoints = max(interpolatedData, d => d._interpolatedX)
+        
         const pointsScale = scalePow().exponent(0.33)
             .domain([0, Math.max(maxPoints as number, 20)])
             .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr])
             .nice()
+            
         const teamNameScale = scaleBand()
-            .domain(data.map(accessors.y))
+            .domain(interpolatedData.map(d => accessors.y(d)))
             .range(horizontal ? [dims.ml, dims.w - dims.mr] : [dims.mt, dims.h - dims.mb])
+            
         const pointsAxisGen = horizontal ? axisLeft(pointsScale) : axisTop(pointsScale)
         const ptsRange = pointsScale.range()
         const ptsRangeDir = Math.sign(ptsRange[1] - ptsRange[0])
 
-        const barLenAccessor = (d: Datum) => {
-            return bar.minLength + (pointsScale(accessors.x(d)) - ptsRange[0]) * ptsRangeDir
+        const barLenAccessor = (d: InterpolatedDatum) => {
+            return bar.minLength + (pointsScale(d._interpolatedX) - ptsRange[0]) * ptsRangeDir
         }
-        const barTopAccessor = (d: Datum) => ptsRange[0] + ptsRangeDir * barLenAccessor(d)
+        const barTopAccessor = (d: InterpolatedDatum) => ptsRange[0] + ptsRangeDir * barLenAccessor(d)
         const barBaseAccessor = () => ptsRange[0]
 
-        const transitionBars = <T extends BaseType>(
-            sel: Selection<T, Datum, BaseType, Datum>,
-            to: number | Function = (d: Datum) => teamNameScale(accessors.y(d)),
-            opacity = 1
-        ) => {
-            const attribs: Hash = horizontal ? {
-                x: to,
-                y: (d: Datum) => {
-                    const height = barLenAccessor(d)
-                    return dims.h - dims.mb - height
-                },
-                height: barLenAccessor,
-                opacity
-            } : {
-                width: barLenAccessor,
-                y: to, opacity
-            }
-            return transitionTo(sel as any, attribs, transitionState, noTransition)
-        }
-
-        const transitionPoints = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
-            const attribs: Hash = {
-                transform: (d: Datum) => {
-                    const alongPtsAxis = pointsScale(accessors.x(d)) + ptsRangeDir * points.xOffset
-                    const alongLabelAxis = dest ?? (teamNameScale(accessors.y(d)) || 0) + BAR_THICKNESS * 0.5
-                    if (horizontal) return `translate(${alongLabelAxis}, ${alongPtsAxis}), rotate(-${points.rotation})`
-                    return `translate(${alongPtsAxis}, ${alongLabelAxis})`
-                }
-            }
-            return transitionTo(sel as any, attribs, transitionState, noTransition)
-        }
-        const transitionLabels = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
-            const attribs: Hash = {
-                transform: (d: Datum) => {
-                    const alongLabelAxis = dest ?? teamNameScale(accessors.y(d))
-                    if (horizontal) {
-                        return `translate(${(alongLabelAxis || 0) + BAR_THICKNESS / 2}, ${barBaseAccessor() + (label.topOffset || 0)}), rotate(${label.rotation})`
-                    }
-                    return `translate(${dims.ml - (label.rightOffset || 0)}, ${(alongLabelAxis || 0) + BAR_THICKNESS / 2})`
-                }
-            }
-            return transitionTo(sel as any, attribs, transitionState, noTransition)
-        }
+        // Render bars
         svg.selectAll("rect")
-            .data<Datum>(data, accessors.id as any)
+            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
             .join(
                 enter => {
-                    const sel = enter
-                        .append("rect")
-                    if (horizontal) {
-                        sel.attr("x", EXIT_DEST)
-                            .attr("y", barTopAccessor)
-                            .attr("height", barLenAccessor)
-                        return transitionBars(sel);
-                    }
-                    sel.attr("y", EXIT_DEST)
-                        .attr("width", d => {
-                            const len = barLenAccessor(d);
-                            return len;
-                        });
-                    return transitionBars(sel);
+                    const sel = enter.append("rect")
+                    return sel
                 },
-                update => transitionBars(update),
-                exit => transitionBars(exit, EXIT_DEST, 0)
-                    .remove()
+                update => update,
+                exit => exit.remove()
             )
-            .attr("fill", accessors.color)
+            .attr("fill", d => accessors.color(d))
+            .attr("opacity", d => d._opacity)
             .call(sel => {
                 if (horizontal) {
-                    return sel.attr("width", BAR_THICKNESS)
-                        .attr("rx", 2) // Add rx for rounded corners
-                        .attr("ry", 4); // Add ry for rounded corners
-                }
-                sel.attr("height", BAR_THICKNESS)
-                    .attr("x", barBaseAccessor())
-                    .attr("rx", 2) // Add rx for rounded corners
-                    .attr("ry", 4); // Add ry for rounded corners
-            })
-            .attr("src", accessors.logoSrc)
-            .attr("height", BAR_THICKNESS);
-        const transitionImagesSvg = <T extends BaseType>(sel: Selection<T, Datum, BaseType, Datum>, dest?: number) => {
-            const attribs: Hash = {
-                x: (d: Datum) => {
-                    if (horizontal) {
-                        return dest ?? teamNameScale(accessors.y(d));
-                    } else {
-                        return barTopAccessor(d) + ptsRangeDir * logoXOffset;
-                    }
-                },
-                y: (d: Datum) => {
-                    if (horizontal) {
-                        return barTopAccessor(d) + ptsRangeDir * logoXOffset;
-                    } else {
-                        return dest ?? teamNameScale(accessors.y(d));
-                    }
-                }
-            };
-            return transitionTo(sel as any, attribs, transitionState, noTransition);
-        }
-
-        svg.selectAll("image")
-            .data(data, accessors.id as any)
-            .join(
-                enter => {
-                    const sel = enter
-                        .append("image")
-
-                    if (horizontal) {
-                        sel.attr("x", EXIT_DEST)
-                            .attr("y", d => barTopAccessor(d) + ptsRangeDir * logoXOffset);
-                    } else {
-                        sel.attr("x", d => barTopAccessor(d) + ptsRangeDir * logoXOffset)
-                            .attr("y", EXIT_DEST);
-                    }
-
-                    return transitionImagesSvg(sel);
-                },
-                update => transitionImagesSvg(update),
-                exit => {
-                    transitionImagesSvg(exit, EXIT_DEST).remove();
-                }
-            )
-            .attr("href", accessors.logoSrc) // SVG uses href instead of src
-            .attr("height", BAR_THICKNESS)
-            .attr("width", BAR_THICKNESS) // You might want to maintain aspect ratio here
-            .attr("preserveAspectRatio", "xMidYMid meet"); // Maintain aspect ratio
-        const totalPointsSel = svg
-            .selectAll<BaseType, Datum>(".total-points")
-            .data<Datum>(data)
-            .join(
-                enter => {
-                    const sel = enter
-                        .append("text")
-                        .call(sel => {
-                            if (horizontal) {
-                                return sel
-                                    .attr("transform", `translateX(${EXIT_DEST})`)
-                            }
-                            sel.attr("transform", `translate(0, ${EXIT_DEST})`)
+                    return sel
+                        .attr("x", d => teamNameScale(accessors.y(d)) || 0)
+                        .attr("y", d => {
+                            const height = barLenAccessor(d)
+                            return dims.h - dims.mb - height
                         })
-                    return transitionPoints(sel)
-                },
-                update => transitionPoints(update),
-                exit => {
-                    return transitionPoints(exit, EXIT_DEST)
-                        .remove()
+                        .attr("width", BAR_THICKNESS)
+                        .attr("height", barLenAccessor)
+                        .attr("rx", 2)
+                        .attr("ry", 4)
+                } else {
+                    return sel
+                        .attr("x", barBaseAccessor())
+                        .attr("y", d => teamNameScale(accessors.y(d)) || 0)
+                        .attr("width", barLenAccessor)
+                        .attr("height", BAR_THICKNESS)
+                        .attr("rx", 2)
+                        .attr("ry", 4)
                 }
+            })
+
+        // Render images/logos
+        svg.selectAll("image")
+            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
+            .join(
+                enter => enter.append("image"),
+                update => update,
+                exit => exit.remove()
             )
-            .attr("class", "total-points")
+            .attr("href", d => accessors.logoSrc(d))
+            .attr("height", BAR_THICKNESS)
+            .attr("width", BAR_THICKNESS)
+            .attr("preserveAspectRatio", "xMidYMid meet")
+            .attr("opacity", d => d._opacity)
+            .call(sel => {
+                if (horizontal) {
+                    return sel
+                        .attr("x", d => teamNameScale(accessors.y(d)) || 0)
+                        .attr("y", d => barTopAccessor(d) + ptsRangeDir * logoXOffset)
+                } else {
+                    return sel
+                        .attr("x", d => barTopAccessor(d) + ptsRangeDir * logoXOffset)
+                        .attr("y", d => teamNameScale(accessors.y(d)) || 0)
+                }
+            })
+
+        // Render points text
+        svg.selectAll(".total-points")
+            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
+            .join(
+                enter => enter.append("text").attr("class", "total-points"),
+                update => update,
+                exit => exit.remove()
+            )
             .attr("font-size", points.size)
             .attr("font-family", "helvetica")
             .attr("fill", points.fill)
             .attr("style", "letter-spacing: 2px;")
-            .attr("font-family", "helvetica")
             .attr("alignment-baseline", "central")
+            .attr("opacity", d => d._opacity)
+            .text(d => xAxis.format ? xAxis.format(d._interpolatedX) : d._interpolatedX.toString())
+            .attr("transform", d => {
+                const alongPtsAxis = pointsScale(d._interpolatedX) + ptsRangeDir * points.xOffset
+                const alongLabelAxis = (teamNameScale(accessors.y(d)) || 0) + BAR_THICKNESS * 0.5
+                if (horizontal) return `translate(${alongLabelAxis}, ${alongPtsAxis}), rotate(-${points.rotation})`
+                return `translate(${alongPtsAxis}, ${alongLabelAxis})`
+            })
 
-        svg
-            .selectAll<BaseType, Datum>(".label-axis")
-            .data<Datum>(data, accessors.id)
+        // Render labels
+        svg.selectAll(".label-axis")
+            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
             .join(
-                enter => {
-                    const sel = enter
-                        .append("text")
-                        .call(sel => {
-                            if (horizontal) {
-                                return sel.attr("transform", `translate(${EXIT_DEST}, ${barBaseAccessor() + (label.topOffset || 0)}), rotate(${label.rotation})`)
-                            }
-                            sel.attr("transform", `translate(${dims.ml - (label.rightOffset || 0)}, ${EXIT_DEST})`)
-                        })
-
-                    return transitionLabels(sel)
-                },
-                update => {
-                    return transitionLabels(update)
-                },
-                exit => {
-                    transitionLabels(exit, EXIT_DEST).remove()
-                }
+                enter => enter.append("text").attr("class", "label-axis"),
+                update => update,
+                exit => exit.remove()
             )
-            .attr("class", "label-axis")
-            .text(accessors.name)
+            .text(d => accessors.name(d))
             .attr("font-size", label.size)
             .attr("fill", label.fill)
             .attr("font-family", "Helvetica")
             .attr("alignment-baseline", "central")
             .attr("text-anchor", label.textAnchor ?? "")
+            .attr("opacity", d => d._opacity)
+            .attr("transform", d => {
+                const alongLabelAxis = teamNameScale(accessors.y(d)) || 0
+                if (horizontal) {
+                    return `translate(${alongLabelAxis + BAR_THICKNESS / 2}, ${barBaseAccessor() + (label.topOffset || 0)}), rotate(${label.rotation})`
+                }
+                return `translate(${dims.ml - (label.rightOffset || 0)}, ${alongLabelAxis + BAR_THICKNESS / 2})`
+            })
 
-        svg
-            .selectAll<BaseType, Datum>(".position")
-            .data<Datum>(data)
+        // Render position/rank numbers
+        svg.selectAll(".position")
+            .data<InterpolatedDatum>(interpolatedData)
             .join<SVGTextElement>("text")
             .attr("class", "position")
             .attr("x", dims.ml + position.xOffset)
@@ -301,29 +270,23 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("style", "font-weight: 700;")
             .attr("font-size", position.size)
             .attr("font-family", "helvetica")
+            .attr("text-anchor", "start")
+            .attr("opacity", d => d._opacity)
             .text((_: any, i: number) => {
                 const rank = (barCount.dir === -1 ? barCount.max - barCount.active : 0) + i + 1
                 const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : ''
-                return medal ? medal: ""
+                return medal ? medal : ""
             })
-            .call(sel => {
-                if (horizontal) {
-                    return sel.attr("text-anchor", "start")
-                }
-                sel.attr("text-anchor", "start")
-            })
+
+        // Render axis (only for non-horizontal)
         if (!horizontal) {
             const ptsAxis = svg
                 .selectAll("g.x-axis")
                 .data([null])
                 .join("g")
                 .attr("class", "x-axis")
-                .call(sel => {
-                    sel.attr("transform", horizontal ? `translate(${dims.ml + xAxis.offset}, 0)` : `translate(0, ${dims.mt + xAxis.offset})`)
-                })
-            ptsAxis.transition()
+                .attr("transform", `translate(0, ${dims.mt + xAxis.offset})`)
                 .attr("font-size", xAxis.size)
-                .duration(() => noTransition ? 0 : transitionState.duration())
                 .call(g => {
                     pointsAxisGen
                         .tickSizeInner(0)
@@ -337,35 +300,21 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                         .attr('stroke-width', 0)
                 })
         }
-
-        const totlaPointsSelTrans = totalPointsSel
-            .transition(transitionState)
-        if (noTransition || !tween) {
-            totalPointsSel.text(d => xAxis.format ? xAxis.format(accessors.x(d)) : accessors.x(d))
-        } else {
-            totlaPointsSelTrans.tween("text", function (d) {
-                var i = interpolate(xAxis.reverseFormat ? xAxis.reverseFormat(select(this).text()) : 0, accessors.x(d))
-                return t => {
-                    select(this).text(xAxis.format ? xAxis.format(i(t)) : i(t))
-                }
-            })
-        }
-        await wait(animation.duration + animation.offset)
     }
-    barGraph.animation = val => (animation = val, barGraph)
+
+    // Configuration methods (removed animation since it's controlled externally)
     barGraph.barCount = val => (barCount = val, barGraph)
     barGraph.bar = val => (bar = val, barGraph)
     barGraph.label = ({ topOffset = 25, rotation = -75, textAnchor = "start", ...rest }) => (label = { topOffset, rotation, textAnchor, ...rest }, barGraph)
     barGraph.points = val => (points = val, barGraph)
     barGraph.accessors = val => (accessors = val, barGraph)
-    barGraph.data = val => (allData = val, barGraph)
     barGraph.logoXOffset = val => (logoXOffset = val, barGraph)
     barGraph.position = val => (position = val, barGraph)
     barGraph.xAxis = val => (xAxis = val, barGraph)
-    barGraph.tween = val => (tween = val, barGraph)
     barGraph.horizontal = val => (horizontal = val, barGraph)
     barGraph.background = val => (background = val, barGraph)
     barGraph.dom = val => (dom = val, barGraph)
+    
     return barGraph
 }
 
