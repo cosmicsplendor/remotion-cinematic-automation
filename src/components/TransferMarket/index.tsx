@@ -8,7 +8,7 @@ import {
   staticFile,
   Sequence,
 } from 'remotion';
-import { Chart, Datum, SafeChart, Frame, SeasonOdometer, months } from "./helpers"
+import { Chart, Datum, SafeChart, Frame, SeasonOdometer, quarters } from "./helpers"
 import { easeLinear } from "d3"
 import { formatX, reverseFormatX } from "./helpers"
 import { BarChartGenerator } from '../../../lib/d3/generators/BarChart';
@@ -101,7 +101,7 @@ export const TransferMarket: React.FC = () => {
 
   // Get current data to display
   const currentData = flattenedData[currentDataIndex];
-  const currentMonth = new Date(flattenedData[currentDataIndex]?.weekStart).getMonth();
+  const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3);
   // Get current season as number (will be null if data was invalid)
   const currentYear = currentData ? new Date(currentData.weekStart).getFullYear() : "2000";
 
@@ -220,7 +220,7 @@ export const TransferMarket: React.FC = () => {
           }}>
           </span>
           {/* Ensure SeasonOdometer handles null if currentYear is null */}
-          <OdometerDisplay currentIndex={currentMonth} values={months} top="8px" right="190px" />
+          <OdometerDisplay currentIndex={quarter} values={quarters} top="8px" right="190px" />
           <RotatingGear top="-64px" right="300px" />
           <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>

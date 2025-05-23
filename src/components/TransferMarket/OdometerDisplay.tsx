@@ -138,7 +138,7 @@ const OdometerDisplay: React.FC<OdometerDisplayProps> = ({
         display: 'flex',
         flexDirection: 'column',
         transform: `translateY(${translateY}px)`,
-        transition: shouldAnimate ? 'transform 1s ease-out' : 'none',
+        transition: shouldAnimate ? 'transform 1s ease-in-out' : 'none',
     };
 
     const spanStyle: React.CSSProperties = {

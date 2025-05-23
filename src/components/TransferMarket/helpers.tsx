@@ -59,6 +59,7 @@ export const months = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ]
+export const quarters = ["Q1", "Q2", "Q3", "Q4"]
 // Create a custom Season Odometer Component
 export const SeasonOdometer = ({ value, amplitude, top, right }: { value: number | string, amplitude: number, top: string, right: string }) => {
   const odometerRef = useRef<HTMLDivElement>(null);
