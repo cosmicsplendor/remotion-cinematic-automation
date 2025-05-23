@@ -93,7 +93,7 @@ export const TransferMarket: React.FC = () => {
   const currentDataIndex = useMemo(() => {
     if (flattenedData.length === 0) return 0;
     return Math.min(
-      Math.floor(frame / FRAMES_PER_DATA_POINT),
+      Math.floor(frame / FRAMES_PER_DATA_POINT) + 1,
       flattenedData.length - 1
     );
   }, [frame, FRAMES_PER_DATA_POINT, flattenedData.length]);
@@ -103,13 +103,13 @@ export const TransferMarket: React.FC = () => {
   const currentData = flattenedData[currentDataIndex];
   const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3) + 1;
   // Get current season as number (will be null if data was invalid)
-  const currentSeason = currentData ? new Date(currentData.weekStart).getFullYear() : null;
+  const currentYear = currentData ? new Date(currentData.weekStart).getFullYear() : "2000";
 
   // Find the metadata for the *current* season
-  const currentSeasonMetadata = useMemo(() => {
-    if (currentSeason === null) return null; // No valid season to find metadata for
-    return seasonAudioMetadata.find(meta => meta.season === currentSeason) || null;
-  }, [currentSeason, seasonAudioMetadata]);
+  const currentYearMetadata = useMemo(() => {
+    if (currentYear === null) return null; // No valid season to find metadata for
+    return seasonAudioMetadata.find(meta => meta.season === currentYear) || null;
+  }, [currentYear, seasonAudioMetadata]);
 
 
 
@@ -160,6 +160,9 @@ export const TransferMarket: React.FC = () => {
     // Initialize with first frame data if available
     if (flattenedData.length > 0) {
       barChart(flattenedData[0].data.map(d => ({ ...d, points: 0 })), true);
+      setTimeout(() => {
+        barChart(flattenedData[1].data.map(d => ({ ...d, points: 0 })), false)
+      },0)
     } else {
       console.warn("flattenedData is empty, chart not initialized with data.");
     }
@@ -200,7 +203,7 @@ export const TransferMarket: React.FC = () => {
         ref={svgRef}
       ></svg>
       {/* Season Display */}
-      {currentData && (currentSeason !== null) && ( // Only show if data and a valid season number exist
+      {currentData && (currentYear !== null) && ( // Only show if data and a valid season number exist
         <div style={{
           position: 'absolute',
           top: '10px',
@@ -216,10 +219,10 @@ export const TransferMarket: React.FC = () => {
             color: '#333'
           }}>
           </span>
-          {/* Ensure SeasonOdometer handles null if currentSeason is null */}
-          <QuarterDisplay value={quarter} top="8px" right="200px" />
+          {/* Ensure SeasonOdometer handles null if currentYear is null */}
+          <QuarterDisplay value={quarter} top="8px" right="190px" />
           <RotatingGear top="-64px" right="300px" />
-          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="-12px" right="14px" /> {/* Pass 0 if season is null to avoid error */}
+          <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
@@ -234,10 +237,10 @@ export const TransferMarket: React.FC = () => {
       })} */}
 
       {/* Single AudioVisualizer for the CURRENT season only */}
-      {/* {currentSeasonMetadata && (
+      {/* {currentYearMetadata && (
         <AudioVisualizer
-          audioSrc={`/assets/transferAudio/${currentSeasonMetadata.season}.wav`} // Pass relative path
-          audioStartFrame={currentSeasonMetadata.startFrame} // Pass the absolute start frame
+          audioSrc={`/assets/transferAudio/${currentYearMetadata.season}.wav`} // Pass relative path
+          audioStartFrame={currentYearMetadata.startFrame} // Pass the absolute start frame
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
       )} */}

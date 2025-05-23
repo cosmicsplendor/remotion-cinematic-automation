@@ -44,7 +44,7 @@ const QuarterDisplay: React.FC<QuarterDisplayProps> = ({
         position: 'absolute', // Positioning for the entire component
         top,
         right,
-        opacity: 0.7, // Opacity for the outer box
+        opacity: 0.8, // Opacity for the outer box
         display: 'inline-block', // So it wraps the inner div properly
         boxSizing: 'border-box',
 

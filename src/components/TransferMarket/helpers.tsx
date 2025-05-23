@@ -57,7 +57,7 @@ export const reverseFormatX = (str: string) => {
 }
 
 // Create a custom Season Odometer Component
-export const SeasonOdometer = ({ value, amplitude, top, right }: { value: number, amplitude: number, top: string, right: string }) => {
+export const SeasonOdometer = ({ value, amplitude, top, right }: { value: number | string, amplitude: number, top: string, right: string }) => {
   const odometerRef = useRef<HTMLDivElement>(null);
   const odometerInstanceRef = useRef<any>(null);
   const [smoothedAmp, setSmoothedAmp] = useState(amplitude)
@@ -127,7 +127,7 @@ export const SeasonOdometer = ({ value, amplitude, top, right }: { value: number
         fontWeight: 500,
         top, right,
         filter: "grayscale(1)",
-        opacity: 0.6, color: "#222222",
+        opacity: 0.7, color: "#222222",
         boxShadow: `0 14px 20px 5px rgba(50, 150, 250, ${smoothedAmp.toFixed(3)})`
       }}
     ></div>

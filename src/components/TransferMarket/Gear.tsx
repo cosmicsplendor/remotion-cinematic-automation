@@ -9,7 +9,7 @@ const RotatingGear: React.FC<{right: string, top: string }> = ({ top, right }) =
         right,
         width: '120px',
         height: '120px',
-        opacity: 0.5,
+        opacity: 0.4,
       }}
     >
       <div className="gear-container">
