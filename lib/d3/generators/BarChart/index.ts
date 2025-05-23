@@ -76,6 +76,7 @@ const createInterpolatedData = <Datum>(
     accessors: Accessors<Datum>,
     barCount: BarCount
 ): (Datum & { _interpolatedX: number, _opacity: number })[] => {
+    console.log({ newData, prevData, progress })
     const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
     const prevSliced = prevData.slice(...sliceArgs)
     const newSliced = newData.slice(...sliceArgs)
@@ -296,7 +297,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                             if (!maxPoints || !xAxis.format) return ""
                             return Number(val) <= maxPoints ? xAxis.format(val as number) : ""
                         })(g as any)
-                    ptsAxis.select('.domain')
+                    g.select('.domain')
                         .attr('stroke-width', 0)
                 })
         }
