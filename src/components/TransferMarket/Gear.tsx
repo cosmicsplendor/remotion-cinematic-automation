@@ -69,7 +69,7 @@ const RotatingGear: React.FC<{right: string, top: string }> = ({ top, right }) =
           <circle 
             cx="60" 
             cy="60" 
-            r="16" 
+            r=" 16" 
             fill="#A6A6A6" 
             stroke="#8C8C8C" 
             strokeWidth="1"
@@ -166,11 +166,11 @@ const RotatingGear: React.FC<{right: string, top: string }> = ({ top, right }) =
         }
         
         .rotating-gear {
-          animation: rotate 8s linear infinite;
+          animation: rotate 4s linear infinite;
         }
         
         .supporting-gear {
-          animation: rotate-reverse 6s linear infinite;
+          animation: rotate-reverse 2s linear infinite;
         }
         
         .quarter-text {
@@ -205,7 +205,7 @@ const RotatingGear: React.FC<{right: string, top: string }> = ({ top, right }) =
         }
         
         .gear-container:hover .rotating-gear {
-          animation-duration: 2s;
+          animation-duration: 1.5s;
         }
         
         .gear-container:hover .supporting-gear {

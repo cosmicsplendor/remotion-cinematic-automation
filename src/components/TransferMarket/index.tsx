@@ -22,12 +22,12 @@ import { AudioVisualizer } from '../AudioVisualizer';
 import React from 'react'; // Import React for Fragment
 import Clock from './Clock';
 import RotatingGear from './Gear';
+import QuarterDisplay from './QuarterDisplay';
 
 // --- Restored Original Constants and Export ---
 const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
 const DURATION = 1000; // Equivalent to 1 second at 60fps
-const margins = { mt: 100, mr: 250, mb: 40, ml: 290 };
 export const TRANSFER_LIFESPAN = data.length * DURATION / 1000; // Restored original export
 
 export const TransferMarket: React.FC = () => {
@@ -101,7 +101,7 @@ export const TransferMarket: React.FC = () => {
 
   // Get current data to display
   const currentData = flattenedData[currentDataIndex];
-  const quarter = Math.floor(new Date( flattenedData[currentDataIndex]?.weekStart).getMonth() / 3) + 1;
+  const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3) + 1;
   // Get current season as number (will be null if data was invalid)
   const currentSeason = currentData ? new Date(currentData.weekStart).getFullYear() : null;
 
@@ -118,14 +118,14 @@ export const TransferMarket: React.FC = () => {
       return;
     }
 
-    const w = width * 0.9, h = height;
+    const w = width * 0.95, h = height;
+    const margins = { mt: 120, mr: 300, mb: 40, ml: 290 };
     const dims = Object.freeze({ w, h, ...margins });
-
     const modifier = (chart: Chart) => {
       const safeChart = chart as SafeChart;
       safeChart
         .animation({ easingFn: easeLinear, duration: DURATION, offset: 0 }) // DURATION constant used here
-        .bar({ gap: 22, minLength: 10 })
+        .bar({ gap: 18, minLength: 10 })
         .barCount({ dir: 1, active: 10, max: 20 })
         .label({ fill: "#707070", rightOffset: 200, size: 24 })
         .position({ fill: "#666", size: 32, xOffset: -260 })
@@ -149,7 +149,7 @@ export const TransferMarket: React.FC = () => {
         // color: d => (colorsMap as any)[sanitizeName(d.name)] ?? "#000",
         color: d => "#000",
         name: d => (teamNameMap as any)[d.name] ?? d.name,
-        logoSrc: d =>{
+        logoSrc: d => {
           const sanitizedName = sanitizeName(d.name);
           return staticFile(`race-images/${sanitizedName}.png`);
         }
@@ -195,6 +195,7 @@ export const TransferMarket: React.FC = () => {
       id={CONT_ID} // CONT_ID used here
       ref={containerRef}
     >
+      <QuarterDisplay value={quarter} top="32px" right="256px" />
       <svg
         id={PLOT_ID} // PLOT_ID used here
         ref={svgRef}
@@ -218,7 +219,7 @@ export const TransferMarket: React.FC = () => {
           </span>
           {/* Ensure SeasonOdometer handles null if currentSeason is null */}
 
-          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="15vh" right="64px" /> {/* Pass 0 if season is null to avoid error */}
+          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="0vh" right="64px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
@@ -240,7 +241,7 @@ export const TransferMarket: React.FC = () => {
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
       )} */}
-      <RotatingGear top="200px" right="250px"/>
+      <RotatingGear top="500px" right="350px" />
       {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );
