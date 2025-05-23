@@ -121,7 +121,7 @@ const createInterpolatedData = <Datum>(
         } else { // ENTERING ITEM
             const newX = accessors.x(newItem);
             const interpolatedX = newX * progress;
-            const startPosition = barCount.active + 2;
+            const startPosition = barCount.active + 1.5;
             const interpolatedPosition = startPosition + (newIndex - startPosition) * progress;
 
             interpolatedData.push({
@@ -142,7 +142,7 @@ const createInterpolatedData = <Datum>(
         if (!newMap.has(id)) { // EXITING ITEM
             const prevX = accessors.x(prevItem);
             const interpolatedX = prevX * (1 - progress);
-            const endPosition = barCount.active + 2;
+            const endPosition = barCount.active + 1.5;
             const interpolatedPosition = prevIndex + (endPosition - prevIndex) * progress;
 
             interpolatedData.push({
