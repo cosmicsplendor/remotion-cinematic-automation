@@ -8,7 +8,8 @@ const RotatingGear: React.FC<{right: string, top: string }> = ({ top, right }) =
         top, 
         right,
         width: '120px',
-        height: '120px'
+        height: '120px',
+        opacity: 0.5,
       }}
     >
       <div className="gear-container">
@@ -25,7 +26,7 @@ const RotatingGear: React.FC<{right: string, top: string }> = ({ top, right }) =
               const angle = (i * 30) * Math.PI / 180;
               const innerRadius = 45;
               const outerRadius = 55;
-              const toothWidth = 8;
+              const toothWidth = 16;
               
               const x1 = 60 + Math.cos(angle - toothWidth/2 * Math.PI/180) * innerRadius;
               const y1 = 60 + Math.sin(angle - toothWidth/2 * Math.PI/180) * innerRadius;
@@ -115,7 +116,7 @@ const RotatingGear: React.FC<{right: string, top: string }> = ({ top, right }) =
               const angle = (i * 45) * Math.PI / 180;
               const innerRadius = 18;
               const outerRadius = 23;
-              const toothWidth = 18;
+              const toothWidth = 24;
               
               const x1 = 25 + Math.cos(angle - toothWidth/2 * Math.PI/180) * innerRadius;
               const y1 = 25 + Math.sin(angle - toothWidth/2 * Math.PI/180) * innerRadius;

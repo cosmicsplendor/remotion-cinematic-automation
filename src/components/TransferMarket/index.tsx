@@ -195,7 +195,6 @@ export const TransferMarket: React.FC = () => {
       id={CONT_ID} // CONT_ID used here
       ref={containerRef}
     >
-      <QuarterDisplay value={quarter} top="32px" right="256px" />
       <svg
         id={PLOT_ID} // PLOT_ID used here
         ref={svgRef}
@@ -218,8 +217,9 @@ export const TransferMarket: React.FC = () => {
           }}>
           </span>
           {/* Ensure SeasonOdometer handles null if currentSeason is null */}
-
-          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="0vh" right="64px" /> {/* Pass 0 if season is null to avoid error */}
+          <QuarterDisplay value={quarter} top="8px" right="200px" />
+          <RotatingGear top="-64px" right="300px" />
+          <SeasonOdometer value={currentSeason ?? 0} amplitude={currentAmplitude} top="-12px" right="14px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
 
@@ -241,7 +241,6 @@ export const TransferMarket: React.FC = () => {
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
       )} */}
-      <RotatingGear top="500px" right="350px" />
       {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );

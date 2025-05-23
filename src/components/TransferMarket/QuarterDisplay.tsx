@@ -17,13 +17,14 @@ const QuarterDisplay: React.FC<QuarterDisplayProps> = ({
         fontFamily: 'monospace', // Font for "Q{value}"
         fontSize: '32px',                   // Font size for "Q{value}"
         fontWeight: 600,
+        opacity: 1,                  // Opacity for "Q{value}"
         color: '#444444',                   // Text color for "Q{value}"
         height: "54px",                     // Fixed height for the inner cell
         display: 'flex',
         alignItems: 'center',               // Center text vertically
         justifyContent: 'center',           // Center text horizontally
-        paddingLeft: '4px',                 // Horizontal padding within the inner cell
-        paddingRight: '4px',
+        paddingLeft: '5px',                 // Horizontal padding within the inner cell
+        paddingRight: '6px',
         // Background and border styling like an odometer digit from the CSS reference
         backgroundImage: 'linear-gradient(to bottom, #cccccc 0%, #ffffff 20%, #ffffff 80%, #cccccc 100%)',
         // border: '0.03em solid #444', // Calculated based on 32px fontSize: 0.03 * 32 = 0.96px (~1px)
@@ -43,6 +44,7 @@ const QuarterDisplay: React.FC<QuarterDisplayProps> = ({
         position: 'absolute', // Positioning for the entire component
         top,
         right,
+        opacity: 0.7, // Opacity for the outer box
         display: 'inline-block', // So it wraps the inner div properly
         boxSizing: 'border-box',
 
