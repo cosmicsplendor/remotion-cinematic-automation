@@ -42,6 +42,20 @@ export type RemotionBarChart<Datum> = {
     dom?: ({ container, svg }: DOM) => RemotionBarChart<Datum>
 }
 
+enum TransitionState {
+    EXISTING = 'existing',
+    ENTERING = 'entering',
+    EXITING = 'exiting'
+}
+
+type InterpolatedDatum<Datum> = Datum & {
+    _interpolatedX: number,
+    _interpolatedPosition: number,
+    _transitionState: TransitionState,
+    _originalPosition?: number,
+    _targetPosition?: number
+}
+
 const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: T, attribs: Hash) => {
     return Object
         .entries(attribs)
@@ -51,63 +65,90 @@ const applyAttribs = <T extends { attr: (attrib: string, val: any) => T }>(sel: 
         }, sel)
 }
 
-// Helper function to interpolate between two data points
-const interpolateDataPoint = <Datum>(
-    prevItem: Datum | undefined,
-    newItem: Datum,
-    progress: number,
-    accessors: Accessors<Datum>
-): Datum & { _interpolatedX: number } => {
-    const prevX = prevItem ? accessors.x(prevItem) : 0
-    const newX = accessors.x(newItem)
-    const interpolatedX = prevX + (newX - prevX) * progress
-    
-    return {
-        ...newItem,
-        _interpolatedX: interpolatedX
-    }
-}
-
-// Helper function to create interpolated dataset
+// Helper function to create interpolated dataset with smooth enter/exit transitions
 const createInterpolatedData = <Datum>(
     prevData: Datum[],
     newData: Datum[],
     progress: number,
     accessors: Accessors<Datum>,
     barCount: BarCount
-): (Datum & { _interpolatedX: number, _opacity: number })[] => {
+): InterpolatedDatum<Datum>[] => {
     const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
     const prevSliced = prevData.slice(...sliceArgs)
     const newSliced = newData.slice(...sliceArgs)
     
-    // Create a map of previous data by ID for easy lookup
-    const prevMap = new Map(prevSliced.map(d => [accessors.id(d), d]))
+    // Create maps for easy lookup
+    const prevMap = new Map(prevSliced.map((d, index) => [accessors.id(d), { data: d, index }]))
+    const newMap = new Map(newSliced.map((d, index) => [accessors.id(d), { data: d, index }]))
     
-    // Create interpolated data array
-    const interpolatedData = newSliced.map(newItem => {
+    const interpolatedData: InterpolatedDatum<Datum>[] = []
+    
+    // Handle existing and entering items
+    newSliced.forEach((newItem, newIndex) => {
         const id = accessors.id(newItem)
-        const prevItem = prevMap.get(id)
-        const interpolated = interpolateDataPoint(prevItem, newItem, progress, accessors)
+        const prevInfo = prevMap.get(id)
         
-        // Calculate opacity for fade in/out effects
-        const opacity = prevItem ? 1 : progress // Fade in new items
-        
-        return {
-            ...interpolated,
-            _opacity: opacity
+        if (prevInfo) {
+            // EXISTING ITEM - smooth transition between positions
+            const prevX = accessors.x(prevInfo.data)
+            const newX = accessors.x(newItem)
+            const interpolatedX = prevX + (newX - prevX) * progress
+            
+            const prevPosition = prevInfo.index
+            const newPosition = newIndex
+            const interpolatedPosition = prevPosition + (newPosition - prevPosition) * progress
+            
+            interpolatedData.push({
+                ...newItem,
+                _interpolatedX: interpolatedX,
+                _interpolatedPosition: interpolatedPosition,
+                _transitionState: TransitionState.EXISTING,
+                _originalPosition: prevPosition,
+                _targetPosition: newPosition
+            })
+        } else {
+            // ENTERING ITEM - start from off-screen and slide into position
+            const newX = accessors.x(newItem)
+            const interpolatedX = newX * progress // Grow from 0 to full value
+            
+            // Start position is off-screen (below/right of visible area)
+            const startPosition = barCount.active + 0.5 // Just outside visible range
+            const targetPosition = newIndex
+            const interpolatedPosition = startPosition + (targetPosition - startPosition) * progress
+            
+            interpolatedData.push({
+                ...newItem,
+                _interpolatedX: interpolatedX,
+                _interpolatedPosition: interpolatedPosition,
+                _transitionState: TransitionState.ENTERING,
+                _originalPosition: startPosition,
+                _targetPosition: targetPosition
+            })
         }
     })
     
-    // Add exiting items with fade out effect
-    prevSliced.forEach(prevItem => {
+    // Handle exiting items
+    prevSliced.forEach((prevItem, prevIndex) => {
         const id = accessors.id(prevItem)
-        const stillExists = newSliced.some(newItem => accessors.id(newItem) === id)
+        const stillExists = newMap.has(id)
         
         if (!stillExists) {
-            const interpolated = interpolateDataPoint(prevItem, prevItem, progress, accessors)
+            // EXITING ITEM - slide out of view
+            const prevX = accessors.x(prevItem)
+            const interpolatedX = prevX * (1 - progress) // Shrink towards 0
+            
+            // End position is off-screen (below/right of visible area)
+            const startPosition = prevIndex
+            const endPosition = barCount.active + 0.5 // Just outside visible range
+            const interpolatedPosition = startPosition + (endPosition - startPosition) * progress
+            
             interpolatedData.push({
-                ...interpolated,
-                _opacity: 1 - progress // Fade out
+                ...prevItem,
+                _interpolatedX: interpolatedX,
+                _interpolatedPosition: interpolatedPosition,
+                _transitionState: TransitionState.EXITING,
+                _originalPosition: startPosition,
+                _targetPosition: endPosition
             })
         }
     })
@@ -117,7 +158,6 @@ const createInterpolatedData = <Datum>(
 
 function BarChartGenerator<Datum extends object>(dims: Dims) {
     type Data = Datum[]
-    type InterpolatedDatum = Datum & { _interpolatedX: number, _opacity: number }
 
     let barCount: BarCount, bar: Bar, label: Label, points: Points, xAxis: XAxis = { offset: -10, size: 18 }
     let accessors: Accessors<Datum>, logoXOffset: number, position: Position, horizontal = false, background = "whitesmoke", dom: DOM
@@ -130,48 +170,61 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const interpolatedData = createInterpolatedData(prevData, newData, progress, accessors, barCount)
         const BAR_THICKNESS = Math.round((horizontal ? dims.w - dims.ml - dims.mt : dims.h - dims.mt - dims.mb) / barCount.active) - bar.gap
         
-        // Use interpolated x values for scaling
-        const maxPoints = max(interpolatedData, d => d._interpolatedX)
+        // Calculate max points for consistent scaling
+        const allCurrentValues = interpolatedData
+            .filter(d => d._transitionState !== TransitionState.EXITING)
+            .map(d => accessors.x(d)) // Use original values for scale calculation
+        const maxPoints = Math.max(...allCurrentValues, 20)
         
         const pointsScale = scalePow().exponent(0.33)
-            .domain([0, Math.max(maxPoints as number, 20)])
+            .domain([0, maxPoints])
             .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr])
             .nice()
             
-        // Use newData for consistent positioning scale, not interpolated data
-        const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
-        const newDataSliced = newData.slice(...sliceArgs)
-        const teamNameScale = scaleBand()
-            .domain(newDataSliced.map(accessors.y))
-            .range(horizontal ? [dims.ml, dims.w - dims.mr] : [dims.mt, dims.h - dims.mb])
+        // Create position scale for smooth transitions
+        const positionScale = scaleLinear()
+            .domain([0, barCount.active - 1])
+            .range(horizontal ? [dims.ml, dims.w - dims.mr - BAR_THICKNESS] : [dims.mt, dims.h - dims.mb - BAR_THICKNESS])
             
         const pointsAxisGen = horizontal ? axisLeft(pointsScale) : axisTop(pointsScale)
         const ptsRange = pointsScale.range()
         const ptsRangeDir = Math.sign(ptsRange[1] - ptsRange[0])
 
-        const barLenAccessor = (d: InterpolatedDatum) => {
+        const barLenAccessor = (d: InterpolatedDatum<Datum>) => {
             return bar.minLength + (pointsScale(d._interpolatedX) - ptsRange[0]) * ptsRangeDir
         }
-        const barTopAccessor = (d: InterpolatedDatum) => ptsRange[0] + ptsRangeDir * barLenAccessor(d)
+        const barTopAccessor = (d: InterpolatedDatum<Datum>) => ptsRange[0] + ptsRangeDir * barLenAccessor(d)
         const barBaseAccessor = () => ptsRange[0]
 
+        // Calculate opacity based on transition state and position
+        const getOpacity = (d: InterpolatedDatum<Datum>) => {
+            if (d._transitionState === TransitionState.EXITING) {
+                return 1 - progress // Fade out
+            }
+            if (d._transitionState === TransitionState.ENTERING) {
+                return progress // Fade in
+            }
+            // Check if item is outside visible range
+            if (d._interpolatedPosition < -0.5 || d._interpolatedPosition > barCount.active - 0.5) {
+                return 0 // Hide items outside visible range
+            }
+            return 1
+        }
+
         // Render bars
-        svg.selectAll("rect")
-            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
+        svg.selectAll("rect.bar")
+            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d) as string)
             .join(
-                enter => {
-                    const sel = enter.append("rect")
-                    return sel
-                },
+                enter => enter.append("rect").attr("class", "bar"),
                 update => update,
                 exit => exit.remove()
             )
             .attr("fill", d => accessors.color(d))
-            .attr("opacity", d => d._opacity)
+            .attr("opacity", getOpacity)
             .call(sel => {
                 if (horizontal) {
                     return sel
-                        .attr("x", d => teamNameScale(accessors.y(d)) || 0)
+                        .attr("x", d => positionScale(Math.max(0, Math.min(barCount.active - 1, d._interpolatedPosition))))
                         .attr("y", d => {
                             const height = barLenAccessor(d)
                             return dims.h - dims.mb - height
@@ -183,7 +236,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
                 } else {
                     return sel
                         .attr("x", barBaseAccessor())
-                        .attr("y", d => teamNameScale(accessors.y(d)) || 0)
+                        .attr("y", d => positionScale(Math.max(0, Math.min(barCount.active - 1, d._interpolatedPosition))))
                         .attr("width", barLenAccessor)
                         .attr("height", BAR_THICKNESS)
                         .attr("rx", 2)
@@ -192,10 +245,10 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             })
 
         // Render images/logos
-        svg.selectAll("image")
-            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
+        svg.selectAll("image.logo")
+            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d) as string)
             .join(
-                enter => enter.append("image"),
+                enter => enter.append("image").attr("class", "logo"),
                 update => update,
                 exit => exit.remove()
             )
@@ -203,22 +256,22 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("height", BAR_THICKNESS)
             .attr("width", BAR_THICKNESS)
             .attr("preserveAspectRatio", "xMidYMid meet")
-            .attr("opacity", d => d._opacity)
+            .attr("opacity", getOpacity)
             .call(sel => {
                 if (horizontal) {
                     return sel
-                        .attr("x", d => teamNameScale(accessors.y(d)) || 0)
+                        .attr("x", d => positionScale(Math.max(0, Math.min(barCount.active - 1, d._interpolatedPosition))))
                         .attr("y", d => barTopAccessor(d) + ptsRangeDir * logoXOffset)
                 } else {
                     return sel
                         .attr("x", d => barTopAccessor(d) + ptsRangeDir * logoXOffset)
-                        .attr("y", d => teamNameScale(accessors.y(d)) || 0)
+                        .attr("y", d => positionScale(Math.max(0, Math.min(barCount.active - 1, d._interpolatedPosition))))
                 }
             })
 
         // Render points text
-        svg.selectAll(".total-points")
-            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
+        svg.selectAll("text.total-points")
+            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d) as string)
             .join(
                 enter => enter.append("text").attr("class", "total-points"),
                 update => update,
@@ -229,18 +282,24 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("fill", points.fill)
             .attr("style", "letter-spacing: 2px;")
             .attr("alignment-baseline", "central")
-            .attr("opacity", d => d._opacity)
-            .text(d => xAxis.format ? xAxis.format(d._interpolatedX) : d._interpolatedX.toString())
+            .attr("opacity", getOpacity)
+            .text(d => {
+                const value = d._transitionState === TransitionState.ENTERING 
+                    ? d._interpolatedX // Show interpolated value for entering items
+                    : accessors.x(d) // Show actual value for existing items during transition
+                return xAxis.format ? xAxis.format(value) : Math.round(value).toString()
+            })
             .attr("transform", d => {
+                const clampedPosition = Math.max(0, Math.min(barCount.active - 1, d._interpolatedPosition))
                 const alongPtsAxis = pointsScale(d._interpolatedX) + ptsRangeDir * points.xOffset
-                const alongLabelAxis = (teamNameScale(accessors.y(d)) || 0) + BAR_THICKNESS * 0.5
+                const alongLabelAxis = positionScale(clampedPosition) + BAR_THICKNESS * 0.5
                 if (horizontal) return `translate(${alongLabelAxis}, ${alongPtsAxis}), rotate(-${points.rotation})`
                 return `translate(${alongPtsAxis}, ${alongLabelAxis})`
             })
 
         // Render labels
-        svg.selectAll(".label-axis")
-            .data<InterpolatedDatum>(interpolatedData, d => accessors.id(d) as string)
+        svg.selectAll("text.label-axis")
+            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d) as string)
             .join(
                 enter => enter.append("text").attr("class", "label-axis"),
                 update => update,
@@ -252,31 +311,41 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .attr("font-family", "Helvetica")
             .attr("alignment-baseline", "central")
             .attr("text-anchor", label.textAnchor ?? "")
-            .attr("opacity", d => d._opacity)
+            .attr("opacity", getOpacity)
             .attr("transform", d => {
-                const alongLabelAxis = teamNameScale(accessors.y(d)) || 0
+                const clampedPosition = Math.max(0, Math.min(barCount.active - 1, d._interpolatedPosition))
+                const alongLabelAxis = positionScale(clampedPosition)
                 if (horizontal) {
                     return `translate(${alongLabelAxis + BAR_THICKNESS / 2}, ${barBaseAccessor() + (label.topOffset || 0)}), rotate(${label.rotation})`
                 }
                 return `translate(${dims.ml - (label.rightOffset || 0)}, ${alongLabelAxis + BAR_THICKNESS / 2})`
             })
 
-        // Render position/rank numbers
-        svg.selectAll(".position")
-            .data<InterpolatedDatum>(interpolatedData)
+        // Render position/rank numbers (only for visible items)
+        const visibleItems = interpolatedData.filter(d => 
+            d._transitionState !== TransitionState.EXITING && 
+            d._interpolatedPosition >= -0.5 && 
+            d._interpolatedPosition <= barCount.active - 0.5
+        )
+        
+        svg.selectAll("text.position")
+            .data<InterpolatedDatum<Datum>>(visibleItems, d => accessors.id(d) as string)
             .join<SVGTextElement>("text")
             .attr("class", "position")
             .attr("x", dims.ml + position.xOffset)
-            .attr("y", d => (teamNameScale(accessors.y(d)) ?? 0) + BAR_THICKNESS / 2)
+            .attr("y", d => {
+                const clampedPosition = Math.max(0, Math.min(barCount.active - 1, d._interpolatedPosition))
+                return positionScale(clampedPosition) + BAR_THICKNESS / 2
+            })
             .attr("alignment-baseline", "central")
             .attr("fill", position.fill)
             .attr("style", "font-weight: 700;")
             .attr("font-size", position.size)
             .attr("font-family", "helvetica")
             .attr("text-anchor", "start")
-            .attr("opacity", d => d._opacity)
-            .text((_: any, i: number) => {
-                const rank = (barCount.dir === -1 ? barCount.max - barCount.active : 0) + i + 1
+            .attr("opacity", getOpacity)
+            .text((d: InterpolatedDatum<Datum>) => {
+                const rank = Math.round(d._interpolatedPosition) + 1
                 const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : ''
                 return medal ? medal : ""
             })
@@ -305,7 +374,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         }
     }
 
-    // Configuration methods (removed animation since it's controlled externally)
+    // Configuration methods
     barGraph.barCount = val => (barCount = val, barGraph)
     barGraph.bar = val => (bar = val, barGraph)
     barGraph.label = ({ topOffset = 25, rotation = -75, textAnchor = "start", ...rest }) => (label = { topOffset, rotation, textAnchor, ...rest }, barGraph)

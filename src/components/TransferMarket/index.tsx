@@ -90,12 +90,14 @@ export const TransferMarket: React.FC = () => {
 
 
   // Calculate which data point to show based on current frame
-  const currentDataIndex = useMemo(() => {
-    if (flattenedData.length === 0) return 0;
-    return Math.min(
-      Math.floor(frame / FRAMES_PER_DATA_POINT) + 1,
-      flattenedData.length - 1
-    );
+  const { currentDataIndex, progress } = useMemo(() => {
+    if (flattenedData.length === 0) return { currentDataIndex: 0, progress: 0 };
+    const progress = frame / FRAMES_PER_DATA_POINT
+    const currentDataIndex = Math.min(Math.floor(progress) + 1, flattenedData.length - 1);
+    return {
+      currentDataIndex,
+      progress: Math.min(progress - Math.floor(progress), 1)
+    }
   }, [frame, FRAMES_PER_DATA_POINT, flattenedData.length]);
 
 
@@ -158,7 +160,7 @@ export const TransferMarket: React.FC = () => {
 
     // Initialize with first frame data if available
     if (flattenedData.length > 0) {
-      barChart(flattenedData[0].data, flattenedData[1].data, 0.5)
+      barChart(flattenedData[0].data, flattenedData[1].data, progress)
     } else {
       console.warn("flattenedData is empty, chart not initialized with data.");
     }
@@ -175,8 +177,8 @@ export const TransferMarket: React.FC = () => {
     }
     const chart = chartRef.current;
     const { data } = currentData;
-    chart(flattenedData[currentDataIndex - 1].data, data, 0.1);
-  }, [currentData]);
+    chart(flattenedData[currentDataIndex - 1].data, data, progress);
+  }, [frame]);
 
 
 
