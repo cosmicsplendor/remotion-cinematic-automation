@@ -121,7 +121,7 @@ const createInterpolatedData = <Datum>(
         } else { // ENTERING ITEM
             const newX = accessors.x(newItem);
             const interpolatedX = newX * progress;
-            const startPosition = barCount.active + 1.5;
+            const startPosition = barCount.active + 1;
             const interpolatedPosition = startPosition + (newIndex - startPosition) * progress;
 
             interpolatedData.push({
@@ -142,7 +142,7 @@ const createInterpolatedData = <Datum>(
         if (!newMap.has(id)) { // EXITING ITEM
             const prevX = accessors.x(prevItem);
             const interpolatedX = prevX * (1 - progress);
-            const endPosition = barCount.active + 1.5;
+            const endPosition = barCount.active + 1;
             const interpolatedPosition = prevIndex + (endPosition - prevIndex) * progress;
 
             interpolatedData.push({
@@ -204,10 +204,10 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         }
 
         const positionScale = scaleLinear()
-            .domain([0, barCount.active + 3])
+            .domain([0, barCount.active + 1.25])
             .range(horizontal ?
-                [dims.ml, dims.w - dims.mr - BAR_THICKNESS + (BAR_THICKNESS + bar.gap) * 3] :
-                [dims.mt, dims.h - dims.mb - BAR_THICKNESS + (BAR_THICKNESS + bar.gap) * 3]
+                [dims.ml, dims.w - dims.mr - BAR_THICKNESS + (BAR_THICKNESS + bar.gap) * 1.25] :
+                [dims.mt, dims.h - dims.mb - BAR_THICKNESS + (BAR_THICKNESS + bar.gap) * 1.25]
             );
 
         const pointsAxisGen = horizontal ? axisLeft(axisDisplayScale) : axisTop(axisDisplayScale); // Axis uses interpolated scale
@@ -222,12 +222,16 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             const safeNewLengthCont = Math.max(0, newLengthCont);
 
             if (d._transitionState === TransitionState.EXITING) {
-                // Interpolate from full size to (e.g.) 80% of original size as it exits
-                const exitFraction = 1;
-                const exitLength = safePrevLengthCont * (1 - progress * (1 - exitFraction));
-                return bar.minLength + exitLength;
+                // Keep bar at previous length throughout exit
+                return bar.minLength + safePrevLengthCont;
+            }
+            if (d._transitionState === TransitionState.ENTERING) {
+                // Start at final length (or a fraction, e.g. 0.8)
+                const entryFraction = 1; // set to 0.8 for 80% if you want
+                return bar.minLength + safeNewLengthCont * entryFraction;
             }
 
+            // Existing bars interpolate as before
             const interpolatedLengthCont = safePrevLengthCont * (1 - progress) + safeNewLengthCont * progress;
             return bar.minLength + interpolatedLengthCont;
         };
