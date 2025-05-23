@@ -76,7 +76,6 @@ const createInterpolatedData = <Datum>(
     accessors: Accessors<Datum>,
     barCount: BarCount
 ): (Datum & { _interpolatedX: number, _opacity: number })[] => {
-    console.log({ newData, prevData, progress })
     const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
     const prevSliced = prevData.slice(...sliceArgs)
     const newSliced = newData.slice(...sliceArgs)
@@ -139,8 +138,11 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr])
             .nice()
             
+        // Use newData for consistent positioning scale, not interpolated data
+        const sliceArgs = barCount.dir === 1 ? [0, barCount.active] : [-barCount.active]
+        const newDataSliced = newData.slice(...sliceArgs)
         const teamNameScale = scaleBand()
-            .domain(interpolatedData.map(d => accessors.y(d)))
+            .domain(newDataSliced.map(accessors.y))
             .range(horizontal ? [dims.ml, dims.w - dims.mr] : [dims.mt, dims.h - dims.mb])
             
         const pointsAxisGen = horizontal ? axisLeft(pointsScale) : axisTop(pointsScale)

@@ -124,7 +124,6 @@ export const TransferMarket: React.FC = () => {
     const modifier = (chart: Chart) => {
       const safeChart = chart as SafeChart;
       safeChart
-        .animation({ easingFn: easeLinear, duration: DURATION, offset: 0 }) // DURATION constant used here
         .bar({ gap: 18, minLength: 10 })
         .barCount({ dir: 1, active: 10, max: 20 })
         .label({ fill: "#707070", rightOffset: 200, size: 24 })
@@ -159,10 +158,7 @@ export const TransferMarket: React.FC = () => {
 
     // Initialize with first frame data if available
     if (flattenedData.length > 0) {
-      barChart(flattenedData[0].data.map(d => ({ ...d, points: 0 })), true);
-      setTimeout(() => {
-        barChart(flattenedData[1].data.map(d => ({ ...d, points: 0 })), false)
-      },0)
+      barChart(flattenedData[0].data, flattenedData[1].data, 0.5)
     } else {
       console.warn("flattenedData is empty, chart not initialized with data.");
     }
@@ -179,7 +175,7 @@ export const TransferMarket: React.FC = () => {
     }
     const chart = chartRef.current;
     const { data } = currentData;
-    chart(data);
+    chart(flattenedData[currentDataIndex - 1].data, data, 0.1);
   }, [currentData]);
 
 
