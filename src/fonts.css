@@ -1,6 +1,12 @@
 /* Import a font that supports Nepali (Devanagari script) */
 /* Noto Sans Devanagari is a good standard choice */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap');
+@font-face {
+  font-family: 'Futura Bold';
+  src: url('./fonts/Futura Bold font.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
 
 body {
   margin: 0;

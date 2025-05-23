@@ -179,20 +179,10 @@ export const TransferMarket: React.FC = () => {
   }, [currentData]);
 
 
-  const opacity = interpolate(
-    frame,
-    [0, 30, durationInFrames - 30, durationInFrames],
-    [0, 1, 1, 0],
-    {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
-  );
 
   return (
     <AbsoluteFill
       style={{
-        opacity,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
