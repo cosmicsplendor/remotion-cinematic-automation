@@ -1,7 +1,15 @@
 type EasingFns = {
     [Key: string]: (x: number) => number
 }
-
+let seed = 0
+export const randomSeed = (newSeed: number) => {
+    seed = newSeed
+}
+export const seededRand = (to: number, from = 0) => {
+    seed = (seed * 9301 + 49297) % 233280
+    const rnd = seed / 233280
+    return from + Math.floor((to - from + 1) * rnd)
+}
 export const rand = (to: number, from = 0) => from + Math.floor((to - from + 1) * Math.random())
 
 export const randf = (to: number, from = 0) => from + (to - from) * Math.random()

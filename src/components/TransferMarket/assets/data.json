@@ -1953,7 +1953,7 @@
   {
     "weekStart": "2016-05-27T00:00:00.000Z",
     "slowDown": 3,
-    "easing": "cubicInOut",
+    "easing": "quadInOut",
     "coins": [
       {
         "name": "Bitcoin",
