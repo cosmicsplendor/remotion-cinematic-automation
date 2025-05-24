@@ -20,6 +20,7 @@ import { AudioVisualizer } from '../AudioVisualizer';
 import React from 'react'; // Import React for Fragment
 import RotatingGear from './Gear';
 import OdometerDisplay from './OdometerDisplay';
+import { easingFns } from '../../../lib/d3/utils/math';
 
 const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
@@ -44,8 +45,8 @@ export const TransferMarket: React.FC = () => {
     const result = [];
     const originalDataTyped = data as Frame[];
     for (const index in originalDataTyped) {
-      const { weekStart, coins } = originalDataTyped[index];
-      result.push({ weekStart, data: coins.slice(0, 15) });
+      const { weekStart, coins, easing } = originalDataTyped[index];
+      result.push({ weekStart, easing, data: coins.slice(0, 15) });
     }
     return result;
   }, [data]);
@@ -145,8 +146,10 @@ export const TransferMarket: React.FC = () => {
     }
     const chart = chartRef.current;
     const { data } = currentData;
+    const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
+    console.log({ easingFn, easing: currentData.easing })
     const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
-    chart(prevData, data, progress);
+    chart(prevData, data, easingFn(progress));
   }, [frame]);
 
   return (

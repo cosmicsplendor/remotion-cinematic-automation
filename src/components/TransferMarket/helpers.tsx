@@ -12,6 +12,8 @@ export type Datum = {
 }
 export type Frame = {
   weekStart: string,
+  easing?: string,
+  slowDown?: number,
   coins: Datum[]
 }
 export type Chart = BarChart<Datum>
