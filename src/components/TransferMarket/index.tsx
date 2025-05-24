@@ -28,7 +28,6 @@ const SF = data.map(d => (d.slowDown as number) ?? 1)
 export const TRANSFER_LIFESPAN = SF.reduce((s, x) => x + s) * DURATION / 1000; // Restored original export
 
 export const TransferMarket: React.FC = () => {
-  const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,6 +38,7 @@ export const TransferMarket: React.FC = () => {
     if (!fps || fps <= 0) return 0;
     return (fps * DURATION) / 1000;
   }, [fps]);
+  const frame = useCurrentFrame() + SF[1] * FRAMES_PER_UNIT_POINT; // just to give a headstart
 
   const flattenedData = useMemo(() => {
     const result = [];
@@ -136,15 +136,7 @@ export const TransferMarket: React.FC = () => {
       });
 
     const barChart = modifier(barChartRaw);
-
-    if (flattenedData.length > 0) {
-      barChart(flattenedData[0].data, flattenedData[1].data, progress)
-    } else {
-      console.warn("flattenedData is empty, chart not initialized with data.");
-    }
-
     chartRef.current = barChart;
-
   }, [svgRef, containerRef, flattenedData, width, height]); 
 
   useEffect(() => {
@@ -153,7 +145,8 @@ export const TransferMarket: React.FC = () => {
     }
     const chart = chartRef.current;
     const { data } = currentData;
-    chart(flattenedData[currentDataIndex - 1].data, data, progress);
+    const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
+    chart(prevData, data, progress);
   }, [frame]);
 
   return (
