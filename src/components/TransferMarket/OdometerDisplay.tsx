@@ -18,7 +18,7 @@ const OdometerDisplay: React.FC<OdometerDisplayProps> = ({
     const [displayValues, setDisplayValues] = useState<string[]>([]);
     const [translateY, setTranslateY] = useState(0);
     const prevIndexRef = useRef<number>(currentIndex);
-    const containerHeight = 54; // Height of one item
+    const containerHeight = 56; // Height of one item
 
     useEffect(() => {
         if (isFirstRender) {
