@@ -26,7 +26,7 @@ export const sqLen = (x: number, y: number) => x * x + y * y
 
 export const calcNormal = (x: number, y: number) => { // computes perpendicular components
     const length = len(x, y)
-    return { x: y / length, y: -x / length}
+    return { x: y / length, y: -x / length }
 }
 
 export const normalize = (x: number, y: number) => { // returns unit vector
@@ -39,10 +39,13 @@ export const easingFns: EasingFns = {
         return x
     },
     quadIn(x) {
-        return  x * x
+        return x * x
     },
     quadOut(x) {
         return 1 - this.quadIn(x - 1)
+    },
+    quadInOut(x) {
+        return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
     },
     cubicIn(x) {
         return x * x * x
@@ -50,36 +53,19 @@ export const easingFns: EasingFns = {
     cubicOut(x) {
         return 1 - this.cubicIn(1 - x)
     },
+    cubicInOut(x) {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    },
+    sineIn(x) {
+        return 1 - Math.cos((x * Math.PI) / 2);
+    },
+    sineOut(x) {
+        return Math.sin((x * Math.PI) / 2);
+    },
+    sineInOut(x) {
+        return -(Math.cos(Math.PI * x) - 1) / 2;
+    },
     smoothStep(x) {
         return x * x * (3 - 2 * x)
-    }
-}
-
-
-export const atan = (y: number, x: number) => {
-    const abs = Math.abs(Math.atan(y / x))
-    if (x > 0 && y < 0) { // fourth quadrant
-        return -abs
-    }
-    if (x < 0 && y < 0) { // third quadrant
-        return Math.PI + abs
-    }
-    if (x < 0 && y > 0) { // second quadrant
-        return Math.PI - abs
-    }
-    if (x > 0 && y > 0) { // first quadrant
-        return abs
-    }
-    if (y === 0 && x > 0) {
-        return 0
-    }
-    if (y === 0 && x < 0) {
-        return Math.PI
-    }
-    if (x === 0 && y > 0) {
-        return Math.PI / 2
-    }
-    if (x === 0 && y < 0) {
-        return -Math.PI / 2
     }
 }

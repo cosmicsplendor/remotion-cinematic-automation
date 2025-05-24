@@ -73,11 +73,3 @@ export const segmentDevanagariText = (text: string) => {
   // Filter out any potentially empty strings if logic allows them
   return syllables.filter(s => s.length > 0);
 };
-
-export const pickOne = (arr: any[]) => {
-  if (arr.length === 0) {
-    return null;
-  }
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
-}
