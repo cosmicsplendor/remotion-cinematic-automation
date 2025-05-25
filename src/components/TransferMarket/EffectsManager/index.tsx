@@ -22,10 +22,9 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
         {
             effects.map((effect, index) => {
                 if (effect.type === "confetti") {
-                    const el = getSvgEl(effect.target);
-                    if (!el) return null;
                     return (
                         <ConfettiEffect
+                            key={index}
                             effect={effect}
                             svgRef={svgRef}
                             getSvgEl={getSvgEl}

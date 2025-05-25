@@ -28,6 +28,8 @@ const Effect: React.FC<{
     const particlesRef = useRef<Particle[]>([]);
     const containerRef = useRef<SVGGElement | null>(null);
     const frameRef = useRef<number>(0);
+    const triggeredBurstsRef = useRef<Set<number>>(new Set());
+
     useEffect(() => {
         const svg = svgRef.current;
         if (!svg) return;
@@ -44,6 +46,21 @@ const Effect: React.FC<{
         const burstPoints = Array.from({ length: effect.bursts }, (_, i) => {
             return (i + 1) / (effect.bursts + 1);
         });
+
+        // Function to get SVG coordinates from target element
+        const getTargetPosition = () => {
+            const targetEl = getSvgEl(`points-${sanitizeName(effect.target)}`);
+            if (!targetEl || !svg) return null;
+
+            // Get the bounding box of the target element in SVG coordinates
+            const targetBBox = targetEl.getBBox();
+            
+            // Calculate the right center point of the target
+            const x = targetBBox.x + targetBBox.width; // Right edge
+            const y = targetBBox.y + targetBBox.height / 2; // Vertical center
+            
+            return { x, y };
+        };
 
         // Function to update particle positions
         const updateParticles = () => {
@@ -85,37 +102,36 @@ const Effect: React.FC<{
                 .attr('width', d => d.size)
                 .attr('height', d => d.size)
                 .attr('fill', d => d.color)
-                .style('transform', d => `rotate(${d.rotation}deg)`);
+                .attr('transform', d => `rotate(${d.rotation} ${d.x} ${d.y})`);
         };
 
-        // Function to spawn new particles
+        // Function to spawn new particles at target's right center
         const spawnParticles = () => {
-            const targetEl = getSvgEl(`points-${sanitizeName(effect.target)}`);
-            if (!targetEl) return;
+            const position = getTargetPosition();
+            if (!position) return;
 
-            const bbox = targetEl.getBoundingClientRect();
-            const svgBBox = svg.getBoundingClientRect();
-            const x = bbox.right - svgBBox.left + 10; // Small margin
-            const y = bbox.top + bbox.height/2 - svgBBox.top;
+            const { x, y } = position;
 
             // Spawn 20-30 particles per burst
-            const count = seededRand(30, 20);
+            const count = 20 + Math.floor(seededRand(11)); // 20-30 particles
             const now = performance.now() / 1000;
 
             for (let i = 0; i < count; i++) {
-                const angle = seededRand(360) * Math.PI / 180;
-                const speed = seededRand(300, 100);
+                // Create firework-like burst pattern
+                const angle = (i / count) * 2 * Math.PI + seededRand(0.5); // Evenly distributed with small random offset
+                const speed = 150 + seededRand(100); // Random speed between 150-250
+                
                 const particle: Particle = {
-                    id: seededRand(1000000),
-                    x,
-                    y,
+                    id: Date.now() + i, // Unique ID
+                    x, // All particles start at the same point
+                    y, // All particles start at the same point
                     vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed - 200, // Initial upward velocity
+                    vy: Math.sin(angle) * speed - 50, // Small upward bias for firework effect
                     rotation: seededRand(360),
-                    vrotation: seededRand(720, -720),
-                    size: seededRand(8, 4),
-                    color: COLORS[seededRand(COLORS.length - 1)],
-                    lifespan: 0.3 + seededRand(30) / 100, // 0.3-0.6 seconds
+                    vrotation: seededRand(720) - 360, // -360 to 360 degrees per second
+                    size: 4 + seededRand(4), // 4-8 pixels
+                    color: COLORS[Math.floor(seededRand(COLORS.length))],
+                    lifespan: 1.5 + seededRand(1), // 1.5-2.5 seconds
                     spawnTime: now
                 };
                 particlesRef.current.push(particle);
@@ -142,11 +158,17 @@ const Effect: React.FC<{
         animate();
 
         // Check if we should spawn particles based on progress and burst points
-        burstPoints.forEach(point => {
-            if (Math.abs(progress - point) < 0.01 && particlesRef.current.length === 0) {
+        burstPoints.forEach((point, index) => {
+            if (progress >= point && !triggeredBurstsRef.current.has(index)) {
+                triggeredBurstsRef.current.add(index);
                 spawnParticles();
             }
         });
+
+        // Reset triggered bursts when progress goes back to 0 (animation restart)
+        if (progress < 0.1) {
+            triggeredBurstsRef.current.clear();
+        }
 
         return cleanup;
     }, [effect, getSvgEl, svgRef, progress]);

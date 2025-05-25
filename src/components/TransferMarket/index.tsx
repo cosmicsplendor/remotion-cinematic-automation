@@ -46,8 +46,8 @@ export const TransferMarket: React.FC = () => {
     const result = [];
     const originalDataTyped = data as Frame[];
     for (const index in originalDataTyped) {
-      const { weekStart, data, easing } = originalDataTyped[index];
-      result.push({ weekStart, easing, data: data.slice(0, 15) });
+      const { data, ...rest } = originalDataTyped[index];
+      result.push({ ...rest, data: data.slice(0, 15) });
     }
     return result;
   }, [data]);
