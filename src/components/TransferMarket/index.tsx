@@ -39,7 +39,7 @@ export const TransferMarket: React.FC = () => {
     if (!fps || fps <= 0) return 0;
     return (fps * DURATION) / 1000;
   }, [fps]);
-  const frame = useCurrentFrame() + SF[1] * FRAMES_PER_UNIT_POINT; // just to give a headstart
+  const frame = useCurrentFrame() + FRAMES_PER_UNIT_POINT; // just to give a headstart
 
   const flattenedData = useMemo(() => {
     const result = [];
@@ -147,7 +147,6 @@ export const TransferMarket: React.FC = () => {
     const chart = chartRef.current;
     const { data } = currentData;
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
-    console.log({ easingFn, easing: currentData.easing })
     const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
     chart(prevData, data, easingFn(progress));
   }, [frame]);
