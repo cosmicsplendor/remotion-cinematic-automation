@@ -249,9 +249,9 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         };
 
         svg.selectAll("rect.bar")
-            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d) as string)
+            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d as Datum) as string)
             .join(
-                enter => enter.append("rect").attr("class", "bar"),
+                enter => enter.append("rect").attr("class", "bar").attr("id", d => `bar-${accessors.id(d)}`),
                 update => update,
                 exit => exit.remove()
             )
@@ -300,9 +300,9 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
 
 
         svg.selectAll("image.logo")
-            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d) as string)
+            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d as Datum) as string)
             .join(
-                enter => enter.append("image").attr("class", "logo"),
+                enter => enter.append("image").attr("class", "logo").attr("id", d => `logo-${accessors.id(d)}`),
                 update => update,
                 exit => exit.remove()
             )
@@ -322,9 +322,9 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
             });
 
         svg.selectAll("text.total-points")
-            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d) as string)
+            .data<InterpolatedDatum<Datum>>(interpolatedData, d => accessors.id(d as Datum) as string)
             .join(
-                enter => enter.append("text").attr("class", "total-points"),
+                enter => enter.append("text").attr("class", "total-points").attr("id", d => `points-${accessors.id(d)}`),
                 update => update,
                 exit => exit.remove()
             )

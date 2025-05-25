@@ -126,7 +126,7 @@ export const TransferMarket: React.FC = () => {
       .accessors({
         x: d => d.marketCap,
         y: d => d.name,
-        id: d => d.name,
+        id: d => sanitizeName(d.name),
         // color: d => (colorsMap as any)[sanitizeName(d.name)] ?? "#000",
         color: d => "#000",
         name: d => (teamNameMap as any)[d.name] ?? d.name,
