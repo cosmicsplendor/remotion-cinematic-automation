@@ -5,7 +5,7 @@ let seed = 0
 export const randomSeed = (newSeed: number) => {
     seed = newSeed
 }
-export const seededRand = (to: number, from = 0) => {
+export const seededRand = (to: number=1, from = 0) => {
     seed = (seed * 9301 + 49297) % 233280
     const rnd = seed / 233280
     return from + Math.floor((to - from + 1) * rnd)
