@@ -22,7 +22,7 @@ export type SafeChart = {
   ? (...args: Parameters<Required<Chart>[K]>) => SafeChart
   : never
 }
-
+export const sanitizeName = (name: string) => name.replace(/[^a-zA-Z0-9\-_]/g, '_').toLowerCase()
 const TRILLION = 1_000_000_000_000
 const BILLION = 1_000_000_000
 const MILLION = 1_000_000

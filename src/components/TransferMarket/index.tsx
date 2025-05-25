@@ -8,7 +8,7 @@ import {
   staticFile,
   Sequence,
 } from 'remotion';
-import { Chart, Datum, SafeChart, Frame, SeasonOdometer, quarters } from "./helpers"
+import { Chart, Datum, SafeChart, Frame, SeasonOdometer, quarters, sanitizeName } from "./helpers"
 import { easeLinear } from "d3"
 import { formatX, reverseFormatX } from "./helpers"
 import { BarChartGenerator } from '../../../lib/d3/generators/BarChart';
@@ -106,7 +106,7 @@ export const TransferMarket: React.FC = () => {
     const modifier = (chart: Chart) => {
       const safeChart = chart as SafeChart;
       safeChart
-        .bar({ gap: 18, minLength: 10 })
+        .bar({ gap: 24, minLength: 10 })
         .barCount({ dir: 1, active: 10, max: 20 })
         .label({ fill: "#707070", rightOffset: 200, size: 24 })
         .position({ fill: "#666", size: 32, xOffset: -260 })
@@ -121,7 +121,6 @@ export const TransferMarket: React.FC = () => {
 
       return safeChart as Chart;
     };
-    const sanitizeName = (name: string) => name.replace(/[^a-zA-Z0-9\-_]/g, '_').toLowerCase()
     const barChartRaw = BarChartGenerator<Datum>(dims)
       .accessors({
         x: d => d.marketCap,
