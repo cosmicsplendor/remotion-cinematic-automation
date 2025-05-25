@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { BarChart } from "../../../lib/d3/generators/BarChart"
+import { RemotionBarChart } from "../../../lib/d3/generators/BarChart"
 import { Hash } from "../../../lib/d3/utils/types"
 import TMOdometerModule from 'tm-odometer'
 // import "./odometer-themes/slot-machine.css";
@@ -14,9 +14,10 @@ export type Frame = {
   weekStart: string,
   easing?: string,
   slowDown?: number,
-  coins: Datum[]
+  coins: Datum[],
+  effects?: StrHash[]
 }
-export type Chart = BarChart<Datum>
+export type Chart = RemotionBarChart<Datum>
 export type SafeChart = {
   [K in keyof Required<Chart>]: Exclude<Required<Chart>[K], undefined> extends (...args: any[]) => any
   ? (...args: Parameters<Required<Chart>[K]>) => SafeChart
