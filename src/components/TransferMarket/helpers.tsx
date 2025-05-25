@@ -10,12 +10,18 @@ export type Datum = {
   name: string
   marketCap: number
 }
+export type ConfettiEffect = {
+  type: "confetti"
+  target: string,
+  bursts: number
+}
+export type Effect = ConfettiEffect
 export type Frame = {
   weekStart: string,
   easing?: string,
   slowDown?: number,
   coins: Datum[],
-  effects?: StrHash[]
+  effects?: Effect[]
 }
 export type Chart = RemotionBarChart<Datum>
 export type SafeChart = {

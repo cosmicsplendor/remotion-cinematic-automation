@@ -1,8 +1,9 @@
 import { RefObject, useCallback, useEffect, useState } from "react";
-import { Frame, StrHash } from "../helpers"
+import { Effect, Frame } from "../helpers"
+import ConfettiEffect from "./effects/Confetti";
 const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, svgRef: RefObject<SVGSVGElement> }> = props => {
-    const [effects, setEffects] = useState<StrHash[]>([])
-    const { frame, progress, data, svgRef } = props;
+    const [effects, setEffects] = useState<Effect[]>([])
+    const { progress, data, svgRef } = props;
     useEffect(() => {
         if (!data.effects || data.effects.length === 0) return;
         setEffects([
@@ -10,6 +11,9 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
             ...data.effects
         ])
     }, [data]);
+    const removeEffect = useCallback((effect: Effect) => {
+        setEffects(effects => effects.filter(e => e !== effect));
+    }, [setEffects]);
     const getSvgEl = useCallback((id: string) => {
         if (!svgRef.current) return null;
         const el = svgRef.current.querySelector(`#${id}`);
@@ -18,7 +22,26 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
         }
         return null;
     }, [svgRef])
-    return <></>
+    return <>
+        {
+            effects.map((effect, index) => {
+                if (effect.type === "confetti") {
+                    const el = getSvgEl(effect.target);
+                    if (!el) return null;
+                    return (
+                        <ConfettiEffect
+                            effect={effect}
+                            getSvgEl={getSvgEl}
+                            progress={progress}
+                            data={data}
+                            removeEffect={removeEffect}
+                        />
+                    );
+                }
+                return null;
+            })
+        }
+    </>
 }
 
 export default EffectsManager;
