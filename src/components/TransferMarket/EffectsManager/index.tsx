@@ -3,7 +3,7 @@ import { Effect, Frame } from "../helpers"
 import ConfettiEffect from "./effects/Confetti";
 const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, svgRef: RefObject<SVGSVGElement> }> = props => {
     const [effects, setEffects] = useState<Effect[]>([])
-    const { progress, data, svgRef } = props;
+    const { frame, data, svgRef } = props;
     useEffect(() => {
         if (!data.effects || data.effects.length === 0) return;
         setEffects([
@@ -32,8 +32,8 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
                             effect={effect}
                             svgRef={svgRef}
                             getSvgEl={getSvgEl}
-                            progress={progress}
                             removeEffect={removeEffect}
+                            frame={frame}
                         />
                     );
                 }

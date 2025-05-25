@@ -13,7 +13,8 @@ export type Datum = {
 export type ConfettiEffect = {
   type: "confetti"
   target: string,
-  bursts: number
+  bursts: number,
+  duration: number
 }
 export type Effect = ConfettiEffect
 export type Frame = {
