@@ -7,6 +7,7 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
     useEffect(() => {
         if (!data.effects || data.effects.length === 0) return;
         setEffects([
+            ...effects,
             ...data.effects
         ])
     }, [data]);
@@ -18,6 +19,9 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
         }
         return null;
     }, [svgRef])
+    const removeEffect = useCallback((effect: Effect) => {
+        setEffects(effects.filter(e => e !== effect))
+    }, [setEffects])
     return <>
         {
             effects.map((effect, index) => {
@@ -29,6 +33,7 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
                             svgRef={svgRef}
                             getSvgEl={getSvgEl}
                             progress={progress}
+                            removeEffect={removeEffect}
                         />
                     );
                 }

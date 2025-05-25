@@ -1,7 +1,6 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
-import { ConfettiEffect, Frame, sanitizeName } from "../../helpers";
+import { ConfettiEffect, Effect, Frame, sanitizeName } from "../../helpers";
 import { seededRand } from "../../../../../lib/d3/utils/math";
-import { select } from "d3";
 
 type Particle = {
     id: number;
@@ -16,13 +15,13 @@ type Particle = {
 };
 
 const COLORS = ['#FFD700', '#FF69B4', '#4169E1', '#32CD32', '#FF4500', '#9370DB'];
-
 const Effect: React.FC<{
     effect: ConfettiEffect;
     getSvgEl: (id: string) => SVGElement | null;
     svgRef: RefObject<SVGSVGElement>;
     progress: number;
-}> = ({ effect, getSvgEl, svgRef, progress }) => {
+    removeEffect: (effect: Effect) => void
+}> = ({ effect, getSvgEl, svgRef, progress, removeEffect }) => {
     const particlesRef = useRef<Particle[]>([]);
     const target = useMemo(() => sanitizeName(effect.target), [effect])
     const targetEl = useMemo(() => getSvgEl(`points-${target}`), [getSvgEl, target]);
@@ -30,7 +29,7 @@ const Effect: React.FC<{
 
     useEffect(() => {
         return () => {
-            // cleanup particles
+            // cleanup particles, probably just remove the group
         }
     }, [])
     useEffect(() => {
@@ -38,11 +37,15 @@ const Effect: React.FC<{
         const group = svgRef.current.querySelector<SVGElement>(`.confetti-group-${target}`) || null;
         setGroupEl(group);
         // initialize particles
+        for (let i = 0; i < effect.bursts; i++) {
+
+        }
     }, [targetEl]);
 
     useEffect(() => {
         if (!groupEl) return;
         // update particles
+
     }, [groupEl, progress]);
     return <></>
 }
