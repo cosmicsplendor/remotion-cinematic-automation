@@ -25,6 +25,10 @@ type Accessors<Datum> = {
 
 type DOM = Record<"container" | "svg", string>
 
+const smoothstep = (min: number, max: number, value: number): number => {
+    const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
+    return x * x * (3 - 2 * x);
+};
 export type RemotionBarChart<Datum> = {
     (prevData: Datum[], newData: Datum[], progress: number): void
     barCount?: (val: BarCount) => RemotionBarChart<Datum>,
@@ -242,10 +246,15 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const getOpacity = (d: InterpolatedDatum<Datum>) => {
             if (d._transitionState === TransitionState.EXITING) return Math.max(0, 1 - progress * 1.5);
             if (d._transitionState === TransitionState.ENTERING) return Math.min(1, progress * 1.5);
+
+            let positionOpacity = 1;
             if (d._interpolatedPosition < -0.5 || d._interpolatedPosition > barCount.active - 0.5) {
-                return Math.max(0, 1 - Math.abs(d._interpolatedPosition - (barCount.active - 1) / 2) / 3);
+                const minPos = (barCount.active - 1) / 2 - 3;
+                const maxPos = (barCount.active - 1) / 2 + 3;
+                positionOpacity = 1 - smoothstep(minPos, maxPos, d._interpolatedPosition);
             }
-            return 1;
+
+            return positionOpacity;
         };
 
         svg.selectAll("rect.bar")

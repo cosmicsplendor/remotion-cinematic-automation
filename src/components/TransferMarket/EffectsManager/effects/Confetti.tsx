@@ -28,7 +28,6 @@ const Effect: React.FC<{
     const particlesRef = useRef<Particle[]>([]);
     const containerRef = useRef<SVGGElement | null>(null);
     const frameRef = useRef<number>(0);
-
     useEffect(() => {
         const svg = svgRef.current;
         if (!svg) return;
