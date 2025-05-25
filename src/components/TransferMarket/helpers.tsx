@@ -20,7 +20,7 @@ export type Frame = {
   weekStart: string,
   easing?: string,
   slowDown?: number,
-  coins: Datum[],
+  data: Datum[],
   effects?: Effect[]
 }
 export type Chart = RemotionBarChart<Datum>

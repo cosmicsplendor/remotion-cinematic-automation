@@ -30,7 +30,6 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
                             svgRef={svgRef}
                             getSvgEl={getSvgEl}
                             progress={progress}
-                            data={data}
                         />
                     );
                 }

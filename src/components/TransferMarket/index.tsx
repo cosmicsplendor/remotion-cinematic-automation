@@ -21,6 +21,7 @@ import React from 'react'; // Import React for Fragment
 import RotatingGear from './Gear';
 import OdometerDisplay from './OdometerDisplay';
 import { easingFns } from '../../../lib/d3/utils/math';
+import EffectsManager from './EffectsManager';
 
 const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
@@ -45,8 +46,8 @@ export const TransferMarket: React.FC = () => {
     const result = [];
     const originalDataTyped = data as Frame[];
     for (const index in originalDataTyped) {
-      const { weekStart, coins, easing } = originalDataTyped[index];
-      result.push({ weekStart, easing, data: coins.slice(0, 15) });
+      const { weekStart, data, easing } = originalDataTyped[index];
+      result.push({ weekStart, easing, data: data.slice(0, 15) });
     }
     return result;
   }, [data]);
@@ -57,14 +58,14 @@ export const TransferMarket: React.FC = () => {
     const originalDataTyped = data as Frame[];
     for (const seasonEntry of originalDataTyped) {
       const seasonNumber = new Date(seasonEntry.weekStart).getFullYear();
-      if (!isNaN(seasonNumber) && seasonEntry.coins && seasonEntry.coins.length > 0) {
+      if (!isNaN(seasonNumber) && seasonEntry.data && seasonEntry.data.length > 0) {
         metadata.push({
           season: seasonNumber,
           startFrame: currentFrameCounter,
         });
       }
-      if (seasonEntry.coins && seasonEntry.coins.length > 0) {
-        currentFrameCounter += seasonEntry.coins.length * FRAMES_PER_UNIT_POINT;
+      if (seasonEntry.data && seasonEntry.data.length > 0) {
+        currentFrameCounter += seasonEntry.data.length * FRAMES_PER_UNIT_POINT;
       }
     }
     return metadata;
@@ -187,7 +188,7 @@ export const TransferMarket: React.FC = () => {
           <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
-
+      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData}/>
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
       {/* {seasonAudioMetadata.map(({ season, startFrame }) => {
         const audioSrcPath = `/assets/transferAudio/${season}.wav`;

@@ -1,7 +1,7 @@
 [
   {
     "weekStart": "2016-01-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6256927063.573571
@@ -104,7 +104,7 @@
     "weekStart": "2016-01-22T00:00:00.000Z",
     "slowDown": 1,
     "easing": "sineInOut",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6052683223.919286
@@ -217,7 +217,7 @@
   },
   {
     "weekStart": "2016-01-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 5800495195.293715
@@ -330,7 +330,7 @@
   },
   {
     "weekStart": "2016-02-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 5766327480.8902855
@@ -435,7 +435,7 @@
   },
   {
     "weekStart": "2016-02-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 5940825613.245001
@@ -532,7 +532,7 @@
   },
   {
     "weekStart": "2016-02-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6266348087.269856
@@ -625,7 +625,7 @@
   },
   {
     "weekStart": "2016-02-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6482050263.491572
@@ -718,7 +718,7 @@
   },
   {
     "weekStart": "2016-03-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6426983894.555572
@@ -815,7 +815,7 @@
   },
   {
     "weekStart": "2016-03-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6395582756.924572
@@ -920,7 +920,7 @@
   },
   {
     "weekStart": "2016-03-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6351376753.140142
@@ -1029,7 +1029,7 @@
   },
   {
     "weekStart": "2016-03-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6404734089.534858
@@ -1134,7 +1134,7 @@
   },
   {
     "weekStart": "2016-04-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6448990437.228
@@ -1235,7 +1235,7 @@
   },
   {
     "weekStart": "2016-04-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6492842230.047
@@ -1332,7 +1332,7 @@
   },
   {
     "weekStart": "2016-04-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6609775863.745999
@@ -1437,7 +1437,7 @@
   },
   {
     "weekStart": "2016-04-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6827233898.334572
@@ -1546,7 +1546,7 @@
   },
   {
     "weekStart": "2016-04-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 6930530278.514286
@@ -1655,7 +1655,7 @@
   },
   {
     "weekStart": "2016-05-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 7036914625.538144
@@ -1756,7 +1756,7 @@
   },
   {
     "weekStart": "2016-05-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 7040633487.213
@@ -1853,7 +1853,7 @@
   },
   {
     "weekStart": "2016-05-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 7000333081.595715
@@ -1957,7 +1957,7 @@
     "slowDown": 3,
     "easing": "quadInOut",
     "effects": [{"type":"confetti","bursts":5,"target":"The DAO"}],
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 7580663215.171571
@@ -2058,7 +2058,7 @@
   },
   {
     "weekStart": "2016-06-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 8346603712.461714
@@ -2159,7 +2159,7 @@
   },
   {
     "weekStart": "2016-06-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9603085593.767427
@@ -2260,7 +2260,7 @@
   },
   {
     "weekStart": "2016-06-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10440680747.876572
@@ -2357,7 +2357,7 @@
   },
   {
     "weekStart": "2016-06-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10526993997.409143
@@ -2450,7 +2450,7 @@
   },
   {
     "weekStart": "2016-07-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10565944710.889286
@@ -2547,7 +2547,7 @@
   },
   {
     "weekStart": "2016-07-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10396433984.196857
@@ -2640,7 +2640,7 @@
   },
   {
     "weekStart": "2016-07-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10488197374.772858
@@ -2733,7 +2733,7 @@
   },
   {
     "weekStart": "2016-07-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10393544994.892714
@@ -2834,7 +2834,7 @@
   },
   {
     "weekStart": "2016-07-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9983131089.56
@@ -2931,7 +2931,7 @@
   },
   {
     "weekStart": "2016-08-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9576856885.372856
@@ -3032,7 +3032,7 @@
   },
   {
     "weekStart": "2016-08-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9256569288.345284
@@ -3129,7 +3129,7 @@
   },
   {
     "weekStart": "2016-08-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9190931996.973572
@@ -3226,7 +3226,7 @@
   },
   {
     "weekStart": "2016-08-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9133440585.405428
@@ -3323,7 +3323,7 @@
   },
   {
     "weekStart": "2016-09-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9370926885.579144
@@ -3420,7 +3420,7 @@
   },
   {
     "weekStart": "2016-09-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9560696839.777855
@@ -3525,7 +3525,7 @@
   },
   {
     "weekStart": "2016-09-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9637611794.11457
@@ -3626,7 +3626,7 @@
   },
   {
     "weekStart": "2016-09-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9626813487.234428
@@ -3723,7 +3723,7 @@
   },
   {
     "weekStart": "2016-09-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9666437398.171429
@@ -3828,7 +3828,7 @@
   },
   {
     "weekStart": "2016-10-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 9825797989.278286
@@ -3933,7 +3933,7 @@
   },
   {
     "weekStart": "2016-10-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10010571803.851572
@@ -4042,7 +4042,7 @@
   },
   {
     "weekStart": "2016-10-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10304141100.608574
@@ -4151,7 +4151,7 @@
   },
   {
     "weekStart": "2016-10-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 10847382650.315573
@@ -4260,7 +4260,7 @@
   },
   {
     "weekStart": "2016-11-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 11168715934.74057
@@ -4369,7 +4369,7 @@
   },
   {
     "weekStart": "2016-11-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 11400883705.268572
@@ -4474,7 +4474,7 @@
   },
   {
     "weekStart": "2016-11-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 11663076277.447857
@@ -4575,7 +4575,7 @@
   },
   {
     "weekStart": "2016-11-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 11795394612.052286
@@ -4676,7 +4676,7 @@
   },
   {
     "weekStart": "2016-12-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 12102698324.191715
@@ -4773,7 +4773,7 @@
   },
   {
     "weekStart": "2016-12-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 12299166213.158573
@@ -4866,7 +4866,7 @@
   },
   {
     "weekStart": "2016-12-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 12691657771.945856
@@ -4971,7 +4971,7 @@
   },
   {
     "weekStart": "2016-12-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 13852204575.726284
@@ -5080,7 +5080,7 @@
   },
   {
     "weekStart": "2016-12-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 15295879937.403141
@@ -5189,7 +5189,7 @@
   },
   {
     "weekStart": "2017-01-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 14948096553.817001
@@ -5294,7 +5294,7 @@
   },
   {
     "weekStart": "2017-01-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 14396173464.058857
@@ -5391,7 +5391,7 @@
   },
   {
     "weekStart": "2017-01-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 14286220495.282715
@@ -5484,7 +5484,7 @@
   },
   {
     "weekStart": "2017-01-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 14827423611.161427
@@ -5577,7 +5577,7 @@
   },
   {
     "weekStart": "2017-02-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 15907090053.565857
@@ -5674,7 +5674,7 @@
   },
   {
     "weekStart": "2017-02-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 16195995387.139431
@@ -5771,7 +5771,7 @@
   },
   {
     "weekStart": "2017-02-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 17025154300.565859
@@ -5860,7 +5860,7 @@
   },
   {
     "weekStart": "2017-02-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 18146282507.368713
@@ -5945,7 +5945,7 @@
   },
   {
     "weekStart": "2017-03-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 19283795000.126854
@@ -6034,7 +6034,7 @@
   },
   {
     "weekStart": "2017-03-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 19595241349.747284
@@ -6131,7 +6131,7 @@
   },
   {
     "weekStart": "2017-03-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 18395195857.259003
@@ -6240,7 +6240,7 @@
   },
   {
     "weekStart": "2017-03-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 17192446793.11886
@@ -6353,7 +6353,7 @@
   },
   {
     "weekStart": "2017-03-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 17416853536.07229
@@ -6466,7 +6466,7 @@
   },
   {
     "weekStart": "2017-04-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 18372252402.836716
@@ -6583,7 +6583,7 @@
   },
   {
     "weekStart": "2017-04-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 19158746665.74286
@@ -6692,7 +6692,7 @@
   },
   {
     "weekStart": "2017-04-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 19909135579.42557
@@ -6793,7 +6793,7 @@
   },
   {
     "weekStart": "2017-04-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 21536149740.668285
@@ -6898,7 +6898,7 @@
   },
   {
     "weekStart": "2017-05-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 24802354417.380146
@@ -7019,7 +7019,7 @@
   },
   {
     "weekStart": "2017-05-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 27518715523.910145
@@ -7140,7 +7140,7 @@
   },
   {
     "weekStart": "2017-05-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 32228916774.331573
@@ -7257,7 +7257,7 @@
   },
   {
     "weekStart": "2017-05-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 34747766744.06614
@@ -7358,7 +7358,7 @@
   },
   {
     "weekStart": "2017-06-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 39813998301.16386
@@ -7459,7 +7459,7 @@
   },
   {
     "weekStart": "2017-06-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 42641489899.72086
@@ -7568,7 +7568,7 @@
   },
   {
     "weekStart": "2017-06-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 43690342134.50343
@@ -7685,7 +7685,7 @@
   },
   {
     "weekStart": "2017-06-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 43090699207.77386
@@ -7790,7 +7790,7 @@
   },
   {
     "weekStart": "2017-06-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 42241178672.34043
@@ -7903,7 +7903,7 @@
   },
   {
     "weekStart": "2017-07-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 41154655441.700905
@@ -8016,7 +8016,7 @@
   },
   {
     "weekStart": "2017-07-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 39008772020.418
@@ -8117,7 +8117,7 @@
   },
   {
     "weekStart": "2017-07-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 41243134320.822044
@@ -8218,7 +8218,7 @@
   },
   {
     "weekStart": "2017-07-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 43494182056.36943
@@ -8315,7 +8315,7 @@
   },
   {
     "weekStart": "2017-08-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 49484837439.62671
@@ -8412,7 +8412,7 @@
   },
   {
     "weekStart": "2017-08-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 59300038428.70257
@@ -8513,7 +8513,7 @@
   },
   {
     "weekStart": "2017-08-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 65431763194.92029
@@ -8614,7 +8614,7 @@
   },
   {
     "weekStart": "2017-08-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 71148510043.977
@@ -8715,7 +8715,7 @@
   },
   {
     "weekStart": "2017-09-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 73557353352.776
@@ -8820,7 +8820,7 @@
   },
   {
     "weekStart": "2017-09-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 70402171346.3183
@@ -8929,7 +8929,7 @@
   },
   {
     "weekStart": "2017-09-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 66089196616.54143
@@ -9030,7 +9030,7 @@
   },
   {
     "weekStart": "2017-09-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 64281837728.82443
@@ -9131,7 +9131,7 @@
   },
   {
     "weekStart": "2017-09-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 67693540573.65829
@@ -9232,7 +9232,7 @@
   },
   {
     "weekStart": "2017-10-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 73857969313.29713
@@ -9337,7 +9337,7 @@
   },
   {
     "weekStart": "2017-10-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 85238786323.79857
@@ -9434,7 +9434,7 @@
   },
   {
     "weekStart": "2017-10-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 93062960958.35127
@@ -9527,7 +9527,7 @@
   },
   {
     "weekStart": "2017-10-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 100765783534.73186
@@ -9624,7 +9624,7 @@
   },
   {
     "weekStart": "2017-11-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 111513689850.32028
@@ -9721,7 +9721,7 @@
   },
   {
     "weekStart": "2017-11-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 113624650119.68657
@@ -9814,7 +9814,7 @@
   },
   {
     "weekStart": "2017-11-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 124876447767.06085
@@ -9903,7 +9903,7 @@
   },
   {
     "weekStart": "2017-11-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 141877423490.58026
@@ -9996,7 +9996,7 @@
   },
   {
     "weekStart": "2017-12-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 180738910857.5837
@@ -10097,7 +10097,7 @@
   },
   {
     "weekStart": "2017-12-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 232462258116.3147
@@ -10206,7 +10206,7 @@
   },
   {
     "weekStart": "2017-12-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 275073929773.7841
@@ -10315,7 +10315,7 @@
   },
   {
     "weekStart": "2017-12-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 268331761827.51
@@ -10428,7 +10428,7 @@
   },
   {
     "weekStart": "2017-12-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 255432753229.69476
@@ -10541,7 +10541,7 @@
   },
   {
     "weekStart": "2018-01-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 253529456406.74304
@@ -10642,7 +10642,7 @@
   },
   {
     "weekStart": "2018-01-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 235496752687.5003
@@ -10739,7 +10739,7 @@
   },
   {
     "weekStart": "2018-01-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 214193046429.97958
@@ -10836,7 +10836,7 @@
   },
   {
     "weekStart": "2018-01-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 191713798332.43616
@@ -10929,7 +10929,7 @@
   },
   {
     "weekStart": "2018-02-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 161394464446.34613
@@ -11026,7 +11026,7 @@
   },
   {
     "weekStart": "2018-02-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 152719546305.98486
@@ -11123,7 +11123,7 @@
   },
   {
     "weekStart": "2018-02-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 163340412998.871
@@ -11220,7 +11220,7 @@
   },
   {
     "weekStart": "2018-02-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 171716607077.88528
@@ -11309,7 +11309,7 @@
   },
   {
     "weekStart": "2018-03-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 180055847933.12225
@@ -11398,7 +11398,7 @@
   },
   {
     "weekStart": "2018-03-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 165578693426.46213
@@ -11491,7 +11491,7 @@
   },
   {
     "weekStart": "2018-03-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 154265100468.61212
@@ -11588,7 +11588,7 @@
   },
   {
     "weekStart": "2018-03-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 142852200262.61472
@@ -11689,7 +11689,7 @@
   },
   {
     "weekStart": "2018-03-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 129636841250.66444
@@ -11790,7 +11790,7 @@
   },
   {
     "weekStart": "2018-04-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 122660749044.453
@@ -11887,7 +11887,7 @@
   },
   {
     "weekStart": "2018-04-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 128043508130.61514
@@ -11984,7 +11984,7 @@
   },
   {
     "weekStart": "2018-04-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 141829771638.29813
@@ -12073,7 +12073,7 @@
   },
   {
     "weekStart": "2018-04-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 152662765937.70572
@@ -12166,7 +12166,7 @@
   },
   {
     "weekStart": "2018-05-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 158658808346.23843
@@ -12259,7 +12259,7 @@
   },
   {
     "weekStart": "2018-05-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 152140718358.19687
@@ -12352,7 +12352,7 @@
   },
   {
     "weekStart": "2018-05-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 144463604108.49414
@@ -12445,7 +12445,7 @@
   },
   {
     "weekStart": "2018-05-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 133273732234.12444
@@ -12538,7 +12538,7 @@
   },
   {
     "weekStart": "2018-06-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 130500204168.7904
@@ -12631,7 +12631,7 @@
   },
   {
     "weekStart": "2018-06-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 123421224167.39142
@@ -12724,7 +12724,7 @@
   },
   {
     "weekStart": "2018-06-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 118355062607.39857
@@ -12817,7 +12817,7 @@
   },
   {
     "weekStart": "2018-06-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 110103857467.37685
@@ -12906,7 +12906,7 @@
   },
   {
     "weekStart": "2018-06-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 109670057070.58685
@@ -13007,7 +13007,7 @@
   },
   {
     "weekStart": "2018-07-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 110576793852.33058
@@ -13108,7 +13108,7 @@
   },
   {
     "weekStart": "2018-07-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 114537271306.57957
@@ -13209,7 +13209,7 @@
   },
   {
     "weekStart": "2018-07-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 124427856676.07343
@@ -13302,7 +13302,7 @@
   },
   {
     "weekStart": "2018-07-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 131871444604.36844
@@ -13391,7 +13391,7 @@
   },
   {
     "weekStart": "2018-08-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 126838215646.417
@@ -13484,7 +13484,7 @@
   },
   {
     "weekStart": "2018-08-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 116824805145.95729
@@ -13577,7 +13577,7 @@
   },
   {
     "weekStart": "2018-08-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 111669622001.23859
@@ -13670,7 +13670,7 @@
   },
   {
     "weekStart": "2018-08-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 114313659301.6933
@@ -13759,7 +13759,7 @@
   },
   {
     "weekStart": "2018-08-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 118768786738.97386
@@ -13844,7 +13844,7 @@
   },
   {
     "weekStart": "2018-09-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 115166685663.95287
@@ -13933,7 +13933,7 @@
   },
   {
     "weekStart": "2018-09-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 112995836031.18315
@@ -14022,7 +14022,7 @@
   },
   {
     "weekStart": "2018-09-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 112641241926.32613
@@ -14111,7 +14111,7 @@
   },
   {
     "weekStart": "2018-09-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 113602318830.99713
@@ -14200,7 +14200,7 @@
   },
   {
     "weekStart": "2018-10-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 113905109518.22885
@@ -14289,7 +14289,7 @@
   },
   {
     "weekStart": "2018-10-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 112642719056.54086
@@ -14378,7 +14378,7 @@
   },
   {
     "weekStart": "2018-10-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 112372786873.44315
@@ -14467,7 +14467,7 @@
   },
   {
     "weekStart": "2018-10-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 111538254535.35886
@@ -14556,7 +14556,7 @@
   },
   {
     "weekStart": "2018-11-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 111579810455.13515
@@ -14641,7 +14641,7 @@
   },
   {
     "weekStart": "2018-11-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 109445257011.64258
@@ -14730,7 +14730,7 @@
   },
   {
     "weekStart": "2018-11-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 98089997296.12985
@@ -14819,7 +14819,7 @@
   },
   {
     "weekStart": "2018-11-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 82869469349.61699
@@ -14912,7 +14912,7 @@
   },
   {
     "weekStart": "2018-11-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 72746495731.81615
@@ -15005,7 +15005,7 @@
   },
   {
     "weekStart": "2018-12-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 64767529930.344574
@@ -15102,7 +15102,7 @@
   },
   {
     "weekStart": "2018-12-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 62708076829.056854
@@ -15203,7 +15203,7 @@
   },
   {
     "weekStart": "2018-12-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 64656970834.59443
@@ -15300,7 +15300,7 @@
   },
   {
     "weekStart": "2018-12-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 66430370423.615
@@ -15393,7 +15393,7 @@
   },
   {
     "weekStart": "2019-01-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 68169909524.38643
@@ -15486,7 +15486,7 @@
   },
   {
     "weekStart": "2019-01-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 66011942190.43914
@@ -15579,7 +15579,7 @@
   },
   {
     "weekStart": "2019-01-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 64591577482.03772
@@ -15668,7 +15668,7 @@
   },
   {
     "weekStart": "2019-01-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 62604733604.659424
@@ -15765,7 +15765,7 @@
   },
   {
     "weekStart": "2019-02-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 61465266265.35686
@@ -15862,7 +15862,7 @@
   },
   {
     "weekStart": "2019-02-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 62542722846.05472
@@ -15959,7 +15959,7 @@
   },
   {
     "weekStart": "2019-02-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 64854076228.77372
@@ -16052,7 +16052,7 @@
   },
   {
     "weekStart": "2019-02-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 67287822177.15557
@@ -16141,7 +16141,7 @@
   },
   {
     "weekStart": "2019-03-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 67968030616.474
@@ -16230,7 +16230,7 @@
   },
   {
     "weekStart": "2019-03-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 68602502139.71614
@@ -16319,7 +16319,7 @@
   },
   {
     "weekStart": "2019-03-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 69785694339.08957
@@ -16412,7 +16412,7 @@
   },
   {
     "weekStart": "2019-03-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 70558994940.44957
@@ -16505,7 +16505,7 @@
   },
   {
     "weekStart": "2019-03-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 74805844105.59357
@@ -16594,7 +16594,7 @@
   },
   {
     "weekStart": "2019-04-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 83351714854.77615
@@ -16683,7 +16683,7 @@
   },
   {
     "weekStart": "2019-04-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 88715723373.28229
@@ -16772,7 +16772,7 @@
   },
   {
     "weekStart": "2019-04-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 93048199976.60672
@@ -16861,7 +16861,7 @@
   },
   {
     "weekStart": "2019-04-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 93852075919.93286
@@ -16954,7 +16954,7 @@
   },
   {
     "weekStart": "2019-05-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 99212965123.25316
@@ -17047,7 +17047,7 @@
   },
   {
     "weekStart": "2019-05-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 116344672213.58258
@@ -17140,7 +17140,7 @@
   },
   {
     "weekStart": "2019-05-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 129292749591.06071
@@ -17233,7 +17233,7 @@
   },
   {
     "weekStart": "2019-05-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 142738262218.48602
@@ -17322,7 +17322,7 @@
   },
   {
     "weekStart": "2019-05-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 145262732251.64716
@@ -17407,7 +17407,7 @@
   },
   {
     "weekStart": "2019-06-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 144661130497.87616
@@ -17496,7 +17496,7 @@
   },
   {
     "weekStart": "2019-06-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 152581758993.36914
@@ -17589,7 +17589,7 @@
   },
   {
     "weekStart": "2019-06-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 176865056581.7306
@@ -17686,7 +17686,7 @@
   },
   {
     "weekStart": "2019-06-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 193661043553.4629
@@ -17783,7 +17783,7 @@
   },
   {
     "weekStart": "2019-07-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 205100151962.83228
@@ -17880,7 +17880,7 @@
   },
   {
     "weekStart": "2019-07-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 197567738666.83655
@@ -17973,7 +17973,7 @@
   },
   {
     "weekStart": "2019-07-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 189926129457.16583
@@ -18070,7 +18070,7 @@
   },
   {
     "weekStart": "2019-07-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 180032342249.42487
@@ -18163,7 +18163,7 @@
   },
   {
     "weekStart": "2019-08-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 190438227448.10043
@@ -18252,7 +18252,7 @@
   },
   {
     "weekStart": "2019-08-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 194576769403.56503
@@ -18341,7 +18341,7 @@
   },
   {
     "weekStart": "2019-08-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 192977362584.8263
@@ -18430,7 +18430,7 @@
   },
   {
     "weekStart": "2019-08-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 185564175641.02258
@@ -18523,7 +18523,7 @@
   },
   {
     "weekStart": "2019-08-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 182358522601.96387
@@ -18612,7 +18612,7 @@
   },
   {
     "weekStart": "2019-09-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 183310583113.98087
@@ -18701,7 +18701,7 @@
   },
   {
     "weekStart": "2019-09-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 184312454918.82556
@@ -18794,7 +18794,7 @@
   },
   {
     "weekStart": "2019-09-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 176098805891.06085
@@ -18887,7 +18887,7 @@
   },
   {
     "weekStart": "2019-09-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 161412974661.63055
@@ -18980,7 +18980,7 @@
   },
   {
     "weekStart": "2019-10-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 152525186585.75757
@@ -19077,7 +19077,7 @@
   },
   {
     "weekStart": "2019-10-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 148580321534.4886
@@ -19174,7 +19174,7 @@
   },
   {
     "weekStart": "2019-10-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 145694288414.65216
@@ -19267,7 +19267,7 @@
   },
   {
     "weekStart": "2019-10-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 155577616880.0837
@@ -19360,7 +19360,7 @@
   },
   {
     "weekStart": "2019-11-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 162375182962.19586
@@ -19453,7 +19453,7 @@
   },
   {
     "weekStart": "2019-11-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 163208650885.7354
@@ -19546,7 +19546,7 @@
   },
   {
     "weekStart": "2019-11-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 155896307233.06128
@@ -19635,7 +19635,7 @@
   },
   {
     "weekStart": "2019-11-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 142516591502.1214
@@ -19720,7 +19720,7 @@
   },
   {
     "weekStart": "2019-11-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 136668401553.71327
@@ -19805,7 +19805,7 @@
   },
   {
     "weekStart": "2019-12-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 133699707164.86172
@@ -19894,7 +19894,7 @@
   },
   {
     "weekStart": "2019-12-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 131225040853.34843
@@ -19987,7 +19987,7 @@
   },
   {
     "weekStart": "2019-12-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 131416934865.21043
@@ -20084,7 +20084,7 @@
   },
   {
     "weekStart": "2019-12-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 131013697171.16972
@@ -20177,7 +20177,7 @@
   },
   {
     "weekStart": "2020-01-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 135927098634.9713
@@ -20270,7 +20270,7 @@
   },
   {
     "weekStart": "2020-01-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 144703942858.719
@@ -20367,7 +20367,7 @@
   },
   {
     "weekStart": "2020-01-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 153133195387.69385
@@ -20460,7 +20460,7 @@
   },
   {
     "weekStart": "2020-01-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 159310863299.03625
@@ -20557,7 +20557,7 @@
   },
   {
     "weekStart": "2020-01-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 166091235027.74542
@@ -20650,7 +20650,7 @@
   },
   {
     "weekStart": "2020-02-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 175430049471.1483
@@ -20747,7 +20747,7 @@
   },
   {
     "weekStart": "2020-02-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 179285879805.45175
@@ -20840,7 +20840,7 @@
   },
   {
     "weekStart": "2020-02-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 176472711669.6063
@@ -20929,7 +20929,7 @@
   },
   {
     "weekStart": "2020-02-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 167452548079.25516
@@ -21018,7 +21018,7 @@
   },
   {
     "weekStart": "2020-03-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 153838254852.41
@@ -21115,7 +21115,7 @@
   },
   {
     "weekStart": "2020-03-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 124281808243.07057
@@ -21216,7 +21216,7 @@
   },
   {
     "weekStart": "2020-03-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 116706257669.02144
@@ -21317,7 +21317,7 @@
   },
   {
     "weekStart": "2020-03-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 113507531017.69499
@@ -21414,7 +21414,7 @@
   },
   {
     "weekStart": "2020-04-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 123299276553.13843
@@ -21507,7 +21507,7 @@
   },
   {
     "weekStart": "2020-04-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 125304457629.17743
@@ -21600,7 +21600,7 @@
   },
   {
     "weekStart": "2020-04-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 128981579228.82372
@@ -21693,7 +21693,7 @@
   },
   {
     "weekStart": "2020-04-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 137597114582.963
@@ -21794,7 +21794,7 @@
   },
   {
     "weekStart": "2020-05-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 153840772613.2557
@@ -21899,7 +21899,7 @@
   },
   {
     "weekStart": "2020-05-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 164350084184.85315
@@ -22008,7 +22008,7 @@
   },
   {
     "weekStart": "2020-05-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 171613380662.20557
@@ -22113,7 +22113,7 @@
   },
   {
     "weekStart": "2020-05-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 169813970341.54758
@@ -22214,7 +22214,7 @@
   },
   {
     "weekStart": "2020-05-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 174037559034.70743
@@ -22311,7 +22311,7 @@
   },
   {
     "weekStart": "2020-06-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 175982348412.36288
@@ -22404,7 +22404,7 @@
   },
   {
     "weekStart": "2020-06-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 176158329861.2
@@ -22501,7 +22501,7 @@
   },
   {
     "weekStart": "2020-06-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 174409744611.43457
@@ -22602,7 +22602,7 @@
   },
   {
     "weekStart": "2020-06-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 170973515884.30185
@@ -22703,7 +22703,7 @@
   },
   {
     "weekStart": "2020-07-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 170205588733.6857
@@ -22800,7 +22800,7 @@
   },
   {
     "weekStart": "2020-07-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 169791277550.06857
@@ -22889,7 +22889,7 @@
   },
   {
     "weekStart": "2020-07-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 170851011146.49316
@@ -22986,7 +22986,7 @@
   },
   {
     "weekStart": "2020-07-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 181983077860.79056
@@ -23079,7 +23079,7 @@
   },
   {
     "weekStart": "2020-07-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 197792008355.11905
@@ -23172,7 +23172,7 @@
   },
   {
     "weekStart": "2020-08-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 209640587706.596
@@ -23269,7 +23269,7 @@
   },
   {
     "weekStart": "2020-08-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 216855470437.25113
@@ -23370,7 +23370,7 @@
   },
   {
     "weekStart": "2020-08-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 215799853349.96228
@@ -23467,7 +23467,7 @@
   },
   {
     "weekStart": "2020-08-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 213705837737.4776
@@ -23568,7 +23568,7 @@
   },
   {
     "weekStart": "2020-09-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 201235049762.46915
@@ -23661,7 +23661,7 @@
   },
   {
     "weekStart": "2020-09-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 197836840042.65845
@@ -23758,7 +23758,7 @@
   },
   {
     "weekStart": "2020-09-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 196257363069.44702
@@ -23855,7 +23855,7 @@
   },
   {
     "weekStart": "2020-09-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 198351414282.31757
@@ -23948,7 +23948,7 @@
   },
   {
     "weekStart": "2020-10-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 198303024733.11316
@@ -24041,7 +24041,7 @@
   },
   {
     "weekStart": "2020-10-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 204876154023.6503
@@ -24146,7 +24146,7 @@
   },
   {
     "weekStart": "2020-10-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 213661367263.86127
@@ -24251,7 +24251,7 @@
   },
   {
     "weekStart": "2020-10-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 231106340593.34586
@@ -24356,7 +24356,7 @@
   },
   {
     "weekStart": "2020-10-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 247817921440.89243
@@ -24445,7 +24445,7 @@
   },
   {
     "weekStart": "2020-11-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 270671578285.802
@@ -24534,7 +24534,7 @@
   },
   {
     "weekStart": "2020-11-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 296041312475.6683
@@ -24639,7 +24639,7 @@
   },
   {
     "weekStart": "2020-11-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 323076934210.80273
@@ -24752,7 +24752,7 @@
   },
   {
     "weekStart": "2020-11-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 338173496499.03534
@@ -24877,7 +24877,7 @@
   },
   {
     "weekStart": "2020-12-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 346283751780.8761
@@ -24986,7 +24986,7 @@
   },
   {
     "weekStart": "2020-12-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 357746686458.2374
@@ -25095,7 +25095,7 @@
   },
   {
     "weekStart": "2020-12-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 397914100234.3895
@@ -25188,7 +25188,7 @@
   },
   {
     "weekStart": "2020-12-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 456016882291.1693
@@ -25281,7 +25281,7 @@
   },
   {
     "weekStart": "2021-01-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 552113212194.551
@@ -25378,7 +25378,7 @@
   },
   {
     "weekStart": "2021-01-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 641654163777.3442
@@ -25471,7 +25471,7 @@
   },
   {
     "weekStart": "2021-01-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 666510603949.6263
@@ -25568,7 +25568,7 @@
   },
   {
     "weekStart": "2021-01-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 639455065717.8512
@@ -25677,7 +25677,7 @@
   },
   {
     "weekStart": "2021-01-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 638221361355.5784
@@ -25786,7 +25786,7 @@
   },
   {
     "weekStart": "2021-02-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 717409177758.6832
@@ -25907,7 +25907,7 @@
   },
   {
     "weekStart": "2021-02-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 829454420766.6257
@@ -26012,7 +26012,7 @@
   },
   {
     "weekStart": "2021-02-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 927171463282.9734
@@ -26129,7 +26129,7 @@
   },
   {
     "weekStart": "2021-02-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 924054516498.4486
@@ -26238,7 +26238,7 @@
   },
   {
     "weekStart": "2021-03-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 956905050872.0928
@@ -26351,7 +26351,7 @@
   },
   {
     "weekStart": "2021-03-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1016722323822.7097
@@ -26460,7 +26460,7 @@
   },
   {
     "weekStart": "2021-03-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1039864183425.226
@@ -26565,7 +26565,7 @@
   },
   {
     "weekStart": "2021-03-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1063067570595.5322
@@ -26662,7 +26662,7 @@
   },
   {
     "weekStart": "2021-04-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1075396218087.9644
@@ -26759,7 +26759,7 @@
   },
   {
     "weekStart": "2021-04-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1113751118045.772
@@ -26860,7 +26860,7 @@
   },
   {
     "weekStart": "2021-04-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1090578642495.552
@@ -26965,7 +26965,7 @@
   },
   {
     "weekStart": "2021-04-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1036664884099.6865
@@ -27062,7 +27062,7 @@
   },
   {
     "weekStart": "2021-04-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1035729353676.8652
@@ -27159,7 +27159,7 @@
   },
   {
     "weekStart": "2021-05-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1029623520153.0128
@@ -27260,7 +27260,7 @@
   },
   {
     "weekStart": "2021-05-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 931945018565.5933
@@ -27369,7 +27369,7 @@
   },
   {
     "weekStart": "2021-05-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 806206028652.0605
@@ -27478,7 +27478,7 @@
   },
   {
     "weekStart": "2021-05-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 719860847954.8751
@@ -27575,7 +27575,7 @@
   },
   {
     "weekStart": "2021-06-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 681110150980.3143
@@ -27668,7 +27668,7 @@
   },
   {
     "weekStart": "2021-06-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 697637579194.4288
@@ -27761,7 +27761,7 @@
   },
   {
     "weekStart": "2021-06-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 670581913493.7334
@@ -27858,7 +27858,7 @@
   },
   {
     "weekStart": "2021-06-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 654514016268.585
@@ -27959,7 +27959,7 @@
   },
   {
     "weekStart": "2021-07-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 638621354414.4482
@@ -28060,7 +28060,7 @@
   },
   {
     "weekStart": "2021-07-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 629646861623.5017
@@ -28153,7 +28153,7 @@
   },
   {
     "weekStart": "2021-07-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 608836998512.323
@@ -28246,7 +28246,7 @@
   },
   {
     "weekStart": "2021-07-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 649564730231.7596
@@ -28339,7 +28339,7 @@
   },
   {
     "weekStart": "2021-07-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 704839045623.9707
@@ -28436,7 +28436,7 @@
   },
   {
     "weekStart": "2021-08-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 786240713385.1951
@@ -28533,7 +28533,7 @@
   },
   {
     "weekStart": "2021-08-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 838240467362.5942
@@ -28630,7 +28630,7 @@
   },
   {
     "weekStart": "2021-08-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 886474498868.5372
@@ -28731,7 +28731,7 @@
   },
   {
     "weekStart": "2021-08-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 903991766233.4774
@@ -28828,7 +28828,7 @@
   },
   {
     "weekStart": "2021-09-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 917969253224.4987
@@ -28937,7 +28937,7 @@
   },
   {
     "weekStart": "2021-09-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 894875569405.5638
@@ -29042,7 +29042,7 @@
   },
   {
     "weekStart": "2021-09-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 869299354824.2192
@@ -29147,7 +29147,7 @@
   },
   {
     "weekStart": "2021-09-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 828150641823.2941
@@ -29252,7 +29252,7 @@
   },
   {
     "weekStart": "2021-10-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 885278617575.4357
@@ -29361,7 +29361,7 @@
   },
   {
     "weekStart": "2021-10-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 973098261050.8037
@@ -29466,7 +29466,7 @@
   },
   {
     "weekStart": "2021-10-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1097313161564.3778
@@ -29559,7 +29559,7 @@
   },
   {
     "weekStart": "2021-10-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1138313069880.6477
@@ -29648,7 +29648,7 @@
   },
   {
     "weekStart": "2021-10-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1164815973381.042
@@ -29737,7 +29737,7 @@
   },
   {
     "weekStart": "2021-11-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1187205321784.0483
@@ -29826,7 +29826,7 @@
   },
   {
     "weekStart": "2021-11-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1184916552904.3872
@@ -29919,7 +29919,7 @@
   },
   {
     "weekStart": "2021-11-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1143299808913.7532
@@ -30012,7 +30012,7 @@
   },
   {
     "weekStart": "2021-11-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1095479364184.678
@@ -30105,7 +30105,7 @@
   },
   {
     "weekStart": "2021-12-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1013003427863.4332
@@ -30194,7 +30194,7 @@
   },
   {
     "weekStart": "2021-12-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 954276204530.1782
@@ -30291,7 +30291,7 @@
   },
   {
     "weekStart": "2021-12-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 916320064723.6605
@@ -30388,7 +30388,7 @@
   },
   {
     "weekStart": "2021-12-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 918756165640.7769
@@ -30489,7 +30489,7 @@
   },
   {
     "weekStart": "2021-12-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 892719124920.084
@@ -30590,7 +30590,7 @@
   },
   {
     "weekStart": "2022-01-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 846189111919.4949
@@ -30695,7 +30695,7 @@
   },
   {
     "weekStart": "2022-01-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 814414182418.9757
@@ -30800,7 +30800,7 @@
   },
   {
     "weekStart": "2022-01-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 746200034773.1472
@@ -30897,7 +30897,7 @@
   },
   {
     "weekStart": "2022-01-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 726467433957.4192
@@ -30998,7 +30998,7 @@
   },
   {
     "weekStart": "2022-02-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 761239964868.4556
@@ -31091,7 +31091,7 @@
   },
   {
     "weekStart": "2022-02-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 792423341907.6635
@@ -31184,7 +31184,7 @@
   },
   {
     "weekStart": "2022-02-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 770815672580.6189
@@ -31277,7 +31277,7 @@
   },
   {
     "weekStart": "2022-02-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 773705349857.3826
@@ -31370,7 +31370,7 @@
   },
   {
     "weekStart": "2022-03-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 754819856994.7065
@@ -31463,7 +31463,7 @@
   },
   {
     "weekStart": "2022-03-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 756093417372.9447
@@ -31548,7 +31548,7 @@
   },
   {
     "weekStart": "2022-03-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 775146313544.9646
@@ -31637,7 +31637,7 @@
   },
   {
     "weekStart": "2022-03-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 828667603602.1882
@@ -31730,7 +31730,7 @@
   },
   {
     "weekStart": "2022-04-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 854152422446.8022
@@ -31823,7 +31823,7 @@
   },
   {
     "weekStart": "2022-04-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 824890072896.825
@@ -31912,7 +31912,7 @@
   },
   {
     "weekStart": "2022-04-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 794028877711.788
@@ -31997,7 +31997,7 @@
   },
   {
     "weekStart": "2022-04-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 764031676266.484
@@ -32082,7 +32082,7 @@
   },
   {
     "weekStart": "2022-04-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 743418331672.3225
@@ -32175,7 +32175,7 @@
   },
   {
     "weekStart": "2022-05-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 673983726115.6305
@@ -32272,7 +32272,7 @@
   },
   {
     "weekStart": "2022-05-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 614473821822.8429
@@ -32369,7 +32369,7 @@
   },
   {
     "weekStart": "2022-05-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 574713981082.1277
@@ -32466,7 +32466,7 @@
   },
   {
     "weekStart": "2022-05-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 569876290049.6907
@@ -32555,7 +32555,7 @@
   },
   {
     "weekStart": "2022-06-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 573641351835.8793
@@ -32644,7 +32644,7 @@
   },
   {
     "weekStart": "2022-06-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 522272709286.3894
@@ -32737,7 +32737,7 @@
   },
   {
     "weekStart": "2022-06-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 450073000670.6214
@@ -32834,7 +32834,7 @@
   },
   {
     "weekStart": "2022-06-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 407185703742.35956
@@ -32931,7 +32931,7 @@
   },
   {
     "weekStart": "2022-07-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 387320420771.0182
@@ -33024,7 +33024,7 @@
   },
   {
     "weekStart": "2022-07-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 390432574486.1559
@@ -33113,7 +33113,7 @@
   },
   {
     "weekStart": "2022-07-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 406139912375.8326
@@ -33202,7 +33202,7 @@
   },
   {
     "weekStart": "2022-07-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 420068510227.1861
@@ -33295,7 +33295,7 @@
   },
   {
     "weekStart": "2022-07-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 435190858890.048
@@ -33384,7 +33384,7 @@
   },
   {
     "weekStart": "2022-08-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 443273649189.9534
@@ -33473,7 +33473,7 @@
   },
   {
     "weekStart": "2022-08-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 452451578864.4583
@@ -33558,7 +33558,7 @@
   },
   {
     "weekStart": "2022-08-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 431461016334.12415
@@ -33643,7 +33643,7 @@
   },
   {
     "weekStart": "2022-08-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 405815306699.7908
@@ -33728,7 +33728,7 @@
   },
   {
     "weekStart": "2022-09-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 384082886178.95746
@@ -33813,7 +33813,7 @@
   },
   {
     "weekStart": "2022-09-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 390600735654.0276
@@ -33898,7 +33898,7 @@
   },
   {
     "weekStart": "2022-09-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 381558252295.6575
@@ -33987,7 +33987,7 @@
   },
   {
     "weekStart": "2022-09-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 375927739498.4176
@@ -34080,7 +34080,7 @@
   },
   {
     "weekStart": "2022-09-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 373381500774.6445
@@ -34177,7 +34177,7 @@
   },
   {
     "weekStart": "2022-10-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 371922095426.5276
@@ -34274,7 +34274,7 @@
   },
   {
     "weekStart": "2022-10-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 370987287178.08813
@@ -34367,7 +34367,7 @@
   },
   {
     "weekStart": "2022-10-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 374448116509.8911
@@ -34460,7 +34460,7 @@
   },
   {
     "weekStart": "2022-10-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 384230415923.453
@@ -34549,7 +34549,7 @@
   },
   {
     "weekStart": "2022-11-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 380347132724.90326
@@ -34642,7 +34642,7 @@
   },
   {
     "weekStart": "2022-11-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 351115459590.52515
@@ -34735,7 +34735,7 @@
   },
   {
     "weekStart": "2022-11-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 328622312405.07043
@@ -34828,7 +34828,7 @@
   },
   {
     "weekStart": "2022-11-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 318401967059.96313
@@ -34917,7 +34917,7 @@
   },
   {
     "weekStart": "2022-12-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 322599633825.56866
@@ -35006,7 +35006,7 @@
   },
   {
     "weekStart": "2022-12-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 329053350778.8547
@@ -35095,7 +35095,7 @@
   },
   {
     "weekStart": "2022-12-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 326733578128.93475
@@ -35188,7 +35188,7 @@
   },
   {
     "weekStart": "2022-12-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 324671563577.6423
@@ -35281,7 +35281,7 @@
   },
   {
     "weekStart": "2022-12-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 321851976744.77515
@@ -35370,7 +35370,7 @@
   },
   {
     "weekStart": "2023-01-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 329338929955.79175
@@ -35459,7 +35459,7 @@
   },
   {
     "weekStart": "2023-01-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 366051750167.5176
@@ -35548,7 +35548,7 @@
   },
   {
     "weekStart": "2023-01-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 407898834083.5957
@@ -35637,7 +35637,7 @@
   },
   {
     "weekStart": "2023-01-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 436870226271.64215
@@ -35722,7 +35722,7 @@
   },
   {
     "weekStart": "2023-02-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 443984136912.6153
@@ -35811,7 +35811,7 @@
   },
   {
     "weekStart": "2023-02-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 439379755329.98413
@@ -35900,7 +35900,7 @@
   },
   {
     "weekStart": "2023-02-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 454331474080.3213
@@ -35989,7 +35989,7 @@
   },
   {
     "weekStart": "2023-02-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 453928028267.2503
@@ -36078,7 +36078,7 @@
   },
   {
     "weekStart": "2023-03-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 441996539184.7477
@@ -36171,7 +36171,7 @@
   },
   {
     "weekStart": "2023-03-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 440370713873.774
@@ -36264,7 +36264,7 @@
   },
   {
     "weekStart": "2023-03-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 486927312494.66345
@@ -36357,7 +36357,7 @@
   },
   {
     "weekStart": "2023-03-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 518188004933.6376
@@ -36450,7 +36450,7 @@
   },
   {
     "weekStart": "2023-03-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 540943732046.3197
@@ -36539,7 +36539,7 @@
   },
   {
     "weekStart": "2023-04-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 553353645525.964
@@ -36624,7 +36624,7 @@
   },
   {
     "weekStart": "2023-04-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 566119278529.2996
@@ -36709,7 +36709,7 @@
   },
   {
     "weekStart": "2023-04-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 557061295235.5941
@@ -36802,7 +36802,7 @@
   },
   {
     "weekStart": "2023-04-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 557989443995.4078
@@ -36895,7 +36895,7 @@
   },
   {
     "weekStart": "2023-05-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 548999671555.70355
@@ -36984,7 +36984,7 @@
   },
   {
     "weekStart": "2023-05-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 536957275269.7224
@@ -37073,7 +37073,7 @@
   },
   {
     "weekStart": "2023-05-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 525646871081.9203
@@ -37158,7 +37158,7 @@
   },
   {
     "weekStart": "2023-05-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 525208751528.7491
@@ -37247,7 +37247,7 @@
   },
   {
     "weekStart": "2023-06-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 522208373704.7381
@@ -37336,7 +37336,7 @@
   },
   {
     "weekStart": "2023-06-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 512125473425.9609
@@ -37429,7 +37429,7 @@
   },
   {
     "weekStart": "2023-06-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 523449444972.4081
@@ -37518,7 +37518,7 @@
   },
   {
     "weekStart": "2023-06-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 557563416181.0632
@@ -37611,7 +37611,7 @@
   },
   {
     "weekStart": "2023-06-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 582075030331.5409
@@ -37704,7 +37704,7 @@
   },
   {
     "weekStart": "2023-07-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 592971710088.6871
@@ -37801,7 +37801,7 @@
   },
   {
     "weekStart": "2023-07-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 588978559865.0214
@@ -37894,7 +37894,7 @@
   },
   {
     "weekStart": "2023-07-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 581032849791.9141
@@ -37987,7 +37987,7 @@
   },
   {
     "weekStart": "2023-07-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 574126931148.3606
@@ -38080,7 +38080,7 @@
   },
   {
     "weekStart": "2023-08-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 570755002246.8707
@@ -38169,7 +38169,7 @@
   },
   {
     "weekStart": "2023-08-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 565763292265.478
@@ -38262,7 +38262,7 @@
   },
   {
     "weekStart": "2023-08-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 537002560229.6256
@@ -38351,7 +38351,7 @@
   },
   {
     "weekStart": "2023-08-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 522620595329.9827
@@ -38440,7 +38440,7 @@
   },
   {
     "weekStart": "2023-09-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 508477816257.30817
@@ -38529,7 +38529,7 @@
   },
   {
     "weekStart": "2023-09-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 506736807662.59595
@@ -38622,7 +38622,7 @@
   },
   {
     "weekStart": "2023-09-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 513157778100.39825
@@ -38719,7 +38719,7 @@
   },
   {
     "weekStart": "2023-09-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 515534399571.7046
@@ -38816,7 +38816,7 @@
   },
   {
     "weekStart": "2023-09-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 526684610692.21027
@@ -38909,7 +38909,7 @@
   },
   {
     "weekStart": "2023-10-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 531914968763.6738
@@ -39002,7 +39002,7 @@
   },
   {
     "weekStart": "2023-10-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 539559176851.55286
@@ -39095,7 +39095,7 @@
   },
   {
     "weekStart": "2023-10-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 584347558251.6731
@@ -39188,7 +39188,7 @@
   },
   {
     "weekStart": "2023-10-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 634792954650.2832
@@ -39281,7 +39281,7 @@
   },
   {
     "weekStart": "2023-11-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 673868627016.4395
@@ -39370,7 +39370,7 @@
   },
   {
     "weekStart": "2023-11-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 701986273950.2222
@@ -39455,7 +39455,7 @@
   },
   {
     "weekStart": "2023-11-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 715029049554.3807
@@ -39544,7 +39544,7 @@
   },
   {
     "weekStart": "2023-11-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 728710869259.5039
@@ -39633,7 +39633,7 @@
   },
   {
     "weekStart": "2023-12-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 772312436063.012
@@ -39726,7 +39726,7 @@
   },
   {
     "weekStart": "2023-12-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 811178114320.9193
@@ -39823,7 +39823,7 @@
   },
   {
     "weekStart": "2023-12-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 831178118891.3027
@@ -39920,7 +39920,7 @@
   },
   {
     "weekStart": "2023-12-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 841554691846.6372
@@ -40013,7 +40013,7 @@
   },
   {
     "weekStart": "2023-12-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 844329465501.242
@@ -40106,7 +40106,7 @@
   },
   {
     "weekStart": "2024-01-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 868899314190.0095
@@ -40199,7 +40199,7 @@
   },
   {
     "weekStart": "2024-01-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 852604592954.5837
@@ -40288,7 +40288,7 @@
   },
   {
     "weekStart": "2024-01-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 826337125210.6047
@@ -40385,7 +40385,7 @@
   },
   {
     "weekStart": "2024-01-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 823446021439.7463
@@ -40482,7 +40482,7 @@
   },
   {
     "weekStart": "2024-02-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 836363380317.3307
@@ -40579,7 +40579,7 @@
   },
   {
     "weekStart": "2024-02-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 908869662117.0879
@@ -40676,7 +40676,7 @@
   },
   {
     "weekStart": "2024-02-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 971332633166.2761
@@ -40761,7 +40761,7 @@
   },
   {
     "weekStart": "2024-02-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1046114853900.592
@@ -40850,7 +40850,7 @@
   },
   {
     "weekStart": "2024-03-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1166773676969.938
@@ -40939,7 +40939,7 @@
   },
   {
     "weekStart": "2024-03-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1292978824564.2249
@@ -41032,7 +41032,7 @@
   },
   {
     "weekStart": "2024-03-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1324430612201.1377
@@ -41125,7 +41125,7 @@
   },
   {
     "weekStart": "2024-03-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1337395215070.4473
@@ -41218,7 +41218,7 @@
   },
   {
     "weekStart": "2024-03-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1337357876619.9456
@@ -41311,7 +41311,7 @@
   },
   {
     "weekStart": "2024-04-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1357290460731.488
@@ -41404,7 +41404,7 @@
   },
   {
     "weekStart": "2024-04-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1312159566839.5547
@@ -41493,7 +41493,7 @@
   },
   {
     "weekStart": "2024-04-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1293637922990.9666
@@ -41578,7 +41578,7 @@
   },
   {
     "weekStart": "2024-04-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1244809193536.6895
@@ -41663,7 +41663,7 @@
   },
   {
     "weekStart": "2024-05-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1240841281854.3438
@@ -41748,7 +41748,7 @@
   },
   {
     "weekStart": "2024-05-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1232645902622.4482
@@ -41837,7 +41837,7 @@
   },
   {
     "weekStart": "2024-05-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1292425023980.938
@@ -41930,7 +41930,7 @@
   },
   {
     "weekStart": "2024-05-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1326974851774.227
@@ -42027,7 +42027,7 @@
   },
   {
     "weekStart": "2024-05-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1356443216434.6614
@@ -42120,7 +42120,7 @@
   },
   {
     "weekStart": "2024-06-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1355131002276.252
@@ -42213,7 +42213,7 @@
   },
   {
     "weekStart": "2024-06-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1326307076904.6753
@@ -42310,7 +42310,7 @@
   },
   {
     "weekStart": "2024-06-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1273316912044.5269
@@ -42407,7 +42407,7 @@
   },
   {
     "weekStart": "2024-06-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1227583598030.806
@@ -42504,7 +42504,7 @@
   },
   {
     "weekStart": "2024-07-05T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1169858135538.5444
@@ -42601,7 +42601,7 @@
   },
   {
     "weekStart": "2024-07-12T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1192773282144.1438
@@ -42694,7 +42694,7 @@
   },
   {
     "weekStart": "2024-07-19T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1251942390878.5164
@@ -42791,7 +42791,7 @@
   },
   {
     "weekStart": "2024-07-26T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1298511846255.1643
@@ -42884,7 +42884,7 @@
   },
   {
     "weekStart": "2024-08-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1231719366143.5671
@@ -42977,7 +42977,7 @@
   },
   {
     "weekStart": "2024-08-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1195186464121.1528
@@ -43062,7 +43062,7 @@
   },
   {
     "weekStart": "2024-08-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1170021376698.2166
@@ -43151,7 +43151,7 @@
   },
   {
     "weekStart": "2024-08-23T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1199102363550.7495
@@ -43240,7 +43240,7 @@
   },
   {
     "weekStart": "2024-08-30T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1174790858692.3467
@@ -43329,7 +43329,7 @@
   },
   {
     "weekStart": "2024-09-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1142791141114.1055
@@ -43418,7 +43418,7 @@
   },
   {
     "weekStart": "2024-09-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1158556736410.4805
@@ -43503,7 +43503,7 @@
   },
   {
     "weekStart": "2024-09-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1209539604101.9473
@@ -43588,7 +43588,7 @@
   },
   {
     "weekStart": "2024-09-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1241612836765.3086
@@ -43677,7 +43677,7 @@
   },
   {
     "weekStart": "2024-10-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1237116208939.8716
@@ -43766,7 +43766,7 @@
   },
   {
     "weekStart": "2024-10-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1260841228220.0605
@@ -43859,7 +43859,7 @@
   },
   {
     "weekStart": "2024-10-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1302159786814.1545
@@ -43952,7 +43952,7 @@
   },
   {
     "weekStart": "2024-10-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1348189603246.5994
@@ -44045,7 +44045,7 @@
   },
   {
     "weekStart": "2024-11-01T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1382060766645.9517
@@ -44138,7 +44138,7 @@
   },
   {
     "weekStart": "2024-11-08T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1526845275303.9248
@@ -44239,7 +44239,7 @@
   },
   {
     "weekStart": "2024-11-15T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1693734398013.199
@@ -44344,7 +44344,7 @@
   },
   {
     "weekStart": "2024-11-22T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1830318813383.87
@@ -44445,7 +44445,7 @@
   },
   {
     "weekStart": "2024-11-29T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1894971852993.9272
@@ -44542,7 +44542,7 @@
   },
   {
     "weekStart": "2024-12-06T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1939982383151.5078
@@ -44643,7 +44643,7 @@
   },
   {
     "weekStart": "2024-12-13T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1988256100785.9963
@@ -44744,7 +44744,7 @@
   },
   {
     "weekStart": "2024-12-20T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1961549288388.954
@@ -44845,7 +44845,7 @@
   },
   {
     "weekStart": "2024-12-27T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1915115180321.5295
@@ -44946,7 +44946,7 @@
   },
   {
     "weekStart": "2025-01-03T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1908132400154.0671
@@ -45047,7 +45047,7 @@
   },
   {
     "weekStart": "2025-01-10T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1907549548398.295
@@ -45152,7 +45152,7 @@
   },
   {
     "weekStart": "2025-01-17T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1985536485859.5566
@@ -45253,7 +45253,7 @@
   },
   {
     "weekStart": "2025-01-24T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 2023071377677.1792
@@ -45354,7 +45354,7 @@
   },
   {
     "weekStart": "2025-01-31T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 2006949513908.472
@@ -45459,7 +45459,7 @@
   },
   {
     "weekStart": "2025-02-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1957637244314.3752
@@ -45556,7 +45556,7 @@
   },
   {
     "weekStart": "2025-02-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1927357681501.26
@@ -45653,7 +45653,7 @@
   },
   {
     "weekStart": "2025-02-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1862599694707.7593
@@ -45750,7 +45750,7 @@
   },
   {
     "weekStart": "2025-02-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1801996153119.708
@@ -45851,7 +45851,7 @@
   },
   {
     "weekStart": "2025-03-07T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1708342781110.541
@@ -45952,7 +45952,7 @@
   },
   {
     "weekStart": "2025-03-14T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1677456075515.3806
@@ -46049,7 +46049,7 @@
   },
   {
     "weekStart": "2025-03-21T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1683614268401.6792
@@ -46142,7 +46142,7 @@
   },
   {
     "weekStart": "2025-03-28T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1672242189957.6404
@@ -46231,7 +46231,7 @@
   },
   {
     "weekStart": "2025-04-04T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1635879990620.5127
@@ -46332,7 +46332,7 @@
   },
   {
     "weekStart": "2025-04-11T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1645374205074.6372
@@ -46429,7 +46429,7 @@
   },
   {
     "weekStart": "2025-04-18T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1704911886810.2961
@@ -46530,7 +46530,7 @@
   },
   {
     "weekStart": "2025-04-25T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1805256616198.855
@@ -46627,7 +46627,7 @@
   },
   {
     "weekStart": "2025-05-02T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1881058913469.5527
@@ -46720,7 +46720,7 @@
   },
   {
     "weekStart": "2025-05-09T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 1984254585308.9912
@@ -46817,7 +46817,7 @@
   },
   {
     "weekStart": "2025-05-16T00:00:00.000Z",
-    "coins": [
+    "data": [
       {
         "name": "Bitcoin",
         "marketCap": 2047363935376.577

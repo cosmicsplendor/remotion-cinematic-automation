@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef } from "react";
 import { ConfettiEffect, Frame, sanitizeName } from "../../helpers";
-import { seededRand } from "lib/d3/utils/math";
+import { seededRand } from "../../../../../lib/d3/utils/math";
 import { select } from "d3";
 
 type Particle = {
