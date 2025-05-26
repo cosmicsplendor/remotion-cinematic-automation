@@ -44561,10 +44561,11 @@
   },
   {
     "weekStart": "2024-12-06T00:00:00.000Z",
+    "effects": [{"type": "confetti","bursts": 8,"target": "Bitcoin","duration": 2,"dist": "ease-quad"}, {"target": "Bitcoin","type": "surge","duration": 2, "bursts": 5, "dist": "space-between"}],
     "data": [
       {
         "name": "Bitcoin",
-        "marketCap": 1939982383151.5078
+        "marketCap": 2109982383151.5078
       },
       {
         "name": "Ethereum",
@@ -44665,7 +44666,7 @@
     "data": [
       {
         "name": "Bitcoin",
-        "marketCap": 1988256100785.9963
+        "marketCap": 1999982383151.9963
       },
       {
         "name": "Ethereum",
@@ -44766,7 +44767,7 @@
     "data": [
       {
         "name": "Bitcoin",
-        "marketCap": 1961549288388.954
+        "marketCap": 2161549288388.954
       },
       {
         "name": "Ethereum",
@@ -45171,7 +45172,6 @@
   },
   {
     "weekStart": "2025-01-17T00:00:00.000Z",
-    "effects": [{"type": "confetti","bursts": 8,"target": "Bitcoin","duration": 2,"dist": "ease-quad"}, {"target": "Bitcoin","type": "surge","duration": 2, "bursts": 3, "dist": "space-between"}],
     "data": [
       {
         "name": "Bitcoin",

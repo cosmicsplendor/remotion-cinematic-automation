@@ -3,8 +3,8 @@ import { SurgeEffect, Effect, sanitizeName } from "../../helpers";
 import { distributeEventStartTimes, getGlobalBBox, seededRand } from "../../../../../lib/d3/utils/math";
 import { useVideoConfig } from "remotion";
 
-const BURST_LIFESPAN = 1.25; // Duration of each individual burst
-const GLOW_COLOR = '#fff'; // Cyan-blue glow
+const BURST_LIFESPAN = 1.0; // Duration of each individual burst
+const GLOW_COLOR = '#ffffff'; // Cyan-blue glow
 const GLOW_INTENSITY = 1.0; // Full intensity for bright glow
 const SPARK_COUNT = 8; // Number of sparks per frame
 const SPARK_LIFESPAN = 0.3; // How long sparks live
@@ -37,62 +37,72 @@ const Effect: React.FC<{
     const [frame0, setFrame0] = useState<number | null>(null);
     const { fps } = useVideoConfig();
     const groupElRef = useRef<SVGElement | null>(null);
-    const glowRectRef = useRef<SVGRectElement | null>(null);
+    const glowRectsRef = useRef<SVGRectElement[]>([]);
     const sparksRef = useRef<SVGCircleElement[]>([]);
     const sparkDataRef = useRef<SparkData[]>([]);
     const defsCreatedRef = useRef<boolean>(false);
     const burstStartTimesRef = useRef<number[]>([]);
-    const activeBurstsRef = useRef<Set<number>>(new Set());
-    
+
     const target = useMemo(() => sanitizeName(effect.target), [effect]);
     const groupId = useMemo(() => `surge-group-${target}`, [target]);
     const targetEl = useMemo(() => getSvgEl(`bar-${target}`), [getSvgEl, target]);
 
     // Create SVG definitions for glow effect
+    // Replace the createGlowDefs function with this enhanced version
     const createGlowDefs = (svg: SVGSVGElement) => {
         if (defsCreatedRef.current) return;
-        
+
         let defs = svg.querySelector('defs');
         if (!defs) {
             defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
             svg.appendChild(defs);
         }
 
-        // Check if our filter already exists
         if (defs.querySelector('#surge-glow-filter')) {
             defsCreatedRef.current = true;
             return;
         }
 
-        // Create glow filter with better transparency
         const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
         filter.setAttribute('id', 'surge-glow-filter');
         filter.setAttribute('x', '-100%');
-        filter.setAttribute('y', '-50%');
+        filter.setAttribute('y', '-100%');
         filter.setAttribute('width', '300%');
-        filter.setAttribute('height', '200%');
+        filter.setAttribute('height', '300%');
 
-        // Gaussian blur for glow
-        const feGaussianBlur = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
-        feGaussianBlur.setAttribute('stdDeviation', '4');
-        feGaussianBlur.setAttribute('result', 'coloredBlur');
+        // Create intense center glow
+        const innerBlur = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+        innerBlur.setAttribute('in', 'SourceGraphic');
+        innerBlur.setAttribute('stdDeviation', '2');
+        innerBlur.setAttribute('result', 'innerBlur');
 
-        // Merge with original for layered glow effect
+        // Create wider outer glow
+        const outerBlur = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+        outerBlur.setAttribute('in', 'SourceGraphic');
+        outerBlur.setAttribute('stdDeviation', '8');
+        outerBlur.setAttribute('result', 'outerBlur');
+
+        // Composite the glows
+        const composite = document.createElementNS("http://www.w3.org/2000/svg", "feComposite");
+        composite.setAttribute('in', 'innerBlur');
+        composite.setAttribute('in2', 'outerBlur');
+        composite.setAttribute('operator', 'arithmetic');
+        composite.setAttribute('k1', '1');
+        composite.setAttribute('k2', '1');
+        composite.setAttribute('k3', '0');
+        composite.setAttribute('k4', '0');
+        composite.setAttribute('result', 'compositedGlow');
+
+        // Final merge
         const feMerge = document.createElementNS("http://www.w3.org/2000/svg", "feMerge");
-        const feMergeNode1 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
-        feMergeNode1.setAttribute('in', 'coloredBlur');
-        const feMergeNode2 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
-        feMergeNode2.setAttribute('in', 'coloredBlur');
-        const feMergeNode3 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
-        feMergeNode3.setAttribute('in', 'SourceGraphic');
+        ['outerBlur', 'innerBlur', 'compositedGlow', 'SourceGraphic'].forEach(name => {
+            const feMergeNode = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+            feMergeNode.setAttribute('in', name);
+            feMerge.appendChild(feMergeNode);
+        });
 
-        feMerge.appendChild(feMergeNode1);
-        feMerge.appendChild(feMergeNode2);
-        feMerge.appendChild(feMergeNode3);
-        filter.appendChild(feGaussianBlur);
-        filter.appendChild(feMerge);
+        filter.append(innerBlur, outerBlur, composite, feMerge);
         defs.appendChild(filter);
-
         defsCreatedRef.current = true;
     };
 
@@ -102,17 +112,17 @@ const Effect: React.FC<{
             if (groupElRef.current && svgRef.current) {
                 svgRef.current.removeChild(groupElRef.current);
             }
+            glowRectsRef.current = [];
             sparksRef.current = [];
             sparkDataRef.current = [];
-            activeBurstsRef.current.clear();
         };
     }, []);
 
     useEffect(() => {
         if (!svgRef.current) return;
-        
+
         createGlowDefs(svgRef.current);
-        
+
         const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         group.setAttribute('id', groupId);
         svgRef.current.appendChild(group);
@@ -122,85 +132,65 @@ const Effect: React.FC<{
         const burstStartTimes = distributeEventStartTimes(effect.duration, BURST_LIFESPAN, effect.bursts, effect.dist ?? "space-around");
         burstStartTimesRef.current = burstStartTimes;
 
-        // Create the main glow rectangle - bright and glowing
-        const glowRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        glowRect.setAttribute('fill', GLOW_COLOR);
-        glowRect.setAttribute('filter', 'url(#surge-glow-filter)');
-        glowRect.setAttribute('opacity', '0');
-        group.appendChild(glowRect);
-        glowRectRef.current = glowRect;
+        // Create a separate glow rectangle for each burst
+        burstStartTimes.forEach((startTime, index) => {
+            const glowRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            glowRect.setAttribute('fill', GLOW_COLOR);
+            glowRect.setAttribute('filter', 'url(#surge-glow-filter)');
+            glowRect.setAttribute('opacity', '0');
+            glowRect.setAttribute('data-burst-index', index.toString());
+            glowRect.setAttribute('data-start-time', startTime.toString());
+            group.appendChild(glowRect);
+            glowRectsRef.current.push(glowRect);
+        });
 
     }, [svgRef.current, groupId, effect.duration, effect.bursts]);
 
     useEffect(() => {
-        if (!groupElRef.current || !targetEl || frame0 === null || !glowRectRef.current) return;
-        
+        if (!groupElRef.current || !targetEl || frame0 === null || glowRectsRef.current.length === 0) return;
+
         const t = (frame - frame0) / fps;
-        
+
         if (t > effect.duration + BURST_LIFESPAN) {
             removeEffect(effect);
             return;
         }
-        
+
         const targetBox = getGlobalBBox(targetEl as SVGGraphicsElement);
-        
-        // Check which bursts are currently active
-        const currentActiveBursts = new Set<number>();
-        burstStartTimesRef.current.forEach((startTime, index) => {
+
+        // Update each burst's glow rectangle independently
+        glowRectsRef.current.forEach((glowRect, burstIndex) => {
+            const startTime = burstStartTimesRef.current[burstIndex];
             const burstAge = t - startTime;
-            if (burstAge >= 0 && burstAge <= BURST_LIFESPAN) {
-                currentActiveBursts.add(index);
-            }
-        });
-        
-        // Show glow if any burst is active
-        const hasActiveBurst = currentActiveBursts.size > 0;
-        
-        if (hasActiveBurst) {
-            // Find the most prominent active burst for glow positioning
-            let dominantBurstProgress = 0;
-            let maxIntensity = 0;
-            
-            currentActiveBursts.forEach(burstIndex => {
-                const startTime = burstStartTimesRef.current[burstIndex];
-                const burstAge = t - startTime;
+            const isActive = burstAge >= 0 && burstAge <= BURST_LIFESPAN;
+
+            if (isActive) {
                 const burstProgress = burstAge / BURST_LIFESPAN;
                 const easedProgress = easeInOutSine(burstProgress);
-                
-                // Calculate intensity (higher in middle of burst)
-                let intensity = 1;
+
+                // Update glow rectangle position
+                const glowWidth = 20;
+                const glowX = targetBox.x + (targetBox.width - glowWidth) * easedProgress;
+
+                glowRect.setAttribute('x', glowX.toString());
+                glowRect.setAttribute('y', targetBox.y.toString());
+                glowRect.setAttribute('width', glowWidth.toString());
+                glowRect.setAttribute('height', targetBox.height.toString());
+
+                // Calculate opacity with fade in/out
+                let opacity = GLOW_INTENSITY;
                 if (burstProgress < 0.1) {
-                    intensity = burstProgress / 0.1;
+                    opacity *= burstProgress / 0.1;
                 } else if (burstProgress > 0.9) {
-                    intensity = (1 - burstProgress) / 0.1;
+                    opacity *= (1 - burstProgress) / 0.1;
                 }
-                
-                if (intensity > maxIntensity) {
-                    maxIntensity = intensity;
-                    dominantBurstProgress = easedProgress;
-                }
-            });
-            
-            // Update glow rectangle based on dominant burst
-            const glowWidth = 20;
-            const glowX = targetBox.x + (targetBox.width - glowWidth) * dominantBurstProgress;
-            
-            glowRectRef.current.setAttribute('x', glowX.toString());
-            glowRectRef.current.setAttribute('y', targetBox.y.toString());
-            glowRectRef.current.setAttribute('width', glowWidth.toString());
-            glowRectRef.current.setAttribute('height', targetBox.height.toString());
-            glowRectRef.current.setAttribute('opacity', (GLOW_INTENSITY * maxIntensity).toString());
-            
-            // Generate sparks for active bursts
-            currentActiveBursts.forEach(burstIndex => {
-                const startTime = burstStartTimesRef.current[burstIndex];
-                const burstAge = t - startTime;
-                const burstProgress = burstAge / BURST_LIFESPAN;
-                const easedProgress = easeInOutSine(burstProgress);
-                
-                const sparkCenterX = targetBox.x + (targetBox.width - 20) * easedProgress + 10; // Center of glow
+
+                glowRect.setAttribute('opacity', opacity.toString());
+
+                // Generate sparks for this specific burst
+                const sparkCenterX = glowX + glowWidth / 2;
                 const sparkCenterY = targetBox.y + targetBox.height / 2;
-                
+
                 // Add new sparks for this burst
                 for (let i = 0; i < SPARK_COUNT; i++) {
                     const spark = document.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -214,28 +204,28 @@ const Effect: React.FC<{
                         color: seededRand(1) > 0.7 ? '#FFD700' : GLOW_COLOR,
                         burstStartTime: startTime
                     };
-                    
+
                     spark.setAttribute('fill', sparkData.color);
                     spark.setAttribute('r', sparkData.size.toString());
                     spark.setAttribute('cx', sparkData.x.toString());
                     spark.setAttribute('cy', sparkData.y.toString());
                     spark.setAttribute('opacity', '0.8');
-                    
+
                     groupElRef.current?.appendChild(spark);
                     sparksRef.current.push(spark);
                     sparkDataRef.current.push(sparkData);
                 }
-            });
-        } else {
-            // No active bursts, hide glow
-            glowRectRef.current.setAttribute('opacity', '0');
-        }
+            } else {
+                // Hide inactive burst glow
+                glowRect.setAttribute('opacity', '0');
+            }
+        });
 
         // Update existing sparks
         sparksRef.current.forEach((spark, index) => {
             const sparkData = sparkDataRef.current[index];
             const sparkAge = t - sparkData.birthTime;
-            
+
             if (sparkAge > SPARK_LIFESPAN) {
                 // Remove expired spark
                 if (groupElRef.current && spark.parentNode) {
@@ -245,19 +235,19 @@ const Effect: React.FC<{
                 sparkDataRef.current.splice(index, 1);
                 return;
             }
-            
+
             // Update spark position
             const newX = sparkData.x + sparkData.vx * sparkAge;
             const newY = sparkData.y + sparkData.vy * sparkAge;
-            
+
             spark.setAttribute('cx', newX.toString());
             spark.setAttribute('cy', newY.toString());
-            
+
             // Fade out spark
             const sparkProgress = sparkAge / SPARK_LIFESPAN;
             const sparkOpacity = 0.8 * (1 - sparkProgress);
             spark.setAttribute('opacity', sparkOpacity.toString());
-            
+
             // Shrink spark
             const sparkSize = sparkData.size * (1 - sparkProgress * 0.5);
             spark.setAttribute('r', sparkSize.toString());
