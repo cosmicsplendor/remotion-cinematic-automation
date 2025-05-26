@@ -1954,7 +1954,7 @@
   },
   {
     "weekStart": "2016-05-27T00:00:00.000Z",
-    "slowDown": 3,
+    "slowDown": 2,
     "easing": "quadInOut",
     "data": [
       {
@@ -7257,7 +7257,7 @@
   },
   {
     "weekStart": "2017-05-26T00:00:00.000Z",
-    "effects": [{"type":"confetti","bursts":16,"target":"Ethereum", "duration": 7}],
+    "effects": [{"type":"confetti","bursts":30,"target":"Ethereum", "duration": 7, "dist": "ease-sine"}],
     "data": [
       {
         "name": "Bitcoin",

@@ -15,6 +15,7 @@ export type ConfettiEffect = {
   target: string,
   bursts: number,
   duration: number
+  dist?: "space-between" | "space-around" | "ease-sine" | "ease-quad" | "ease-cubic"
 }
 export type Effect = ConfettiEffect
 export type Frame = {

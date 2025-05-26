@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
-import { ConfettiEffect, Effect, Frame, sanitizeName } from "../../helpers";
+import { ConfettiEffect, Effect, sanitizeName } from "../../helpers";
 import { distributeEventStartTimes, getGlobalBBox, seededRand } from "../../../../../lib/d3/utils/math";
-import { useCurrentFrame, useVideoConfig } from "remotion";
+import { useVideoConfig } from "remotion";
 
 const LIFESPAN = 1.2;
 const COLORS = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE'];
@@ -37,12 +37,11 @@ const Effect: React.FC<{
     const groupId = useMemo(() => `confetti-group-${target}`, [target]);
     const targetEl = useMemo(() => getSvgEl(`logo-${target}`), [getSvgEl, target]);
     const groupElRef = useRef<SVGElement | null>(null);
+    const burstStartTimesRef = useRef<number[]>([]);
 
     useEffect(() => {
         setFrame0(frame);
         return () => {
-            // Cleanup particles by removing the group
-            console.log("CLEANUP CALLED")
             if (groupElRef.current && svgRef.current) {
                 svgRef.current.removeChild(groupElRef.current);
             }
@@ -59,14 +58,15 @@ const Effect: React.FC<{
         svgRef.current.appendChild(group);
         groupElRef.current = group;
         
-        distributeEventStartTimes(effect.duration, LIFESPAN, effect.bursts).forEach(startTime => {
-            // Initialize 25-40 particles per burst for richer effect
-            const numParticles = seededRand(40, 25);
+        const burstStartTimes = distributeEventStartTimes(effect.duration, LIFESPAN, effect.bursts, effect.dist ?? "space-around");
+        burstStartTimesRef.current = burstStartTimes;
+
+        burstStartTimes.forEach(startTime => {
+            const numParticles = seededRand(35, 20);
             const offsetX = seededRand(8, -8);
             const offsetY = seededRand(-2, -12);
             
             for (let i = 0; i < numParticles; i++) {
-                // Mix of rectangles and circles (80% rectangles, 20% circles like YouTube)
                 const isRect = seededRand(1) > 0.2;
                 const particle = document.createElementNS("http://www.w3.org/2000/svg", isRect ? "rect" : "circle");
                 
@@ -77,11 +77,9 @@ const Effect: React.FC<{
                 particle.setAttribute("start-time", startTime.toString());
                 particle.setAttribute("visibility", "hidden");
                 
-                // Enhanced color selection with gradients
                 const color = COLORS[Math.floor(seededRand(COLORS.length))];
                 particle.setAttribute("fill", color);
                 
-                // Create particle data for enhanced explosion
                 const size = seededRand(PARTICLE_SIZE_RANGE[1], PARTICLE_SIZE_RANGE[0]);
                 const particleData: ParticleData = {
                     angle: seededRand(Math.PI * 2), // random direction (0 to 2π)
@@ -94,7 +92,6 @@ const Effect: React.FC<{
                     shape: isRect ? 'rect' : 'circle'
                 };
                 
-                // Set initial particle appearance based on shape
                 if (particleData.shape === 'rect') {
                     particle.setAttribute("width", particleData.width.toString());
                     particle.setAttribute("height", particleData.height.toString());
@@ -107,11 +104,8 @@ const Effect: React.FC<{
                     particle.setAttribute("cy", "0");
                 }
                 
-                // Add subtle stroke for definition
                 particle.setAttribute("stroke", "rgba(255,255,255,0.3)");
                 particle.setAttribute("stroke-width", "0.5");
-                
-                // Add to collections
                 group.appendChild(particle);
                 particlesRef.current.push(particle);
                 particleDataRef.current.push(particleData);
@@ -129,12 +123,10 @@ const Effect: React.FC<{
             return;
         }
         
-        // Get target position for particle origin
         const targetBox = getGlobalBBox(targetEl as SVGGraphicsElement)
         const centerX = targetBox.x + targetBox.width / 2;
         const centerY = targetBox.y + targetBox.height / 2;
         
-        // Update each particle
         particlesRef.current.forEach((particle, index) => {
             const particleData = particleDataRef.current[index];
             const offsetX = parseFloat(particle.getAttribute("offset-x") || "0");
@@ -151,47 +143,43 @@ const Effect: React.FC<{
                 const originX = centerX + offsetX;
                 const originY = centerY + offsetY;
                 const progress = particleAge / lifetime;
-                
-                // Enhanced physics: radial explosion + gravity + air resistance
                 const horizontalDistance = particleData.speed * particleAge * Math.cos(particleData.angle);
                 const verticalVelocity = particleData.speed * Math.sin(particleData.angle);
                 const verticalDistance = verticalVelocity * particleAge + 0.5 * GRAVITY * particleAge * particleAge;
-                
-                // Apply slight air resistance for more natural movement
                 const airResistance = 1 - (progress * 0.1);
                 const posX = originX + horizontalDistance * airResistance;
                 const posY = originY + verticalDistance;
-                
-                // Calculate enhanced opacity with bounce-in effect
                 let opacity = 1;
-                if (progress < 0.1) {
-                    // Bounce-in effect at start
-                    opacity = progress / 0.1;
-                } else if (progress > 1 - FADE_DURATION / lifetime) {
-                    // Smooth fade out
+
+                // Fade in the first burst
+                if (burstStartTimesRef.current.length > 0 && startTime === burstStartTimesRef.current[0]) {
+                    if (progress < FADE_DURATION / lifetime) {
+                        const fadeProgress = progress / (FADE_DURATION / lifetime);
+                        opacity = fadeProgress * fadeProgress; // Quadratic fade for smoothness
+                    }
+                }
+                // Fade out the last burst
+                else if (burstStartTimesRef.current.length > 0 && startTime === burstStartTimesRef.current[burstStartTimesRef.current.length - 1]) {
+                     if (progress > 1 - FADE_DURATION / lifetime) {
+                        const fadeProgress = (progress - (1 - FADE_DURATION / lifetime)) / (FADE_DURATION / lifetime);
+                        opacity = 1 - (fadeProgress * fadeProgress); // Quadratic fade for smoothness
+                    }
+                }
+                //Standard Fading
+                else if (progress > 1 - FADE_DURATION / lifetime) {
                     const fadeProgress = (progress - (1 - FADE_DURATION / lifetime)) / (FADE_DURATION / lifetime);
                     opacity = 1 - (fadeProgress * fadeProgress); // Quadratic fade for smoothness
                 }
-                
-                // Calculate rotation
                 const currentRotation = particleData.initialRotation + (particleData.rotationSpeed * particleAge);
-                
-                // Enhanced scaling with slight bounce
                 let scale = 1;
                 if (progress < 0.15) {
-                    // Slight grow-in effect
                     scale = 0.3 + (progress / 0.15) * 0.7;
                 } else {
-                    // Gentle shrink over time
                     scale = 1 - (progress - 0.15) * 0.15;
                 }
-                
-                // Apply transforms
                 const transform = `translate(${posX}, ${posY}) rotate(${currentRotation}) scale(${scale})`;
                 particle.setAttribute("transform", transform);
                 particle.setAttribute("opacity", opacity.toString());
-                
-                // Dynamic size adjustments for rectangles
                 if (particleData.shape === 'rect') {
                     const currentWidth = particleData.width * scale;
                     const currentHeight = particleData.height * scale;
@@ -202,8 +190,6 @@ const Effect: React.FC<{
                 } else {
                     particle.setAttribute("r", (particleData.size * scale).toString());
                 }
-                
-                // Add subtle shimmer effect based on rotation
                 const shimmer = 0.8 + 0.2 * Math.sin(currentRotation * Math.PI / 180);
                 particle.setAttribute("fill-opacity", (opacity * shimmer).toString());
             }
