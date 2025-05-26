@@ -17,7 +17,12 @@ export type ConfettiEffect = {
   duration: number
   dist?: "space-between" | "space-around" | "ease-sine" | "ease-quad" | "ease-cubic"
 }
-export type Effect = ConfettiEffect
+export type SurgeEffect = {
+  type: "surge"
+  target: string,
+  duration: number
+}
+export type Effect = ConfettiEffect | SurgeEffect
 export type Frame = {
   weekStart: string,
   easing?: string,

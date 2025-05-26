@@ -5944,6 +5944,7 @@
   },
   {
     "weekStart": "2017-03-03T00:00:00.000Z",
+    "effects": [{"type":"confetti","bursts":24,"target":"Ethereum", "duration": 5, "dist": "ease-quad"}],
     "data": [
       {
         "name": "Bitcoin",
@@ -6897,7 +6898,7 @@
   },
   {
     "weekStart": "2017-05-05T00:00:00.000Z",
-    "effects": [{"type":"confetti","bursts":10,"target":"XRP", "duration": 3}],
+    "effects": [{"type":"confetti","bursts":14,"target":"XRP", "duration": 3}],
     "data": [
       {
         "name": "Bitcoin",
@@ -7257,7 +7258,7 @@
   },
   {
     "weekStart": "2017-05-26T00:00:00.000Z",
-    "effects": [{"type":"confetti","bursts":30,"target":"Ethereum", "duration": 7, "dist": "ease-sine"}],
+    "effects": [{"type":"confetti","bursts":24,"target":"Ethereum", "duration": 7, "dist": "ease-sine"}],
     "data": [
       {
         "name": "Bitcoin",

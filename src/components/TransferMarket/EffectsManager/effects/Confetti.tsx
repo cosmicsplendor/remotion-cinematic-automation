@@ -62,7 +62,7 @@ const Effect: React.FC<{
         burstStartTimesRef.current = burstStartTimes;
 
         burstStartTimes.forEach(startTime => {
-            const numParticles = seededRand(35, 20);
+            const numParticles = seededRand(30, 20);
             const offsetX = seededRand(8, -8);
             const offsetY = seededRand(-2, -12);
             
@@ -70,7 +70,6 @@ const Effect: React.FC<{
                 const isRect = seededRand(1) > 0.2;
                 const particle = document.createElementNS("http://www.w3.org/2000/svg", isRect ? "rect" : "circle");
                 
-                // Store particle metadata
                 particle.setAttribute("offset-x", offsetX.toString());
                 particle.setAttribute("offset-y", offsetY.toString());
                 particle.setAttribute("lifetime", LIFESPAN.toString());
@@ -150,22 +149,18 @@ const Effect: React.FC<{
                 const posX = originX + horizontalDistance * airResistance;
                 const posY = originY + verticalDistance;
                 let opacity = 1;
-
-                // Fade in the first burst
                 if (burstStartTimesRef.current.length > 0 && startTime === burstStartTimesRef.current[0]) {
                     if (progress < FADE_DURATION / lifetime) {
                         const fadeProgress = progress / (FADE_DURATION / lifetime);
                         opacity = fadeProgress * fadeProgress; // Quadratic fade for smoothness
                     }
                 }
-                // Fade out the last burst
                 else if (burstStartTimesRef.current.length > 0 && startTime === burstStartTimesRef.current[burstStartTimesRef.current.length - 1]) {
                      if (progress > 1 - FADE_DURATION / lifetime) {
                         const fadeProgress = (progress - (1 - FADE_DURATION / lifetime)) / (FADE_DURATION / lifetime);
                         opacity = 1 - (fadeProgress * fadeProgress); // Quadratic fade for smoothness
                     }
                 }
-                //Standard Fading
                 else if (progress > 1 - FADE_DURATION / lifetime) {
                     const fadeProgress = (progress - (1 - FADE_DURATION / lifetime)) / (FADE_DURATION / lifetime);
                     opacity = 1 - (fadeProgress * fadeProgress); // Quadratic fade for smoothness
