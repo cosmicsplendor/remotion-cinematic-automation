@@ -1956,7 +1956,7 @@
     "weekStart": "2016-05-27T00:00:00.000Z",
     "slowDown": 3,
     "easing": "quadInOut",
-    "effects": [{"type":"confetti","bursts":5,"target":"The DAO"}],
+    "effects": [{"type":"confetti","bursts":5,"target":"The DAO", "duration": 5}],
     "data": [
       {
         "name": "Bitcoin",
