@@ -118,3 +118,50 @@ export function distributeEventStartTimes(
     );
   }
 }
+export function getGlobalBBox(element: SVGGraphicsElement): DOMRect {
+    const bbox = element.getBBox();
+    const ctm = element.getCTM();
+
+    if (!ctm) {
+        // If there's no CTM (e.g., element not in DOM, or hidden), return local bbox
+        // or throw an error, depending on desired behavior.
+        return new DOMRect(bbox.x, bbox.y, bbox.width, bbox.height);
+    }
+
+    // Create SVG points for the corners of the local bounding box
+    const svg = element.ownerSVGElement;
+    if (!svg) {
+        console.warn("Element is not part of an SVG document.");
+        return new DOMRect(bbox.x, bbox.y, bbox.width, bbox.height);
+    }
+
+    let p1 = svg.createSVGPoint();
+    p1.x = bbox.x;
+    p1.y = bbox.y;
+
+    let p2 = svg.createSVGPoint();
+    p2.x = bbox.x + bbox.width;
+    p2.y = bbox.y;
+
+    let p3 = svg.createSVGPoint();
+    p3.x = bbox.x;
+    p3.y = bbox.y + bbox.height;
+
+    let p4 = svg.createSVGPoint();
+    p4.x = bbox.x + bbox.width;
+    p4.y = bbox.y + bbox.height;
+
+    // Transform the points using the CTM
+    p1 = p1.matrixTransform(ctm);
+    p2 = p2.matrixTransform(ctm);
+    p3 = p3.matrixTransform(ctm);
+    p4 = p4.matrixTransform(ctm);
+
+    // Find the min/max x and y values to determine the new bounding box
+    const minX = Math.min(p1.x, p2.x, p3.x, p4.x);
+    const maxX = Math.max(p1.x, p2.x, p3.x, p4.x);
+    const minY = Math.min(p1.y, p2.y, p3.y, p4.y);
+    const maxY = Math.max(p1.y, p2.y, p3.y, p4.y);
+
+    return new DOMRect(minX, minY, maxX - minX, maxY - minY);
+}

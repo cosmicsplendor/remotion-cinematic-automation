@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { ConfettiEffect, Effect, Frame, sanitizeName } from "../../helpers";
-import { distributeEventStartTimes, seededRand } from "../../../../../lib/d3/utils/math";
+import { distributeEventStartTimes, getGlobalBBox, seededRand } from "../../../../../lib/d3/utils/math";
 import { useCurrentFrame, useVideoConfig } from "remotion";
 
 const LIFESPAN = 1;
@@ -99,7 +99,7 @@ const Effect: React.FC<{
         }
         
         // Get target position for particle origin
-        const targetBox = (targetEl as SVGGraphicsElement).getBBox();
+        const targetBox = getGlobalBBox(targetEl as SVGGraphicsElement)
         console.log(targetEl)
         const centerX = targetBox.x + targetBox.width + 50;
         const centerY = targetBox.y + targetBox.height / 2;
