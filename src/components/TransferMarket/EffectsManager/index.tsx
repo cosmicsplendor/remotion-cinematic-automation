@@ -20,7 +20,7 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
         return null;
     }, [svgRef])
     const removeEffect = useCallback((effect: Effect) => {
-        setEffects(effects.filter(e => e !== effect))
+        setEffects((prevEffects) => prevEffects.filter((e) => e !== effect))
     }, [setEffects])
     return <>
         {

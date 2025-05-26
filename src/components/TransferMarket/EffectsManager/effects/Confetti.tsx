@@ -41,10 +41,9 @@ const Effect: React.FC<{
     useEffect(() => {
         setFrame0(frame);
         return () => {
-            console.log("CLEANUP CALLED")
             // Cleanup particles by removing the group
+            console.log("CLEANUP CALLED")
             if (groupElRef.current && svgRef.current) {
-                console.log("REMOVING GROUP", groupId);
                 svgRef.current.removeChild(groupElRef.current);
             }
             particlesRef.current = [];
