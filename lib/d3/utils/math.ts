@@ -77,3 +77,44 @@ export const easingFns: EasingFns = {
         return x * x * (3 - 2 * x)
     }
 }
+/**
+ * Distributes event start times uniformly in a given interval.
+ * @param overallDuration Total interval duration
+ * @param eventDuration Duration of each event
+ * @param numEvents Number of events
+ * @param mode "space-between" (default) or "space-around"
+ * @returns Array of start times (ascending)
+ */
+export function distributeEventStartTimes(
+  overallDuration: number,
+  eventDuration: number,
+  numEvents: number,
+  mode: "space-between" | "space-around" = "space-between"
+): number[] {
+  if (numEvents <= 0) return [];
+  if (numEvents === 1) {
+    if (mode === "space-around") {
+      return [Math.max(0, (overallDuration - eventDuration) / 2)];
+    }
+    return [0];
+  }
+  if (overallDuration <= eventDuration) {
+    return Array(numEvents).fill(0);
+  }
+
+  if (mode === "space-between") {
+    // First at 0, last at overallDuration - eventDuration
+    const interval = (overallDuration - eventDuration) / (numEvents - 1);
+    return Array.from({ length: numEvents }, (_, i) =>
+      +(i * interval).toFixed(8)
+    );
+  } else {
+    // space-around: equal gap at both ends and between events
+    const totalEventsDuration = eventDuration * numEvents;
+    const totalGap = overallDuration - totalEventsDuration;
+    const gap = totalGap / (numEvents + 1);
+    return Array.from({ length: numEvents }, (_, i) =>
+      +(gap * (i + 1) + eventDuration * i).toFixed(8)
+    );
+  }
+}

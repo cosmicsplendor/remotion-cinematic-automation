@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { ConfettiEffect, Effect, Frame, sanitizeName } from "../../helpers";
-import { seededRand } from "../../../../../lib/d3/utils/math";
+import { distributeEventStartTimes, seededRand } from "../../../../../lib/d3/utils/math";
 import { useCurrentFrame, useVideoConfig } from "remotion";
 
 type Particle = {
@@ -38,13 +38,13 @@ const Effect: React.FC<{
     }, [])
     useEffect(() => {
         if (!svgRef.current) return;
-        const group = svgRef.current.querySelector<SVGElement>(`.confetti-group-${target}`) || null;
+        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        group.classList.add(`confetti-group-${target}`);
+        svgRef.current.appendChild(group);
         setGroupEl(group);
         // initialize particles
-        for (let i = 0; i < effect.bursts; i++) {
-
-        }
-    }, [targetEl]);
+        distributeEventStartTimes(effect.duration, LIFESPAN, effect.bursts)
+    }, [svgRef.current]);
 
     useEffect(() => {
         if (!groupEl || frame0 === null) return;
