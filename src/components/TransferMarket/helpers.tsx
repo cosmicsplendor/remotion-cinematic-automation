@@ -20,7 +20,9 @@ export type ConfettiEffect = {
 export type SurgeEffect = {
   type: "surge"
   target: string,
-  duration: number
+  duration: number,
+  bursts: number,
+  dist?: "space-between" | "space-around" | "ease-sine" | "ease-quad" | "ease-cubic"
 }
 export type Effect = ConfettiEffect | SurgeEffect
 export type Frame = {

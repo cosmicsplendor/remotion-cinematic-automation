@@ -3,7 +3,7 @@ import { ConfettiEffect, Effect, sanitizeName } from "../../helpers";
 import { distributeEventStartTimes, getGlobalBBox, seededRand } from "../../../../../lib/d3/utils/math";
 import { useVideoConfig } from "remotion";
 
-const LIFESPAN = 1.2;
+const LIFESPAN = 1;
 const COLORS = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE'];
 const EXPLOSION_SPEED = 120; // pixels per second radial speed
 const GRAVITY = 200; // pixels per second squared (downward acceleration)
