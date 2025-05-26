@@ -2,7 +2,8 @@ import { RefObject, useCallback, useEffect, useState } from "react";
 import { Effect, Frame } from "../helpers"
 import ConfettiEffect from "./effects/Confetti";
 import SurgeEffect from "./effects/Surge";
-const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, svgRef: RefObject<SVGSVGElement> }> = props => {
+import ArrowEffect from "./effects/Arrow";
+const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, svgRef: RefObject<SVGSVGElement> }> = props => {
     const [effects, setEffects] = useState<Effect[]>([])
     const { frame, data, svgRef } = props;
     useEffect(() => {
@@ -48,6 +49,15 @@ const EffectsManager: React.FC<{frame: number, progress: number, data: Frame, sv
                             frame={frame}
                         />
                     );
+                } else if (effect.type === "arrow") {
+                    return <ArrowEffect
+                        key={index}
+                        effect={effect}
+                        svgRef={svgRef}
+                        getSvgEl={getSvgEl}
+                        removeEffect={removeEffect}
+                        frame={frame}
+                    />
                 }
                 return null;
             })

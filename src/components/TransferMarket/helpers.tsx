@@ -24,13 +24,13 @@ export type SurgeEffect = {
   bursts: number,
   dist?: "space-between" | "space-around" | "ease-sine" | "ease-quad" | "ease-cubic"
 }
-export interface ArrowEffect {
+export type ArrowEffect = {
     type: 'arrow'; // Differentiates from other effects like ConfettiEffect
     target: string; // Key to find the target element (e.g., 'player1')
     color: string;  // Hex string for arrow color (e.g., '#FF0000')
     duration: number; // Total duration of the effect in seconds
 }
-export type Effect = ConfettiEffect | SurgeEffect
+export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect
 export type Frame = {
   weekStart: string,
   easing?: string,

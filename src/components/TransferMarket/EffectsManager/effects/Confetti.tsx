@@ -116,7 +116,6 @@ const Effect: React.FC<{
         if (!groupElRef.current || !targetEl || frame0 === null) return;
         
         const t = (frame - frame0) / fps;
-        
         if (t > effect.duration + LIFESPAN) {
             removeEffect(effect);
             return;
