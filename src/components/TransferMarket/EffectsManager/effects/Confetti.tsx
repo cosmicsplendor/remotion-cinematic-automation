@@ -5,6 +5,9 @@ import { useCurrentFrame, useVideoConfig } from "remotion";
 
 type Particle = {
     id: number;
+    offsetX: number;
+    offsetY: number;
+    startTime: number;
     x: number;
     y: number;
     vx: number;
@@ -23,7 +26,7 @@ const Effect: React.FC<{
     frame: number;
     removeEffect: (effect: Effect) => void
 }> = ({ effect, getSvgEl, svgRef, frame, removeEffect }) => {
-    const [frame0, setFrame0] = useState<number|null>(null)
+    const [frame0, setFrame0] = useState<number | null>(null)
     const { fps } = useVideoConfig()
     const particlesRef = useRef<Particle[]>([]);
     const target = useMemo(() => sanitizeName(effect.target), [effect])
@@ -50,15 +53,17 @@ const Effect: React.FC<{
     }, [svgRef.current]);
 
     useEffect(() => {
-        if (!groupEl || frame0 === null) return;
+        if (!groupEl || !targetEl || frame0 === null) return;
         const t = (frame - frame0) / fps
         if (t > effect.duration) {
             removeEffect(effect); // this will trigger unmount/cleanup
             return;
         }
         // update particles
-
-    }, [groupEl, frame]);
+        const targetBox = (targetEl as SVGGraphicsElement).getBBox()
+        const centerX = targetBox.x + targetBox.width + 50;
+        const centerY = targetBox.y + targetBox.height / 2
+    }, [groupEl, targetEl, frame]);
     return <></>
 }
 
