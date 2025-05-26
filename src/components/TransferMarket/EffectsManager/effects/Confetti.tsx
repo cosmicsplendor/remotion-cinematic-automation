@@ -27,6 +27,7 @@ const Effect: React.FC<{
     const { fps } = useVideoConfig()
     const particlesRef = useRef<Particle[]>([]);
     const target = useMemo(() => sanitizeName(effect.target), [effect])
+    const groupId = useMemo(() => `confetti-group-${target}`, [target]);
     const targetEl = useMemo(() => getSvgEl(`points-${target}`), [getSvgEl, target]);
     const [groupEl, setGroupEl] = useState<SVGElement | null>(null);
 
@@ -39,16 +40,22 @@ const Effect: React.FC<{
     useEffect(() => {
         if (!svgRef.current) return;
         const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        group.classList.add(`confetti-group-${target}`);
+        group.setAttribute('id', groupId);
         svgRef.current.appendChild(group);
         setGroupEl(group);
-        // initialize particles
-        distributeEventStartTimes(effect.duration, LIFESPAN, effect.bursts)
+        distributeEventStartTimes(effect.duration, LIFESPAN, effect.bursts).forEach(startTime => {
+            // initialize 20-30 particles per burst, data as well as svg element visual representation
+            const numParticles = seededRand(20, 30);
+        })
     }, [svgRef.current]);
 
     useEffect(() => {
         if (!groupEl || frame0 === null) return;
         const t = (frame - frame0) / fps
+        if (t > effect.duration) {
+            removeEffect(effect); // this will trigger unmount/cleanup
+            return;
+        }
         // update particles
 
     }, [groupEl, frame]);
