@@ -5,7 +5,7 @@ let seed = 0
 export const randomSeed = (newSeed: number) => {
     seed = newSeed
 }
-export const seededRand = (to: number=1, from = 0) => {
+export const seededRand = (to: number = 1, from = 0) => {
     seed = (seed * 9301 + 49297) % 233280
     const rnd = seed / 233280
     return from + Math.floor((to - from + 1) * rnd)
@@ -86,37 +86,74 @@ export const easingFns: EasingFns = {
  * @returns Array of start times (ascending)
  */
 export function distributeEventStartTimes(
-  overallDuration: number,
-  eventDuration: number,
-  numEvents: number,
-  mode: "space-between" | "space-around" = "space-between"
+    overallDuration: number,
+    eventDuration: number,
+    numEvents: number,
+    mode: "space-between" | "space-around" | "ease-quad" | "ease-cubic" | "ease-sine" = "space-between"
 ): number[] {
-  if (numEvents <= 0) return [];
-  if (numEvents === 1) {
-    if (mode === "space-around") {
-      return [Math.max(0, (overallDuration - eventDuration) / 2)];
+    if (numEvents <= 0) return [];
+    if (numEvents === 1) {
+        if (mode === "space-around") {
+            return [Math.max(0, (overallDuration - eventDuration) / 2)];
+        }
+        return [0];
     }
-    return [0];
-  }
-  if (overallDuration <= eventDuration) {
-    return Array(numEvents).fill(0);
-  }
+    if (overallDuration <= eventDuration) {
+        return Array(numEvents).fill(0);
+    }
 
-  if (mode === "space-between") {
-    // First at 0, last at overallDuration - eventDuration
-    const interval = (overallDuration - eventDuration) / (numEvents - 1);
-    return Array.from({ length: numEvents }, (_, i) =>
-      +(i * interval).toFixed(8)
-    );
-  } else {
-    // space-around: equal gap at both ends and between events
-    const totalEventsDuration = eventDuration * numEvents;
-    const totalGap = overallDuration - totalEventsDuration;
-    const gap = totalGap / (numEvents + 1);
-    return Array.from({ length: numEvents }, (_, i) =>
-      +(gap * (i + 1) + eventDuration * i).toFixed(8)
-    );
-  }
+    // Handle linear distribution modes
+    if (mode === "space-between") {
+        // First at 0, last at overallDuration - eventDuration
+        const interval = (overallDuration - eventDuration) / (numEvents - 1);
+        return Array.from({ length: numEvents }, (_, i) =>
+            +(i * interval).toFixed(8)
+        );
+    } else if (mode === "space-around") {
+        // space-around: equal gap at both ends and between events
+        const totalEventsDuration = eventDuration * numEvents;
+        const totalGap = overallDuration - totalEventsDuration;
+        const gap = totalGap / (numEvents + 1);
+        return Array.from({ length: numEvents }, (_, i) =>
+            +(gap * (i + 1) + eventDuration * i).toFixed(8)
+        );
+    }
+
+    // Handle easing distribution modes
+    const maxStart = overallDuration - eventDuration;
+
+    // Generate normalized positions (0 to 1) for each event
+    const normalizedPositions = Array.from({ length: numEvents }, (_, i) => {
+        if (numEvents === 1) return 0;
+        return i / (numEvents - 1);
+    });
+
+    // Apply easing function based on mode (all use ease-in-out)
+    const easedPositions = normalizedPositions.map(t => {
+        switch (mode) {
+            case "ease-quad":
+                // Quadratic ease-in-out
+                return t < 0.5
+                    ? 2 * t * t
+                    : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+            case "ease-cubic":
+                // Cubic ease-in-out
+                return t < 0.5
+                    ? 4 * t * t * t
+                    : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+            case "ease-sine":
+                // Sine ease-in-out
+                return -(Math.cos(Math.PI * t) - 1) / 2;
+
+            default:
+                return t; // Linear fallback
+        }
+    });
+
+    // Convert eased positions to actual start times
+    return easedPositions.map(pos => +(pos * maxStart).toFixed(8));
 }
 export function getGlobalBBox(element: SVGGraphicsElement): DOMRect {
     const bbox = element.getBBox();

@@ -35,15 +35,17 @@ const Effect: React.FC<{
     const particleDataRef = useRef<ParticleData[]>([]);
     const target = useMemo(() => sanitizeName(effect.target), [effect]);
     const groupId = useMemo(() => `confetti-group-${target}`, [target]);
-    const targetEl = useMemo(() => getSvgEl(`points-${target}`), [getSvgEl, target]);
-    const [groupEl, setGroupEl] = useState<SVGElement | null>(null);
+    const targetEl = useMemo(() => getSvgEl(`logo-${target}`), [getSvgEl, target]);
+    const groupElRef = useRef<SVGElement | null>(null);
 
     useEffect(() => {
         setFrame0(frame);
         return () => {
+            console.log("CLEANUP CALLED")
             // Cleanup particles by removing the group
-            if (groupEl && svgRef.current) {
-                svgRef.current.removeChild(groupEl);
+            if (groupElRef.current && svgRef.current) {
+                console.log("REMOVING GROUP", groupId);
+                svgRef.current.removeChild(groupElRef.current);
             }
             particlesRef.current = [];
             particleDataRef.current = [];
@@ -56,13 +58,13 @@ const Effect: React.FC<{
         const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         group.setAttribute('id', groupId);
         svgRef.current.appendChild(group);
-        setGroupEl(group);
+        groupElRef.current = group;
         
         distributeEventStartTimes(effect.duration, LIFESPAN, effect.bursts).forEach(startTime => {
             // Initialize 25-40 particles per burst for richer effect
             const numParticles = seededRand(40, 25);
             const offsetX = seededRand(8, -8);
-            const offsetY = seededRand(8, -8);
+            const offsetY = seededRand(-2, -12);
             
             for (let i = 0; i < numParticles; i++) {
                 // Mix of rectangles and circles (80% rectangles, 20% circles like YouTube)
@@ -119,7 +121,7 @@ const Effect: React.FC<{
     }, [svgRef.current, groupId, effect.duration, effect.bursts]);
 
     useEffect(() => {
-        if (!groupEl || !targetEl || frame0 === null) return;
+        if (!groupElRef.current || !targetEl || frame0 === null) return;
         
         const t = (frame - frame0) / fps;
         
@@ -130,7 +132,7 @@ const Effect: React.FC<{
         
         // Get target position for particle origin
         const targetBox = getGlobalBBox(targetEl as SVGGraphicsElement)
-        const centerX = targetBox.x + targetBox.width + 50;
+        const centerX = targetBox.x + targetBox.width / 2;
         const centerY = targetBox.y + targetBox.height / 2;
         
         // Update each particle
@@ -207,7 +209,7 @@ const Effect: React.FC<{
                 particle.setAttribute("fill-opacity", (opacity * shimmer).toString());
             }
         });
-    }, [groupEl, targetEl, frame, frame0, fps, effect.duration, removeEffect]);
+    }, [targetEl, frame, frame0, fps, effect.duration, removeEffect]);
 
     return <></>;
 };

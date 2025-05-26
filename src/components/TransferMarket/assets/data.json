@@ -1956,7 +1956,6 @@
     "weekStart": "2016-05-27T00:00:00.000Z",
     "slowDown": 3,
     "easing": "quadInOut",
-    "effects": [{"type":"confetti","bursts":10,"target":"The DAO", "duration": 5}],
     "data": [
       {
         "name": "Bitcoin",
@@ -6898,6 +6897,7 @@
   },
   {
     "weekStart": "2017-05-05T00:00:00.000Z",
+    "effects": [{"type":"confetti","bursts":10,"target":"XRP", "duration": 3}],
     "data": [
       {
         "name": "Bitcoin",
@@ -7257,6 +7257,7 @@
   },
   {
     "weekStart": "2017-05-26T00:00:00.000Z",
+    "effects": [{"type":"confetti","bursts":16,"target":"Ethereum", "duration": 7}],
     "data": [
       {
         "name": "Bitcoin",

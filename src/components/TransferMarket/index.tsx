@@ -91,7 +91,9 @@ export const TransferMarket: React.FC = () => {
   const currentData = flattenedData[currentDataIndex];
   const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3);
   const currentYear = currentData ? new Date(currentData.weekStart).getFullYear() : "2000";
-
+  useEffect(() => {
+    console.log(flattenedData[currentDataIndex]?.weekStart)
+  }, [flattenedData[currentDataIndex]?.weekStart]);
   const currentYearMetadata = useMemo(() => {
     if (currentYear === null) return null; // No valid season to find metadata for
     return seasonAudioMetadata.find(meta => meta.season === currentYear) || null;
