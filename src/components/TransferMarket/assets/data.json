@@ -104,6 +104,9 @@
     "weekStart": "2016-01-22T00:00:00.000Z",
     "slowDown": 2,
     "easing": "sineInOut",
+    "effects": [
+      {"type": "arrow","target": "Ethereum","color": "#ff0000","duration": 4}
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -5945,7 +5948,13 @@
   {
     "weekStart": "2017-03-03T00:00:00.000Z",
     "effects": [
-      {"type": "confetti","bursts": 24,"target": "Ethereum","duration": 5,"dist": "ease-quad"}
+      {
+        "type": "confetti",
+        "bursts": 24,
+        "target": "Ethereum",
+        "duration": 5,
+        "dist": "ease-quad"
+      }
     ],
     "data": [
       {
@@ -44561,7 +44570,22 @@
   },
   {
     "weekStart": "2024-12-06T00:00:00.000Z",
-    "effects": [{"type": "confetti","bursts": 8,"target": "Bitcoin","duration": 2,"dist": "ease-quad"}, {"target": "Bitcoin","type": "surge","duration": 2, "bursts": 5, "dist": "space-between"}],
+    "effects": [
+      {
+        "type": "confetti",
+        "bursts": 8,
+        "target": "Bitcoin",
+        "duration": 2,
+        "dist": "ease-quad"
+      },
+      {
+        "target": "Bitcoin",
+        "type": "surge",
+        "duration": 2,
+        "bursts": 5,
+        "dist": "space-between"
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
