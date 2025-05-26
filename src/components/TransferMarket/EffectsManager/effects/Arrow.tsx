@@ -1,31 +1,33 @@
-/**
- * I have a confetti effect that displays bursts of confettis. Following the similar lifecycle and timing paterns (synced to remotion timeline via frame), I want a simpler effect component. Call it arrow component. effect in this case should have these params: { target: string, color: hex_string, duration: number }. Cannot use raf or css anims, has to be manually controlled. The arrow show point leftward, and pulaste kind of like in gta games. the actual target svg element this time is right-center of text element with id points-${target}. Come up with params for duration, amplitude and easing (maybe sine) that feels good.
- */
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { useVideoConfig } from "remotion";
 import { getGlobalBBox } from "../../../../../lib/d3/utils/math"; 
-import { ArrowEffect, sanitizeName } from "../../helpers";
+import { ArrowEffect, sanitizeName } from "../../helpers"; // Assuming ArrowEffect type and sanitizeName are defined in helpers
 
 interface ArrowEffectProps {
     effect: ArrowEffect;
     getSvgEl: (id: string) => SVGElement | null;
     svgRef: RefObject<SVGSVGElement>;
     frame: number;
-    removeEffect: (effect: ArrowEffect) => void; // Or your generic Effect type
+    removeEffect: (effect: ArrowEffect) => void;
 }
 
-const ARROW_WIDTH = 20;     // Visual width of the arrow
-const ARROW_HEIGHT = 14;    // Visual height of the arrow's base
-const ARROW_OFFSET_X = 10;  // Gap between target and arrow tip
+// --- Arrow Shape & Size Parameters (Increased Size) ---
+const ARROW_HEAD_WIDTH = 40;     // Width of the arrowhead part
+const ARROW_HEAD_HEIGHT = 64;    // Full height of the arrowhead at its base
+const ARROW_SHAFT_LENGTH = 30;   // Length of the arrow's shaft
+const ARROW_SHAFT_WIDTH = 36;    // Thickness of the arrow's shaft
 
-const PULSE_BASE_SCALE = 1.0;   // Default scale
-const PULSE_AMPLITUDE = 0.20;   // Pulsation magnitude (e.g., 0.2 means 20% bigger/smaller)
-const PULSE_FREQUENCY = 1.5;    // Pulsations per second (Hz)
+const ARROW_OFFSET_X = 24;       // Gap between target and arrow tip (adjusted for larger arrow)
 
-const FADE_IN_DURATION_SEC: number = 0.2;  // Fade-in time in seconds
-const FADE_OUT_DURATION_SEC: number = 0.3; // Fade-out time in seconds
+// --- Pulsation Parameters (Horizontal Translation) ---
+const PULSE_FREQUENCY = 1.5;     // Pulsations per second (Hz)
+const PULSE_TRANSLATE_X_AMPLITUDE = 8; // Max pixels the arrow will shift leftward during pulse
 
-const ArrowEffect: React.FC<ArrowEffectProps> = ({
+// --- Fade Parameters ---
+const FADE_IN_DURATION_SEC: number = 0.2;
+const FADE_OUT_DURATION_SEC: number = 0.3;
+
+const ArrowEffectComponent: React.FC<ArrowEffectProps> = ({ // Renamed component to avoid conflict if ArrowEffect is also a type
     effect,
     getSvgEl,
     svgRef,
@@ -36,6 +38,8 @@ const ArrowEffect: React.FC<ArrowEffectProps> = ({
     const { fps } = useVideoConfig();
     
     const groupRef = useRef<SVGGElement | null>(null);
+    // Use effect.id for a more unique group ID if available and preferred,
+    // otherwise sanitizeName(effect.target) is also fine.
     const groupId = useMemo(() => `arrow-effect-${sanitizeName(effect.target)}`, [effect.target]);
     
     const targetElement = useMemo(() => {
@@ -43,6 +47,7 @@ const ArrowEffect: React.FC<ArrowEffectProps> = ({
         return getSvgEl(targetElId);
     }, [getSvgEl, effect.target]);
 
+    // Effect setup: Set initial frame and cleanup
     useEffect(() => {
         setFrame0(frame);
 
@@ -52,7 +57,9 @@ const ArrowEffect: React.FC<ArrowEffectProps> = ({
             }
             groupRef.current = null;
         };
-    }, [])
+    }, []); // Runs once on mount and cleans up on unmount
+
+    // SVG element creation
     useEffect(() => {
         if (!svgRef.current) return;
 
@@ -60,7 +67,17 @@ const ArrowEffect: React.FC<ArrowEffectProps> = ({
         group.setAttribute("id", groupId);
         
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", `M 0 ${-ARROW_HEIGHT / 2} L ${-ARROW_WIDTH} 0 L 0 ${ARROW_HEIGHT / 2} Z`);
+        // Path for a "proper" arrow pointing left.
+        // (0,0) of the path is at the center of the shaft's rightmost edge.
+        const pathD = `M 0 ${-ARROW_SHAFT_WIDTH / 2} ` + // 1. Shaft top-right
+                      `L ${-ARROW_SHAFT_LENGTH} ${-ARROW_SHAFT_WIDTH / 2} ` + // 2. Shaft top-left
+                      `L ${-ARROW_SHAFT_LENGTH} ${-ARROW_HEAD_HEIGHT / 2} ` + // 3. Arrowhead base, outer top
+                      `L ${-(ARROW_SHAFT_LENGTH + ARROW_HEAD_WIDTH)} 0 ` +    // 4. Arrow tip
+                      `L ${-ARROW_SHAFT_LENGTH} ${ARROW_HEAD_HEIGHT / 2} ` +  // 5. Arrowhead base, outer bottom
+                      `L ${-ARROW_SHAFT_LENGTH} ${ARROW_SHAFT_WIDTH / 2} ` +   // 6. Shaft bottom-left
+                      `L 0 ${ARROW_SHAFT_WIDTH / 2} ` +                       // 7. Shaft bottom-right
+                      `Z`; // Close path
+        path.setAttribute("d", pathD);
         path.setAttribute("fill", effect.color);
         
         group.appendChild(path);
@@ -68,27 +85,44 @@ const ArrowEffect: React.FC<ArrowEffectProps> = ({
         
         groupRef.current = group;
 
-    }, [svgRef, effect.color, groupId]); // `frame` ensures frame0 is set correctly
+    }, [svgRef, effect.color, groupId]); // Dependencies for creating/updating SVG arrow
 
+    // Animation loop
     useEffect(() => {
-        if (frame0 === null || !groupRef.current || !svgRef.current || !targetElement) {
+        if (frame0 === null || !groupRef.current || !svgRef.current) {
             return;
         }
+
+        if (!targetElement) {
+            // Optionally hide or handle if target disappears mid-effect
+            groupRef.current.setAttribute("opacity", "0");
+            return;
+        }
+
         const currentTime = (frame - frame0) / fps;
-        if (currentTime > effect.duration && effect.duration >= 0) { // duration >= 0 for effects that might last "forever" if duration is negative.
+
+        if (currentTime > effect.duration && effect.duration >= 0) {
             removeEffect(effect);
             return;
         }
         
         const targetBox = getGlobalBBox(targetElement as SVGGraphicsElement);
 
-        // The tip will be ARROW_WIDTH to the left of this, before scaling.
-        const posX = targetBox.x + targetBox.width + ARROW_OFFSET_X + ARROW_WIDTH;
-        const posY = targetBox.y + targetBox.height / 2;
+        // --- Positioning ---
+        // anchorX is where the arrow *tip* should be horizontally at rest.
+        const anchorX = targetBox.x + targetBox.width + ARROW_OFFSET_X;
+        // The arrow path's tip is at local x = -(ARROW_SHAFT_LENGTH + ARROW_HEAD_WIDTH).
+        // So, the group's origin (0,0) needs to be translated to:
+        const baseTranslateX = anchorX + (ARROW_SHAFT_LENGTH + ARROW_HEAD_WIDTH);
+        const translateY = targetBox.y + targetBox.height / 2;
 
-        // --- Pulsation ---
-        const pulseCycleTime = 2 * Math.PI * PULSE_FREQUENCY * currentTime;
-        const scale = PULSE_BASE_SCALE + PULSE_AMPLITUDE * Math.sin(pulseCycleTime);
+        // --- Pulsation (Horizontal Translation) ---
+        // sin wave from -1 to 1. Phase shift (-Math.PI / 2) makes it start at -1 (min value).
+        const pulseCycle = Math.sin(PULSE_FREQUENCY * 2 * Math.PI * currentTime - Math.PI / 2);
+        // pulseShift goes from 0 (no shift) to PULSE_TRANSLATE_X_AMPLITUDE (max leftward shift)
+        const pulseShift = PULSE_TRANSLATE_X_AMPLITUDE * (0.5 + 0.5 * pulseCycle);
+        
+        const finalTranslateX = baseTranslateX - pulseShift; // Subtract to move the arrow leftward
 
         // --- Opacity (Fade In/Out) ---
         let opacity = 1.0;
@@ -96,25 +130,21 @@ const ArrowEffect: React.FC<ArrowEffectProps> = ({
         if (FADE_IN_DURATION_SEC > 0 && currentTime < FADE_IN_DURATION_SEC) {
             fadeInProgress = currentTime / FADE_IN_DURATION_SEC;
         } else if (FADE_IN_DURATION_SEC === 0 && currentTime < 0) { 
-            // Handles edge case if currentTime could be negative briefly & no fade-in.
              fadeInProgress = 0;
         }
 
-
         let fadeOutProgress = 1.0;
-        // Only apply fade out if effect has a positive duration
-        if (effect.duration >=0 && FADE_OUT_DURATION_SEC > 0 && currentTime > effect.duration - FADE_OUT_DURATION_SEC) {
-            fadeOutProgress = (effect.duration - currentTime) / FADE_OUT_DURATION_SEC;
-        } else if (effect.duration >=0 && FADE_OUT_DURATION_SEC === 0 && currentTime >= effect.duration) {
-            // Instant fade out if duration is 0 and effect is at/past its end time
+        if (effect.duration >= 0 && FADE_OUT_DURATION_SEC > 0 && currentTime > effect.duration - FADE_OUT_DURATION_SEC) {
+            fadeOutProgress = Math.max(0, (effect.duration - currentTime) / FADE_OUT_DURATION_SEC);
+        } else if (effect.duration >= 0 && FADE_OUT_DURATION_SEC === 0 && currentTime >= effect.duration) {
             fadeOutProgress = 0;
         }
         
         opacity = Math.max(0, Math.min(fadeInProgress, fadeOutProgress));
 
-
         // Apply transformations and style
-        groupRef.current.setAttribute("transform", `translate(${posX}, ${posY}) scale(${scale})`);
+        // No scaling pulsation, so scale is constant 1.0
+        groupRef.current.setAttribute("transform", `translate(${finalTranslateX}, ${translateY}) scale(1)`);
         groupRef.current.setAttribute("opacity", opacity.toString());
 
     }, [
@@ -123,10 +153,11 @@ const ArrowEffect: React.FC<ArrowEffectProps> = ({
         fps, 
         targetElement, 
         removeEffect, 
-        svgRef, // svgRef itself as dep for getGlobalBBox if its impl uses it
+        // svgRef, // svgRef.current is stable, not svgRef object itself usually. Fine to omit if not causing issues.
     ]);
 
-    return <></>; // Renders SVG imperatively into svgRef
+    return <></>;
 };
 
-export default ArrowEffect;
+// Export with the name you prefer, e.g., ArrowEffect if that's your convention for components
+export default ArrowEffectComponent; 
