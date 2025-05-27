@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { useVideoConfig } from "remotion";
 import { getGlobalBBox } from "../../../../../lib/d3/utils/math";
-import { ChangeEffect as ChangeEffectType, sanitizeName } from "../../helpers"; // Renamed import to avoid conflict
+import { ChangeEffect as ChangeEffectType, Datum, sanitizeName } from "../../helpers"; // Renamed import to avoid conflict
 
 interface ChangeEffectProps {
     effect: ChangeEffectType;
@@ -9,7 +9,9 @@ interface ChangeEffectProps {
     svgRef: RefObject<SVGSVGElement>;
     frame: number;
     removeEffect: (effect: ChangeEffectType) => void;
-    getValue: () => number; // Function to get current percentage change value (e.g., 10 for +10%)
+    getValue: (progress: number) => number; // Function to get current percentage change value (e.g., 10 for +10%)
+    prevData: Datum[],
+    progress: number
 }
 
 // --- Triangle & Text Parameters ---
@@ -39,11 +41,14 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
     frame,
     removeEffect,
     getValue,
+    prevData,
+    progress
 }) => {
     const [frame0, setFrame0] = useState<number | null>(null);
     // No longer need previousValue state
-    const { fps } = useVideoConfig();
+    const accPercentChangeRef = useRef<number>(0); // Store previous percentage changes if needed, but not used in this effect
 
+    const { fps } = useVideoConfig();
     const groupRef = useRef<SVGGElement | null>(null);
     const triangleRef = useRef<SVGPolygonElement | null>(null);
     const textRef = useRef<SVGTextElement | null>(null);
@@ -55,6 +60,9 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
         return getSvgEl(targetElId);
     }, [getSvgEl, effect.target]);
 
+    useEffect(() => {
+        accPercentChangeRef.current += getValue(1)
+    }, [prevData])
     // Effect setup: Set initial frame and cleanup
     useEffect(() => {
         setFrame0(frame); // Set the initial frame when the effect starts
@@ -118,9 +126,9 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
             removeEffect(effect);
             return;
         }
-
+        const curPercentChange = getValue(progress)
+        const percentChange = curPercentChange + accPercentChangeRef.current
         // getValue() now directly returns the percentage change
-        const percentChange = getValue();
         const isPositive = percentChange >= 0;
 
         // If frame0 is the current frame, it means this is the very first render tick

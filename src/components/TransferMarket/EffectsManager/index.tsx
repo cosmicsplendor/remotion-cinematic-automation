@@ -27,14 +27,14 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
     const removeEffect = useCallback((effect: Effect) => {
         setEffects((prevEffects) => prevEffects.filter((e) => e !== effect))
     }, [setEffects])
-    const getChange = (target: string) => {
+    const getChange = (target: string, progress=1) => {
         const prevVal = prevData.find(d => d.name === target)?.marketCap || 0
         const curTarget = data.data.find(d => d.name === target)
         const { easing=DEFAULT_EASING } = data;
 
         const curVal = curTarget?.marketCap || 0;
         if (curVal === 0 || prevVal === 0) return 0;
-        const percentage = (curVal - prevVal) / prevVal;
+        const percentage = 100 * (curVal - prevVal) / prevVal;
         if (isNaN(percentage)) return 0;
         if (progress === 0) return 0;
         return percentage * easingFns[easing]?.(progress);
@@ -82,7 +82,9 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                             getSvgEl={getSvgEl}
                             removeEffect={removeEffect}
                             frame={frame}
-                            getValue={() => getChange(effect.target)}
+                            getValue={(progress: number) => getChange(effect.target, progress)}
+                            prevData={prevData}
+                            progress={progress}
                         />
                     );
                 }
