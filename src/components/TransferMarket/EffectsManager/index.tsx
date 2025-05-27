@@ -5,6 +5,7 @@ import SurgeEffect from "./effects/Surge";
 import ArrowEffect from "./effects/Arrow";
 import { easingFns } from "../../../../lib/d3/utils/math";
 import ChangeEffect from "./effects/Change";
+import FocusEffect from "./effects/Focus";
 const DEFAULT_EASING = "linear"
 const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, prevData: Datum[], svgRef: RefObject<SVGSVGElement> }> = props => {
     const [effects, setEffects] = useState<Effect[]>([])
@@ -87,6 +88,10 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                             progress={progress}
                         />
                     );
+                } else if (effect.type === "focus") {
+                    return (
+                        <FocusEffect key={index} effect={effect} svgRef={svgRef} getSvgEl={getSvgEl} frame={frame} removeEffect={removeEffect}/>
+                    )
                 }
                 return null;
             })
