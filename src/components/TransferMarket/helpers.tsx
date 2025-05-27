@@ -36,7 +36,7 @@ export type ChangeEffect = {
     duration: number;
     color?: string; // Optional base color, will be overridden by green/red
 }
-export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect
+export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect
 export type Frame = {
   weekStart: string,
   easing?: string,
