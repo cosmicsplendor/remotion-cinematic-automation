@@ -3,7 +3,7 @@ import { useVideoConfig } from "remotion";
 import { getGlobalBBox } from "../../../../../../lib/d3/utils/math";
 import lottie, { AnimationItem } from "lottie-web"; // Import lottie-web for animation playback
 import rocket from "./rocket.json"; // Import your Lottie animation JSON file
-import { LottieEffect } from "src/components/TransferMarket/helpers";
+import { LottieEffect, sanitizeName } from "../../../../../components/TransferMarket/helpers";
 // Assuming sanitizeName helper function is available
 // If `ArrowEffect` is a specific type, you might want a more generic `LottieEffect` or `LottieEffect` type.
 // For this example, let's define a generic `LottieEffect` interface that includes common properties.
@@ -15,7 +15,6 @@ interface LottieEffectProps {
     svgRef: RefObject<SVGSVGElement>;
     frame: number;
     removeEffect: (effect: LottieEffect) => void;
-    sanitizeName: (name: string) => string; // Assuming this is passed or imported
 }
 
 // --- Lottie Container Size Parameters ---
@@ -28,13 +27,12 @@ const LOTTIE_OFFSET_X = 20;          // Gap between target and Lottie container'
 const FADE_IN_DURATION_SEC: number = 0.2;
 const FADE_OUT_DURATION_SEC: number = 0.3;
 
-const LottieEffectComponent: React.FC<LottieEffectProps> = ({
+const LottieEffect: React.FC<LottieEffectProps> = ({
     effect,
     getSvgEl,
     svgRef,
     frame,
     removeEffect,
-    sanitizeName, // Destructure sanitizeName
 }) => {
     const [frame0, setFrame0] = useState<number | null>(null);
     const { fps } = useVideoConfig();
@@ -44,7 +42,7 @@ const LottieEffectComponent: React.FC<LottieEffectProps> = ({
     const lottieContainerRef = useRef<HTMLDivElement | null>(null); // Ref for the div inside foreignObject where Lottie renders
     const lottieInstanceRef = useRef<AnimationItem | null>(null); // Ref for the Lottie animation instance
 
-    const groupId = useMemo(() => `lottie-effect-${effect.id || sanitizeName(effect.target)}`, [effect.id, effect.target, sanitizeName]);
+    const groupId = useMemo(() => `lottie-effect-${sanitizeName(effect.target)}`, [effect.target]);
 
     const targetElement = useMemo(() => {
         const targetElId = `points-${sanitizeName(effect.target)}`;
@@ -189,4 +187,4 @@ const LottieEffectComponent: React.FC<LottieEffectProps> = ({
 };
 
 // Export the component
-export default LottieEffectComponent;
+export default LottieEffect;

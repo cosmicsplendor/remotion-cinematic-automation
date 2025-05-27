@@ -25,10 +25,9 @@ export type SurgeEffect = {
   dist?: "space-between" | "space-around" | "ease-sine" | "ease-quad" | "ease-cubic"
 }
 export type LottieEffect = {
-    id: string; // A unique ID for this effect instance (useful for cleanup)
-    target: string; // The ID of the SVG element this effect is targeting
-    duration: number; // Total duration of the Lottie effect in seconds
-    // You could add more Lottie-specific properties here, e.g., `lottieFilePath: string;`
+    type: "lottie";
+    target: string;
+    duration: number;
 }
 export type ArrowEffect = {
     type: 'arrow'; // Differentiates from other effects like ConfettiEffect
