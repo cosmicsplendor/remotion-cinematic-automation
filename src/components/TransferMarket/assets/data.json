@@ -102,11 +102,9 @@
   },
   {
     "weekStart": "2016-01-22T00:00:00.000Z",
+    "effects": [{"type": "arrow", "duration": 1.5, "target": "Dogecoin", "color":"#000000"}],
     "slowDown": 2,
     "easing": "sineInOut",
-    "effects": [
-      {"type": "arrow","target": "Ethereum","color": "#ff0000","duration": 4}
-    ],
     "data": [
       {
         "name": "Bitcoin",

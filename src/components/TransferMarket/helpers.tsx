@@ -30,6 +30,12 @@ export type ArrowEffect = {
     color: string;  // Hex string for arrow color (e.g., '#FF0000')
     duration: number; // Total duration of the effect in seconds
 }
+export type ChangeEffect = {
+    type: "change";
+    target: string;
+    duration: number;
+    color?: string; // Optional base color, will be overridden by green/red
+}
 export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect
 export type Frame = {
   weekStart: string,

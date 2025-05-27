@@ -1,11 +1,13 @@
 import { RefObject, useCallback, useEffect, useState } from "react";
-import { Effect, Frame } from "../helpers"
+import { Datum, Effect, Frame } from "../helpers"
 import ConfettiEffect from "./effects/Confetti";
 import SurgeEffect from "./effects/Surge";
 import ArrowEffect from "./effects/Arrow";
-const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, svgRef: RefObject<SVGSVGElement> }> = props => {
+import { easingFns } from "../../../../lib/d3/utils/math";
+const DEFAULT_EASING = "linear"
+const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, prevData: Datum[], svgRef: RefObject<SVGSVGElement> }> = props => {
     const [effects, setEffects] = useState<Effect[]>([])
-    const { frame, data, svgRef } = props;
+    const { frame, data, prevData, svgRef, progress } = props;
     useEffect(() => {
         if (!data.effects || data.effects.length === 0) return;
         setEffects([
@@ -24,6 +26,15 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, s
     const removeEffect = useCallback((effect: Effect) => {
         setEffects((prevEffects) => prevEffects.filter((e) => e !== effect))
     }, [setEffects])
+    const getValue = (target: string) => {
+        const prevVal = prevData.find(d => d.name === target)?.marketCap || 0
+        const curTarget = data.data.find(d => d.name === target)
+        const { easing=DEFAULT_EASING } = data;
+
+        const curVal = curTarget?.marketCap || 0;
+        if (curVal === 0 || prevVal === 0) return 0;
+        return (curVal - prevVal) * easingFns[easing]?.(progress) || 0;
+    }
     return <>
         {
             effects.map((effect, index) => {

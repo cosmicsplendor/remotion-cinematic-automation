@@ -141,7 +141,7 @@ export const TransferMarket: React.FC = () => {
     const barChart = modifier(barChartRaw);
     chartRef.current = barChart;
   }, [svgRef, containerRef, flattenedData, width, height]); 
-
+  const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
   useEffect(() => {
     if (!chartRef.current || !currentData) {
       return;
@@ -149,7 +149,6 @@ export const TransferMarket: React.FC = () => {
     const chart = chartRef.current;
     const { data } = currentData;
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
-    const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
     chart(prevData, data, easingFn(progress));
   }, [frame]);
 
@@ -190,7 +189,7 @@ export const TransferMarket: React.FC = () => {
           <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
-      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData}/>
+      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData}/>
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
       {/* {seasonAudioMetadata.map(({ season, startFrame }) => {
         const audioSrcPath = `/assets/transferAudio/${season}.wav`;
