@@ -102,7 +102,7 @@
   },
   {
     "weekStart": "2016-01-22T00:00:00.000Z",
-    "effects": [{"type": "arrow", "duration": 1.5, "target": "Dogecoin", "color":"#000000"}],
+    "effects":[{"type": "focus", "duration": 1.5, "target": "Bitcoin"},{"type": "arrow", "duration": 1.5, "target": "Dogecoin", "color":"#000000"}  ],
     "slowDown": 2,
     "easing": "sineInOut",
     "data": [
@@ -1956,7 +1956,6 @@
   {
     "weekStart": "2016-05-27T00:00:00.000Z",
     "slowDown": 2,
-    "effects":[{"type": "focus", "duration": 10, "target": "The Dao"}  ],
     "easing": "quadInOut",
     "data": [
       {

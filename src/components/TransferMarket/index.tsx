@@ -103,7 +103,7 @@ export const TransferMarket: React.FC = () => {
       return;
     }
     const w = width * 0.95, h = height;
-    const margins = { mt: 120, mr: 300, mb: 40, ml: 290 };
+    const margins = { mt: 120, mr: 300, mb: 0, ml: 290 };
     const dims = Object.freeze({ w, h, ...margins });
     const modifier = (chart: Chart) => {
       const safeChart = chart as SafeChart;

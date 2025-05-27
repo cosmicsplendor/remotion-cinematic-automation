@@ -24,6 +24,12 @@ export type SurgeEffect = {
   bursts: number,
   dist?: "space-between" | "space-around" | "ease-sine" | "ease-quad" | "ease-cubic"
 }
+export type LottieEffect = {
+    id: string; // A unique ID for this effect instance (useful for cleanup)
+    target: string; // The ID of the SVG element this effect is targeting
+    duration: number; // Total duration of the Lottie effect in seconds
+    // You could add more Lottie-specific properties here, e.g., `lottieFilePath: string;`
+}
 export type ArrowEffect = {
     type: 'arrow'; // Differentiates from other effects like ConfettiEffect
     target: string; // Key to find the target element (e.g., 'player1')
@@ -41,7 +47,7 @@ export type FocusEffect = {
     target: string;
     duration: number;
 }
-export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect
+export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect | LottieEffect
 export type Frame = {
   weekStart: string,
   easing?: string,
