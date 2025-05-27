@@ -12,14 +12,14 @@ interface FocusEffectProps {
 }
 
 // --- Focus Parameters ---
-const FOCUS_MARGIN = 18; // Additional margin around the bar for the focus area
+const FOCUS_MARGIN = 20; // Additional margin around the bar for the focus area
 const OVERLAY_OPACITY = 0.6; // Opacity of the dark overlay (0 = transparent, 1 = opaque)
 
 // --- Fade Parameters ---
 const FADE_IN_DURATION_SEC: number = 0.3;
 const FADE_OUT_DURATION_SEC: number = 0.3;
 
-const FocusEffect: React.FC<FocusEffectProps> = ({
+const FocusEffectComponent: React.FC<FocusEffectProps> = ({
     effect,
     getSvgEl,
     svgRef,
@@ -61,14 +61,14 @@ const FocusEffect: React.FC<FocusEffectProps> = ({
         topRect.setAttribute("x", "0");
         topRect.setAttribute("y", "0");
         topRect.setAttribute("width", viewportWidth.toString());
-        topRect.setAttribute("fill", "white");
+        topRect.setAttribute("fill", "black");
         topRect.setAttribute("opacity", OVERLAY_OPACITY.toString());
         
         // Create bottom overlay rectangle (covers area below focus)
         const bottomRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         bottomRect.setAttribute("x", "0");
         bottomRect.setAttribute("width", viewportWidth.toString());
-        bottomRect.setAttribute("fill", "white");
+        bottomRect.setAttribute("fill", "black");
         bottomRect.setAttribute("opacity", OVERLAY_OPACITY.toString());
         
         group.appendChild(topRect);
@@ -149,4 +149,4 @@ const FocusEffect: React.FC<FocusEffectProps> = ({
     return <></>;
 };
 
-export default FocusEffect;
+export default FocusEffectComponent;

@@ -34,7 +34,6 @@ export const TransferMarket: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
-
   const [currentAmplitude, setCurrentAmplitude] = useState(0);
   const FRAMES_PER_UNIT_POINT = useMemo(() => {
     if (!fps || fps <= 0) return 0;
@@ -151,7 +150,6 @@ export const TransferMarket: React.FC = () => {
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
     chart(prevData, data, easingFn(progress));
   }, [frame]);
-
   return (
     <AbsoluteFill
       style={{
@@ -165,6 +163,8 @@ export const TransferMarket: React.FC = () => {
       ref={containerRef}
     >
       <svg
+        width={width}
+        height={height}
         id={PLOT_ID} // PLOT_ID used here
         ref={svgRef}
       ></svg>

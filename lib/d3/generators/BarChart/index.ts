@@ -175,8 +175,8 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
 
     const barGraph: RemotionBarChart<Datum> = (prevData: Data, newData: Data, progress: number) => {
         const svg = select(dom.svg)
-            .attr("width", dims.w)
-            .attr("height", dims.h);
+            // .attr("width", dims.w)
+            // .attr("height", dims.h);
 
         const interpolatedData = createInterpolatedData(prevData, newData, progress, accessors, barCount);
         const BAR_THICKNESS = Math.round((horizontal ? dims.w - dims.ml - dims.mt : dims.h - dims.mt - dims.mb) / barCount.active) - bar.gap;
