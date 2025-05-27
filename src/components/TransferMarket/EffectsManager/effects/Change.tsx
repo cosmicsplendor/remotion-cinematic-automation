@@ -1,30 +1,30 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { useVideoConfig } from "remotion";
-import { getGlobalBBox } from "../../../../../lib/d3/utils/math"; 
-import { ChangeEffect, sanitizeName } from "../../helpers"; // Assuming sanitizeName is defined in helpers
+import { getGlobalBBox } from "../../../../../lib/d3/utils/math";
+import { ChangeEffect as ChangeEffectType, sanitizeName } from "../../helpers"; // Renamed import to avoid conflict
 
 interface ChangeEffectProps {
-    effect: ChangeEffect;
+    effect: ChangeEffectType;
     getSvgEl: (id: string) => SVGElement | null;
     svgRef: RefObject<SVGSVGElement>;
     frame: number;
-    removeEffect: (effect: ChangeEffect) => void;
-    getValue: () => number; // Function to get current numeric value
+    removeEffect: (effect: ChangeEffectType) => void;
+    getValue: () => number; // Function to get current percentage change value (e.g., 10 for +10%)
 }
 
 // --- Triangle & Text Parameters ---
-const TRIANGLE_SIZE = 12;        // Size of the triangle (equilateral)
-const TEXT_OFFSET_X = 8;         // Gap between text and triangle
-const ELEMENT_OFFSET_X = 20;     // Gap between target and indicator
-const FONT_SIZE = 14;
-const FONT_FAMILY = "Arial, sans-serif";
+const TRIANGLE_SIZE = 22;
+const TEXT_OFFSET_X = 24;
+const ELEMENT_OFFSET_X = 20;
+const FONT_SIZE = 24;
+const FONT_FAMILY = "monospace";
 
 // --- Colors ---
-const COLOR_UP = "#00C851";      // Green for positive change
-const COLOR_DOWN = "#FF4444";    // Red for negative change
+const COLOR_UP = "#00C851";
+const COLOR_DOWN = "#FF4444";
 
 // --- Oscillation Parameters ---
-const OSCILLATION_FREQUENCY = 2.0; // Oscillations per second (Hz)
+const OSCILLATION_FREQUENCY = 2.0;
 const MIN_OPACITY = 0.6;
 const MAX_OPACITY = 1.0;
 
@@ -32,7 +32,7 @@ const MAX_OPACITY = 1.0;
 const FADE_IN_DURATION_SEC: number = 0.2;
 const FADE_OUT_DURATION_SEC: number = 0.3;
 
-const ChangeEffect: React.FC<ChangeEffectProps> = ({
+const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component to avoid conflict with type
     effect,
     getSvgEl,
     svgRef,
@@ -41,15 +41,15 @@ const ChangeEffect: React.FC<ChangeEffectProps> = ({
     getValue,
 }) => {
     const [frame0, setFrame0] = useState<number | null>(null);
-    const [previousValue, setPreviousValue] = useState<number | null>(null);
+    // No longer need previousValue state
     const { fps } = useVideoConfig();
-    
+
     const groupRef = useRef<SVGGElement | null>(null);
     const triangleRef = useRef<SVGPolygonElement | null>(null);
     const textRef = useRef<SVGTextElement | null>(null);
-    
+
     const groupId = useMemo(() => `percent-change-effect-${sanitizeName(effect.target)}`, [effect.target]);
-    
+
     const targetElement = useMemo(() => {
         const targetElId = `points-${sanitizeName(effect.target)}`;
         return getSvgEl(targetElId);
@@ -57,7 +57,7 @@ const ChangeEffect: React.FC<ChangeEffectProps> = ({
 
     // Effect setup: Set initial frame and cleanup
     useEffect(() => {
-        setFrame0(frame);
+        setFrame0(frame); // Set the initial frame when the effect starts
 
         return () => {
             if (groupRef.current && svgRef.current) {
@@ -75,34 +75,31 @@ const ChangeEffect: React.FC<ChangeEffectProps> = ({
 
         const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         group.setAttribute("id", groupId);
-        
-        // Create triangle (initially pointing up)
+
         const triangle = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-        // Equilateral triangle pointing up, centered at origin
         const height = (TRIANGLE_SIZE * Math.sqrt(3)) / 2;
-        const upTrianglePoints = `0,${-height/2} ${-TRIANGLE_SIZE/2},${height/2} ${TRIANGLE_SIZE/2},${height/2}`;
+        const upTrianglePoints = `0,${-height / 2} ${-TRIANGLE_SIZE / 2},${height / 2} ${TRIANGLE_SIZE / 2},${height / 2}`;
         triangle.setAttribute("points", upTrianglePoints);
-        triangle.setAttribute("fill", COLOR_UP);
-        
-        // Create text element
+        triangle.setAttribute("fill", COLOR_UP); // Default color
+
         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         text.setAttribute("font-family", FONT_FAMILY);
         text.setAttribute("font-size", FONT_SIZE.toString());
         text.setAttribute("font-weight", "bold");
-        text.setAttribute("text-anchor", "end"); // Right-align text to triangle
+        text.setAttribute("text-anchor", "end");
         text.setAttribute("dominant-baseline", "central");
-        text.setAttribute("fill", COLOR_UP);
-        text.textContent = "0.00%";
-        
+        text.setAttribute("fill", COLOR_UP); // Default color
+        text.textContent = "+0.00%"; // Default text
+
         group.appendChild(text);
         group.appendChild(triangle);
         svgRef.current.appendChild(group);
-        
+
         groupRef.current = group;
         triangleRef.current = triangle;
         textRef.current = text;
 
-    }, [svgRef, groupId]);
+    }, [svgRef, groupId]); // Runs when svgRef or groupId changes
 
     // Animation loop
     useEffect(() => {
@@ -111,68 +108,66 @@ const ChangeEffect: React.FC<ChangeEffectProps> = ({
         }
 
         if (!targetElement) {
-            // Hide if target disappears mid-effect
-            groupRef.current.setAttribute("opacity", "0");
+            groupRef.current.setAttribute("opacity", "0"); // Hide if target is gone
             return;
         }
 
         const currentTime = (frame - frame0) / fps;
 
-        if (currentTime > effect.duration && effect.duration >= 0) {
+        if (effect.duration >= 0 && currentTime > effect.duration) {
             removeEffect(effect);
             return;
         }
-        
-        const currentValue = getValue();
-        
-        // Calculate percent change
-        let percentChange = 0;
-        let isPositive = true;
-        
-        if (previousValue !== null && previousValue !== 0) {
-            percentChange = ((currentValue - previousValue) / Math.abs(previousValue)) * 100;
-            isPositive = percentChange >= 0;
-        }
-        
-        // Update previous value for next frame
-        setPreviousValue(currentValue);
-        
-        // Skip display for first frame if no previous value
-        if (previousValue === null) {
-            groupRef.current.setAttribute("opacity", "0");
-            return;
-        }
+
+        // getValue() now directly returns the percentage change
+        const percentChange = getValue();
+        const isPositive = percentChange >= 0;
+
+        // If frame0 is the current frame, it means this is the very first render tick
+        // for this effect's animation. We might want to ensure getValue() has a meaningful
+        // value from the start or handle an initial "no change" state if getValue() isn't ready.
+        // For simplicity, we assume getValue() is always ready.
 
         const targetBox = getGlobalBBox(targetElement as SVGGraphicsElement);
 
-        // --- Positioning ---
-        const baseTranslateX = targetBox.x - ELEMENT_OFFSET_X;
-        const translateY = targetBox.y + targetBox.height / 2;
-
         // --- Update triangle shape and color ---
-        const height = (TRIANGLE_SIZE * Math.sqrt(3)) / 2;
+        const triangleHeight = (TRIANGLE_SIZE * Math.sqrt(3)) / 2;
         const color = isPositive ? COLOR_UP : COLOR_DOWN;
-        
+
         if (isPositive) {
-            // Up triangle
-            const upTrianglePoints = `0,${-height/2} ${-TRIANGLE_SIZE/2},${height/2} ${TRIANGLE_SIZE/2},${height/2}`;
+            const upTrianglePoints = `0,${-triangleHeight / 2} ${-TRIANGLE_SIZE / 2},${triangleHeight / 2} ${TRIANGLE_SIZE / 2},${triangleHeight / 2}`;
             triangleRef.current.setAttribute("points", upTrianglePoints);
         } else {
-            // Down triangle (inverted)
-            const downTrianglePoints = `0,${height/2} ${-TRIANGLE_SIZE/2},${-height/2} ${TRIANGLE_SIZE/2},${-height/2}`;
+            const downTrianglePoints = `0,${triangleHeight / 2} ${-TRIANGLE_SIZE / 2},${-triangleHeight / 2} ${TRIANGLE_SIZE / 2},${-triangleHeight / 2}`;
             triangleRef.current.setAttribute("points", downTrianglePoints);
         }
-        
         triangleRef.current.setAttribute("fill", color);
-        
+
         // --- Update text ---
-        const percentText = `${isPositive ? '+' : ''}${percentChange.toFixed(2)}%`;
+        let percentText: string;
+        if (percentChange === Infinity) {
+            percentText = "+Inf%";
+        } else if (percentChange === -Infinity) {
+            percentText = "-Inf%";
+        } else if (isNaN(percentChange)) {
+            percentText = "N/A"; // Or handle as 0% or hide
+        } else {
+            percentText = `${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%`;
+        }
         textRef.current.textContent = percentText;
         textRef.current.setAttribute("fill", color);
-        
-        // Position text to the left of triangle
+
+        // Position text to the left of triangle (relative to group origin)
         textRef.current.setAttribute("x", (-TEXT_OFFSET_X).toString());
         textRef.current.setAttribute("y", "0");
+
+        // --- Positioning ---
+        const actualTextWidth = textRef.current.getBBox().width;
+        const groupTranslateX = targetBox.x + targetBox.width +
+            ELEMENT_OFFSET_X +
+            actualTextWidth +
+            TEXT_OFFSET_X;
+        const groupTranslateY = targetBox.y + targetBox.height / 2;
 
         // --- Opacity Oscillation ---
         const oscillationCycle = Math.sin(OSCILLATION_FREQUENCY * 2 * Math.PI * currentTime);
@@ -188,24 +183,22 @@ const ChangeEffect: React.FC<ChangeEffectProps> = ({
         if (effect.duration >= 0 && FADE_OUT_DURATION_SEC > 0 && currentTime > effect.duration - FADE_OUT_DURATION_SEC) {
             fadeOutProgress = Math.max(0, (effect.duration - currentTime) / FADE_OUT_DURATION_SEC);
         }
-        
         const finalOpacity = Math.max(0, Math.min(fadeInProgress, fadeOutProgress)) * oscillatingOpacity;
 
-        // Apply transformations and style
-        groupRef.current.setAttribute("transform", `translate(${baseTranslateX}, ${translateY})`);
+        groupRef.current.setAttribute("transform", `translate(${groupTranslateX}, ${groupTranslateY})`);
         groupRef.current.setAttribute("opacity", finalOpacity.toString());
 
     }, [
-        frame, 
-        frame0, 
-        fps, 
-        targetElement, 
+        frame,
+        frame0,
+        fps,
+        effect,
+        targetElement,
         removeEffect,
-        getValue,
-        previousValue
+        // previousValue is removed
     ]);
 
-    return <></>;
+    return <></>; // The component renders SVG elements imperatively
 };
 
-export default ChangeEffect;
+export default ChangeEffectDisplay; // Export with the new name
