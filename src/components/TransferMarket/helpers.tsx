@@ -26,7 +26,11 @@ export type SurgeEffect = {
 }
 export type LottieEffect = {
     type: "lottie";
+    anim: string;
     target: string;
+    targetEl?: string;
+    offsetX?: number;
+    offsetY?: number;
     duration: number;
 }
 export type ArrowEffect = {

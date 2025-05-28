@@ -5,10 +5,6 @@ import lottie, { AnimationItem } from "lottie-web"; // Import lottie-web for ani
 import anims from "./anims/index"
 const {rocket} = anims; // Import your Lottie animation JSON file
 import { LottieEffect, sanitizeName } from "../../../../../components/TransferMarket/helpers";
-// Assuming sanitizeName helper function is available
-// If `ArrowEffect` is a specific type, you might want a more generic `LottieEffect` or `LottieEffect` type.
-// For this example, let's define a generic `LottieEffect` interface that includes common properties.
-
 
 interface LottieEffectProps {
     effect: LottieEffect;
