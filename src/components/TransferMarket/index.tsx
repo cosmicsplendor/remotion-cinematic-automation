@@ -149,7 +149,6 @@ export const TransferMarket: React.FC = () => {
     const { data } = currentData;
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
     chart(prevData, data, easingFn(progress));
-    console.log(`[${frame}] from parent`)
   }, [frame]);
   return (
     <AbsoluteFill
