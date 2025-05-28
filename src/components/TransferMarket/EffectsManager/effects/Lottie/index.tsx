@@ -2,7 +2,8 @@ import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { useVideoConfig } from "remotion";
 import { getGlobalBBox } from "../../../../../../lib/d3/utils/math";
 import lottie, { AnimationItem } from "lottie-web"; // Import lottie-web for animation playback
-import rocket from "./rocket.json"; // Import your Lottie animation JSON file
+import anims from "./anims/index"
+const {rocket} = anims; // Import your Lottie animation JSON file
 import { LottieEffect, sanitizeName } from "../../../../../components/TransferMarket/helpers";
 // Assuming sanitizeName helper function is available
 // If `ArrowEffect` is a specific type, you might want a more generic `LottieEffect` or `LottieEffect` type.
