@@ -9,7 +9,7 @@ interface ChangeEffectProps {
     svgRef: RefObject<SVGSVGElement>;
     frame: number;
     removeEffect: (effect: ChangeEffectType) => void;
-    getValue: (progress: number) => number; // Function to get current percentage change value (e.g., 10 for +10%)
+    getValue: (initialData: Datum[], progress: number) => number; // Function to get current percentage change value (e.g., 10 for +10%)
     prevData: Datum[],
     progress: number
 }
@@ -46,7 +46,7 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
 }) => {
     const [frame0] = useState<number | null>(frame);
     // No longer need previousValue state
-    const accPercentChangeRef = useRef<number>(0); // Store previous percentage changes if needed, but not used in this effect
+    const [initialData] = useState<Datum[]>(prevData);
 
     const { fps } = useVideoConfig();
     const groupRef = useRef<SVGGElement | null>(null);
@@ -60,9 +60,7 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
         return getSvgEl(targetElId);
     }, [getSvgEl, effect.target]);
 
-    useEffect(() => {
-        accPercentChangeRef.current += getValue(1)
-    }, [prevData])
+   
     // Effect setup: Set initial frame and cleanup
     useEffect(() => {
         return () => {
@@ -124,8 +122,8 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
             removeEffect(effect);
             return;
         }
-        const curPercentChange = getValue(progress)
-        const percentChange = curPercentChange + accPercentChangeRef.current
+        const curPercentChange = getValue(initialData, currentTime/effect.duration)
+        const percentChange = curPercentChange
         // getValue() now directly returns the percentage change
         const isPositive = percentChange >= 0;
 

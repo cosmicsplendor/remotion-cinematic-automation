@@ -94,8 +94,8 @@ const EffectsManager: React.FC<{
         setManagedEffects(prevEffects => prevEffects.filter(me => me.id !== effectId));
     }, []);
 
-    const getChange = (target: string, currentEffectProgress = 1) => {
-        const prevVal = prevData.find(d => d.name === target)?.marketCap || 0;
+    const getChange = (target: string, initialData: Datum[], currentEffectProgress = 1) => {
+        const prevVal = initialData.find(d => d.name === target)?.marketCap || 0;
         const curTarget = data.data.find(d => d.name === target);
         const { easing = DEFAULT_EASING } = data; // Easing from the main Frame data
 
@@ -147,7 +147,7 @@ const EffectsManager: React.FC<{
                     return (
                         <ChangeEffect
                             {...commonEffectProps}
-                            getValue={(p: number) => getChange(sourceEffect.target!, p)}
+                            getValue={(initialData: Datum[], p: number) => getChange(sourceEffect.target!, initialData, p)}
                             prevData={prevData}
                             progress={progress} // Overall scene/frame progress for easing
                         />
