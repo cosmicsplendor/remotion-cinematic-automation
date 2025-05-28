@@ -3,7 +3,6 @@ import { useVideoConfig } from "remotion";
 import { getGlobalBBox } from "../../../../../../lib/d3/utils/math";
 import lottie, { AnimationItem } from "lottie-web"; // Import lottie-web for animation playback
 import anims from "./anims/index"
-const {rocket} = anims; // Import your Lottie animation JSON file
 import { LottieEffect, sanitizeName } from "../../../../../components/TransferMarket/helpers";
 
 interface LottieEffectProps {
@@ -23,6 +22,10 @@ const LOTTIE_OFFSET_X = 20;          // Gap between target and Lottie container'
 // --- Fade Parameters ---
 const FADE_IN_DURATION_SEC: number = 0.2;
 const FADE_OUT_DURATION_SEC: number = 0.3;
+
+function isAnimationKey(key: string, anims: object): key is keyof typeof anims {
+    return key in anims;
+}
 
 const LottieEffect: React.FC<LottieEffectProps> = ({
     effect,
@@ -93,15 +96,13 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
         groupRef.current = group;
 
         // Initialize Lottie once the div is in the DOM tree
-        if (lottieContainerRef.current) {
+        if (lottieContainerRef.current && isAnimationKey(effect.anim, anims)) {
             lottieInstanceRef.current = lottie.loadAnimation({
                 container: lottieContainerRef.current, // The DOM element where Lottie renders
                 renderer: 'svg',     // Important: Lottie will render its own SVG content here
                 loop: false,         // We control playback manually
                 autoplay: false,     // We control playback manually
-                animationData: rocket  // Path to your Lottie animation JSON file
-                // Alternatively, you could import the JSON directly and use `animationData`:
-                // animationData: require('./anim.json'),
+                animationData: anims[effect.anim] as any  // Path to your Lottie animation JSON file
             });
         }
 
