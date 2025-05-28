@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { LoadingEffect, sanitizeName } from "../../helpers";
 // getGlobalBBox is crucial for positioning relative to the target element.
-import { getGlobalBBox } from "../../../../../lib/d3/utils/math";
+import { easingFns, getGlobalBBox } from "../../../../../lib/d3/utils/math";
 import { useVideoConfig } from "remotion";
 
 // --- Constants for LoadingEffect ---
@@ -14,12 +14,7 @@ const STAR_GLOW_COLOR = '#FFD700'; // Gold/Yellow for the star's glow
 const STAR_SIZE_FACTOR = 0.5; // Star size relative to target bar height (e.g., 50% of bar height)
 const GLOW_OSCILLATION_RANGE = [2, 8]; // Min and max stdDeviation for glow blur
 const GLOW_OSCILLATION_SPEED = Math.PI * 2; // Speed of glow pulsation (1 cycle per second)
-const BORDER_RADIUS_FACTOR = 0.5; // To make ends fully rounded (50% of height)
-
-// Easing function for smooth in-out sine
-const easeInOutSine = (t: number): number => {
-    return -(Math.cos(Math.PI * t) - 1) / 2;
-};
+const BORDER_RADIUS_FACTOR = 0; // To make ends fully rounded (50% of height)
 
 // Helper to generate points for a rhombus/4-point star
 const getRhombusPoints = (cx: number, cy: number, width: number, height: number): string => {
@@ -200,7 +195,7 @@ const LoadingEffect: React.FC<{
         const targetBox = getGlobalBBox(targetEl as SVGGraphicsElement);
 
         // Calculate animation progress with easing for smoother start/end
-        const progress = easeInOutSine(t / effect.duration);
+        const progress = easingFns.sineInOut(t / effect.duration);
 
         // --- Animate Loading Bar ---
         const currentWidth = targetBox.width * progress;
