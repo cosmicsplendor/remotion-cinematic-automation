@@ -218,7 +218,7 @@
   },
   {
     "weekStart": "2016-01-29T00:00:00.000Z",
-    "effect": [{"type": "loading","duration":2,"target":"Ethereum"}],
+    "effects": [{"type": "loading","duration":1.5,"target":"Ethereum","bursts":1,"dist":"space-between","delay":0}],
     "data": [
       {
         "name": "Bitcoin",

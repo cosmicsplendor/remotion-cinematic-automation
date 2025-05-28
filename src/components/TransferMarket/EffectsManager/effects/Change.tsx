@@ -44,7 +44,7 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
     prevData,
     progress
 }) => {
-    const [frame0, setFrame0] = useState<number | null>(null);
+    const [frame0] = useState<number | null>(frame);
     // No longer need previousValue state
     const accPercentChangeRef = useRef<number>(0); // Store previous percentage changes if needed, but not used in this effect
 
@@ -65,8 +65,6 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
     }, [prevData])
     // Effect setup: Set initial frame and cleanup
     useEffect(() => {
-        setFrame0(frame); // Set the initial frame when the effect starts
-
         return () => {
             if (groupRef.current && svgRef.current) {
                 svgRef.current.removeChild(groupRef.current);
@@ -130,11 +128,6 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
         const percentChange = curPercentChange + accPercentChangeRef.current
         // getValue() now directly returns the percentage change
         const isPositive = percentChange >= 0;
-
-        // If frame0 is the current frame, it means this is the very first render tick
-        // for this effect's animation. We might want to ensure getValue() has a meaningful
-        // value from the start or handle an initial "no change" state if getValue() isn't ready.
-        // For simplicity, we assume getValue() is always ready.
 
         const targetBox = getGlobalBBox(targetElement as SVGGraphicsElement);
 

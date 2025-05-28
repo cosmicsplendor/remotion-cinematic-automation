@@ -151,7 +151,7 @@ const Effect: React.FC<{
 
         const t = (frame - frame0) / fps;
 
-        if (t > effect.duration + BURST_LIFESPAN) {
+        if (t > effect.duration) {
             removeEffect(effect);
             return;
         }
