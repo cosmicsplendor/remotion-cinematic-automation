@@ -45,9 +45,10 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
     const groupId = useMemo(() => `lottie-effect-${sanitizeName(effect.target)}`, [effect.target]);
 
     const targetElement = useMemo(() => {
-        const targetElId = `points-${sanitizeName(effect.target)}`;
+        const targetEl = effect.targetEl || "points"; // Default to "points" if not specified
+        const targetElId = `${targetEl}-${sanitizeName(effect.target)}`;
         return getSvgEl(targetElId);
-    }, [getSvgEl, effect.target, sanitizeName]);
+    }, [effect.targetEl, effect.target]);
 
     // LottieEffect setup: Set initial frame and cleanup
     useEffect(() => {
@@ -71,6 +72,7 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
     }, []); // Runs once on mount and cleans up on unmount
 
     // SVG foreignObject and Lottie initialization
+    // In the SVG foreignObject and Lottie initialization useEffect:
     useEffect(() => {
         if (!svgRef.current) return;
 
@@ -78,14 +80,34 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
         group.setAttribute("id", groupId);
 
         const foreignObject = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-        // Set fixed width and height for the foreignObject
         foreignObject.setAttribute("width", LOTTIE_CONTAINER_WIDTH.toString());
         foreignObject.setAttribute("height", LOTTIE_CONTAINER_HEIGHT.toString());
+
+        // Set initial position if target element is available
+        if (targetElement) {
+            const targetBox = getGlobalBBox(targetElement as SVGGraphicsElement);
+            let translateX = targetBox.x + targetBox.width + LOTTIE_OFFSET_X;
+            let translateY = targetBox.y + targetBox.height / 2 - LOTTIE_CONTAINER_HEIGHT / 2;
+
+            if (typeof effect.offsetX === 'number') {
+                translateX += effect.offsetX;
+            }
+            if (typeof effect.offsetY === 'number') {
+                translateY += effect.offsetY;
+            }
+
+            group.setAttribute("transform", `translate(${translateX}, ${translateY})`);
+            group.setAttribute("opacity", "0"); // Start hidden, will fade in
+        } else {
+            // If no target element, start hidden and positioned off-screen
+            group.setAttribute("transform", "translate(-1000, -1000)");
+            group.setAttribute("opacity", "0");
+        }
+
         foreignObjectRef.current = foreignObject;
 
-        // Inside foreignObject, we need an HTML div for Lottie to render into
         const lottieDiv = document.createElement("div");
-        lottieDiv.style.width = "100%"; // Ensure div fills the foreignObject
+        lottieDiv.style.width = "100%";
         lottieDiv.style.height = "100%";
         lottieContainerRef.current = lottieDiv;
 
@@ -95,18 +117,18 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
 
         groupRef.current = group;
 
-        // Initialize Lottie once the div is in the DOM tree
+        // Initialize Lottie
         if (lottieContainerRef.current && isAnimationKey(effect.anim, anims)) {
             lottieInstanceRef.current = lottie.loadAnimation({
-                container: lottieContainerRef.current, // The DOM element where Lottie renders
-                renderer: 'svg',     // Important: Lottie will render its own SVG content here
-                loop: false,         // We control playback manually
-                autoplay: false,     // We control playback manually
-                animationData: anims[effect.anim] as any  // Path to your Lottie animation JSON file
+                container: lottieContainerRef.current,
+                renderer: 'svg',
+                loop: false,
+                autoplay: false,
+                animationData: anims[effect.anim] as any
             });
         }
 
-    }, [svgRef, groupId]); // Dependencies for creating SVG elements and initializing Lottie
+    }, [svgRef, groupId, targetElement]); // Dependencies for creating SVG elements and initializing Lottie
 
     // Animation loop (positioning, Lottie frame control, fading)
     useEffect(() => {
@@ -147,8 +169,6 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
             translateY += effect.offsetY;
         }
 
-        // --- Lottie Animation Frame Control ---
-        // Calculate progress from 0 to 1 over the effect's duration
         const lottieProgress = effect.duration > 0 ? Math.min(1, currentTime / effect.duration) : 0;
         // Map progress to Lottie's total frames
         const lottieFrame = lottieProgress * lottieInstance.totalFrames;

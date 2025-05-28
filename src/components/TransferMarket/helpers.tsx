@@ -28,7 +28,7 @@ export type LottieEffect = {
     type: "lottie";
     anim: string;
     target: string;
-    targetEl?: string;
+    targetEl?: "bar" | "points" | "logo";
     offsetX?: number;
     offsetY?: number;
     duration: number;

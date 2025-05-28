@@ -218,7 +218,7 @@
   },
   {
     "weekStart": "2016-01-29T00:00:00.000Z",
-    "effects": [{"type":"lottie","duration":3, "target": "XRP"}],
+    "effects": [{"type":"lottie","duration":3,"anim": "rocket","target": "XRP"}],
     "data": [
       {
         "name": "Bitcoin",
