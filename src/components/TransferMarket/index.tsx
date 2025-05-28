@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo, useState } from 'react';
+import { useEffect, useRef, useMemo, useState, useLayoutEffect } from 'react';
 import {
   AbsoluteFill,
   useCurrentFrame,
@@ -141,7 +141,7 @@ export const TransferMarket: React.FC = () => {
     chartRef.current = barChart;
   }, [svgRef, containerRef, flattenedData, width, height]); 
   const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!chartRef.current || !currentData) {
       return;
     }
@@ -149,6 +149,7 @@ export const TransferMarket: React.FC = () => {
     const { data } = currentData;
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
     chart(prevData, data, easingFn(progress));
+    console.log(`[${frame}] from parent`)
   }, [frame]);
   return (
     <AbsoluteFill

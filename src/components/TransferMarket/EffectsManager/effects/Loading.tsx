@@ -1,25 +1,33 @@
 import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { LoadingEffect, sanitizeName } from "../../helpers";
-// getGlobalBBox is crucial for positioning relative to the target element.
 import { easingFns, getGlobalBBox } from "../../../../../lib/d3/utils/math";
 import { useVideoConfig } from "remotion";
 
-// --- Constants for LoadingEffect ---
 // Colors inspired by the Duolingo streak screenshot.
 const LOADING_BAR_COLOR_START = '#F79D00'; // Darker orange for the start of the gradient
 const LOADING_BAR_COLOR_END = '#FFCE00';   // Brighter yellow for the end of the gradient
 const STAR_COLOR = '#FFFFFF'; // White for the star itself
-const STAR_GLOW_COLOR = '#FFD700'; // Gold/Yellow for the star's glow
+const STAR_GLOW_COLOR = '#ffffff'; // Gold/Yellow for the star's glow
 
-const STAR_SIZE_FACTOR = 0.5; // Star size relative to target bar height (e.g., 50% of bar height)
-const GLOW_OSCILLATION_RANGE = [2, 8]; // Min and max stdDeviation for glow blur
+const STAR_SIZE_FACTOR = 0.65; // Star size relative to target bar height (e.g., 50% of bar height)
+const GLOW_OSCILLATION_RANGE = [8, 18]; // Min and max stdDeviation for glow blur
 const GLOW_OSCILLATION_SPEED = Math.PI * 2; // Speed of glow pulsation (1 cycle per second)
 const BORDER_RADIUS_FACTOR = 0; // To make ends fully rounded (50% of height)
+const POSITION_PADDING = 1; // Pixels to extend bounds for better alignment
 
-// Helper to generate points for a rhombus/4-point star
-const getRhombusPoints = (cx: number, cy: number, width: number, height: number): string => {
-    // Points are defined clockwise: top, right, bottom, left
-    return `${cx},${cy - height / 2} ${cx + width / 2},${cy} ${cx},${cy + height / 2} ${cx - width / 2},${cy}`;
+// Helper to generate curved rhombus path with inward-curving sides
+const getCurvedRhombusPath = (cx: number, cy: number, width: number, height: number): string => {
+    const hw = width / 2;
+    const hh = height / 2;
+
+    // For inward curves, we need control points that pull the sides inward
+    const curveDepth = Math.min(hw, hh) * 0.3; // How much to curve inward
+
+    return `M ${cx},${cy - hh} 
+            Q ${cx + hw - curveDepth},${cy} ${cx + hw},${cy}
+            Q ${cx + hw - curveDepth},${cy} ${cx},${cy + hh}
+            Q ${cx - hw + curveDepth},${cy} ${cx - hw},${cy}
+            Q ${cx - hw + curveDepth},${cy} ${cx},${cy - hh} Z`;
 };
 
 // --- Component Definition ---
@@ -36,7 +44,8 @@ const LoadingEffect: React.FC<{
     // Refs for the SVG elements we will create and manipulate
     const groupElRef = useRef<SVGGElement | null>(null);
     const loadingRectRef = useRef<SVGRectElement | null>(null);
-    const starPolyRef = useRef<SVGPolygonElement | null>(null);
+    const starPathRef = useRef<SVGPathElement | null>(null);
+    const trailLineRef = useRef<SVGLineElement | null>(null);
     const defsCreatedRef = useRef<boolean>(false); // To ensure SVG defs are created only once
 
     // Memoize target name and group ID for stability
@@ -128,11 +137,38 @@ const LoadingEffect: React.FC<{
             defs.appendChild(linearGradient);
         }
 
+        // 3. Motion blur filter for the trail line
+        if (!defs.querySelector('#trail-line-gradient')) {
+            const trailGradient = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+            trailGradient.setAttribute('id', 'trail-line-gradient');
+            trailGradient.setAttribute('gradientUnits', 'userSpaceOnUse');
+            trailGradient.setAttribute('x1', '0%');
+            trailGradient.setAttribute('y1', '0%');
+            trailGradient.setAttribute('x2', '100%');
+            trailGradient.setAttribute('y2', '0%');
+
+            const stop0 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            stop0.setAttribute('offset', '0%');
+            stop0.setAttribute('stop-color', LOADING_BAR_COLOR_END);
+            stop0.setAttribute('stop-opacity', '0');
+
+            const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            stop1.setAttribute('offset', '50%');
+            stop1.setAttribute('stop-color', '#FFFFFF');
+            stop1.setAttribute('stop-opacity', '1');
+
+            const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            stop2.setAttribute('offset', '100%');
+            stop2.setAttribute('stop-color', '#FFFFFF');
+            stop2.setAttribute('stop-opacity', '1');
+
+            trailGradient.append(stop0, stop1, stop2);
+            defs.appendChild(trailGradient);
+        }
+
         defsCreatedRef.current = true;
     };
 
-    // --- Lifecycle: Mount/Unmount ---
-    // Sets the starting frame and handles cleanup when the component unmounts.
     useEffect(() => {
         setFrame0(frame);
         return () => {
@@ -143,8 +179,7 @@ const LoadingEffect: React.FC<{
         };
     }, []);
 
-    // --- Lifecycle: Initial SVG Element Creation ---
-    // Creates the SVG group, the loading rectangle, and the star polygon.
+    // Creates the SVG group, the loading rectangle, the star path, and the trail line.
     useEffect(() => {
         if (!svgRef.current) return;
 
@@ -164,81 +199,106 @@ const LoadingEffect: React.FC<{
         group.appendChild(loadingRect);
         loadingRectRef.current = loadingRect; // Store reference
 
-        // Create the star shape (rhombus)
-        const starPoly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-        starPoly.setAttribute('fill', STAR_COLOR); // White star color
-        starPoly.setAttribute('filter', 'url(#loading-star-glow-filter)'); // Apply the glow filter
-        starPoly.setAttribute('opacity', '0'); // Start hidden, fade in
-        group.appendChild(starPoly);
-        starPolyRef.current = starPoly; // Store reference
+        // Create the trail line (appears behind the star)
+        const trailLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        trailLine.setAttribute('stroke', 'url(#trail-line-gradient)');
+        trailLine.setAttribute('stroke-width', '10'); // Make it thicker to be more visible
+        trailLine.setAttribute('opacity', '0'); // Start hidden
+        trailLine.setAttribute('stroke-linecap', 'round'); // Rounded line ends
+        group.appendChild(trailLine);
+        trailLineRef.current = trailLine;
+
+        // Create the star shape (curved rhombus using path)
+        const starPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        starPath.setAttribute('fill', STAR_COLOR); // White star color
+        starPath.setAttribute('filter', 'url(#loading-star-glow-filter)'); // Apply the glow filter
+        starPath.setAttribute('opacity', '0'); // Start hidden, fade in
+        group.appendChild(starPath);
+        starPathRef.current = starPath; // Store reference
 
     }, [svgRef.current, groupId]); // Re-run if SVG ref or group ID changes
 
-    // --- Animation Loop ---
-    // Updates the position, size, and appearance of the loading bar and star every frame.
+    // Updates the position, size, and appearance of the loading bar, star, and trail every frame.
     useEffect(() => {
         // Ensure all necessary elements and data are available
-        if (!groupElRef.current || !targetEl || frame0 === null || !loadingRectRef.current || !starPolyRef.current) {
-            return;
-        }
-
-        // Calculate elapsed time (t) in seconds
-        const t = (frame - frame0) / fps;
-
-        // Remove the effect if its duration is over
-        if (t > effect.duration) {
-            removeEffect(effect);
-            return;
-        }
-
-        // Get the bounding box of the target SVG element (the black bar)
-        const targetBox = getGlobalBBox(targetEl as SVGGraphicsElement);
-
-        // Calculate animation progress with easing for smoother start/end
-        const progress = easingFns.sineInOut(t / effect.duration);
-
-        // --- Animate Loading Bar ---
-        const currentWidth = targetBox.width * progress;
-        // Fade in the loading bar and star during the initial phase
-        const currentOpacity = Math.min(1, progress * 2); // Fades in over the first 50% of duration
-        const borderRadius = targetBox.height * BORDER_RADIUS_FACTOR; // Dynamic rounding based on height
-
-        loadingRectRef.current.setAttribute('x', targetBox.x.toString());
-        loadingRectRef.current.setAttribute('y', targetBox.y.toString());
-        loadingRectRef.current.setAttribute('width', currentWidth.toString());
-        loadingRectRef.current.setAttribute('height', targetBox.height.toString());
-        loadingRectRef.current.setAttribute('rx', borderRadius.toString()); // Apply rounded corners
-        loadingRectRef.current.setAttribute('ry', borderRadius.toString());
-        loadingRectRef.current.setAttribute('opacity', currentOpacity.toString());
-
-        // --- Animate Star ---
-        // The star is positioned at the leading edge of the loading bar
-        const starX = targetBox.x + currentWidth;
-        const starY = targetBox.y + targetBox.height / 2; // Vertically centered on the bar
-        const starWidth = targetBox.height * STAR_SIZE_FACTOR;
-        const starHeight = targetBox.height * STAR_SIZE_FACTOR;
-
-        starPolyRef.current.setAttribute('points', getRhombusPoints(starX, starY, starWidth, starHeight));
-        starPolyRef.current.setAttribute('opacity', currentOpacity.toString());
-
-        // --- Animate Star Glow Oscillation ---
-        const glowFilter = groupElRef.current.querySelector('#loading-star-glow-filter') as SVGFilterElement;
-        if (glowFilter) {
-            // Find the feGaussianBlur element within the filter
-            const feGaussianBlur = glowFilter.querySelector('feGaussianBlur') as SVGFEGaussianBlurElement;
-            if (feGaussianBlur) {
-                // Calculate oscillating stdDeviation using sine wave
-                const glowAmplitude = (GLOW_OSCILLATION_RANGE[1] - GLOW_OSCILLATION_RANGE[0]) / 2;
-                const glowOffset = GLOW_OSCILLATION_RANGE[0] + glowAmplitude;
-                const stdDeviation = glowOffset + glowAmplitude * Math.sin(t * GLOW_OSCILLATION_SPEED);
-                feGaussianBlur.setAttribute('stdDeviation', stdDeviation.toString());
+        setTimeout(() => {
+            if (!groupElRef.current || !targetEl || frame0 === null || !loadingRectRef.current || !starPathRef.current || !trailLineRef.current) {
+                return;
             }
-        }
+
+            // Calculate elapsed time (t) in seconds
+            const t = (frame - frame0) / fps;
+
+            // Remove the effect if its duration is over
+            if (t > effect.duration) {
+                removeEffect(effect);
+                return;
+            }
+
+            // Get the bounding box of the target SVG element (the black bar)
+            const targetBox = getGlobalBBox(targetEl as SVGGraphicsElement);
+
+            // Calculate animation progress with easing for smoother start/end
+            const progress = easingFns.sineInOut(t / effect.duration);
+
+            // --- Animate Loading Bar ---
+            const currentWidth = targetBox.width * progress;
+            // Fade in the loading bar, star, and trail during the initial phase
+            const currentOpacity = Math.min(1, progress * 2); // Fades in over the first 50% of duration
+            const borderRadius = targetBox.height * BORDER_RADIUS_FACTOR; // Dynamic rounding based on height
+
+            // Apply position padding for better alignment during movement
+            loadingRectRef.current.setAttribute('x', (targetBox.x - POSITION_PADDING).toString());
+            loadingRectRef.current.setAttribute('y', (targetBox.y - POSITION_PADDING).toString());
+            loadingRectRef.current.setAttribute('width', (currentWidth + POSITION_PADDING * 2).toString());
+            loadingRectRef.current.setAttribute('height', (targetBox.height + POSITION_PADDING * 2).toString());
+            loadingRectRef.current.setAttribute('rx', borderRadius.toString()); // Apply rounded corners
+            loadingRectRef.current.setAttribute('ry', borderRadius.toString());
+            loadingRectRef.current.setAttribute('opacity', currentOpacity.toString());
+
+            // --- Animate Star ---
+            // The star is positioned at the leading edge of the loading bar
+            const starX = targetBox.x + currentWidth;
+            const starY = targetBox.y + targetBox.height / 2; // Vertically centered on the bar
+            const starWidth = targetBox.height * STAR_SIZE_FACTOR;
+            const starHeight = targetBox.height * STAR_SIZE_FACTOR;
+
+            starPathRef.current.setAttribute('d', getCurvedRhombusPath(starX, starY, starWidth, starHeight));
+            starPathRef.current.setAttribute('opacity', currentOpacity.toString());
+
+            // --- Animate Trail Line ---
+            const trailLength = Math.min(currentWidth * 0.4, 100); // Longer trail (40% of progress or max 30px)
+            const trailOpacity = currentOpacity * 0.3; // More visible trail
+
+            // Only show trail if there's meaningful progress
+            if (currentWidth > 10) {
+                console.log("HERE")
+                trailLineRef.current.setAttribute('x1', (starX - trailLength).toString());
+                trailLineRef.current.setAttribute('y1', starY.toString());
+                trailLineRef.current.setAttribute('x2', starX.toString());
+                trailLineRef.current.setAttribute('y2', starY.toString());
+                trailLineRef.current.setAttribute('opacity', trailOpacity.toString());
+            } else {
+                trailLineRef.current.setAttribute('opacity', '0');
+            }
+
+            // --- Animate Star Glow Oscillation ---
+            const glowFilter = svgRef.current?.querySelector('#loading-star-glow-filter') as SVGFilterElement;
+            if (glowFilter) {
+                // Find the feGaussianBlur element within the filter
+                const feGaussianBlur = glowFilter.querySelector('feGaussianBlur') as SVGFEGaussianBlurElement;
+                if (feGaussianBlur) {
+                    // Calculate oscillating stdDeviation using sine wave
+                    const glowAmplitude = (GLOW_OSCILLATION_RANGE[1] - GLOW_OSCILLATION_RANGE[0]) / 2;
+                    const glowOffset = GLOW_OSCILLATION_RANGE[0] + glowAmplitude;
+                    const stdDeviation = glowOffset + glowAmplitude * Math.sin(t * GLOW_OSCILLATION_SPEED);
+                    feGaussianBlur.setAttribute('stdDeviation', stdDeviation.toString());
+                }
+            }
+        })
 
     }, [targetEl, frame, frame0, fps, effect.duration, removeEffect]); // Dependencies for useEffect
 
-    // This component directly manipulates the SVG DOM, so it doesn't render
-    // any React elements itself.
     return null;
 };
 
