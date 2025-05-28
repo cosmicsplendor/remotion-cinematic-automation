@@ -92,10 +92,8 @@ export const TransferMarket: React.FC = () => {
   const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3);
   const currentYear = currentData ? new Date(currentData.weekStart).getFullYear() : "2000";
   const currentPeriodMetaData = useMemo(() => {
-    if (currentYear === null) return null; // No valid season to find metadata for
-    return periodAudioMetaData.find(meta => meta.period === `q${quarter} ${currentYear}`) || null;
+    return periodAudioMetaData.find(meta => meta.period === `q${quarter + 1} ${currentYear}`) || null;
   }, [quarter, currentYear, periodAudioMetaData]);
-
   useEffect(() => {
     if (containerRef.current === null || svgRef.current === null) {
       return;
@@ -199,13 +197,13 @@ export const TransferMarket: React.FC = () => {
       })}
 
       {/* Single AudioVisualizer for the CURRENT period only */}
-      {/* {currentPeriodMetaData && (
+      {currentPeriodMetaData && (
         <AudioVisualizer
           audioSrc={`/assets/transferAudio/${currentPeriodMetaData.period}.mp3`} // Pass relative path
           audioStartFrame={currentPeriodMetaData.startFrame} // Pass the absolute start frame
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
-      )} */}
+      )}
       {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );

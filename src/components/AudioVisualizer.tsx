@@ -23,7 +23,7 @@ export const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
 
   // Load the specific audio file
   const audioData = useAudioData(staticFile(audioSrc));
-
+  console.log(audioSrc)
   useEffect(() => {
     // Reset if no audio data yet
     if (!audioData) {
