@@ -72,16 +72,19 @@ export const TransferMarket: React.FC = () => {
     const originalDataTyped = data as Frame[];
     let lastQuarter: string = ""
     for (const periodEntry of originalDataTyped) {
-      currentFrameCounter += FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
       const year = new Date(periodEntry.weekStart).getFullYear();
       const quarter = Math.floor(new Date(periodEntry.weekStart).getMonth() / 3) + 1; // <-- FIXED
       const period = `q${quarter} ${year}`;
-      if (lastQuarter === period) continue
+      if (lastQuarter === period) {
+        currentFrameCounter += FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
+        continue; // Skip if the period is the same as the last one
+      }
       metadata.push({
         period,
         startFrame: currentFrameCounter
       });
       lastQuarter = period;
+      currentFrameCounter += FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
     }
     return metadata;
   }, [data, FRAMES_PER_UNIT_POINT]);
