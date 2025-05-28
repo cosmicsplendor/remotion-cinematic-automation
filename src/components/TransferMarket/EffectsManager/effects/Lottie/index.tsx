@@ -1,10 +1,9 @@
 import { RefObject, useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useVideoConfig } from "remotion";
-import { getGlobalBBox } from "../../../../../../lib/d3/utils/math";
+import { easingFns, getGlobalBBox } from "../../../../../../lib/d3/utils/math";
 import lottie, { AnimationItem } from "lottie-web";
 import anims from "./anims/index"
 import { LottieEffect, sanitizeName } from "../../../../../components/TransferMarket/helpers";
-
 interface LottieEffectProps {
     effect: LottieEffect;
     getSvgEl: (id: string) => SVGElement | null;
@@ -174,10 +173,11 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
             fadeInProgress = 0;
         }
 
-        // Fade Out
+        // Fade Out with sineOut easing
         let fadeOutProgress = 1.0;
         if (effect.duration >= 0 && FADE_OUT_DURATION_SEC > 0 && currentTime > effect.duration - FADE_OUT_DURATION_SEC) {
-            fadeOutProgress = Math.max(0, (effect.duration - currentTime) / FADE_OUT_DURATION_SEC);
+            const raw = Math.max(0, (effect.duration - currentTime) / FADE_OUT_DURATION_SEC);
+            fadeOutProgress = easingFns.sineOut(raw);
         } else if (effect.duration >= 0 && FADE_OUT_DURATION_SEC === 0 && currentTime >= effect.duration) {
             fadeOutProgress = 0;
         }
