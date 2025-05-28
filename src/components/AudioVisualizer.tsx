@@ -1,5 +1,5 @@
-// AudioVisualizer.tsx - Changes
-import { useEffect } from 'react';
+// AudioVisualizer.tsx - With Amplitude Smoothing
+import { useEffect, useRef } from 'react';
 import {
   staticFile,
   useCurrentFrame,
@@ -9,58 +9,96 @@ import { useAudioData, visualizeAudio } from '@remotion/media-utils';
 
 interface AudioVisualizerProps {
   audioSrc: string;
-  audioStartFrame: number; // Added prop
+  audioStartFrame: number;
   onAmplitudeChange: (amplitude: number) => void;
+  smoothingType?: 'envelope' | 'simple'; // Choose smoothing method
+  attackRate?: number; // How fast to respond to increases (0-1, lower = faster)
+  releaseRate?: number; // How fast to respond to decreases (0-1, higher = slower)
+  smoothingFactor?: number; // For simple smoothing (0-1, higher = more smoothing)
 }
 
 export const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   audioSrc,
-  audioStartFrame, // Get the start frame
+  audioStartFrame,
   onAmplitudeChange,
+  smoothingType = 'envelope',
+  attackRate = 0.3, // Fast attack
+  releaseRate = 0.70, // Slow release
+  smoothingFactor = 0.60,
 }) => {
-  const frame = useCurrentFrame(); // Absolute frame in the video timeline
+  const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  
+  // Store the previous amplitude for smoothing
+  const prevAmplitudeRef = useRef<number>(0);
 
-  // Load the specific audio file
+  // Attack/Release envelope for more natural audio response
+  const applyEnvelope = (current: number, previous: number, attackRate: number = 0.3, releaseRate: number = 0.85): number => {
+    // If amplitude is increasing (attack), respond faster
+    if (current > previous) {
+      return previous * attackRate + current * (1 - attackRate);
+    }
+    // If amplitude is decreasing (release), respond slower for smoother decay
+    return previous * releaseRate + current * (1 - releaseRate);
+  };
+
+  // Simple exponential moving average (backup/alternative method)
+  const smoothAmplitude = (current: number, previous: number, factor: number): number => {
+    return previous * factor + current * (1 - factor);
+  };
+
   const audioData = useAudioData(staticFile(audioSrc));
-  console.log(audioSrc)
+
   useEffect(() => {
-    // Reset if no audio data yet
     if (!audioData) {
-      onAmplitudeChange(0);
+      const smoothedZero = smoothingType === 'envelope'
+        ? applyEnvelope(0, prevAmplitudeRef.current, attackRate, releaseRate)
+        : smoothAmplitude(0, prevAmplitudeRef.current, smoothingFactor);
+      prevAmplitudeRef.current = smoothedZero;
+      onAmplitudeChange(smoothedZero);
       return;
     }
 
-    // Calculate the frame number relative to the start of *this* audio clip's playback
     const frameInAudio = frame - audioStartFrame;
 
-    // If the current frame is before the audio is supposed to start,
-    // or if calculated frame is negative for any reason, amplitude is 0
     if (frameInAudio < 0) {
-       onAmplitudeChange(0);
-       return;
+      const smoothedZero = smoothingType === 'envelope' 
+        ? applyEnvelope(0, prevAmplitudeRef.current, attackRate, releaseRate)
+        : smoothAmplitude(0, prevAmplitudeRef.current, smoothingFactor);
+      prevAmplitudeRef.current = smoothedZero;
+      onAmplitudeChange(smoothedZero);
+      return;
     }
 
-    // Calculate visualization using the FRAME WITHIN THE AUDIO FILE
     const visualization = visualizeAudio({
       fps,
-      frame: frameInAudio, // Use the relative frame here!
+      frame: frameInAudio,
       audioData,
-      numberOfSamples: 1, // Get a single amplitude value
+      numberOfSamples: 1,
     });
 
-    // Extract amplitude (ensure it's not undefined)
-    const amplitude = visualization[0] || 0;
+    const rawAmplitude = visualization[0] || 0;
+    
+    // Normalize the raw amplitude
+    const normalizedAmplitude = Math.min(1, Math.max(0, rawAmplitude * 2));
+    
+    // Apply chosen smoothing method
+    let smoothedAmplitude: number;
+    
+    if (smoothingType === 'envelope') {
+      // Attack/Release envelope - mimics how audio equipment works
+      smoothedAmplitude = applyEnvelope(normalizedAmplitude, prevAmplitudeRef.current, attackRate, releaseRate);
+    } else {
+      // Simple exponential moving average
+      smoothedAmplitude = smoothAmplitude(normalizedAmplitude, prevAmplitudeRef.current, smoothingFactor);
+    }
+    
+    // Store for next frame
+    prevAmplitudeRef.current = smoothedAmplitude;
+    
+    onAmplitudeChange(smoothedAmplitude);
 
-    // Normalize amplitude (adjust multiplier as needed for desired effect)
-    const normalizedAmplitude = Math.min(1, Math.max(0, amplitude * 2)); // Example normalization
+  }, [audioData, frame, fps, onAmplitudeChange, audioStartFrame, smoothingType, attackRate, releaseRate, smoothingFactor]);
 
-    // Send the amplitude back to the parent
-    onAmplitudeChange(normalizedAmplitude);
-
-    // Dependencies: Recalculate if any of these change
-  }, [audioData, frame, fps, onAmplitudeChange, audioStartFrame]); // Add audioStartFrame
-
-  // This component renders nothing itself
   return null;
 };
