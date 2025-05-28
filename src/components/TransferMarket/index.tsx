@@ -50,26 +50,6 @@ export const TransferMarket: React.FC = () => {
     }
     return result;
   }, [data]);
-
-  const seasonAudioMetadata = useMemo(() => {
-    const metadata = [];
-    let currentFrameCounter = 0;
-    const originalDataTyped = data as Frame[];
-    for (const seasonEntry of originalDataTyped) {
-      const seasonNumber = new Date(seasonEntry.weekStart).getFullYear();
-      if (!isNaN(seasonNumber) && seasonEntry.data && seasonEntry.data.length > 0) {
-        metadata.push({
-          season: seasonNumber,
-          startFrame: currentFrameCounter,
-        });
-      }
-      if (seasonEntry.data && seasonEntry.data.length > 0) {
-        currentFrameCounter += seasonEntry.data.length * FRAMES_PER_UNIT_POINT;
-      }
-    }
-    return metadata;
-  }, [data, FRAMES_PER_UNIT_POINT]);
-
   const { currentDataIndex, progress } = useMemo(() => {
     if (flattenedData.length === 0) return { currentDataIndex: 0, progress: 0 };
     let frameStart = 0, currentDataIndex = 0, currentSF = 1
@@ -86,17 +66,32 @@ export const TransferMarket: React.FC = () => {
     const progress = (frame - frameStart) / (currentSF * FRAMES_PER_UNIT_POINT);
     return { currentDataIndex, progress };
   }, [frame, FRAMES_PER_UNIT_POINT, flattenedData.length]);
-
+  const periodAudioMetaData = useMemo(() => {
+    const metadata = [];
+    let currentFrameCounter = 0;
+    const originalDataTyped = data as Frame[];
+    let lastQuarter: string = ""
+    for (const periodEntry of originalDataTyped) {
+      currentFrameCounter += periodEntry.data.length * FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
+      const year = new Date(periodEntry.weekStart).getFullYear();
+      const quarter = Math.floor(new Date(periodEntry.weekStart).getMonth() / 3) + 1; // <-- FIXED
+      const period = `q${quarter} ${year}`;
+      if (lastQuarter === period) continue
+      metadata.push({
+        period,
+        startFrame: currentFrameCounter
+      });
+      lastQuarter = period;
+    }
+    return metadata;
+  }, [data, FRAMES_PER_UNIT_POINT]);
   const currentData = flattenedData[currentDataIndex];
   const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3);
   const currentYear = currentData ? new Date(currentData.weekStart).getFullYear() : "2000";
-  useEffect(() => {
-    console.log(flattenedData[currentDataIndex]?.weekStart)
-  }, [flattenedData[currentDataIndex]?.weekStart]);
-  const currentYearMetadata = useMemo(() => {
+  const currentPeriodMetaData = useMemo(() => {
     if (currentYear === null) return null; // No valid season to find metadata for
-    return seasonAudioMetadata.find(meta => meta.season === currentYear) || null;
-  }, [currentYear, seasonAudioMetadata]);
+    return periodAudioMetaData.find(meta => meta.period === `q${quarter} ${currentYear}`) || null;
+  }, [quarter, currentYear, periodAudioMetaData]);
 
   useEffect(() => {
     if (containerRef.current === null || svgRef.current === null) {
@@ -139,7 +134,7 @@ export const TransferMarket: React.FC = () => {
 
     const barChart = modifier(barChartRaw);
     chartRef.current = barChart;
-  }, [svgRef, containerRef, flattenedData, width, height]); 
+  }, [svgRef, containerRef, flattenedData, width, height]);
   const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
   useLayoutEffect(() => {
     if (!chartRef.current || !currentData) {
@@ -185,29 +180,29 @@ export const TransferMarket: React.FC = () => {
           }}>
           </span>
           <OdometerDisplay currentIndex={quarter} values={quarters} top="8px" right="190px" />
-          <RotatingGear top="-64px" right="300px" t={frame * 1/fps}/>
+          <RotatingGear top="-64px" right="300px" />
           <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
-      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData}/>
+      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData} />
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
-      {/* {seasonAudioMetadata.map(({ season, startFrame }) => {
-        const audioSrcPath = `/assets/transferAudio/${season}.wav`;
+      {periodAudioMetaData.map(({ period, startFrame }) => {
+        const audioSrcPath = `/assets/transferAudio/${period}.mp3`;
         return (
-          <Sequence key={`audio-${season}-playback`} from={startFrame}>
+          <Sequence key={`audio-${period}-playback`} from={startFrame}>
             <Audio src={staticFile(audioSrcPath)} />
           </Sequence>
         );
-      })} */}
+      })}
 
-      {/* Single AudioVisualizer for the CURRENT season only */}
-      {/* {currentYearMetadata && (
+      {/* Single AudioVisualizer for the CURRENT period only */}
+      {currentPeriodMetaData && (
         <AudioVisualizer
-          audioSrc={`/assets/transferAudio/${currentYearMetadata.season}.wav`} // Pass relative path
-          audioStartFrame={currentYearMetadata.startFrame} // Pass the absolute start frame
+          audioSrc={`/assets/transferAudio/${currentPeriodMetaData.period}.mp3`} // Pass relative path
+          audioStartFrame={currentPeriodMetaData.startFrame} // Pass the absolute start frame
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
-      )} */}
+      )}
       {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );
