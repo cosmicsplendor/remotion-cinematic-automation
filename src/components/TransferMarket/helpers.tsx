@@ -57,7 +57,7 @@ export interface LoadingEffect {
     duration: number;
     reverse?: boolean; 
 }
-export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect | LottieEffect | LoadingEffect
+export type Effect = (ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect | LottieEffect | LoadingEffect) & { delay?: number }
 export type Frame = {
   weekStart: string,
   easing?: string,

@@ -25,7 +25,7 @@ import EffectsManager from './EffectsManager';
 
 const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
-const DURATION = 1000; // Equivalent to 1 second at 60fps
+const DURATION = 1250; // Equivalent to 1 second at 60fps
 const SF = data.map(d => (d.slowDown as number) ?? 1)
 export const TRANSFER_LIFESPAN = SF.reduce((s, x) => x + s) * DURATION / 1000; // Restored original export
 
@@ -137,6 +137,9 @@ export const TransferMarket: React.FC = () => {
     chartRef.current = barChart;
   }, [svgRef, containerRef, flattenedData, width, height]);
   const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
+  useEffect(() => {
+    console.log(currentData.weekStart)
+  }, [ currentData.weekStart ]);
   useLayoutEffect(() => {
     if (!chartRef.current || !currentData) {
       return;
@@ -146,6 +149,7 @@ export const TransferMarket: React.FC = () => {
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
     chart(prevData, data, easingFn(progress));
   }, [frame]);
+
   return (
     <AbsoluteFill
       style={{

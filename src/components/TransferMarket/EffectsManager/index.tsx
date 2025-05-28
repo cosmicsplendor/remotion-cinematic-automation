@@ -8,17 +8,50 @@ import ChangeEffect from "./effects/Change";
 import FocusEffect from "./effects/Focus";
 import LottieEffect from "./effects/Lottie";
 import LoadingEffect from "./effects/Loading";
+
 const DEFAULT_EASING = "linear"
-const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, prevData: Datum[], svgRef: RefObject<SVGSVGElement> }> = props => {
+
+const EffectsManager: React.FC<{ 
+    frame: number, 
+    progress: number, 
+    data: Frame, 
+    prevData: Datum[], 
+    svgRef: RefObject<SVGSVGElement>
+}> = props => {
     const [effects, setEffects] = useState<Effect[]>([])
+    const [readyEffects, setReadyEffects] = useState<Effect[]>([])
     const { frame, data, prevData, svgRef, progress } = props;
+
+    // Handle new effects with delays
     useEffect(() => {
         if (!data.effects || data.effects.length === 0) return;
-        setEffects([
-            ...effects,
-            ...data.effects
-        ])
-    }, [data]);
+        
+        const newEffects = data.effects;
+        const timeoutIds: NodeJS.Timeout[] = [];
+        
+        newEffects.forEach(effect => {
+            const delay = effect.delay || 0;
+            
+            if (delay === 0) {
+                // Add immediately if no delay
+                setReadyEffects(prev => [...prev, effect]);
+            } else {
+                // Add after delay
+                const timeoutId = setTimeout(() => {
+                    setReadyEffects(prev => [...prev, effect]);
+                }, delay * 1000);
+                timeoutIds.push(timeoutId);
+            }
+        });
+
+        setEffects(prev => [...prev, ...newEffects]);
+
+        // Cleanup timeouts on unmount or effect change
+        return () => {
+            timeoutIds.forEach(id => clearTimeout(id));
+        };
+    }, [data.effects]);
+
     const getSvgEl = useCallback((id: string) => {
         if (!svgRef.current) return null;
         const el = svgRef.current.querySelector(`#${id}`);
@@ -27,9 +60,12 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
         }
         return null;
     }, [svgRef])
+
     const removeEffect = useCallback((effect: Effect) => {
-        setEffects((prevEffects) => prevEffects.filter((e) => e !== effect))
-    }, [setEffects])
+        setEffects((prevEffects) => prevEffects.filter((e) => e !== effect));
+        setReadyEffects((prevEffects) => prevEffects.filter((e) => e !== effect));
+    }, [])
+
     const getChange = (target: string, progress=1) => {
         const prevVal = prevData.find(d => d.name === target)?.marketCap || 0
         const curTarget = data.data.find(d => d.name === target)
@@ -42,13 +78,17 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
         if (progress === 0) return 0;
         return percentage * easingFns[easing]?.(progress);
     }
+
     return <>
         {
-            effects.map((effect, index) => {
+            readyEffects.map((effect, index) => {
+                // Use a unique key based on the effect's properties to avoid conflicts
+                const key = `${effect.type}-${index}-${effect.target || 'default'}`;
+                
                 if (effect.type === "confetti") {
                     return (
                         <ConfettiEffect
-                            key={index}
+                            key={key}
                             effect={effect}
                             svgRef={svgRef}
                             getSvgEl={getSvgEl}
@@ -59,7 +99,7 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                 } else if (effect.type === "surge") {
                     return (
                         <SurgeEffect
-                            key={index}
+                            key={key}
                             effect={effect}
                             svgRef={svgRef}
                             getSvgEl={getSvgEl}
@@ -69,7 +109,7 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                     );
                 } else if (effect.type === "lottie") {
                     return <LottieEffect
-                        key={index}
+                        key={key}
                         effect={effect}
                         svgRef={svgRef}
                         getSvgEl={getSvgEl}
@@ -78,7 +118,7 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                     />
                 } else if (effect.type === "arrow") {
                     return <ArrowEffect
-                        key={index}
+                        key={key}
                         effect={effect}
                         svgRef={svgRef}
                         getSvgEl={getSvgEl}
@@ -87,7 +127,7 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                     />
                 } else if (effect.type === "loading") {
                     return <LoadingEffect
-                        key={index}
+                        key={key}
                         effect={effect}
                         svgRef={svgRef}
                         getSvgEl={getSvgEl}
@@ -97,7 +137,7 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                 } else if (effect.type === "change") {
                     return (
                         <ChangeEffect
-                            key={index}
+                            key={key}
                             effect={effect}
                             svgRef={svgRef}
                             getSvgEl={getSvgEl}
@@ -110,7 +150,14 @@ const EffectsManager: React.FC<{ frame: number, progress: number, data: Frame, p
                     );
                 } else if (effect.type === "focus") {
                     return (
-                        <FocusEffect key={index} effect={effect} svgRef={svgRef} getSvgEl={getSvgEl} frame={frame} removeEffect={removeEffect}/>
+                        <FocusEffect 
+                            key={key} 
+                            effect={effect} 
+                            svgRef={svgRef} 
+                            getSvgEl={getSvgEl} 
+                            frame={frame} 
+                            removeEffect={removeEffect}
+                        />
                     )
                 }
                 return null;
