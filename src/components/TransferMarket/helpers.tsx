@@ -51,7 +51,12 @@ export type FocusEffect = {
   target: string;
   duration: number;
 }
-export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect | LottieEffect
+export interface LoadingEffect {
+    type: "loading";
+    target: string;
+    duration: number;
+}
+export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect | LottieEffect | LoadingEffect
 export type Frame = {
   weekStart: string,
   easing?: string,
