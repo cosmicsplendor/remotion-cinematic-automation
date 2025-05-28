@@ -135,9 +135,17 @@ const LottieEffect: React.FC<LottieEffectProps> = ({
 
         // --- Positioning ---
         // Place the left edge of the Lottie container to the right of the target element.
-        const translateX = targetBox.x + targetBox.width + LOTTIE_OFFSET_X;
+        let translateX = targetBox.x + targetBox.width + LOTTIE_OFFSET_X;
         // Vertically center the Lottie container with the target element.
-        const translateY = targetBox.y + targetBox.height / 2 - LOTTIE_CONTAINER_HEIGHT / 2;
+        let translateY = targetBox.y + targetBox.height / 2 - LOTTIE_CONTAINER_HEIGHT / 2;
+
+        if (typeof effect.offsetX === 'number') {
+            translateX += effect.offsetX;
+        }
+
+        if (typeof effect.offsetY === 'number') {
+            translateY += effect.offsetY;
+        }
 
         // --- Lottie Animation Frame Control ---
         // Calculate progress from 0 to 1 over the effect's duration
