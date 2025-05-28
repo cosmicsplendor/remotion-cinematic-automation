@@ -76,10 +76,10 @@ const EffectsManager: React.FC<{
         */
 
     }, [data.effects, currentFrame]); // IMPORTANT: `currentFrame` is included here because `introducedAtFrame`
-                                      // depends on it WHEN an effect is added. If `data.effects` is stable,
-                                      // this hook will run each frame, but `newEffectsToAdd` will be empty
-                                      // after the initial additions for that `data.effects` set.
-                                      // This is acceptable. The expensive part (setState) is conditional.
+    // depends on it WHEN an effect is added. If `data.effects` is stable,
+    // this hook will run each frame, but `newEffectsToAdd` will be empty
+    // after the initial additions for that `data.effects` set.
+    // This is acceptable. The expensive part (setState) is conditional.
 
     const getSvgEl = useCallback((id: string) => {
         if (!svgRef.current) return null;
@@ -94,22 +94,58 @@ const EffectsManager: React.FC<{
         setManagedEffects(prevEffects => prevEffects.filter(me => me.id !== effectId));
     }, []);
 
-    const getChange = (target: string, initialData: Datum[], currentEffectProgress = 1) => {
-        const prevVal = initialData.find(d => d.name === target)?.marketCap || 0;
-        const curTarget = data.data.find(d => d.name === target);
-        const { easing = DEFAULT_EASING } = data; // Easing from the main Frame data
+    // Assume 'easingFns' and 'DEFAULT_EASING' are accessible in this scope.
+    // Assume 'Datum' has 'name' and 'marketCap' properties.
 
-        const curVal = curTarget?.marketCap || 0;
+    const getChange = (
+        target: string,              // The name of the target item (e.g., "Bitcoin")
+        dataAtEffectStart: Datum[],  // Data array from ChangeEffectDisplay's initial mount (baseline)
+        dataAtSegmentStart: Datum[], // Data array for the start of the current animation segment
+        segmentProgress: number,     // Progress of the current animation segment (0 to 1)
+    ): number => {
+        const initialTargetDatum = dataAtEffectStart.find(d => d.name === target);
+        const segmentStartDatum = dataAtSegmentStart.find(d => d.name === target);
+        const segmentEndDatum = data.data.find(d => d.name === target);
 
-        if (prevVal === 0 && curVal === 0) return 0;
-        if (prevVal === 0) return currentEffectProgress > 0 ? Infinity : 0; // New item, could be 100% or Infinity based on progress
+        const initialVal = initialTargetDatum?.marketCap;
+        const segmentStartVal = segmentStartDatum?.marketCap;
+        const segmentEndVal = segmentEndDatum?.marketCap;
+        const easingType = data.easing;
 
-        const percentage = 100 * (curVal - prevVal) / prevVal;
-        if (isNaN(percentage)) return 0;
-        if (currentEffectProgress === 0) return 0;
+        // --- 1. Validate data ---
+        if (
+            initialVal === undefined || initialVal === null ||
+            segmentStartVal === undefined || segmentStartVal === null ||
+            segmentEndVal === undefined || segmentEndVal === null
+        ) {
+            // console.warn(`getChange: Missing marketCap data for target "${target}"`,
+            //   { initialVal, segmentStartVal, segmentEndVal });
+            return NaN; // Or 0, depending on how you want to handle missing data
+        }
 
-        const easingFn = easingFns[easing] || easingFns[DEFAULT_EASING];
-        return percentage * easingFn(currentEffectProgress);
+        // --- 2. Calculate the current interpolated absolute value ---
+        const easingFn = easingFns[easingType] || easingFns[DEFAULT_EASING];
+        const easedSegmentProgress = easingFn(segmentProgress);
+
+        const currentInterpolatedValue = segmentStartVal + (segmentEndVal - segmentStartVal) * easedSegmentProgress;
+
+        // --- 3. Calculate overall percentage change from initialVal to currentInterpolatedValue ---
+        if (initialVal === 0) {
+            if (currentInterpolatedValue === 0) return 0;
+            // If initial is 0, any positive current value is an "infinite" % increase
+            // relative to 0. Any negative current value is an "infinite" % decrease.
+            return currentInterpolatedValue > 0 ? Infinity : -Infinity;
+        }
+
+        const overallPercentage = 100 * (currentInterpolatedValue - initialVal) / initialVal;
+
+        if (isNaN(overallPercentage)) {
+            // console.warn(`getChange: Calculated NaN for overallPercentage for target "${target}"`,
+            //   { currentInterpolatedValue, initialVal });
+            return 0; // Default to 0% if calculation results in NaN (e.g. if initialVal was 0 and somehow missed above)
+        }
+
+        return overallPercentage;
     };
 
     const readyEffectsToRender = managedEffects.filter(managedEffect => {
@@ -147,7 +183,7 @@ const EffectsManager: React.FC<{
                     return (
                         <ChangeEffect
                             {...commonEffectProps}
-                            getValue={(initialData: Datum[], p: number) => getChange(sourceEffect.target!, initialData, p)}
+                            getValue={(initialData: Datum[], previousData: Datum[], progress: number) => getChange(sourceEffect.target!, initialData, previousData, progress)}
                             prevData={prevData}
                             progress={progress} // Overall scene/frame progress for easing
                         />

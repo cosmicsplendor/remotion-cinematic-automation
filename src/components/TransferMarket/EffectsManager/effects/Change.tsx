@@ -9,7 +9,7 @@ interface ChangeEffectProps {
     svgRef: RefObject<SVGSVGElement>;
     frame: number;
     removeEffect: (effect: ChangeEffectType) => void;
-    getValue: (initialData: Datum[], progress: number) => number; // Function to get current percentage change value (e.g., 10 for +10%)
+    getValue: (initialData: Datum[], previousData: Datum[], progress: number) => number; // Function to get current percentage change value (e.g., 10 for +10%)
     prevData: Datum[],
     progress: number
 }
@@ -122,7 +122,7 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
             removeEffect(effect);
             return;
         }
-        const curPercentChange = getValue(initialData, currentTime/effect.duration)
+        const curPercentChange = getValue(initialData, prevData, progress)
         const percentChange = curPercentChange
         // getValue() now directly returns the percentage change
         const isPositive = percentChange >= 0;
