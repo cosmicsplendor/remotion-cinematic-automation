@@ -25,6 +25,7 @@
     "@remotion/zod-types": "^4.0.133",
     "@types/d3": "^7.4.3",
     "@types/three": "^0.176.0",
+    "clipboardy": "^4.0.0",
     "d3": "^7.9.0",
     "get-audio-duration": "^4.0.1",
     "lottie-web": "^5.13.0",
