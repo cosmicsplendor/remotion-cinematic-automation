@@ -25,30 +25,31 @@ export type SurgeEffect = {
   dist?: "space-between" | "space-around" | "ease-sine" | "ease-quad" | "ease-cubic"
 }
 export type LottieEffect = {
-    type: "lottie";
-    anim: string;
-    target: string;
-    targetEl?: "bar" | "points" | "logo";
-    offsetX?: number;
-    offsetY?: number;
-    duration: number;
+  type: "lottie";
+  targetEl?: "bar" | "points" | "logo";
+  target: string;
+  anim: string;
+  duration: number;
+  offsetX?: number;
+  offsetY?: number;
+  height?: number; // New: configurable height, width auto-calculated
 }
 export type ArrowEffect = {
-    type: 'arrow'; // Differentiates from other effects like ConfettiEffect
-    target: string; // Key to find the target element (e.g., 'player1')
-    color: string;  // Hex string for arrow color (e.g., '#FF0000')
-    duration: number; // Total duration of the effect in seconds
+  type: 'arrow'; // Differentiates from other effects like ConfettiEffect
+  target: string; // Key to find the target element (e.g., 'player1')
+  color: string;  // Hex string for arrow color (e.g., '#FF0000')
+  duration: number; // Total duration of the effect in seconds
 }
 export type ChangeEffect = {
-    type: "change";
-    target: string;
-    duration: number;
-    color?: string; // Optional base color, will be overridden by green/red
+  type: "change";
+  target: string;
+  duration: number;
+  color?: string; // Optional base color, will be overridden by green/red
 }
 export type FocusEffect = {
-    type: "focus";
-    target: string;
-    duration: number;
+  type: "focus";
+  target: string;
+  duration: number;
 }
 export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect | LottieEffect
 export type Frame = {
@@ -87,7 +88,7 @@ export const formatX = (num: number | string) => {
     suffix = "M"
   }
 
-  const decimals = n > TRILLION ? 3: 2
+  const decimals = n > TRILLION ? 3 : 2
   return `$${(n / divisor).toFixed(decimals)}${suffix}`
 }
 
