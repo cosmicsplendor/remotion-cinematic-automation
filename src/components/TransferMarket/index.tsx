@@ -72,7 +72,7 @@ export const TransferMarket: React.FC = () => {
     const originalDataTyped = data as Frame[];
     let lastQuarter: string = ""
     for (const periodEntry of originalDataTyped) {
-      currentFrameCounter += periodEntry.data.length * FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
+      currentFrameCounter += FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
       const year = new Date(periodEntry.weekStart).getFullYear();
       const quarter = Math.floor(new Date(periodEntry.weekStart).getMonth() / 3) + 1; // <-- FIXED
       const period = `q${quarter} ${year}`;
@@ -196,13 +196,13 @@ export const TransferMarket: React.FC = () => {
       })}
 
       {/* Single AudioVisualizer for the CURRENT period only */}
-      {currentPeriodMetaData && (
+      {/* {currentPeriodMetaData && (
         <AudioVisualizer
           audioSrc={`/assets/transferAudio/${currentPeriodMetaData.period}.mp3`} // Pass relative path
           audioStartFrame={currentPeriodMetaData.startFrame} // Pass the absolute start frame
           onAmplitudeChange={setCurrentAmplitude} // Update the state
         />
-      )}
+      )} */}
       {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );
