@@ -25,7 +25,7 @@ const RotatingGear: React.FC<{ top: string; right: string }> = ({
         right,
         width: '120px',
         height: '120px',
-        opacity: 0.9,
+        opacity: 0.8,
       }}
     >
       <div

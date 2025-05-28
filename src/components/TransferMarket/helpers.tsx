@@ -55,6 +55,7 @@ export interface LoadingEffect {
     type: "loading";
     target: string;
     duration: number;
+    reverse?: boolean; // Feature 1: reverse boolean flag
 }
 export type Effect = ConfettiEffect | SurgeEffect | ArrowEffect | ChangeEffect | FocusEffect | LottieEffect | LoadingEffect
 export type Frame = {
