@@ -104,7 +104,22 @@
     "weekStart": "2016-01-22T00:00:00.000Z",
     "slowDown": 2,
     "easing": "sineInOut",
-    "effects": [{"type": "focus", "duration": 1.2, "target": "Bitcoin", "delay": 1.75}, {"type":"surge","duration": 1, "target": "Bitcoin", "bursts": 1, "dist": "space-between", "delay": 1.75}],
+    "effects": [
+      {
+        "type": "focus",
+        "duration": 1.2,
+        "target": "Bitcoin",
+        "delay": 1.75
+      },
+      {
+        "type": "surge",
+        "duration": 1,
+        "target": "Bitcoin",
+        "bursts": 1,
+        "dist": "space-between",
+        "delay": 1.75
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -218,7 +233,20 @@
   },
   {
     "weekStart": "2016-01-29T00:00:00.000Z",
-    "effects": [{"type": "loading","duration":1.5,"target":"Ethereum"}, {"type": "change", "duration": 10, "delay": 0.2, "target": "Ethereum","initialDataOffset":-2}],
+    "effects": [
+      {
+        "type": "loading",
+        "duration": 1.5,
+        "target": "Ethereum"
+      },
+      {
+        "type": "change",
+        "duration": 10,
+        "delay": 0.2,
+        "target": "Ethereum",
+        "initialDataOffset": -2
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -332,7 +360,17 @@
   },
   {
     "weekStart": "2016-02-05T00:00:00.000Z",
-    "effects": [{"type":"lottie","duration":5,"anim": "rocketman","target": "Ethereum", "targetEl": "bar", "height":100, "offsetX": -100}],
+    "effects": [
+      {
+        "type": "lottie",
+        "duration": 5,
+        "anim": "rocketman",
+        "target": "Ethereum",
+        "targetEl": "bar",
+        "height": 100,
+        "offsetX": -100
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -1033,7 +1071,13 @@
   },
   {
     "weekStart": "2016-03-25T00:00:00.000Z",
-    "effects": [{"type": "arrow", "target": "monero", "duration": 3}],
+    "effects": [
+      {
+        "type": "arrow",
+        "target": "monero",
+        "duration": 3
+      }
+    ],
     "slowDown": 1.6,
     "easing": "sommothStep",
     "data": [
@@ -1445,7 +1489,20 @@
   },
   {
     "weekStart": "2016-04-22T00:00:00.000Z",
-    "effects": [{"type": "focus", "target": "ethereum", "duration": 1.25}, {"type": "confetti", "target": "ethereum", "duration": 1.5, "dist": "space-between", "bursts": 2 }],
+    "effects": [
+      {
+        "type": "focus",
+        "target": "ethereum",
+        "duration": 1.25
+      },
+      {
+        "type": "confetti",
+        "target": "ethereum",
+        "duration": 1.5,
+        "dist": "space-between",
+        "bursts": 2
+      }
+    ],
     "slowDown": 0.6,
     "data": [
       {
@@ -1967,7 +2024,21 @@
   {
     "weekStart": "2016-05-27T00:00:00.000Z",
     "slowDown": 3,
-    "effects": [{"type":"lottie","duration":2,"anim": "fire","target": "The Dao","height":100, "offsetY": -20}, {"type": "loading", "duration": 2, "target": "The Dao"}],
+    "effects": [
+      {
+        "type": "lottie",
+        "duration": 2,
+        "anim": "fire",
+        "target": "The Dao",
+        "height": 100,
+        "offsetY": -20
+      },
+      {
+        "type": "loading",
+        "duration": 2,
+        "target": "The Dao"
+      }
+    ],
     "easing": "quadOut",
     "data": [
       {
@@ -2274,7 +2345,16 @@
   },
   {
     "weekStart": "2016-06-17T00:00:00.000Z",
-    "effects": [{"type": "lottie", "duration": 0.75, "target": "The dao", "anim": "skull", "delay": 0.6, "offsetY": -30}],
+    "effects": [
+      {
+        "type": "lottie",
+        "duration": 0.75,
+        "target": "The dao",
+        "anim": "skull",
+        "delay": 0.6,
+        "offsetY": -30
+      }
+    ],
     "slowDown": 2,
     "data": [
       {
@@ -2564,7 +2644,13 @@
   },
   {
     "weekStart": "2016-07-08T00:00:00.000Z",
-    "effects": [{ "type": "focus", "target": "Steem", "duration": 2}],
+    "effects": [
+      {
+        "type": "focus",
+        "target": "Steem",
+        "duration": 2
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -2754,7 +2840,15 @@
   {
     "weekStart": "2016-07-22T00:00:00.000Z",
     "slowDown": 2,
-    "effects": [{"type": "loading", "target": "The Dao", "duration": 3, "reverse": true, "delay": 0.5}],
+    "effects": [
+      {
+        "type": "loading",
+        "target": "The Dao",
+        "duration": 3,
+        "reverse": true,
+        "delay": 0.5
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -3054,7 +3148,13 @@
   },
   {
     "weekStart": "2016-08-12T00:00:00.000Z",
-    "effects": [{"type": "arrow", "target": "ethereum classic", "duration": 1}],
+    "effects": [
+      {
+        "type": "arrow",
+        "target": "ethereum classic",
+        "duration": 1
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -5712,6 +5812,28 @@
   },
   {
     "weekStart": "2017-02-10T00:00:00.000Z",
+    "effects": [
+      {
+        "type": "lottie",
+        "anim": "rocket1",
+        "height": 180,
+        "duration": 3,
+        "target": "Dash",
+        "delay": 1,
+        "offsetX": -50,
+        "offsetY": -50
+      },
+      {
+        "type": "lottie",
+        "anim": "fire",
+        "height": 100,
+        "duration": 1,
+        "target": "Dash",
+        "targetEl": "logo",
+        "offsetX": -95,
+        "offsetY": -15
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -6287,6 +6409,15 @@
   },
   {
     "weekStart": "2017-03-24T00:00:00.000Z",
+    "effects": [
+      {
+        "type": "lottie",
+        "anim": "wow",
+        "duration": 3,
+        "target": "XRP"
+      }
+    ],
+    "slowDown": 2,
     "data": [
       {
         "name": "Bitcoin",
@@ -6400,6 +6531,7 @@
   },
   {
     "weekStart": "2017-03-31T00:00:00.000Z",
+    "slowDown": 1.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -6513,6 +6645,7 @@
   },
   {
     "weekStart": "2017-04-07T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -6630,6 +6763,7 @@
   },
   {
     "weekStart": "2017-04-14T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -6739,6 +6873,7 @@
   },
   {
     "weekStart": "2017-04-21T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -6840,6 +6975,14 @@
   },
   {
     "weekStart": "2017-04-28T00:00:00.000Z",
+    "slowDown": 0.6,
+    "effects": [
+      {
+        "type": "change",
+        "target": "XRP",
+        "duration": 4
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -7312,15 +7455,21 @@
   },
   {
     "weekStart": "2017-05-26T00:00:00.000Z",
+    "slowDown": 0.6,
     "effects": [
       {
-        "type": "confetti",
-        "bursts": 24,
+        "type": "lottie",
         "target": "Ethereum",
-        "duration": 7,
-        "dist": "ease-sine"
+        "duration": 5,
+        "anim": "rocketman",
+        "height": 75
       },
-      {"type": "change", "duration": 3, "target": "Ethereum", "color":"#000000"}
+      {
+        "type": "focus",
+        "duration": 3,
+        "delay": 1,
+        "target": "Ethereum"
+      }
     ],
     "data": [
       {
@@ -7524,6 +7673,7 @@
   },
   {
     "weekStart": "2017-06-09T00:00:00.000Z",
+    "slowDown": 1.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -7633,6 +7783,7 @@
   },
   {
     "weekStart": "2017-06-16T00:00:00.000Z",
+    "slowDown": 1.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -7750,6 +7901,8 @@
   },
   {
     "weekStart": "2017-06-23T00:00:00.000Z",
+    "slowDown":1.4,
+    "easing": "cubicIn",
     "data": [
       {
         "name": "Bitcoin",
@@ -7852,9 +8005,11 @@
         "marketCap": 85057700.46200001
       }
     ]
+
   },
   {
     "weekStart": "2017-06-30T00:00:00.000Z",
+    "slowDown": 0.8,
     "data": [
       {
         "name": "Bitcoin",
@@ -7968,6 +8123,7 @@
   },
   {
     "weekStart": "2017-07-07T00:00:00.000Z",
+    "slowDown": 1.2,
     "data": [
       {
         "name": "Bitcoin",
@@ -8081,6 +8237,7 @@
   },
   {
     "weekStart": "2017-07-14T00:00:00.000Z",
+    "slowDown": 1.4,
     "data": [
       {
         "name": "Bitcoin",
@@ -8182,6 +8339,7 @@
   },
   {
     "weekStart": "2017-07-21T00:00:00.000Z",
+    "slowDown": 1.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -8283,6 +8441,15 @@
   },
   {
     "weekStart": "2017-07-28T00:00:00.000Z",
+    "slowDown":2,
+    "easing": "sineInOut",
+    "effects": [
+      {
+        "type": "loading",
+        "target": "Bitcoin Cash",
+        "duration": 2.5
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
