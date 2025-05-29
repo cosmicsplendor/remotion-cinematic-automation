@@ -1,22 +1,18 @@
-import { useEffect, useRef, useMemo, useState, useLayoutEffect } from 'react';
+import { useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import {
   AbsoluteFill,
   useCurrentFrame,
   useVideoConfig,
-  interpolate,
   Audio,
   staticFile,
   Sequence,
 } from 'remotion';
 import { Chart, Datum, SafeChart, Frame, SeasonOdometer, quarters, sanitizeName } from "./helpers"
-import { easeLinear } from "d3"
 import { formatX, reverseFormatX } from "./helpers"
 import { BarChartGenerator } from '../../../lib/d3/generators/BarChart';
 import teamNameMap from "./assets/teamNameMap.json"
-import colorsMap from "./assets/colorsMap.json"
-import logosMap from "./assets/logosMap.json"
 import data from "./assets/data.json"
-import { AudioVisualizer } from '../AudioVisualizer';
+import { useAudioAmplitude } from '../hooks/useAudioAmplitude';
 import React from 'react'; // Import React for Fragment
 import RotatingGear from './Gear';
 import OdometerDisplay from './OdometerDisplay';
@@ -34,7 +30,6 @@ export const TransferMarket: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<any>(null);
-  const [currentAmplitude, setCurrentAmplitude] = useState(0);
   const FRAMES_PER_UNIT_POINT = useMemo(() => {
     if (!fps || fps <= 0) return 0;
     return (fps * DURATION) / 1000;
@@ -92,6 +87,7 @@ export const TransferMarket: React.FC = () => {
   const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3);
   const currentYear = currentData ? new Date(currentData.weekStart).getFullYear() : "2000";
   const currentPeriodMetaData = useMemo(() => {
+
     return periodAudioMetaData.find(meta => meta.period === `q${quarter + 1} ${currentYear}`) || null;
   }, [quarter, currentYear, periodAudioMetaData]);
   useEffect(() => {
@@ -139,7 +135,7 @@ export const TransferMarket: React.FC = () => {
   const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
   useEffect(() => {
     console.log(currentData.weekStart)
-  }, [ currentData.weekStart ]);
+  }, [currentData.weekStart]);
   useLayoutEffect(() => {
     if (!chartRef.current || !currentData) {
       return;
@@ -149,7 +145,10 @@ export const TransferMarket: React.FC = () => {
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
     chart(prevData, data, easingFn(progress));
   }, [frame]);
-
+  const currentAmplitude = useAudioAmplitude({
+    audioSrc: currentPeriodMetaData ? `/assets/transferAudio/${currentPeriodMetaData.period}.mp3` : "",
+    audioStartFrame: currentPeriodMetaData ? currentPeriodMetaData.startFrame : 0
+  });
   return (
     <AbsoluteFill
       style={{
@@ -186,10 +185,10 @@ export const TransferMarket: React.FC = () => {
           </span>
           <OdometerDisplay currentIndex={quarter} values={quarters} top="8px" right="190px" />
           <RotatingGear top="-64px" right="300px" />
-          <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
+          <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> Pass 0 if season is null to avoid error
         </div>
       )}
-      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData} allData={flattenedData} currentDataIndex={currentDataIndex}/>
+      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData} allData={flattenedData} currentDataIndex={currentDataIndex} />
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
       {periodAudioMetaData.map(({ period, startFrame }) => {
         const audioSrcPath = `/assets/transferAudio/${period}.mp3`;
@@ -201,13 +200,6 @@ export const TransferMarket: React.FC = () => {
       })}
 
       {/* Single AudioVisualizer for the CURRENT period only */}
-      {currentPeriodMetaData && (
-        <AudioVisualizer
-          audioSrc={`/assets/transferAudio/${currentPeriodMetaData.period}.mp3`} // Pass relative path
-          audioStartFrame={currentPeriodMetaData.startFrame} // Pass the absolute start frame
-          onAmplitudeChange={setCurrentAmplitude} // Update the state
-        />
-      )}
       {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );
