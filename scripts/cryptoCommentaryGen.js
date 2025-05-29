@@ -191,7 +191,7 @@ async function mainCli() {
 
             rl.question("Options: (n)ext, (p)revious, (q)uit: ", (action) => {
                 action = action.trim().toLowerCase();
-                if (action === 'n') {
+                if (action === '') {
                     currentQuarterIndex = (currentQuarterIndex + 1);
                     if (currentQuarterIndex >= processedData.length) {
                         console.log("Reached the end of data. Looping back to the start.");
