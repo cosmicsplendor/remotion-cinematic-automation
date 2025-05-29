@@ -104,7 +104,7 @@
     "weekStart": "2016-01-22T00:00:00.000Z",
     "slowDown": 2,
     "easing": "sineInOut",
-    "effects": [{"type": "focus", "duration": 1.2, "target": "Bitcoin",  "color": "#f7931a", "delay": 1.75}, {"type":"surge","duration": 1, "target": "Bitcoin", "bursts": 1, "dist": "space-between", "delay": 1.75}, {"type": "change", "duration": 16, "target": "Ethereum", "delay": 0.15}],
+    "effects": [{"type": "focus", "duration": 1.2, "target": "Bitcoin",  "color": "#f7931a", "delay": 1.75}, {"type":"surge","duration": 1, "target": "Bitcoin", "bursts": 1, "dist": "space-between", "delay": 1.75}, {"type": "change", "duration": 16, "target": "Ethereum", "delay": 1,"initialDataOffset":-1}],
     "data": [
       {
         "name": "Bitcoin",

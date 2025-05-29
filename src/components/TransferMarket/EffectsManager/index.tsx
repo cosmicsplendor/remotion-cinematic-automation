@@ -9,7 +9,6 @@ import ChangeEffect from "./effects/Change";
 import FocusEffect from "./effects/Focus";
 import LottieEffect from "./effects/Lottie";
 import LoadingEffect from "./effects/Loading";
-import { effect } from "zod";
 
 const DEFAULT_EASING = "linear";
 
@@ -20,11 +19,8 @@ interface ManagedEffect {
     sourceIdSignature: string; // A signature of the source effect for comparison
 }
 
-// Generates a signature for an effect based on its content, excluding highly volatile parts like delay if desired for "sameness"
 const generateEffectSourceIdSignature = (effect: OriginalEffect, indexInArray: number): string => {
-    // Using indexInArray makes it sensitive to order.
-    // If effects can be reordered but are the same, omit index or use a stable ID from the effect itself if available.
-    return `effect-sig-${effect.type}-${effect.target || 'default'}-${indexInArray}-${JSON.stringify(effect.options || {})}`;
+    return `effect-sig-${effect.type}-${effect.target || 'default'}-${indexInArray}}`;
 };
 
 
@@ -42,8 +38,6 @@ const EffectsManager: React.FC<{
 
     const [managedEffects, setManagedEffects] = useState<ManagedEffect[]>([]);
 
-    // This useEffect synchronizes `managedEffects` with `props.data.effects`.
-    // It only adds new effects not already present.
     useEffect(() => {
         const effectsFromProps = data.effects || [];
         if (!effectsFromProps && managedEffects.length === 0) return;
@@ -71,18 +65,7 @@ const EffectsManager: React.FC<{
             setManagedEffects(prev => [...prev, ...newEffectsToAdd]);
         }
 
-        // Optional: Aggressive cleanup if effects disappear from props
-        // This depends on whether effects should persist beyond their definition in data.effects
-        /*
-        const currentPropSignatures = new Set(effectsFromProps.map((ef, idx) => generateEffectSourceIdSignature(ef, idx)));
-        setManagedEffects(prev => prev.filter(me => currentPropSignatures.has(me.sourceIdSignature)));
-        */
-
     }, [data.effects, currentFrame]); // IMPORTANT: `currentFrame` is included here because `introducedAtFrame`
-    // depends on it WHEN an effect is added. If `data.effects` is stable,
-    // this hook will run each frame, but `newEffectsToAdd` will be empty
-    // after the initial additions for that `data.effects` set.
-    // This is acceptable. The expensive part (setState) is conditional.
 
     const getSvgEl = useCallback((id: string) => {
         if (!svgRef.current) return null;
@@ -113,38 +96,29 @@ const EffectsManager: React.FC<{
         const initialVal = initialTargetDatum?.marketCap;
         const segmentStartVal = segmentStartDatum?.marketCap;
         const segmentEndVal = segmentEndDatum?.marketCap;
-        const easingType = data.easing;
+        const easingType = data.easing as string;
 
-        // --- 1. Validate data ---
         if (
             initialVal === undefined || initialVal === null ||
             segmentStartVal === undefined || segmentStartVal === null ||
             segmentEndVal === undefined || segmentEndVal === null
         ) {
-            // console.warn(`getChange: Missing marketCap data for target "${target}"`,
-            //   { initialVal, segmentStartVal, segmentEndVal });
             return NaN; // Or 0, depending on how you want to handle missing data
         }
 
-        // --- 2. Calculate the current interpolated absolute value ---
         const easingFn = easingFns[easingType] || easingFns[DEFAULT_EASING];
         const easedSegmentProgress = easingFn(segmentProgress);
 
         const currentInterpolatedValue = segmentStartVal + (segmentEndVal - segmentStartVal) * easedSegmentProgress;
 
-        // --- 3. Calculate overall percentage change from initialVal to currentInterpolatedValue ---
         if (initialVal === 0) {
             if (currentInterpolatedValue === 0) return 0;
-            // If initial is 0, any positive current value is an "infinite" % increase
-            // relative to 0. Any negative current value is an "infinite" % decrease.
             return currentInterpolatedValue > 0 ? Infinity : -Infinity;
         }
 
         const overallPercentage = 100 * (currentInterpolatedValue - initialVal) / initialVal;
 
         if (isNaN(overallPercentage)) {
-            // console.warn(`getChange: Calculated NaN for overallPercentage for target "${target}"`,
-            //   { currentInterpolatedValue, initialVal });
             return 0; // Default to 0% if calculation results in NaN (e.g. if initialVal was 0 and somehow missed above)
         }
 
@@ -163,37 +137,82 @@ const EffectsManager: React.FC<{
                 const { sourceEffect, id } = managedEffect;
                 const key = id;
 
-                const commonEffectProps = {
-                    key: key,
-                    effect: sourceEffect,
-                    svgRef: svgRef,
+                const baseProps = {
                     getSvgEl: getSvgEl,
-                    removeEffect: () => removeEffectById(id),
-                    frame: currentFrame, // Pass the global currentFrame
+                    svgRef: svgRef,
+                    frame: currentFrame,
                 };
 
                 if (sourceEffect.type === "confetti") {
-                    return <ConfettiEffect {...commonEffectProps} />;
+                    return (
+                        <ConfettiEffect
+                            key={key}
+                            effect={sourceEffect}
+                            {...baseProps}
+                            removeEffect={() => removeEffectById(id)}
+                        />
+                    );
                 } else if (sourceEffect.type === "surge") {
-                    return <SurgeEffect {...commonEffectProps} />;
+                    return (
+                        <SurgeEffect
+                            key={key}
+                            effect={sourceEffect}
+                            {...baseProps}
+                            removeEffect={() => removeEffectById(id)}
+                        />
+                    );
                 } else if (sourceEffect.type === "lottie") {
-                    return <LottieEffect {...commonEffectProps} />;
+                    return (
+                        <LottieEffect
+                            key={key}
+                            effect={sourceEffect}
+                            {...baseProps}
+                            removeEffect={() => removeEffectById(id)}
+                        />
+                    );
                 } else if (sourceEffect.type === "arrow") {
-                    return <ArrowEffect {...commonEffectProps} />;
+                    return (
+                        <ArrowEffect
+                            key={key}
+                            effect={sourceEffect}
+                            {...baseProps}
+                            removeEffect={() => removeEffectById(id)}
+                        />
+                    );
                 } else if (sourceEffect.type === "loading") {
-                    return <LoadingEffect {...commonEffectProps} />;
+                    return (
+                        <LoadingEffect
+                            key={key}
+                            effect={sourceEffect}
+                            {...baseProps}
+                            removeEffect={() => removeEffectById(id)}
+                        />
+                    );
                 } else if (sourceEffect.type === "change") {
                     return (
                         <ChangeEffect
-                            {...commonEffectProps}
-                            getValue={(initialData: Datum[], previousData: Datum[], progress: number) => getChange(sourceEffect.target!, initialData, previousData, progress)}
+                            key={key}
+                            effect={sourceEffect}
+                            {...baseProps}
+                            removeEffect={() => removeEffectById(id)}
+                            getValue={(initialData: Datum[], previousData: Datum[], progress: number) =>
+                                getChange(sourceEffect.target!, initialData, previousData, progress)}
                             prevData={prevData}
-                            progress={progress} // Overall scene/frame progress for easing
-                            initialData={commonEffectProps.effect.initialDataOffset ? allData[currentDataIndex + commonEffectProps.effect.initialDataOffset]: prevData}
+                            progress={progress}
+                            initialData={sourceEffect.initialDataOffset ?
+                                allData[currentDataIndex + sourceEffect.initialDataOffset]?.data :
+                                prevData}
                         />
                     );
                 } else if (sourceEffect.type === "focus") {
-                    return <FocusEffect {...commonEffectProps} />;
+                    return (
+                        <FocusEffect
+                            key={key}
+                            effect={sourceEffect}
+                            {...baseProps}
+                            removeEffect={() => removeEffectById(id)}
+                        />
+                    );
                 }
                 return null;
             })}
