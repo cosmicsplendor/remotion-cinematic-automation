@@ -1,6 +1,6 @@
-import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useState } from "react";
 import { useVideoConfig } from "remotion";
-import { Datum, Effect as OriginalEffect, Frame, Effect } from "../helpers";
+import { Datum, Effect as OriginalEffect, Frame } from "../helpers";
 import ConfettiEffect from "./effects/Confetti";
 import SurgeEffect from "./effects/Surge";
 import ArrowEffect from "./effects/Arrow";
@@ -37,67 +37,35 @@ const EffectsManager: React.FC<{
     const { fps } = useVideoConfig();
 
     const [managedEffects, setManagedEffects] = useState<ManagedEffect[]>([]);
-    const currentFrameRef = useRef(currentFrame);
-    currentFrameRef.current = currentFrame;
 
-    // Memoize the effects to prevent unnecessary re-runs
-    const memoizedEffects = useMemo(() => {
-        return data.effects || [];
-    }, [JSON.stringify(data.effects)]);
-
-    // Separate effect for adding new effects - only depends on data.effects
     useEffect(() => {
-        const effectsFromProps = memoizedEffects;
-        if (effectsFromProps.length === 0) return;
+        const effectsFromProps = data.effects || [];
+        if (!effectsFromProps && managedEffects.length === 0) return;
 
-        // Use functional update to avoid reading managedEffects in dependencies
-        setManagedEffects(prevManagedEffects => {
-            const existingSignatures = new Set(prevManagedEffects.map(me => me.sourceIdSignature));
-            const newEffectsToAdd: ManagedEffect[] = [];
 
-            effectsFromProps.forEach((effectFromProp: any, index: number) => {
-                const signature = generateEffectSourceIdSignature(effectFromProp, index);
+        const newEffectsToAdd: ManagedEffect[] = [];
+        const existingSignatures = new Set(managedEffects.map(me => me.sourceIdSignature));
 
-                if (!existingSignatures.has(signature)) {
-                    const uniqueInstanceId = `managed-${signature}-frame${currentFrameRef.current}-${Math.random().toString(36).substr(2, 9)}`;
-                    newEffectsToAdd.push({
-                        id: uniqueInstanceId,
-                        sourceEffect: effectFromProp,
-                        introducedAtFrame: currentFrameRef.current,
-                        sourceIdSignature: signature,
-                    });
-                }
-            });
+        effectsFromProps.forEach((effectFromProp: any, index: number) => {
+            const signature = generateEffectSourceIdSignature(effectFromProp, index);
 
-            // Only update if there are actually new effects to add
-            return newEffectsToAdd.length > 0
-                ? [...prevManagedEffects, ...newEffectsToAdd]
-                : prevManagedEffects; // Return same reference if no changes
+            if (!existingSignatures.has(signature)) {
+                // This effect (based on its signature) is not yet managed.
+                const uniqueInstanceId = `managed-${signature}-frame${currentFrame}-${Math.random().toString(36).substr(2, 9)}`;
+                newEffectsToAdd.push({
+                    id: uniqueInstanceId,
+                    sourceEffect: effectFromProp,
+                    introducedAtFrame: currentFrame, // Key: use currentFrame at time of addition
+                    sourceIdSignature: signature,
+                });
+            }
         });
 
-    }, [memoizedEffects]); // Only depend on memoizedEffects, NOT managedEffects
+        if (newEffectsToAdd.length > 0) {
+            setManagedEffects(prev => [...prev, ...newEffectsToAdd]);
+        }
 
-    // Separate effect for cleaning up effects that are no longer in data.effects
-    useEffect(() => {
-        const effectsFromProps = memoizedEffects;
-        const currentSignatures = new Set(
-            effectsFromProps.map((effect: Effect, index: number) =>
-                generateEffectSourceIdSignature(effect, index)
-            )
-        );
-
-        setManagedEffects(prevManagedEffects => {
-            const filteredEffects = prevManagedEffects.filter(managedEffect =>
-                currentSignatures.has(managedEffect.sourceIdSignature)
-            );
-
-            // Only update if something was actually removed
-            return filteredEffects.length !== prevManagedEffects.length
-                ? filteredEffects
-                : prevManagedEffects;
-        });
-
-    }, [memoizedEffects]); // Clean up when effects change
+    }, [data.effects, currentFrame]); // IMPORTANT: `currentFrame` is included here because `introducedAtFrame`
 
     const getSvgEl = useCallback((id: string) => {
         if (!svgRef.current) return null;
@@ -156,6 +124,7 @@ const EffectsManager: React.FC<{
 
         return overallPercentage;
     };
+
     const readyEffectsToRender = managedEffects.filter(managedEffect => {
         const delayInSeconds = managedEffect.sourceEffect.delay || 0;
         const delayInFrames = Math.round(delayInSeconds * fps);
