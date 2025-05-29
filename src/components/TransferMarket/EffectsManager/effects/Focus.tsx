@@ -13,7 +13,7 @@ interface FocusEffectProps {
 
 // --- Focus Parameters ---
 const FOCUS_MARGIN = 18; // Additional margin around the bar for the focus area
-const OVERLAY_OPACITY = 0.5; // Opacity of the dark overlay (0 = transparent, 1 = opaque)
+const OVERLAY_OPACITY = 0.3; // Opacity of the dark overlay (0 = transparent, 1 = opaque)
 
 // --- Fade Parameters ---
 const FADE_IN_DURATION_SEC: number = 0.3;

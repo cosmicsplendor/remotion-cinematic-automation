@@ -50,7 +50,7 @@ export const easingFns: EasingFns = {
         return x * x
     },
     quadOut(x) {
-        return 1 - this.quadIn(x - 1)
+        return 1 - (x - 1) * (x - 1)
     },
     quadInOut(x) {
         return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
@@ -59,7 +59,7 @@ export const easingFns: EasingFns = {
         return x * x * x
     },
     cubicOut(x) {
-        return 1 - this.cubicIn(1 - x)
+        return 1 - (1 - x) * (1 - x) * (1- x)
     },
     cubicInOut(x) {
         return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;

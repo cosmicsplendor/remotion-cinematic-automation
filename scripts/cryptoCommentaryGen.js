@@ -96,11 +96,11 @@ Highlight major movements, such as:
 - Any other historical facts not obvious form the data
 
 You should primarily base your commentary on the data provided. However, if you have relevant external knowledge about major events or narratives during ${quarterKey} that directly influenced these top 10 cryptos, you can subtly weave that in to add depth and analysis. Do not explicitly state "the data shows" or "according to the data." Just commentate.
-Also if two significant events happen simulatneously, not back to back, focus on one or both, but you may not have time to describe one first and eplain the other, because this is happening live/realtime, and you'll have missed the chance to talk about the first event, if you've already spent considerable time on first. So Assume each data frame is consecutive and flows forward in time, you have to be realtime, and have to adjust your commentary as data flows forward, some periods that are significant can be considered longer duration (more words), so you don't necessarily need to divide the words equally across all the periods.
+Also if two significant events happen simulatneously, not back to back, focus on one or both, but you may not have time to describe one first and eplain the other, because this is happening live/realtime, and you'll have missed the chance to talk about the first event, if you've already spent considerable time on first. So Assume each data frame is consecutive and flows forward in time, you have to be realtime, and have to adjust your commentary as data flows forward, some periods that are significant can be considered longer duration (more words), so you don't necessarily need to divide the words equally across all the periods. don't necessarily have to reference the period by quarter, use specific month wherever applicable
 Here's the data for ${quarterKey}:
 ${quarterJsonData}
 
-Your commentary:
+Continue Your commentary in stylistic and storytelling continuum:
 `;
 }
 
