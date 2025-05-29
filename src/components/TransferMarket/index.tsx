@@ -17,7 +17,7 @@ import RotatingGear from './Gear';
 import OdometerDisplay from './OdometerDisplay';
 import { easingFns } from '../../../lib/d3/utils/math';
 import EffectsManager from './EffectsManager';
-import periodsToExclude from './EffectsManager/periodsToExclude';
+import {periodsToExclude, music} from './audioSettings';
 
 const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
@@ -189,6 +189,14 @@ export const TransferMarket: React.FC = () => {
         if (periodsToExclude.includes(period)) return null
         return (
           <Sequence key={`audio-${period}-playback`} from={startFrame}>
+            <Audio src={staticFile(audioSrcPath)} />
+          </Sequence>
+        );
+      })}
+      {music.map(({ start, file }, index) => {
+        const audioSrcPath = `/assets/transferAudio/${file}`;
+        return (
+          <Sequence key={`audio-${index}-playback`} from={start}>
             <Audio src={staticFile(audioSrcPath)} />
           </Sequence>
         );

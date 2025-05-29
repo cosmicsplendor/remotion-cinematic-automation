@@ -3747,6 +3747,7 @@
   },
   {
     "weekStart": "2016-09-30T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -3852,6 +3853,7 @@
   },
   {
     "weekStart": "2016-10-07T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -3957,6 +3959,7 @@
   },
   {
     "weekStart": "2016-10-14T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4066,6 +4069,7 @@
   },
   {
     "weekStart": "2016-10-21T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4175,6 +4179,7 @@
   },
   {
     "weekStart": "2016-10-28T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4284,6 +4289,7 @@
   },
   {
     "weekStart": "2016-11-04T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4393,6 +4399,7 @@
   },
   {
     "weekStart": "2016-11-11T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4498,6 +4505,7 @@
   },
   {
     "weekStart": "2016-11-18T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4599,6 +4607,7 @@
   },
   {
     "weekStart": "2016-11-25T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4700,6 +4709,7 @@
   },
   {
     "weekStart": "2016-12-02T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4797,6 +4807,7 @@
   },
   {
     "weekStart": "2016-12-09T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4890,6 +4901,7 @@
   },
   {
     "weekStart": "2016-12-16T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -4995,6 +5007,7 @@
   },
   {
     "weekStart": "2016-12-23T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -5104,6 +5117,7 @@
   },
   {
     "weekStart": "2016-12-30T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
