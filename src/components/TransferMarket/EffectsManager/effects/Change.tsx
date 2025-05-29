@@ -48,7 +48,6 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
 }) => {
     const [frame0] = useState<number | null>(frame);
     // No longer need previousValue state
-    console.log({iData})
     const [initialData] = useState<Datum[]>(iData);
 
     const { fps } = useVideoConfig();

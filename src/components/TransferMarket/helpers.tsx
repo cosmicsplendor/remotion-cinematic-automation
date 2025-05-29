@@ -116,25 +116,7 @@ export const quarters = ["Q1", "Q2", "Q3", "Q4"]
 export const SeasonOdometer = ({ value, amplitude, top, right }: { value: number | string, amplitude: number, top: string, right: string }) => {
   const odometerRef = useRef<HTMLDivElement>(null);
   const odometerInstanceRef = useRef<any>(null);
-  const [smoothedAmp, setSmoothedAmp] = useState(amplitude)
-  const smoothedAmpRef = useRef(amplitude)
 
-  // Inertia / smoothing effect
-  useEffect(() => {
-    let frameId: number
-
-    const smoothStep = () => {
-      const alpha = 0.15// inertia factor (lower = smoother)
-      const current = smoothedAmpRef.current
-      const next = current + (amplitude - current) * alpha
-      smoothedAmpRef.current = next
-      setSmoothedAmp(next)
-      frameId = requestAnimationFrame(smoothStep)
-    }
-
-    frameId = requestAnimationFrame(smoothStep)
-    return () => cancelAnimationFrame(frameId)
-  }, [amplitude])
   useEffect(() => {
     // Need to dynamically import TM-Odometer since it's a browser library
     const loadTMOdometer = async () => {
@@ -184,7 +166,7 @@ export const SeasonOdometer = ({ value, amplitude, top, right }: { value: number
         top, right,
         filter: "grayscale(1)",
         opacity: 0.7, color: "#222222",
-        boxShadow: `0 14px 20px 5px rgba(50, 150, 250, ${smoothedAmp.toFixed(3)})`
+        boxShadow: `0 14px 20px 5px rgba(50, 150, 250, ${amplitude.toFixed(3)})`
       }}
     ></div>
   );
