@@ -189,7 +189,7 @@ export const TransferMarket: React.FC = () => {
           <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
-      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData}/>
+      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData} allData={flattenedData} currentDataIndex={currentDataIndex}/>
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
       {periodAudioMetaData.map(({ period, startFrame }) => {
         const audioSrcPath = `/assets/transferAudio/${period}.mp3`;

@@ -9,6 +9,7 @@ import ChangeEffect from "./effects/Change";
 import FocusEffect from "./effects/Focus";
 import LottieEffect from "./effects/Lottie";
 import LoadingEffect from "./effects/Loading";
+import { effect } from "zod";
 
 const DEFAULT_EASING = "linear";
 
@@ -33,8 +34,10 @@ const EffectsManager: React.FC<{
     data: Frame;
     prevData: Datum[];
     svgRef: RefObject<SVGSVGElement>;
+    allData: Frame[],
+    currentDataIndex: number; // Current data index in the flattened data array
 }> = props => {
-    const { frame: currentFrame, data, prevData, svgRef, progress } = props;
+    const { frame: currentFrame, data, prevData, svgRef, progress, allData, currentDataIndex } = props;
     const { fps } = useVideoConfig();
 
     const [managedEffects, setManagedEffects] = useState<ManagedEffect[]>([]);
@@ -186,6 +189,7 @@ const EffectsManager: React.FC<{
                             getValue={(initialData: Datum[], previousData: Datum[], progress: number) => getChange(sourceEffect.target!, initialData, previousData, progress)}
                             prevData={prevData}
                             progress={progress} // Overall scene/frame progress for easing
+                            initialData={commonEffectProps.effect.initialDataOffset ? allData[currentDataIndex + commonEffectProps.effect.initialDataOffset]: prevData}
                         />
                     );
                 } else if (sourceEffect.type === "focus") {

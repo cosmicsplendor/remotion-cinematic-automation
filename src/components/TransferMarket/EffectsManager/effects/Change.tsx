@@ -11,7 +11,8 @@ interface ChangeEffectProps {
     removeEffect: (effect: ChangeEffectType) => void;
     getValue: (initialData: Datum[], previousData: Datum[], progress: number) => number; // Function to get current percentage change value (e.g., 10 for +10%)
     prevData: Datum[],
-    progress: number
+    progress: number,
+    initialData: Datum[]; // Optional initial data for the effect
 }
 
 // --- Triangle & Text Parameters ---
@@ -42,11 +43,12 @@ const ChangeEffectDisplay: React.FC<ChangeEffectProps> = ({ // Renamed component
     removeEffect,
     getValue,
     prevData,
+    initialData: iData,
     progress
 }) => {
     const [frame0] = useState<number | null>(frame);
     // No longer need previousValue state
-    const [initialData] = useState<Datum[]>(prevData);
+    const [initialData] = useState<Datum[]>(iData);
 
     const { fps } = useVideoConfig();
     const groupRef = useRef<SVGGElement | null>(null);

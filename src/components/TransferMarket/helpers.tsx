@@ -45,6 +45,7 @@ export type ChangeEffect = {
   target: string;
   duration: number;
   color?: string; // Optional base color, will be overridden by green/red
+  initialDataOffset?: number; // Optional initial offset for the data
 }
 export type FocusEffect = {
   type: "focus";
