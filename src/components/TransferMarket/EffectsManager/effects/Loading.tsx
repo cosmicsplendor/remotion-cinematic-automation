@@ -15,10 +15,6 @@ const GLOW_OSCILLATION_SPEED = Math.PI * 2; // Speed of glow pulsation (1 cycle 
 const BORDER_RADIUS_FACTOR = 0; // To make ends fully rounded (50% of height)
 const POSITION_PADDING = 1; // Pixels to extend bounds for better alignment
 
-// Fade timing constants
-const FADE_IN_DURATION_FACTOR = 0.2; // Fade in over first 25% of animation
-const FADE_OUT_DURATION_FACTOR = 0.2; // Fade out over last 30% of animation
-
 // Helper to generate curved rhombus path with inward-curving sides
 const getCurvedRhombusPath = (cx: number, cy: number, width: number, height: number): string => {
     const hw = width / 2;

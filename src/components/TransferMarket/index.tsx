@@ -12,7 +12,6 @@ import { formatX, reverseFormatX } from "./helpers"
 import { BarChartGenerator } from '../../../lib/d3/generators/BarChart';
 import teamNameMap from "./assets/teamNameMap.json"
 import data from "./assets/data.json"
-import { useAudioAmplitude } from '../hooks/useAudioAmplitude';
 import React from 'react'; // Import React for Fragment
 import RotatingGear from './Gear';
 import OdometerDisplay from './OdometerDisplay';
@@ -86,10 +85,7 @@ export const TransferMarket: React.FC = () => {
   const currentData = flattenedData[currentDataIndex];
   const quarter = Math.floor(new Date(flattenedData[currentDataIndex]?.weekStart).getMonth() / 3);
   const currentYear = currentData ? new Date(currentData.weekStart).getFullYear() : "2000";
-  const currentPeriodMetaData = useMemo(() => {
 
-    return periodAudioMetaData.find(meta => meta.period === `q${quarter + 1} ${currentYear}`) || null;
-  }, [quarter, currentYear, periodAudioMetaData]);
   useEffect(() => {
     if (containerRef.current === null || svgRef.current === null) {
       return;
@@ -135,7 +131,7 @@ export const TransferMarket: React.FC = () => {
   const prevData = flattenedData[Math.max(0, currentDataIndex - 1)].data
   useEffect(() => {
     console.log(currentData.weekStart)
-  }, [currentData.weekStart]);
+  }, [ currentData.weekStart ]);
   useLayoutEffect(() => {
     if (!chartRef.current || !currentData) {
       return;
@@ -145,10 +141,7 @@ export const TransferMarket: React.FC = () => {
     const easingFn = easingFns[currentData.easing || "linear"] || easingFns.linear;
     chart(prevData, data, easingFn(progress));
   }, [frame]);
-  const currentAmplitude = useAudioAmplitude({
-    audioSrc: currentPeriodMetaData ? `/assets/transferAudio/${currentPeriodMetaData.period}.mp3` : "",
-    audioStartFrame: currentPeriodMetaData ? currentPeriodMetaData.startFrame : 0
-  });
+
   return (
     <AbsoluteFill
       style={{
@@ -185,10 +178,10 @@ export const TransferMarket: React.FC = () => {
           </span>
           <OdometerDisplay currentIndex={quarter} values={quarters} top="8px" right="190px" />
           <RotatingGear top="-64px" right="300px" />
-          <SeasonOdometer value={currentYear ?? 0} amplitude={currentAmplitude} top="-12px" right="10px" /> Pass 0 if season is null to avoid error
+          <SeasonOdometer value={currentYear ?? 0} amplitude={0} top="-12px" right="10px" /> {/* Pass 0 if season is null to avoid error */}
         </div>
       )}
-      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData} allData={flattenedData} currentDataIndex={currentDataIndex} />
+      <EffectsManager svgRef={svgRef} frame={frame} progress={progress} data={currentData} prevData={prevData} allData={flattenedData} currentDataIndex={currentDataIndex}/>
       {/* Audio Sequences for Playback (All seasons with valid audio metadata) */}
       {periodAudioMetaData.map(({ period, startFrame }) => {
         const audioSrcPath = `/assets/transferAudio/${period}.mp3`;
@@ -199,8 +192,6 @@ export const TransferMarket: React.FC = () => {
         );
       })}
 
-      {/* Single AudioVisualizer for the CURRENT period only */}
-      {/* <Clock x={900} y={400} lifespan={TRANSFER_LIFESPAN} cycleDuration={DURATION/1000}/> */}
     </AbsoluteFill>
   );
 };

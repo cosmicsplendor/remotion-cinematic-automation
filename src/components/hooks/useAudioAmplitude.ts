@@ -63,72 +63,72 @@ export const useAudioAmplitude = ({
 
     const audioData = useAudioData(memoizedStaticAudioFile);
 
-    // useEffect(() => {
-    //     let smoothedValue: number;
+    useEffect(() => {
+        let smoothedValue: number;
 
-    //     if (!audioData || !audioSrc) { // No data or no source specified
-    //         // Smooth towards 0
-    //         if (smoothingType === 'envelope') {
-    //             smoothedValue = applyEnvelopeSmoothing(0, prevAmplitudeRef.current, attackRate, releaseRate);
-    //         } else {
-    //             smoothedValue = applySimpleSmoothing(0, prevAmplitudeRef.current, smoothingFactor);
-    //         }
-    //         prevAmplitudeRef.current = smoothedValue;
-    //         setAmplitude(smoothedValue);
-    //         return;
-    //     }
+        if (!audioData || !audioSrc) { // No data or no source specified
+            // Smooth towards 0
+            if (smoothingType === 'envelope') {
+                smoothedValue = applyEnvelopeSmoothing(0, prevAmplitudeRef.current, attackRate, releaseRate);
+            } else {
+                smoothedValue = applySimpleSmoothing(0, prevAmplitudeRef.current, smoothingFactor);
+            }
+            prevAmplitudeRef.current = smoothedValue;
+            setAmplitude(smoothedValue);
+            return;
+        }
 
-    //     const frameInAudio = frame - audioStartFrame;
+        const frameInAudio = frame - audioStartFrame;
 
-    //     if (frameInAudio < 0) { // Current frame is before the audio is supposed to start
-    //         // Smooth towards 0
-    //         if (smoothingType === 'envelope') {
-    //             smoothedValue = applyEnvelopeSmoothing(0, prevAmplitudeRef.current, attackRate, releaseRate);
-    //         } else {
-    //             smoothedValue = applySimpleSmoothing(0, prevAmplitudeRef.current, smoothingFactor);
-    //         }
-    //         prevAmplitudeRef.current = smoothedValue;
-    //         setAmplitude(smoothedValue);
-    //         return;
-    //     }
+        if (frameInAudio < 0) { // Current frame is before the audio is supposed to start
+            // Smooth towards 0
+            if (smoothingType === 'envelope') {
+                smoothedValue = applyEnvelopeSmoothing(0, prevAmplitudeRef.current, attackRate, releaseRate);
+            } else {
+                smoothedValue = applySimpleSmoothing(0, prevAmplitudeRef.current, smoothingFactor);
+            }
+            prevAmplitudeRef.current = smoothedValue;
+            setAmplitude(smoothedValue);
+            return;
+        }
 
-    //     const visualization = visualizeAudio({
-    //         fps,
-    //         frame: frameInAudio,
-    //         audioData,
-    //         numberOfSamples: 1, // We only need one value for the overall amplitude
-    //     });
+        const visualization = visualizeAudio({
+            fps,
+            frame: frameInAudio,
+            audioData,
+            numberOfSamples: 1, // We only need one value for the overall amplitude
+        });
 
-    //     const rawAmplitude = visualization[0] || 0;
+        const rawAmplitude = visualization[0] || 0;
 
-    //     // Normalize the raw amplitude (ensure it's within 0-1 range after normalization)
-    //     const normalizedAmplitude = Math.min(1, Math.max(0, rawAmplitude * normalizationFactor));
+        // Normalize the raw amplitude (ensure it's within 0-1 range after normalization)
+        const normalizedAmplitude = Math.min(1, Math.max(0, rawAmplitude * normalizationFactor));
 
-    //     // Apply chosen smoothing method
-    //     if (smoothingType === 'envelope') {
-    //         smoothedValue = applyEnvelopeSmoothing(normalizedAmplitude, prevAmplitudeRef.current, attackRate, releaseRate);
-    //     } else { // 'simple'
-    //         smoothedValue = applySimpleSmoothing(normalizedAmplitude, prevAmplitudeRef.current, smoothingFactor);
-    //     }
+        // Apply chosen smoothing method
+        if (smoothingType === 'envelope') {
+            smoothedValue = applyEnvelopeSmoothing(normalizedAmplitude, prevAmplitudeRef.current, attackRate, releaseRate);
+        } else { // 'simple'
+            smoothedValue = applySimpleSmoothing(normalizedAmplitude, prevAmplitudeRef.current, smoothingFactor);
+        }
 
-    //     // Store for next frame's smoothing calculation
-    //     prevAmplitudeRef.current = smoothedValue;
-    //     // Update the state that will be returned by the hook
-    //     setAmplitude(smoothedValue);
+        // Store for next frame's smoothing calculation
+        prevAmplitudeRef.current = smoothedValue;
+        // Update the state that will be returned by the hook
+        setAmplitude(smoothedValue);
 
-    // }, [
-    //     audioData,
-    //     audioSrc, // To re-evaluate if the source path itself changes to null/valid
-    //     frame,
-    //     fps,
-    //     audioStartFrame,
-    //     smoothingType,
-    //     attackRate,
-    //     releaseRate,
-    //     smoothingFactor,
-    //     normalizationFactor,
-    //     // setAmplitude is stable, prevAmplitudeRef.current changes do not trigger effects
-    // ]);
+    }, [
+        audioData,
+        audioSrc, // To re-evaluate if the source path itself changes to null/valid
+        frame,
+        fps,
+        audioStartFrame,
+        smoothingType,
+        attackRate,
+        releaseRate,
+        smoothingFactor,
+        normalizationFactor,
+        // setAmplitude is stable, prevAmplitudeRef.current changes do not trigger effects
+    ]);
 
     return amplitude;
 };

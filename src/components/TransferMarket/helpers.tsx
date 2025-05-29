@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { RemotionBarChart } from "../../../lib/d3/generators/BarChart"
 import { Hash } from "../../../lib/d3/utils/types"
 import TMOdometerModule from 'tm-odometer'
