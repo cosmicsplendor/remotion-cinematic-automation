@@ -29,6 +29,7 @@ const smoothstep = (min: number, max: number, value: number): number => {
     const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
     return x * x * (3 - 2 * x);
 };
+
 export type RemotionBarChart<Datum> = {
     (prevData: Datum[], newData: Datum[], progress: number): void
     barCount?: (val: BarCount) => RemotionBarChart<Datum>,
@@ -172,6 +173,7 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
     let accessors: Accessors<Datum>, logoXOffset: number, position: Position, horizontal = false, background = "whitesmoke", dom: DOM
 
     let memoizedPrevPointsScale: ScalePower<number, number> | null = null; // Renamed for clarity
+    let globalMaxValue = 0; // Track the global maximum to prevent scale shrinking
 
     const barGraph: RemotionBarChart<Datum> = (prevData: Data, newData: Data, progress: number) => {
         const svg = select(dom.svg)
@@ -188,17 +190,24 @@ function BarChartGenerator<Datum extends object>(dims: Dims) {
         const prevMaxPoints = prevSliced.length > 0 ? Math.max(...prevSliced.map(accessors.x), 20) : 20;
         const newMaxPoints = newSliced.length > 0 ? Math.max(...newSliced.map(accessors.x), 20) : 20; // Ensure newSliced check
 
+        // Update global max to prevent scale from shrinking unexpectedly
+        const currentFrameMax = Math.max(prevMaxPoints, newMaxPoints);
+        globalMaxValue = Math.max(globalMaxValue, currentFrameMax);
+        
+        // Use a stable domain that doesn't shrink
+        const stableDomainMax = Math.max(globalMaxValue, Math.ceil(currentFrameMax * 1.1)); // Add 10% padding
+
         const targetPointsScale = scalePow().exponent(0.33)
-            .domain([0, newMaxPoints])
-            .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr])
-            .nice();
+            .domain([0, stableDomainMax])
+            .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr]);
+            // Removed .nice() to prevent domain jumping
 
         let initialPointsScale = memoizedPrevPointsScale;
         if (!initialPointsScale) {
             initialPointsScale = scalePow().exponent(0.33)
-                .domain([0, prevMaxPoints])
-                .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr])
-                .nice();
+                .domain([0, stableDomainMax])
+                .range(horizontal ? [dims.h - dims.mb, dims.mt] : [dims.ml, dims.w - dims.mr]);
+                // Removed .nice() to prevent domain jumping
         }
 
         const axisDisplayScale = createInterpolatedScale(initialPointsScale, targetPointsScale, progress);
