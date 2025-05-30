@@ -23,7 +23,7 @@ const PLOT_ID = "PLOTX"
 const CONT_ID = "CONTAINERX"
 const DURATION = 1250; // Equivalent to 1 second at 60fps
 const SF = data.map(d => (d.slowDown as number) ?? 1)
-export const TRANSFER_LIFESPAN = SF.reduce((s, x) => x + s) * DURATION / 1000; // Restored original export
+export const TRANSFER_LIFESPAN = Math.ceil(SF.reduce((s, x) => x + s) * DURATION / 1000); // Restored original export
 
 export const TransferMarket: React.FC = () => {
   const { fps, width, height } = useVideoConfig();
@@ -71,7 +71,7 @@ export const TransferMarket: React.FC = () => {
       const quarter = Math.floor(new Date(periodEntry.weekStart).getMonth() / 3) + 1; // <-- FIXED
       const period = `q${quarter} ${year}`;
       if (lastQuarter === period) {
-        currentFrameCounter += FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
+        currentFrameCounter += Math.round(FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1));
         continue; // Skip if the period is the same as the last one
       }
       metadata.push({
@@ -79,7 +79,7 @@ export const TransferMarket: React.FC = () => {
         startFrame: currentFrameCounter
       });
       lastQuarter = period;
-      currentFrameCounter += FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1);
+      currentFrameCounter += Math.round(FRAMES_PER_UNIT_POINT * (periodEntry.slowDown || 1));
     }
     return metadata;
   }, [data, FRAMES_PER_UNIT_POINT]);

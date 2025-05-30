@@ -9509,6 +9509,7 @@
   },
   {
     "weekStart": "2017-10-06T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -9614,6 +9615,7 @@
   },
   {
     "weekStart": "2017-10-13T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -9711,6 +9713,7 @@
   },
   {
     "weekStart": "2017-10-20T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -9804,6 +9807,7 @@
   },
   {
     "weekStart": "2017-10-27T00:00:00.000Z",
+    "slowDown": 0.4,
     "data": [
       {
         "name": "Bitcoin",
@@ -10180,6 +10184,14 @@
   },
   {
     "weekStart": "2017-11-24T00:00:00.000Z",
+    "effects": [
+      {
+        "type": "loading",
+        "target": "Bitcoin Gold",
+        "duration": 1.6
+      }
+    ],
+    "easing": "easeOutQuad",
     "data": [
       {
         "name": "Bitcoin",
@@ -10374,6 +10386,7 @@
   },
   {
     "weekStart": "2017-12-08T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -10483,6 +10496,15 @@
   },
   {
     "weekStart": "2017-12-15T00:00:00.000Z",
+    "effects": [
+      {
+        "type": "arrow",
+        "target": "Cardano",
+        "duration": 1.6
+      }
+    ],
+    "easing": "quadOut",
+    "slowDown": 2,
     "data": [
       {
         "name": "Bitcoin",
@@ -10592,6 +10614,8 @@
   },
   {
     "weekStart": "2017-12-22T00:00:00.000Z",
+    "slowDown": 1.8,
+    "easing": "cubicOut",
     "data": [
       {
         "name": "Bitcoin",
@@ -10705,6 +10729,8 @@
   },
   {
     "weekStart": "2017-12-29T00:00:00.000Z",
+    "easing": "sineInOut",
+    "slowDown": 3,
     "data": [
       {
         "name": "Bitcoin",
@@ -11016,6 +11042,13 @@
   },
   {
     "weekStart": "2018-01-19T00:00:00.000Z",
+    "effects": [
+      {
+        "type": "change",
+        "target": "XRP",
+        "duration": 3
+      }
+    ],
     "data": [
       {
         "name": "Bitcoin",
@@ -11303,6 +11336,7 @@
   },
   {
     "weekStart": "2018-02-09T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -11400,6 +11434,7 @@
   },
   {
     "weekStart": "2018-02-16T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -11497,6 +11532,7 @@
   },
   {
     "weekStart": "2018-02-23T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -11586,6 +11622,7 @@
   },
   {
     "weekStart": "2018-03-02T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -11768,6 +11805,7 @@
   },
   {
     "weekStart": "2018-03-16T00:00:00.000Z",
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
@@ -11865,6 +11903,14 @@
   },
   {
     "weekStart": "2018-03-23T00:00:00.000Z",
+    "effects": [
+      {
+        "type": "change",
+        "target": "Bitcoin",
+        "duration": 1
+      }
+    ],
+    "slowDown": 0.6,
     "data": [
       {
         "name": "Bitcoin",
